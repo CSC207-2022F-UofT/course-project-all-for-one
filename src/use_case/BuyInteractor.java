@@ -1,10 +1,6 @@
 package use_case;
 
-import entity.Order;
-import entity.OrderFactory;
-
 import gateway.TradeDsGateway;
-import presenter.TradeResponsePresenter;
 
 public class BuyInteractor implements TradeInputBoundry {
 

@@ -1,8 +1,6 @@
 package UI;
 
 import controller.TradeController;
-import use_case.TradeRequestModel;
-import entity.Post;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,9 +19,9 @@ public class ConfirmPage extends JPanel implements ActionListener {
 
     TradeController tradeController;
 
-    public ConfirmPage(String number, TradeController controller) {
+    public ConfirmPage(String number, TradeController tradeController) {
 
-        this.tradeController = controller;
+        this.tradeController = tradeController;
 
         this.number = number;
 
@@ -56,12 +54,16 @@ public class ConfirmPage extends JPanel implements ActionListener {
         this.add(buttons);
     }
 
-
+    public static void main(String[] args) {
+        //ConfirmPage confirmPage = new ConfirmPage();
+    }
 
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
 
-        TradeController.create(number);
+        try {
+            TradeController.create(number);
+        }
 
     }
 }

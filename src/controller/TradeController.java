@@ -8,12 +8,14 @@ public class TradeController {
 
     final TradeInputBoundry userInput;
 
-    public TradeController(TradeInputBoundry accountGateway) {
-        this.userInput = accountGateway;
+    public TradeController(TradeInputBoundry orderGateway) {
+        this.userInput = orderGateway;
     }
 
-    public TradeResponseModel create(String number) {
-        TradeRequestModel requestModel = new TradeRequestModel(number);
+    TradeResponseModel create(String postNumber, String postTitle, String finalPrice, String creationTime,
+                              String name, String address, String phoneNumber) {
+        TradeRequestModel requestModel = new TradeRequestModel(postNumber, postTitle, finalPrice, creationTime,
+                name, address, phoneNumber);
 
         return userInput.create(requestModel);
     }

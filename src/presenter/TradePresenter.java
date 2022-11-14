@@ -1,9 +1,17 @@
 package presenter;
 
+import UI.TradeFailed;
 import use_case.TradeResponseModel;
 
-public interface TradePresenter {
-    TradeResponseModel prepareSuccessView();
+public class TradePresenter {
+    public TradeResponseModel prepareSuccessView(TradeResponseModel responseModel) {
+
+        return responseModel;
+    }
+
+    public TradeResponseModel prepareFailView(String error) {
+        throw new TradeFailed(error);
+    }
 
 
 }

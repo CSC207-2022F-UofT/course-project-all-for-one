@@ -1,16 +1,16 @@
 package use_case;
 
 public class TradeResponseModel {
-    String success;
+    String Success;
 
-    String creationTime;
+    String TradeTime;
 
     public TradeResponseModel(String success, String creationTime) {
-        this.success = success;
-        this.creationTime = creationTime;
+        this.Success = success;
+        this.TradeTime = creationTime;
     }
 
-    public String getSuccess() {return success;}
+    public String getSuccess() {return this.Success;}
 
-    public String getCreationTime() {return creationTime;}
+    public String getCreationTime() {return this.TradeTime;}
 }
