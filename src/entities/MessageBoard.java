@@ -8,9 +8,9 @@ public class MessageBoard implements Iterable<List<Message>>{
     private List<Message> messages = new ArrayList<>();
     private int BOARD_SIZE = 5;
 
-    void addStudent(Message s) {
-        messages.add(s);
-    }
+    void addMessage(Message m) {messages.add(m);}
+
+    public void removeMessage(Message m) {messages.remove(m);}
 
     @Override
     public Iterator<List<Message>> iterator() {
