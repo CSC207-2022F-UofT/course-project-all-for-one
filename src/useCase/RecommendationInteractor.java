@@ -1,6 +1,8 @@
 package useCase;
 
+import entity.Order;
 import entity.Post;
+import entity.PurchaseHistory;
 import entity.Recommendation;
 import gateway.RecommendationGateway;
 
@@ -19,6 +21,10 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
     }
     @Override
     public RecommendationResponseModel create(RecommendationRequestModel recommendationRequestModel){
+        List<String> Tags = new ArrayList<String>();
+        for (Order order : recommendationRequestModel.purchaseHistory.getOrders()){
+            Tags.add(order)
+        }
         //find the most 5 tags in PurchaseHistory and BrowsingHistory
         //get in total 30 items that have at least one of these tags in the post database
         //return at most 30 items as the request model
