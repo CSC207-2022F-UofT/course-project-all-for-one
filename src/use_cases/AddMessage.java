@@ -1,7 +1,10 @@
 package use_cases;
 
-public class AddMessage {
-    public void addMessage() {
+import entities.Message;
+import entities.MessageBoard;
 
+public class AddMessage {
+    public static void addMessage(Message message, MessageBoard board) {
+        board.addMessage(message);
     }
 }

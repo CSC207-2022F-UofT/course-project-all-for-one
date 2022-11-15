@@ -4,7 +4,7 @@ import entities.Message;
 import entities.MessageBoard;
 
 public class DeleteMessage {
-    public void deleteMessage(Message message, MessageBoard board) {
+    public static void deleteMessage(Message message, MessageBoard board) {
         board.removeMessage(message);
     }
 }
