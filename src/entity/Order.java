@@ -2,11 +2,9 @@ package entity;
 
 public class Order {
 
-    private final String OrderNumber;
+    private final Post Post;
 
-    private final String Title;
-
-    private final String Price;
+    private final double FinalPrice;
 
     private final String CreationTime;
 
@@ -17,29 +15,21 @@ public class Order {
     private final String PhoneNumber;
 
 
-    Order(String orderNumber, String title, String price, String creationTime, String name, String address, String phoneNumber) {
-        this.OrderNumber = orderNumber;
-        this.Title = title;
-        this.Price = price;
+    Order(Post post, double finalPrice, String creationTime, String name, String address, String phoneNumber) {
+        this.Post = post;
+        this.FinalPrice = finalPrice;
         this.CreationTime = creationTime;
         this.Name = name;
         this.Address = address;
         this.PhoneNumber = phoneNumber;
     }
 
-    public String getOrderNumber() {
-        return this.OrderNumber;
+    public Post getPost() {
+        return this.Post;
     }
 
-    public String getTitle() {
-        return this.Title;
-    }
-    public String getCreationTime() {
-        return this.Title;
-    }
-
-    public String getPrice() {
-        return this.Price;
+    public double getFinalPrice() {
+        return this.FinalPrice;
     }
 
     public String getName() {

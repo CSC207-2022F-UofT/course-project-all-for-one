@@ -1,12 +1,13 @@
 package use_case;
 
+import entity.Account;
+import entity.Post;
+
 public class TradeRequestModel {
 
-    public String PostNumber;
+    public Post Post;
 
-    public String PostTitle;
-
-    public String FinalPrice;
+    public double FinalPrice;
 
     public String CreationTime;
 
@@ -16,27 +17,29 @@ public class TradeRequestModel {
 
     public String PhoneNumber;
 
+    private Account Buyer;
+
+    private Account Seller;
 
 
-    public TradeRequestModel(String postNumber, String postTitle, String finalPrice, String creationTime,
-                             String name, String address, String phoneNumber) {
-        this.PostNumber = postNumber;
-        this.PostTitle = postTitle;
+
+    public TradeRequestModel(Post post, double finalPrice, String creationTime,
+                             String name, String address, String phoneNumber, Account buyer, Account seller) {
+        this.Post = post;
         this.FinalPrice = finalPrice;
         this.CreationTime = creationTime;
         this.Name = name;
         this.Address = address;
         this.PhoneNumber = phoneNumber;
+        this.Buyer = buyer;
+        this.Seller = seller;
     }
 
-    String getPostNumber() {
-        return this.PostNumber;
-    }
-    String getPostTitle() {
-        return this.PostTitle;
+    Post getPost() {
+        return this.Post;
     }
 
-    String getFinalPrice() {
+    double getFinalPrice() {
         return this.FinalPrice;
     }
 
@@ -54,5 +57,13 @@ public class TradeRequestModel {
 
     String getPhoneNumber() {
         return this.PhoneNumber;
+    }
+
+    Account getBuyer() {
+        return this.Buyer;
+    }
+
+    Account getSeller() {
+        return this.Seller;
     }
 }

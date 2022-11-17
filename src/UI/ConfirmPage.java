@@ -1,6 +1,8 @@
 package UI;
 
 import controller.TradeController;
+import entity.Account;
+import entity.Post;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,15 +17,30 @@ public class ConfirmPage extends JPanel implements ActionListener {
 
     JTextField address = new JTextField(100);
 
-    String number = Post.getNumber();
+    public Post Post;
+
+    public double FinalPrice;
+
+    public String CreationTime;
+
+    public Account Buyer;
+
+    public Account Seller;
+
 
     TradeController tradeController;
 
-    public ConfirmPage(String number, TradeController tradeController) {
+    public ConfirmPage(Post post, double finalPrice, String creationTime, Account buyer, Account seller,
+                       TradeController tradeController) {
 
         this.tradeController = tradeController;
 
-        this.number = number;
+        this.Post = post;
+        this.FinalPrice = finalPrice;
+        this.CreationTime = creationTime;
+        this.Buyer = buyer;
+        this.Seller = seller;
+
 
         JLabel title = new JLabel("Confirm Your Purchase");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -54,16 +71,16 @@ public class ConfirmPage extends JPanel implements ActionListener {
         this.add(buttons);
     }
 
-    public static void main(String[] args) {
-        //ConfirmPage confirmPage = new ConfirmPage();
-    }
 
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
 
         try {
-            TradeController.create(number);
+            TradeController.create(Post, FinalPrice, CreationTime,
+                    name.getText(), address.getText(), phone.getText(), Buyer, Seller);
+            JOptionPane.showMessageDialog(this, "Order Placed");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
-
     }
 }

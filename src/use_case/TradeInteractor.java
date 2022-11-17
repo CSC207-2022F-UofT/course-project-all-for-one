@@ -6,31 +6,47 @@ import gateway.TradeDsGateway;
 import presenter.TradePresenter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.util.Objects;
 
 public class TradeInteractor implements TradeInputBoundry {
 
-    final TradeDsGateway tradeDsGateway;
     final TradePresenter tradePresenter;
     final OrderFactory orderFactory;
 
 
 
 
-    public TradeInteractor(TradeDsGateway tradeDsGateway, TradePresenter tradePresenter, OrderFactory orderFactory) {
-        this.tradeDsGateway = tradeDsGateway;
+    public TradeInteractor(TradePresenter tradePresenter, OrderFactory orderFactory) {
         this.tradePresenter = tradePresenter;
         this.orderFactory = orderFactory;
     }
 
     @Override
     public TradeResponseModel create(TradeRequestModel requestModel) {
+        if (requestModel.getBuyer().getWallet().getBalance() < requestModel.getFinalPrice()) {
+            return tradePresenter.prepareFailView("Insufficient balance.");
+        }
 
-        Order order = OrderFactory.create(requestModel.getPostNumber(), requestModel.getPostTitle(), requestModel.getFinalPrice(),
-                requestModel.getCreationTime(), requestModel.getName(),
-                requestModel.getAddress(), requestModel.getPhoneNumber());
+        if (Objects.equals(requestModel.getPost().get_status(), "Sold")) {
+            return tradePresenter.prepareFailView("Item already sold.");
+        }
+
+        requestModel.getBuyer().getWallet().subtractBalance(requestModel.getFinalPrice());
+
+        requestModel.getSeller().getWallet().addBalance(requestModel.getFinalPrice());
 
         LocalDateTime now = LocalDateTime.now();
-        TradeResponseModel tradeResponseModel = new TradeResponseModel("Order Confirmed", now.toString());
+        String creationTime = now.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
+
+        Order order = OrderFactory.create(requestModel.getPost(), requestModel.getFinalPrice(),
+                creationTime, requestModel.getName(),
+                requestModel.getAddress(), requestModel.getPhoneNumber());
+
+        requestModel.getPost().solding_post();
+
+        TradeResponseModel tradeResponseModel = new TradeResponseModel("Order Confirmed", creationTime);
         return tradePresenter.prepareSuccessView(tradeResponseModel);
 
     }
