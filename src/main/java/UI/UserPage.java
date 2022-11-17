@@ -1,5 +1,7 @@
 package UI;
 
+import controller.UserController;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,12 +11,19 @@ public class UserPage implements ActionListener{
        JLabel label = new JLabel();
 
 
-      JButton Edit = new JButton("Edit");
-      JButton Wallet = new JButton("Wallet");
-      JButton PurchaseHistory = new JButton("Purchase History");
-      JButton Shoppingcart = new JButton("Shopping cart");
-      JButton MessageBoard = new JButton("Message Board");
-      JButton BrowsingHistory = new JButton("Browsing History");
+       JButton Edit = Button.getEdit();
+       JButton Wallet = Button.getWallet();
+       JButton PurchaseHistory = Button.getPurchaseHistory();
+       JButton PostHistory = Button.getPostHistory();
+       JButton MessageBoard = Button.getMessageBoard();
+       JButton BrowsingHistory = Button.getBrowsingHistory();
+      //JButton Edit = new JButton("Edit/Create");
+      //JButton Wallet = new JButton("Wallet");
+      //JButton PurchaseHistory = new JButton("Purchase History");
+      //JButton PostHistory = new JButton("Post History");
+      //JButton MessageBoard = new JButton("Message Board");
+      //JButton BrowsingHistory = new JButton("Browsing History");
+
 
       public UserPage(){
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,7 +33,7 @@ public class UserPage implements ActionListener{
             frame.add(Edit);
             frame.add(Wallet);
             frame.add(PurchaseHistory);
-            frame.add(Shoppingcart);
+            frame.add(PostHistory);
             frame.add(MessageBoard);
             frame.add(BrowsingHistory);
             frame.add(label);
@@ -42,9 +51,9 @@ public class UserPage implements ActionListener{
             PurchaseHistory.setFocusable(false);
             PurchaseHistory.addActionListener(this);
 
-            Shoppingcart.setBounds(100,400,80,50);
-            Shoppingcart.setFocusable(false);
-            Shoppingcart.addActionListener(this);
+            PostHistory.setBounds(100,400,80,50);
+            PostHistory.setFocusable(false);
+            PostHistory.addActionListener(this);
 
             MessageBoard.setBounds(100,500,80,50);
             MessageBoard.setFocusable(false);
@@ -58,22 +67,26 @@ public class UserPage implements ActionListener{
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == Edit){
+           if (e.getSource() == Edit){
                   EditPage editPage = new EditPage();
             }
-            if (e.getSource() == Wallet){
-            }
-            if (e.getSource() == PurchaseHistory){
+            //if (e.getSource() == Wallet){
+            //}
+            //if (e.getSource() == PurchaseHistory){
 
-            }
-            if (e.getSource() == Shoppingcart){
+            //}
+            //if (e.getSource() == PostHistory){
+            //      PostHistoryPage postpage = new PostHistoryPage();
+            //}
+            //if (e.getSource() == MessageBoard){
 
-            }
-            if (e.getSource() == MessageBoard){
+            //}
+            //if (e.getSource() == BrowsingHistory){
 
-            }
-            if (e.getSource() == BrowsingHistory){
-
-            }
+            //}
       }
+
+
 }
+
+
