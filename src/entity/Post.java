@@ -65,5 +65,9 @@ public class Post {
         }
         this.tags = arrNew;
     }
+
+    public String[] getTags() {
+        return tags;
+    }
 }
 

@@ -4,8 +4,8 @@ import entity.BrowsingHistory;
 import entity.PurchaseHistory;
 
 public class RecommendationRequestModel {
-    PurchaseHistory purchaseHistory;
-    BrowsingHistory browsingHistory;
+     private PurchaseHistory purchaseHistory;
+     private BrowsingHistory browsingHistory;
 
     public RecommendationRequestModel(PurchaseHistory purchaseHistory, BrowsingHistory browsingHistory){
         this.purchaseHistory = purchaseHistory;
@@ -13,4 +13,11 @@ public class RecommendationRequestModel {
     }
 
 
+    public PurchaseHistory getPurchaseHistory() {
+        return purchaseHistory;
+    }
+
+    public BrowsingHistory getBrowsingHistory() {
+        return browsingHistory;
+    }
 }
