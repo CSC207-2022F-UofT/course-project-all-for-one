@@ -1,9 +1,7 @@
 package entity;
 
-public class Order {
-    private Post post;
+public interface Order {
 
-    public Post getPost() {
-        return post;
-    }
+    String getNumber();
+
 }
