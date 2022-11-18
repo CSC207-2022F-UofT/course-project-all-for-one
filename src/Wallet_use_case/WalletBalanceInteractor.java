@@ -1,6 +1,8 @@
 package Wallet_use_case;
 
 import entity.Wallet;
+import gateway.WalletGateway;
+import presenter.WalletResponsePresenter;
 
 public class WalletBalanceInteractor implements WalletInputBoundary {
 
@@ -14,13 +16,4 @@ public class WalletBalanceInteractor implements WalletInputBoundary {
         this.walletPresenter = walletResponsePresenter;
         this.wallet = wallet1;
     }
-
-    @Override
-    public WalletResponseModel create(WalletRequestModel requestModel){
-
-    }
-
-
-
-
 }
