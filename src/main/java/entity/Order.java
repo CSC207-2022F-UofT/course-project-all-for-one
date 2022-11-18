@@ -4,8 +4,6 @@ public class Order {
 
     private final Post Post;
 
-    private final double FinalPrice;
-
     private final String CreationTime;
 
     private final String Name;
@@ -14,22 +12,21 @@ public class Order {
 
     private final String PhoneNumber;
 
+    private String ShipmentStatus;
 
-    Order(Post post, double finalPrice, String creationTime, String name, String address, String phoneNumber) {
+
+    Order(Post post, String creationTime, String name, String address, String phoneNumber,
+          String shipmentStatus) {
         this.Post = post;
-        this.FinalPrice = finalPrice;
         this.CreationTime = creationTime;
         this.Name = name;
         this.Address = address;
         this.PhoneNumber = phoneNumber;
+        this.ShipmentStatus = shipmentStatus;
     }
 
     public Post getPost() {
         return this.Post;
-    }
-
-    public double getFinalPrice() {
-        return this.FinalPrice;
     }
 
     public String getName() {
@@ -42,5 +39,9 @@ public class Order {
 
     public String getPhoneNumber() {
         return this.Address;
+    }
+
+    public String getShipmentStatus() {
+        return this.ShipmentStatus;
     }
 }

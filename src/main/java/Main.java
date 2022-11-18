@@ -17,11 +17,6 @@ public class Main {
         JPanel screens = new JPanel(cardLayout);
         post.add(screens);
 
-        TradePresenter presenter = new TradePresenter();
-        OrderFactory orderFactory = new OrderFactory();
-        TradeInputBoundry interactor = new TradeInteractor(presenter, orderFactory);
-        TradeController controller = new TradeController(interactor);
-
         Post testPost = new Post("Iphone18", "DNE phone", 10);
         String testCreationTime = "today";
         Wallet testBuyerWallet = new Wallet(100);

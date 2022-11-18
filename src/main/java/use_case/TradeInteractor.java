@@ -40,7 +40,7 @@ public class TradeInteractor implements TradeInputBoundry {
 
         Order order = OrderFactory.create(requestModel.getPost(), requestModel.getPost().get_price(),
                 creationTime, requestModel.getName(),
-                requestModel.getAddress(), requestModel.getPhoneNumber());
+                requestModel.getAddress(), requestModel.getPhoneNumber(), "Order Placed");
 
         requestModel.getPost().solding_post();
 
