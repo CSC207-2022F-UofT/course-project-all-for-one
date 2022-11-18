@@ -34,7 +34,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
             }
         }
 
-        Post[] posts = recommendationRequestModel.getBrowsingHistory().getPosts()
+        Post[] posts = recommendationRequestModel.getBrowsingHistory().getPosts();
         for (Post post : posts){
             for(String tag :post.getTags()){
                 if (!tags.containsKey(tag)) {
