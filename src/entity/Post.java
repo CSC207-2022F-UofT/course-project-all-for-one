@@ -36,6 +36,12 @@ public class Post {
         return this.Price;
     }
 
+    public boolean is_valid(){
+        Criteria criteria = new Criteria();
+        Suggestion suggestion = criteria.evaluatePost(this);
+        return suggestion.suggestion == null;
+    }
+
 
 }
 

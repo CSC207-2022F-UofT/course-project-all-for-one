@@ -1,26 +1,28 @@
 package use_case;
 
-// Use case layer
-
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class PostRequestModel {
+// Use case layer
+
+public class PostDsRequestModel {
 
     private String Title;
     private String Description;
     private String Status;
     private double Price;
     private String [] Tags;
+    private final LocalDateTime creationTime;
 
-    public PostRequestModel(String input_title, String input_description, double input_price, String [] tags){
+    public PostDsRequestModel(String input_title, String input_description, double input_price, String [] tags, LocalDateTime time){
         this.Title = input_title;
         this.Description = input_description;
         this.Price = input_price;
         this.Status = "Active";
         this.Tags = tags;
+        this.creationTime = time;
 
     }
-
     public void Revise_description(String revise_description){
         this.Description = revise_description;
     }
@@ -67,4 +69,10 @@ public class PostRequestModel {
         }
         this.Tags = arrNew;
     }
+
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
+
+
 }

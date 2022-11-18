@@ -9,7 +9,7 @@ public class Criteria {
      * @param post
      * @return Suggestion
      */
-    public Suggestion evaluatePassword(Post post) {
+    public Suggestion evaluatePost(Post post) {
         Suggestion suggestion = new Suggestion();
 
         // Check if post title contains empty spaces
@@ -25,7 +25,7 @@ public class Criteria {
             suggestion.setSuggestion("Please add more detail for your description");
         }
         // Check if post description is lesser than 1500 chars
-        else if (post.get_description().length() > 1500) {
+        else if (post.get_description().length() > 10000) {
             suggestion.setSuggestion("Description too long, max char is 1500");
         }
         // Check if post description is greater than or equal to 3 chars
