@@ -1,4 +1,4 @@
-package UI;
+package main.java.UI;
 
 import controller.UserController;
 
@@ -11,12 +11,12 @@ public class UserPage implements ActionListener{
        JLabel label = new JLabel();
 
 
-       JButton Edit = Button.getEdit();
-       JButton Wallet = Button.getWallet();
-       JButton PurchaseHistory = Button.getPurchaseHistory();
-       JButton PostHistory = Button.getPostHistory();
-       JButton MessageBoard = Button.getMessageBoard();
-       JButton BrowsingHistory = Button.getBrowsingHistory();
+       JButton Edit = UI.Button.getEdit();
+       JButton Wallet = UI.Button.getWallet();
+       JButton PurchaseHistory = UI.Button.getPurchaseHistory();
+       JButton PostHistory = UI.Button.getPostHistory();
+       JButton MessageBoard = UI.Button.getMessageBoard();
+       JButton BrowsingHistory = UI.Button.getBrowsingHistory();
       //JButton Edit = new JButton("Edit/Create");
       //JButton Wallet = new JButton("Wallet");
       //JButton PurchaseHistory = new JButton("Purchase History");
