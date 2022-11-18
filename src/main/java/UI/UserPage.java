@@ -1,6 +1,5 @@
 package main.java.UI;
 
-import controller.UserController;
 
 import javax.swing.*;
 import java.awt.*;
