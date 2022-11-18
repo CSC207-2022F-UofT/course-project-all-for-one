@@ -1,18 +1,27 @@
 package controller;
 
-import Wallet_use_case.WalletInputBoundary;
-import Wallet_use_case.WalletRequestModel;
-import Wallet_use_case.WalletResponseModel;
+import gateway.WalletGateway;
 
 public class WalletController {
-    final WalletInputBoundary walletInput;
 
-    public WalletController(WalletInputBoundary accountGateway){
-        this.walletInput = accountGateway;
+    WalletGateway walletGateway;
+    public WalletController(String username, WalletGateway walletGateway){
+        this.walletGateway=walletGateway;
     }
 
-    public WalletResponseModel create(double balance) {
-        WalletRequestModel requestModel = new WalletRequestModel(balance);
-        return walletInput.create(requestModel);
+    public double useGateway(String username) {
+        return walletGateway.getBalance(username);
     }
+
+//    public void ac(String a){
+//        System.out.println("Click");
+//
+//        WalletGateway walletGateway= new SystemGateway();
+//        WalletController walletController = new WalletController("username", walletGateway);
+//        WalletResponsePresenter walletResponsePresenter = new WalletResponsePresenter();
+//
+//        double balance = walletController.useGateway("username");
+
+//        walletResponsePresenter.createBalancePage(balance); //value should be presented
+//    }
 }
