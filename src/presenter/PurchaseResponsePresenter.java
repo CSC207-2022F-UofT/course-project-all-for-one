@@ -1,4 +1,16 @@
 package presenter;
 
-public class PurchaseResponsePresenter {
+import purchase_use_case.PurchaseResponseModel;
+import purchase_use_case.PurchaseOutputBoundary;
+
+public class PurchaseResponsePresenter implements PurchaseOutputBoundary {
+    @Override
+    public PurchaseResponseModel preparePurchaseView(PurchaseResponseModel purchaseResponse){
+        return purchaseResponse;
+    }
+
+    @Override
+    public PurchaseResponseModel prepareFailView(String error){
+        return error;
+    }
 }
