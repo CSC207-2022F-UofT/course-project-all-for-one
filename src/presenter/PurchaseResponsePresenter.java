@@ -8,9 +8,4 @@ public class PurchaseResponsePresenter implements PurchaseOutputBoundary {
     public PurchaseResponseModel preparePurchaseView(PurchaseResponseModel purchaseResponse){
         return purchaseResponse;
     }
-
-    @Override
-    public PurchaseResponseModel prepareFailView(String error){
-        return error;
-    }
 }
