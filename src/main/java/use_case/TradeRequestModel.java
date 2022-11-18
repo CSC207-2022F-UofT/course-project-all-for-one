@@ -7,8 +7,6 @@ public class TradeRequestModel {
 
     public Post Post;
 
-    public double FinalPrice;
-
     public String CreationTime;
 
     public String Name;
@@ -23,10 +21,9 @@ public class TradeRequestModel {
 
 
 
-    public TradeRequestModel(Post post, double finalPrice, String creationTime,
+    public TradeRequestModel(Post post, String creationTime,
                              String name, String address, String phoneNumber, Account buyer, Account seller) {
         this.Post = post;
-        this.FinalPrice = finalPrice;
         this.CreationTime = creationTime;
         this.Name = name;
         this.Address = address;
@@ -37,10 +34,6 @@ public class TradeRequestModel {
 
     Post getPost() {
         return this.Post;
-    }
-
-    double getFinalPrice() {
-        return this.FinalPrice;
     }
 
     String getCreationTime() {

@@ -23,7 +23,7 @@ public class TradeInteractor implements TradeInputBoundry {
 
     @Override
     public TradeResponseModel create(TradeRequestModel requestModel) {
-        if (requestModel.getBuyer().getWallet().getBalance() < requestModel.getFinalPrice()) {
+        if (requestModel.getBuyer().getWallet().getBalance() < requestModel.getPost().get_price()) {
             return tradePresenter.prepareFailView("Insufficient balance.");
         }
 
@@ -31,14 +31,14 @@ public class TradeInteractor implements TradeInputBoundry {
             return tradePresenter.prepareFailView("Item already sold.");
         }
 
-        requestModel.getBuyer().getWallet().subtractBalance(requestModel.getFinalPrice());
+        requestModel.getBuyer().getWallet().subtractBalance(requestModel.getPost().get_price());
 
-        requestModel.getSeller().getWallet().addBalance(requestModel.getFinalPrice());
+        requestModel.getSeller().getWallet().addBalance(requestModel.getPost().get_price());
 
         LocalDateTime now = LocalDateTime.now();
         String creationTime = now.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
 
-        Order order = OrderFactory.create(requestModel.getPost(), requestModel.getFinalPrice(),
+        Order order = OrderFactory.create(requestModel.getPost(), requestModel.getPost().get_price(),
                 creationTime, requestModel.getName(),
                 requestModel.getAddress(), requestModel.getPhoneNumber());
 

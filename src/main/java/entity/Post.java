@@ -45,6 +45,14 @@ public class Post {
         return this.Status;
     }
 
+    public String getTitle() {
+        return this.Title;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
     public void add_tags(String tag) {
         String[] arrNew = new String[this.tags.length + 1];
         int i;
