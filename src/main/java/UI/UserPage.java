@@ -3,6 +3,7 @@ package main.java.UI;
 import controller.UserController;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,7 +29,7 @@ public class UserPage implements ActionListener{
       public UserPage(){
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(420,400);
-            frame.setLayout(null);
+            frame.setLayout(new FlowLayout());
             frame.setVisible(true);
             frame.add(Edit);
             frame.add(Wallet);
@@ -69,6 +70,7 @@ public class UserPage implements ActionListener{
       public void actionPerformed(ActionEvent e) {
            if (e.getSource() == Edit){
                   EditPage editPage = new EditPage();
+                  frame.dispose();
             }
             //if (e.getSource() == Wallet){
             //}

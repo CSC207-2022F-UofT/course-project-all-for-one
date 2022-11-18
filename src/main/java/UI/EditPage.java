@@ -104,8 +104,10 @@ public class EditPage extends JFrame implements ActionListener{
         System.out.println("Click " + e.getActionCommand());
         if (e.getSource() == save){
             frame.dispose();
+            UserPage userPage = new UserPage();
         }
         if (e.getSource() == cancel){
+            UserPage userPage = new UserPage();
             frame.dispose();
         }
 
