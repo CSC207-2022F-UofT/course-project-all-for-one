@@ -1,4 +1,6 @@
+
 package main.java.use_case;
+
 
 public class ProfileResponseModel {
     String age;
