@@ -3,22 +3,22 @@ package entity;
 import java.util.Objects;
 
 public class Post {
-    String Title;
-    String Description;
-    private String Status;
+    String title;
+    String description;
+    private String status;
     private double price;
     private String [] tags = {};
 
     public Post(String input_title, String input_description, double input_price){
-        this.Title = input_title;
-        this.Description = input_description;
+        this.title = input_title;
+        this.description = input_description;
         this.price = input_price;
-        this.Status = "Active";
+        this.status = "Active";
         this.tags = new String[]{};
     }
 
     public void Revise_description(String revise_description){
-        this.Description = revise_description;
+        this.description = revise_description;
     }
 
     public void Revise_price(double revise_price){
@@ -30,19 +30,19 @@ public class Post {
     }
 
     public void solding_post(){
-        this.Status = "Sold";
+        this.status = "Sold";
     }
 
     public void pending_post(){
-        this.Status = "Pending";
+        this.status = "Pending";
     }
 
     public void activating_post(){
-        this.Status = "Active";
+        this.status = "Active";
     }
 
     public String get_status(){
-        return this.Status;
+        return this.status;
     }
 
     public void add_tags(String tag) {
@@ -69,5 +69,7 @@ public class Post {
     public String[] getTags() {
         return tags;
     }
+
+    public String getTitle(){ return title; }
 }
 
