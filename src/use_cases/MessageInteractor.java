@@ -3,11 +3,12 @@ package use_cases;
 import entities.Message;
 import entities.MessageBoard;
 import presenter.MessagePresenter;
+import presenter.MessageResponseFormatter;
 
 public class MessageInteractor implements MessageInputBoundary {
 
     final MessageDsGateway messageGateway;
-    final MessageBoardPresenter messagePresenter;
+    final MessagePresenter messagePresenter;
 
     private Message message;
 
@@ -16,7 +17,7 @@ public class MessageInteractor implements MessageInputBoundary {
 
 
 
-    public MessageInteractor(MessageDsGateway messageDsGateway, MessageBoardPresenter messagePresenter) {
+    public MessageInteractor(MessageDsGateway messageDsGateway, MessagePresenter messagePresenter) {
         this.messageGateway = messageDsGateway;
         this.messagePresenter = messagePresenter;
     }
@@ -31,9 +32,11 @@ public class MessageInteractor implements MessageInputBoundary {
         board.addMessage(add);  //add new message to the board
         messageGateway.save(new MessageDsRequestModel(board));  // write the new MessageBoard to file
 
-        return messagePresenter.displayBoard();
+        MessageResponseModel responseModel = new MessageResponseModel(add, board);
 
-        MessageDsRequestModel messageDsModel = new MessageDsRequestModel(messageBoard);
+        return messagePresenter.displayBoard(responseModel);
+
+
     }
 }
 
