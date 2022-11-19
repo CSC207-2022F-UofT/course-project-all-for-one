@@ -11,10 +11,10 @@ public class GeneralAccount implements Account{
         this.username = username;
         this.password = password;
     }
-    //TODO implement valid password criteria
+    //TODO improve valid password criteria
     @Override
     public boolean passwordIsValid() {
-        return false;
+        return this.password.matches("[0-9a-zA-Z_\\-+=*&^%$#@!]{8,}");
     }
 
     @Override

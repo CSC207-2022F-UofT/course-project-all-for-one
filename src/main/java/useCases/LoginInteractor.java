@@ -3,6 +3,8 @@ package useCases;
 import entities.Account;
 import entities.AccountFactory;
 
+import java.time.LocalDateTime;
+
 public class LoginInteractor implements LoginInputBoundary{
 
     final LoginDsGateway loginDsGateway;
@@ -14,7 +16,7 @@ public class LoginInteractor implements LoginInputBoundary{
         this.loginPresenter = loginPresenter;
         this.accountFactory = accountFactory;
     }
-    //TODO implement it
+
     @Override
     public LoginResponseModel create(LoginRequestModel requestModel) {
         if (!loginDsGateway.isExistedName(requestModel.getUsername())||
@@ -23,7 +25,12 @@ public class LoginInteractor implements LoginInputBoundary{
         }
 
         Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword());
-        LoginResponseModel responseModel = new LoginResponseModel();
+        account.setLoginStatus(true);
+
+        LocalDateTime now = LocalDateTime.now();
+        LoginDsRequestModel loginDsRequestModel = new LoginDsRequestModel(account.getUsername(), account.getPassword(), now);
+        loginDsGateway.save(loginDsRequestModel);
+        LoginResponseModel responseModel = new LoginResponseModel(account.getUsername(), now.toString());
         return loginPresenter.prepareSuccessView(responseModel);
     }
 }
