@@ -1,6 +1,4 @@
-package main.java.UI;
-//package UI;
-
+package UI;
 
 import javax.swing.*;
 
