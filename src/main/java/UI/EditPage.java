@@ -1,6 +1,6 @@
 package main.java.UI;
 
-import Entity.Profile;
+import main.java.Entity.Profile;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,12 +1,5 @@
 package main.java.use_case;
 
-
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import Entity.Profile;
-
 public class ProfileRequestModel {
 
      private String age;
