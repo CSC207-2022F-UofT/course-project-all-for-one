@@ -1,4 +1,4 @@
-package main.java.gateway;
+package gateway;
 
 public interface profilegateway {
 }
