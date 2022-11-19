@@ -5,8 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MessageBoard implements Iterable<List<Message>>{
+
+    private String name;
     private List<Message> messages = new ArrayList<>();
     private int BOARD_SIZE = 5;
+
+    public MessageBoard(String name) {
+        this.name = name;
+    }
 
     public void addMessage(Message m) {messages.add(m);}
 
