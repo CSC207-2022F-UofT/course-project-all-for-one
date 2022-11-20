@@ -27,10 +27,11 @@ public class MessageInteractor implements MessageInputBoundary {
         if (requestModel.getDelete() != null) {
             messageGateway.delete(requestModel.getDelete().getContent()); //if input a delete message, delete it
         }
+
         Message add = requestModel.getMessage();
         MessageBoard board = requestModel.getBoard();
         board.addMessage(add);  //add new message to the board
-        messageGateway.save(new MessageDsRequestModel(board));  // write the new MessageBoard to file
+        messageGateway.save(new MessageDsRequestModel(board));  // write the new MessageBoard to file}
 
         MessageResponseModel responseModel = new MessageResponseModel(add, board);
 
