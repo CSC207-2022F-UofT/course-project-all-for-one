@@ -1,6 +1,8 @@
 package gateway;
 
-import entity.PurchaseHistory;
+import entity.Order;
+import java.util.List;
 
 public interface PurchaseGateway {
+    List<Order> getOrders(String username);
 }

@@ -1,11 +1,10 @@
 package presenter;
 
-import purchase_use_case.PurchaseResponseModel;
-import purchase_use_case.PurchaseOutputBoundary;
+import entity.Order;
+import java.util.List;
 
-public class PurchaseResponsePresenter implements PurchaseOutputBoundary {
-    @Override
-    public PurchaseResponseModel preparePurchaseView(PurchaseResponseModel purchaseResponse){
-        return purchaseResponse;
+public class PurchaseResponsePresenter {
+    public List<Order> createPurchaseHistoryPage(List<Order> orders){
+        return orders;
     }
 }

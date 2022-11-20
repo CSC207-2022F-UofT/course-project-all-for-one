@@ -2,19 +2,17 @@ package controller;
 
 import entity.Order;
 import java.util.List;
-import purchase_use_case.PurchaseInputBoundary;
-import purchase_use_case.PurchaseRequestModel;
-import purchase_use_case.PurchaseResponseModel;
+import gateway.PurchaseGateway;
 
 public class PurchaseController {
-    final PurchaseInputBoundary purchaseInput;
 
-    public PurchaseController(PurchaseInputBoundary accountGateway){
-        this.purchaseInput = accountGateway;
+    PurchaseGateway purchaseGateway;
+
+    public PurchaseController(String username, PurchaseGateway purchaseGateway){
+        this.purchaseGateway = purchaseGateway;
     }
 
-    public PurchaseResponseModel create(List<Order> orders){
-        PurchaseRequestModel requestModel = new PurchaseRequestModel(orders);
-        return purchaseInput.create(requestModel);
+    public List<Order> useGateway(String username){
+        return purchaseGateway.getOrders(username);
     }
 }
