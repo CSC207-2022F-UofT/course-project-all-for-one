@@ -1,22 +1,24 @@
-package UI;
+package main.java.UI;
 
+
+import main.java.Entity.Profile;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserPage implements ActionListener{
+public class UserCenterPage implements ActionListener{
        JFrame frame = new JFrame();
        JLabel label = new JLabel();
 
 
-       JButton Edit = UI.Button.getEdit();
-       JButton Wallet = UI.Button.getWallet();
-       JButton PurchaseHistory = UI.Button.getPurchaseHistory();
-       JButton PostHistory = UI.Button.getPostHistory();
-       JButton MessageBoard = UI.Button.getMessageBoard();
-       JButton BrowsingHistory = UI.Button.getBrowsingHistory();
+       JButton Edit = Button.getEdit();
+       JButton Wallet = Button.getWallet();
+       JButton PurchaseHistory = Button.getPurchaseHistory();
+       JButton PostHistory = Button.getPostHistory();
+       JButton MessageBoard = Button.getMessageBoard();
+       JButton BrowsingHistory = Button.getBrowsingHistory();
       //JButton Edit = new JButton("Edit/Create");
       //JButton Wallet = new JButton("Wallet");
       //JButton PurchaseHistory = new JButton("Purchase History");
@@ -25,7 +27,7 @@ public class UserPage implements ActionListener{
       //JButton BrowsingHistory = new JButton("Browsing History");
 
 
-      public UserPage(){
+      public UserCenterPage(){
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(420,400);
             frame.setLayout(new FlowLayout());
@@ -63,6 +65,12 @@ public class UserPage implements ActionListener{
             BrowsingHistory.setFocusable(false);
             BrowsingHistory.addActionListener(this);
 
+            JPanel panel1 = new JPanel();
+            TextArea prfoilearea = new TextArea(Profile.getAge() + Profile.getUsername()+ Profile.getAddress() +
+                    Profile.getDescription() + Profile.getPhone());
+            panel1.add(prfoilearea);
+
+            frame.add(panel1);
       }
 
       @Override

@@ -1,7 +1,10 @@
-import UI.UserPage;
+package main.java;
+
+
+import main.java.UI.UserCenterPage;
 
 public class Main {
     public static void main(String[] args) {
-        UserPage userPage = new UserPage();
+        UserCenterPage userCenterPage = new UserCenterPage();
     }
 }

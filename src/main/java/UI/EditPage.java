@@ -1,6 +1,6 @@
-package UI;
+package main.java.UI;
 
-import Entity.Profile;
+import main.java.Entity.Profile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -104,10 +104,10 @@ public class EditPage extends JFrame implements ActionListener{
         System.out.println("Click " + e.getActionCommand());
         if (e.getSource() == save){
             frame.dispose();
-            UserPage userPage = new UserPage();
+            UserCenterPage userCenterPage = new UserCenterPage();
         }
         if (e.getSource() == cancel){
-            UserPage userPage = new UserPage();
+            UserCenterPage userCenterPage = new UserCenterPage();
             frame.dispose();
         }
 
