@@ -19,7 +19,7 @@ public class PurchaseHistoryPage {
            JMenuItem item3 = new JMenuItem("Name: " + order.getName());
            JMenuItem item4 = new JMenuItem("Address: " + order.getAddress());
            JMenuItem item5 = new JMenuItem("Phone Number: " + order.getPhoneNumber());
-           JMenuItem item6 = new JMenuItem("Status: In Progress");
+           JMenuItem item6 = new JMenuItem("Status: " + order.getShipmentStatus());
            menu.add(item1);
            menu.add(item2);
            menu.add(item3);
