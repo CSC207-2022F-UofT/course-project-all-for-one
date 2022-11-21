@@ -1,6 +1,5 @@
 package use_case;
 
-import entity.Post;
 import entity.Recommendation;
 import gateway.RecommendationGateway;
 
