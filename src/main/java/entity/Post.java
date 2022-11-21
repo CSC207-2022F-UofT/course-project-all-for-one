@@ -41,7 +41,7 @@ public class Post {
         this.Status = "Active";
     }
 
-    public String get_status(){
+    public String getStatus(){
         return this.Status;
     }
 

@@ -27,7 +27,7 @@ public class TradeInteractor implements TradeInputBoundry {
             return tradePresenter.prepareFailView("Insufficient balance.");
         }
 
-        if (Objects.equals(requestModel.getPost().get_status(), "Sold")) {
+        if (Objects.equals(requestModel.getPost().getStatus(), "Sold")) {
             return tradePresenter.prepareFailView("Item already sold.");
         }
 
