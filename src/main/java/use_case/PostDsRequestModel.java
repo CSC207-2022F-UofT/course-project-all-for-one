@@ -1,20 +1,23 @@
 package use_case;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Objects;
 
 // Use case layer
 
 public class PostDsRequestModel {
+    private String Username;
 
     private String Title;
     private String Description;
     private String Status;
     private double Price;
-    private String [] Tags;
+    private ArrayList<String> Tags;
     private final LocalDateTime creationTime;
 
-    public PostDsRequestModel(String input_title, String input_description, double input_price, String [] tags, LocalDateTime time){
+    public PostDsRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags, LocalDateTime time){
+        this.Username = input_username;
         this.Title = input_title;
         this.Description = input_description;
         this.Price = input_price;
@@ -26,11 +29,13 @@ public class PostDsRequestModel {
     public void Revise_description(String revise_description){
         this.Description = revise_description;
     }
+    public void Revise_title(String revise_title){this.Title = revise_title;}
 
     public void Revise_price(double revise_price){
         this.Price = revise_price;
     }
-
+    public String get_username(){return this.Username;}
+    public void Revise_username(String revise_username){this.Username = revise_username;}
     public String get_title(){
         return this.Title;
     }
@@ -38,7 +43,7 @@ public class PostDsRequestModel {
         return this.Description;
     }
 
-    public String[] get_tags() {
+    public ArrayList<String> get_tags() {
         return this.Tags;
     }
 
@@ -50,24 +55,11 @@ public class PostDsRequestModel {
     }
 
     public void add_tags(String tag) {
-        String[] arrNew = new String[this.Tags.length + 1];
-        int i;
-        for (i = 0; i < this.Tags.length; i++) {
-            arrNew[i] = this.Tags[i];
-        }
-        arrNew[i] = tag;
-        this.Tags = arrNew;
+        this.Tags.add(tag);
     }
 
     public void delete_tags(String tag) {
-        String[] arrNew = new String[this.Tags.length - 1];
-        for(int i = 0, k = 0; i < this.Tags.length; i++){
-            if(!Objects.equals(this.Tags[i], tag)){
-                arrNew[k] = this.Tags[i];
-                k++;
-            }
-        }
-        this.Tags = arrNew;
+        this.Tags.remove(tag);
     }
 
     public LocalDateTime getCreationTime() {
