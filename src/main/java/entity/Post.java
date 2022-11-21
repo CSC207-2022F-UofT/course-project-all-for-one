@@ -19,24 +19,24 @@ public class Post {
         this.Tags = tags;
     }
 
-    public String get_title(){
+    public String getTitle(){
         return this.Title;
     }
-    public String get_username(){
+    public String getUsername(){
         return this.Username;
     }
-    public String get_description(){
+    public String getDescription(){
         return this.Description;
     }
 
-    public ArrayList<String> get_tags() {
+    public ArrayList<String> getTags() {
         return this.Tags;
     }
 
-    public String get_status(){
+    public String getStatus(){
         return this.Status;
     }
-    public double get_price(){
+    public double getPrice(){
         return this.Price;
     }
 

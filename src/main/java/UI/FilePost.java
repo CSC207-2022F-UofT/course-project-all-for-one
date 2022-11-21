@@ -41,7 +41,7 @@ public class FilePost implements PostDsGateway {
                 String description = String.valueOf(col[headers.get("Description")]);
                 double price = Double.parseDouble(col[headers.get("Price")]);
                 String status = String.valueOf(col[headers.get("Status")]);
-                ArrayList<String> tags = (ArrayList<String>) Arrays.asList(String.valueOf(col[headers.get("Tags")]).split(","));
+                ArrayList<String> tags = (ArrayList<String>) Arrays.asList(String.valueOf(col[headers.get("Tags")]).split(":"));
                 String creationTimeText = String.valueOf(col[headers.get("CreationTime")]);
                 LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
                 PostDsRequestModel post = new PostDsRequestModel(username, title, description, price, tags, ldt);
@@ -70,9 +70,14 @@ public class FilePost implements PostDsGateway {
             writer.newLine();
 
             for (PostDsRequestModel post : posts.values()) {
-                String line = "%s, %s, %s, %s, %s, %s, %s".formatted(
+                String str_post = post.get_tags().toString();
+                str_post = str_post.replace("[","").
+                        replace("]","").replace(" ","").
+                        replace(",",":");
+                String line = "%s,%s,%s,%s,%s,%s,%s".formatted(
                         post.get_username(), post.get_title(), post.get_description(),
-                        post.get_price(), post.get_status(), post.get_tags(), post.getCreationTime());
+                        String.valueOf(post.get_price()), post.get_status(),
+                        str_post, post.getCreationTime());
                 writer.write(line);
                 writer.newLine();
             }

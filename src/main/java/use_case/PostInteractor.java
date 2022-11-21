@@ -31,10 +31,10 @@ public class PostInteractor implements PostInputBoundary {
         }
 
         LocalDateTime now = LocalDateTime.now();
-        PostDsRequestModel postDsModel = new PostDsRequestModel(post.get_username(), post.get_title(), post.get_description(), post.get_price(), post.get_tags(), now);
+        PostDsRequestModel postDsModel = new PostDsRequestModel(post.getUsername(), post.getTitle(), post.getDescription(), post.getPrice(), post.getTags(), now);
         postDsGateway.save(postDsModel);
 
-        PostResponseModel accountResponseModel = new PostResponseModel(post.get_title(), now.toString());
+        PostResponseModel accountResponseModel = new PostResponseModel(post.getTitle(), now.toString());
         return postPresenter.prepareSuccessView(accountResponseModel);
     }
 }

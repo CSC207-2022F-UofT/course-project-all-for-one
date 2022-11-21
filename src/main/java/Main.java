@@ -39,7 +39,7 @@ public class Main {
         cardLayout.show(screens, "post");
         application.pack();
         application.setVisible(true);
-
+        application.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         // Unused screens; we'll uncomment this later
 //        WelcomeScreen welcomeScreen = new WelcomeScreen();
 //        LoginScreen loginScreen = new LoginScreen();

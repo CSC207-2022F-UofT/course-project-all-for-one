@@ -26,7 +26,7 @@ public class PostScreen extends JPanel implements ActionListener {
     JTextField price = new JTextField(15);
     JTextField add_tag = new JTextField(15);
     ArrayList<String> tags = new ArrayList<String>();
-    JLabel tag_s = new JLabel(tags.toString());
+    JTextField tag_show = new JTextField(15);
 
     /**
      * The controller
@@ -70,7 +70,7 @@ public class PostScreen extends JPanel implements ActionListener {
         this.add(descriptionInfo);
         this.add(priceInfo);
         this.add(tagsInfo);
-        this.add(tag_s);
+        this.add(tag_show);
         this.add(buttons);
 
     }
@@ -93,11 +93,9 @@ public class PostScreen extends JPanel implements ActionListener {
             }
         }
         else if (evt.getActionCommand().equals("add tag")){
-            tags.add(add_tag.getText());
-            tag_s.setText(tags.toString());
+            this.tags.add(add_tag.getText());
+            tag_show.setText(this.tags.toString());
         }
-        else if (evt.getActionCommand().equals("cancel")){
-            System.exit(0);
-        }
+
     }
 }
