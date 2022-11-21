@@ -2,7 +2,7 @@ package UI;
 
 
 import controller.RecommendationController;
-import presenter.RecommmendationFailedError;
+import presenter.RecommendationFailedError;
 import useCase.RecommendationResponseModel;
 
 import javax.swing.*;
@@ -16,7 +16,11 @@ public class MainPage extends JPanel implements ActionListener {
     RecommendationController recommendationController;
     JTextField searchKeywordsTextField = new JTextField(20);
 
-
+    /**
+     *
+     * @param username username of the user that is acting
+     * @param recommendationController the RecommendationController that would control which use case to use in this page
+     */
     public MainPage(String username, RecommendationController recommendationController){
 
         this.recommendationController = recommendationController;
@@ -32,10 +36,12 @@ public class MainPage extends JPanel implements ActionListener {
         JButton recommendationButton = new JButton("Recommendation");
         JButton userCenterButton = new JButton("User Center");
         JButton searchButton = new JButton("Search");
+        JButton addPostButton = new JButton("Add Post");
 
         JPanel buttons = new JPanel();
         buttons.add(recommendationButton);
         buttons.add(userCenterButton);
+        buttons.add(addPostButton);
 
 
         //search module
@@ -71,14 +77,17 @@ public class MainPage extends JPanel implements ActionListener {
     }
 
 
-
+    /**
+     *
+     * @param e the event to be processed
+     */
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("recommendationButton")){
             try{
                 RecommendationResponseModel responseModel = recommendationController.generate();
 
-                JPanel recommendationPanel = new JPanel();
+                JScrollPane recommendationPanel = new JScrollPane();
                 recommendationPanel.setLayout(new BoxLayout(recommendationPanel, BoxLayout.Y_AXIS));
 
                 JFrame recommendationFrame = new JFrame("Recommendation");
@@ -100,11 +109,22 @@ public class MainPage extends JPanel implements ActionListener {
 
 
 
-            } catch (RecommmendationFailedError error) {
+
+            } catch (RecommendationFailedError error) {
                 JOptionPane.showMessageDialog(this, error.getMessage());
             }
 
 
-        } //else if search, profile
+        } else if (e.getActionCommand().equals("addPostButton")){
+            JFrame addPostFrame = new JFrame("Add Post");
+            addPostFrame.setBounds(400, 300, 400,300);
+
+
+            // PostScreen postscreen = new PostScreen(username, postcontroller);
+
+
+            addPostFrame.setVisible(true);
+            addPostFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        }
     }
 }

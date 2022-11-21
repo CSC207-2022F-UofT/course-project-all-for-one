@@ -13,13 +13,22 @@ public class RecommendationController {
     final RecommendationInputBoundry recommendationInputBoundry;
     final RecommendationGateway recommendationGateway;
 
-
+    /**
+     *
+     * @param username user with username that is acting
+     * @param userRecommendationInput a RecommendationInteractor instance variable
+     * @param recommendationGateway a RecommendationFilesGateway instance variable
+     */
     public RecommendationController(String username, RecommendationInputBoundry userRecommendationInput, RecommendationGateway recommendationGateway){
         this.username = username;
         this.recommendationInputBoundry = userRecommendationInput;
         this.recommendationGateway = recommendationGateway;
     }
 
+    /**
+     *
+     * @return return a responsemodel to UI to handle
+     */
     public RecommendationResponseModel generate() {
         PurchaseHistory purchaseHistory = recommendationGateway.getPurchaseHistory(username);
         BrowsingHistory browsingHistory = recommendationGateway.getBrowsingHistory(username);

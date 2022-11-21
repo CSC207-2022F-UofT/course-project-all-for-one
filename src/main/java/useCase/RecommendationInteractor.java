@@ -15,11 +15,23 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
 
     final RecommendationGateway recommendationGateway;
 
+    /**
+     *
+     * @param recommendationOutputBoundry
+     * @param recommendationGateway
+     */
     public RecommendationInteractor(RecommendationOutputBoundry recommendationOutputBoundry,
                                     RecommendationGateway recommendationGateway){
         this.recommendationOutputBoundry = recommendationOutputBoundry;
         this.recommendationGateway = recommendationGateway;
     }
+
+    /**
+     *
+     * @param recommendationRequestModel the RecommendationRequestModel that serves as the input needed processing
+     * @return the RecommendationResponseModel object that contains a list of posts from the database that
+     * contain a specific set of tags in recommendationRequestModel
+     */
     @Override
     public RecommendationResponseModel create(RecommendationRequestModel recommendationRequestModel){
         //find all tags in PurchaseHistory and BrowsingHistory
@@ -54,11 +66,11 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
         String mostTag = "";
         List<String> mostTags = new ArrayList<>();
         int i = 0;
-        while (i < 4){
+        while (i < 5){
             for(String key: tags.keySet()){
                 if (tags.get(key) > max){
                     max=tags.get(key);
-                    mostTag=(key);
+                    mostTag = key;
                 }
             }
             mostTags.add(mostTag);

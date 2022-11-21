@@ -21,6 +21,7 @@ public class UItest {
         JButton recommendationButton = new JButton("Recommendation");
         JButton userCenterButton = new JButton("User Center");
         JButton searchButton = new JButton("Search");
+        JButton addPostButton = new JButton("Add Post");
 
         //search module
         JPanel searchPanel = new JPanel();
@@ -31,11 +32,12 @@ public class UItest {
         searchPanel.add(searchButton);
 
 
+
         //put buttons into a panel
         JPanel buttons = new JPanel();
         buttons.add(recommendationButton);
         buttons.add(userCenterButton);
-
+        buttons.add(addPostButton);
 
         buttons.setLocation(100, 200);
 
