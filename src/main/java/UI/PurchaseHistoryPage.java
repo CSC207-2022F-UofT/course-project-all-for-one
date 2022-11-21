@@ -14,8 +14,8 @@ public class PurchaseHistoryPage {
         JMenuBar bar = new JMenuBar();
         for (Order order : orders) {
            JMenu menu = new JMenu(order.getCreationTime());
-           JMenuItem item1 = new JMenuItem("Product: " + order.getPost().get_title());
-           JMenuItem item2 = new JMenuItem("Price: $" + order.getPost().get_price());
+           JMenuItem item1 = new JMenuItem("Product: " + order.getPost().getTitle());
+           JMenuItem item2 = new JMenuItem("Price: $" + order.getPost().getPrice());
            JMenuItem item3 = new JMenuItem("Name: " + order.getName());
            JMenuItem item4 = new JMenuItem("Address: " + order.getAddress());
            JMenuItem item5 = new JMenuItem("Phone Number: " + order.getPhoneNumber());
