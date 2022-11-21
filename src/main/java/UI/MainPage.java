@@ -3,7 +3,7 @@ package UI;
 
 import controller.RecommendationController;
 import presenter.RecommendationFailedError;
-import useCase.RecommendationResponseModel;
+import use_case.RecommendationResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -104,9 +104,6 @@ public class MainPage extends JPanel implements ActionListener {
                 recommendationFrame.add(recommendationPanel);
                 recommendationFrame.setVisible(true);
                 recommendationFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-
-
 
 
 

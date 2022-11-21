@@ -1,12 +1,10 @@
 package controller;
 
 
-import entity.BrowsingHistory;
-import entity.PurchaseHistory;
 import gateway.RecommendationGateway;
-import useCase.RecommendationInputBoundry;
-import useCase.RecommendationRequestModel;
-import useCase.RecommendationResponseModel;
+import use_case.RecommendationInputBoundry;
+import use_case.RecommendationRequestModel;
+import use_case.RecommendationResponseModel;
 
 public class RecommendationController {
     String username;

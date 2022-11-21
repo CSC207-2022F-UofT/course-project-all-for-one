@@ -1,4 +1,4 @@
-package useCase;
+package use_case;
 
 public interface RecommendationOutputBoundry {
     /**

@@ -1,6 +1,6 @@
 import entity.Post;
 import entity.Recommendation;
-import useCase.RecommendationResponseModel;
+import use_case.RecommendationResponseModel;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package presenter;
 
-import useCase.RecommendationOutputBoundry;
-import useCase.RecommendationResponseModel;
+import use_case.RecommendationOutputBoundry;
+import use_case.RecommendationResponseModel;
 
 public class RecommendationResponsePresenter implements RecommendationOutputBoundry {
     /**
