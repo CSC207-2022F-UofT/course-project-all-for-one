@@ -72,7 +72,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
 
 
         //get in total 30 items that have at least one of these tags in the post database
-        Recommendation recommendation = new Recommendation(recommendationGateway.findPosts(mostTags));
+        Recommendation recommendation = new Recommendation(recommendationGateway.findPosts(mostTags, recommendationRequestModel.getUsername()));
 
 
 

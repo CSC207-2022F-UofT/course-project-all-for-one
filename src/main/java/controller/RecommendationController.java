@@ -25,7 +25,7 @@ public class RecommendationController {
         BrowsingHistory browsingHistory = recommendationGateway.getBrowsingHistory(username);
 
         RecommendationRequestModel recommendationRequestModel =
-                new RecommendationRequestModel(purchaseHistory, browsingHistory);
+                new RecommendationRequestModel(purchaseHistory, browsingHistory, username);
 
         return recommendationInputBoundry.create(recommendationRequestModel);
     }

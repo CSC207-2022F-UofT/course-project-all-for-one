@@ -2,7 +2,6 @@ package UI;
 
 
 import controller.RecommendationController;
-import entity.Post;
 import presenter.RecommmendationFailedError;
 import useCase.RecommendationResponseModel;
 
@@ -10,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 
 public class MainPage extends JPanel implements ActionListener {
 
@@ -29,20 +27,25 @@ public class MainPage extends JPanel implements ActionListener {
         JLabel title =new JLabel("Main Page");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel searchPanel = new JPanel();
-        JLabel searchLabel = new JLabel("You want to search:");
-        searchPanel.add(searchLabel);
-        searchPanel.add(searchKeywordsTextField);
 
         //create buttons for recommendation, profile, and search
         JButton recommendationButton = new JButton("Recommendation");
-        JButton profileButton = new JButton("Profile");
+        JButton userCenterButton = new JButton("User Center");
         JButton searchButton = new JButton("Search");
 
         JPanel buttons = new JPanel();
         buttons.add(recommendationButton);
-        buttons.add(profileButton);
-        buttons.add(searchButton);
+        buttons.add(userCenterButton);
+
+
+        //search module
+        JPanel searchPanel = new JPanel();
+        JLabel searchLabel = new JLabel("You want to search:");
+        searchPanel.add(searchLabel);
+        searchPanel.add(searchKeywordsTextField);
+        searchPanel.add(searchButton);
+
+
 
         recommendationButton.addActionListener(this);
 //        recommendationButton.addActionListener(new AbstractAction() {
@@ -75,22 +78,24 @@ public class MainPage extends JPanel implements ActionListener {
             try{
                 RecommendationResponseModel responseModel = recommendationController.generate();
 
-                JScrollPane recom = new JScrollPane();
+                JPanel recommendationPanel = new JPanel();
+                recommendationPanel.setLayout(new BoxLayout(recommendationPanel, BoxLayout.Y_AXIS));
 
-                int j = 1;
-                if (Array.getLength(responseModel.getRecommendation().getPosts()) < 3){
-                    for(Post post: responseModel.getRecommendation().getPosts()){
-                        recom.add(new JLabel(post.getTitle()));
-                        recom.add(new JButton("Open post" + j));
-                    }
-                } else{
-                    for (int i = 0; i < 3; i++) {
-                        for(Post post: responseModel.getRecommendation().getPosts()){
-                            recom.add(new JLabel(post.getTitle()));
-                            recom.add(new JButton("Open post" + i));
-                        }
-                    }
+                JFrame recommendationFrame = new JFrame("Recommendation");
+                recommendationFrame.setBounds(500, 200, 300, 500);
+
+                Button[] buttonsAdded = new Button[responseModel.getRecommendation().getPosts().size()];
+                for(int j = 0; j <responseModel.getRecommendation().getPosts().size(); j++){
+                    buttonsAdded[j] = new Button("Open post" + j);
+                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
+                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
+                    recommendationPanel.add(buttonsAdded[j]);
                 }
+
+                recommendationFrame.add(recommendationPanel);
+                recommendationFrame.setVisible(true);
+                recommendationFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
 
 
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RecommendationGateway {
 
-    List<Post> findPosts(List<String> Tags);
+    List<Post> findPosts(List<String> Tags, String username);
 
     PurchaseHistory getPurchaseHistory(String username);
 

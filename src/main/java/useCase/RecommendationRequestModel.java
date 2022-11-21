@@ -7,9 +7,12 @@ public class RecommendationRequestModel {
      private PurchaseHistory purchaseHistory;
      private BrowsingHistory browsingHistory;
 
-    public RecommendationRequestModel(PurchaseHistory purchaseHistory, BrowsingHistory browsingHistory){
+     private String username;
+
+    public RecommendationRequestModel(PurchaseHistory purchaseHistory, BrowsingHistory browsingHistory, String username){
         this.purchaseHistory = purchaseHistory;
         this.browsingHistory = browsingHistory;
+        this.username = username;
     }
 
 
@@ -19,5 +22,9 @@ public class RecommendationRequestModel {
 
     public BrowsingHistory getBrowsingHistory() {
         return browsingHistory;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }
