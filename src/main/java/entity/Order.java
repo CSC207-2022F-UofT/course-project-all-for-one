@@ -44,4 +44,6 @@ public class Order {
     public String getShipmentStatus() {
         return this.ShipmentStatus;
     }
+
+    public String getCreationTime() {return this.CreationTime;}
 }
