@@ -15,6 +15,7 @@ public class Search {
     }
 
     public List<Post> addPost (String tag){
+        if (Objects.equals())
 
     }
 }
