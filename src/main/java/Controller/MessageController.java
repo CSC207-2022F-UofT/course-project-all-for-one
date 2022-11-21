@@ -1,8 +1,8 @@
 package Controller;
 
-import use_cases.MessageInputBoundary;
-import use_cases.MessageRequestModel;
-import use_cases.MessageResponseModel;
+import use_case.MessageInputBoundary;
+import use_case.MessageRequestModel;
+import use_case.MessageResponseModel;
 
 public class MessageController {
     final MessageInputBoundary messageInput;

@@ -1,7 +1,6 @@
-package use_cases;
+package use_case;
 
-import entities.Message;
-import entities.MessageBoard;
+import entity.MessageBoard;
 
 public class MessageDsRequestModel {
     private MessageBoard board;

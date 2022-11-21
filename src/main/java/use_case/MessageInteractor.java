@@ -1,8 +1,8 @@
-package use_cases;
+package use_case;
 
-import Gateway.MessageDsGateway;
-import entities.Message;
-import entities.MessageBoard;
+import gateway.MessageDsGateway;
+import entity.Message;
+import entity.MessageBoard;
 import presenter.MessagePresenter;
 
 public class MessageInteractor implements MessageInputBoundary {

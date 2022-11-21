@@ -1,6 +1,4 @@
-package use_cases;
-
-import entities.MessageBoard;
+package use_case;
 
 public interface MessageInputBoundary {
    MessageResponseModel create(MessageRequestModel requestModel);

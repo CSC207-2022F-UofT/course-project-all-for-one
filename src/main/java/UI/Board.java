@@ -1,12 +1,12 @@
 package UI;
 
 import Controller.MessageController;
-import Gateway.MessageDsGateway;
+import gateway.MessageDsGateway;
 import presenter.MessagePresenter;
 import presenter.MessageResponseFormatter;
-import use_cases.MessageInteractor;
-import use_cases.MessageRequestModel;
-import use_cases.MessageResponseModel;
+import use_case.MessageInteractor;
+import use_case.MessageRequestModel;
+import use_case.MessageResponseModel;
 
 import javax.swing.*;
 import java.awt.*;

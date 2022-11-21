@@ -1,7 +1,7 @@
-package use_cases;
+package use_case;
 
-import entities.Message;
-import entities.MessageBoard;
+import entity.Message;
+import entity.MessageBoard;
 
 public class MessageRequestModel {
 

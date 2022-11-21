@@ -1,13 +1,9 @@
 import UI.Board;
-import Gateway.MessageDataManagement;
-import Gateway.MessageDsGateway;
-import entities.Message;
-import entities.MessageBoard;
+import gateway.MessageDataManagement;
+import gateway.MessageDsGateway;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Main {

@@ -1,8 +1,8 @@
-package Gateway;
+package gateway;
 
-import entities.Message;
-import entities.MessageBoard;
-import use_cases.MessageDsRequestModel;
+import entity.Message;
+import entity.MessageBoard;
+import use_case.MessageDsRequestModel;
 
 import java.io.*;
 import java.util.List;

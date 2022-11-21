@@ -1,4 +1,4 @@
-package entities;
+package entity;
 
 public class Message {
     private String content;

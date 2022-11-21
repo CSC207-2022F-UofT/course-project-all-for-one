@@ -1,9 +1,7 @@
-package Gateway;
+package gateway;
 
-import entities.MessageBoard;
-import use_cases.MessageDsRequestModel;
-
-import java.io.IOException;
+import entity.MessageBoard;
+import use_case.MessageDsRequestModel;
 
 public interface MessageDsGateway {
 

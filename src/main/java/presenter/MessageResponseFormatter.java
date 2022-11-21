@@ -1,6 +1,6 @@
 package presenter;
 
-import use_cases.MessageResponseModel;
+import use_case.MessageResponseModel;
 
 public class MessageResponseFormatter implements MessagePresenter{
     @Override
