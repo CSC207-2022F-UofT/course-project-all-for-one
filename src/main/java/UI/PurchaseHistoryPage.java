@@ -27,6 +27,7 @@ public class PurchaseHistoryPage {
            menu.add(item5);
            menu.add(item6);
            bar.add(menu);
+           jf.add(bar);
         }
 
         jf.setVisible(true);
