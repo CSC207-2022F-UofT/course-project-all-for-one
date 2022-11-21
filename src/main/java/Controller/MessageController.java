@@ -11,8 +11,8 @@ public class MessageController {
         this.messageInput = input;
     }
 
-    MessageResponseModel create(String message, String delete) {
-        MessageRequestModel requestModel = new MessageRequestModel(message, delete);
+    public MessageResponseModel create(String message) {
+        MessageRequestModel requestModel = new MessageRequestModel(message);
 
         return messageInput.create(requestModel);
     }

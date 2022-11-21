@@ -1,6 +1,7 @@
-package use_cases;
+package Gateway;
 
 import entities.MessageBoard;
+import use_cases.MessageDsRequestModel;
 
 import java.io.IOException;
 
@@ -10,7 +11,7 @@ public interface MessageDsGateway {
 
     void save(MessageDsRequestModel requestModel);
 
-    void delete(String message);
+//    void delete(String message);
 
 
 

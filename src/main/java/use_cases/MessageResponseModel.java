@@ -8,13 +8,10 @@ import java.util.List;
 
 public class MessageResponseModel {
 
-    Message message;
-    MessageBoard board;
-
     List<String> messageList;
 
 
-    public MessageResponseModel(Message message, MessageBoard board) {
+    public MessageResponseModel(MessageBoard board) {
         this.messageList = new ArrayList<>();
         for (List<Message> ml : board) {
             for (Message m : ml) {
@@ -30,6 +27,7 @@ public class MessageResponseModel {
     public void setMessageList(List<String> messageList) {
         this.messageList = messageList;
     }
+
     //    public Message getMessage() {
 //        return message;
 //    }

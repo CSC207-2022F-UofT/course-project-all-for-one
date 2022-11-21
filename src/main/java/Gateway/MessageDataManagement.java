@@ -1,24 +1,27 @@
-package use_cases;
+package Gateway;
 
 import entities.Message;
 import entities.MessageBoard;
+import use_cases.MessageDsRequestModel;
 
 import java.io.*;
 import java.util.List;
 
-public class MessageDataManagement implements MessageDsGateway{
+public class MessageDataManagement implements MessageDsGateway {
 
-    private String fileName;
+    private final File csvFile;
 
-    public MessageDataManagement(String fileName) {
-        this.fileName = fileName;
+    public MessageDataManagement(String csvPath) {
+        csvFile = new File(csvPath);
     }
+
+
 
     @Override
     public MessageBoard getBoard(String boardName) {
         MessageBoard board = new MessageBoard(boardName);
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            BufferedReader reader = new BufferedReader(new FileReader(csvFile));
             String line;
             Message message;
             while((line = reader.readLine()) != null){
@@ -32,10 +35,14 @@ public class MessageDataManagement implements MessageDsGateway{
         return board;
     }
 
+    /**
+     * Add requestModel to storage.
+     * @param requestModel the user information to save.
+     */
     @Override
     public void save(MessageDsRequestModel requestModel) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile));
             for (List<Message> board: requestModel.getBoard()){
                 for( Message message: board) {
                 writer.write(message.getContent() + "\n");}
@@ -46,11 +53,10 @@ public class MessageDataManagement implements MessageDsGateway{
             e.printStackTrace();
         }
 
-
     }
-
-    @Override
-    public void delete(String message) {
-
-    }
+//
+//    @Override
+//    public void delete(String message) {
+//
+//    }
 }

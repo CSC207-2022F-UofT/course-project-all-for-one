@@ -1,9 +1,9 @@
 package use_cases;
 
+import Gateway.MessageDsGateway;
 import entities.Message;
 import entities.MessageBoard;
 import presenter.MessagePresenter;
-import presenter.MessageResponseFormatter;
 
 public class MessageInteractor implements MessageInputBoundary {
 
@@ -24,16 +24,16 @@ public class MessageInteractor implements MessageInputBoundary {
 
     @Override
     public MessageResponseModel create(MessageRequestModel requestModel) {
-        if (requestModel.getDelete() != null) {
-            messageGateway.delete(requestModel.getDelete().getContent()); //if input a delete message, delete it
-        }
+//        if (requestModel.getDelete() != null) {
+//            messageGateway.delete(requestModel.getDelete().getContent()); //if input a delete message, delete it
+//        }
 
         Message add = requestModel.getMessage();
-        MessageBoard board = requestModel.getBoard();
+        MessageBoard board = messageGateway.getBoard("MessageBoard");
         board.addMessage(add);  //add new message to the board
         messageGateway.save(new MessageDsRequestModel(board));  // write the new MessageBoard to file}
 
-        MessageResponseModel responseModel = new MessageResponseModel(add, board);
+        MessageResponseModel responseModel = new MessageResponseModel(board);
 
         return messagePresenter.displayBoard(responseModel);
 
