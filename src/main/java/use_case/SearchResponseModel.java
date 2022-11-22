@@ -1,13 +1,13 @@
-package search_use_case;
+package use_case;
 
 import Entity.Post;
 
 import java.util.List;
 
-public class SearchRequestModel {
+public class SearchResponseModel {
     private List<Post> searchResult;
 
-    public SearchRequestModel(List<Post> searchResult){
+    public SearchResponseModel(List<Post> searchResult){
         this.searchResult = searchResult;
     }
 

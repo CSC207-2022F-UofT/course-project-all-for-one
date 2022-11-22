@@ -1,4 +1,4 @@
-package search_use_case;
+package gateway;
 
 public interface SearchDsGateway {
     void save(SearchRequestModel requestModel);

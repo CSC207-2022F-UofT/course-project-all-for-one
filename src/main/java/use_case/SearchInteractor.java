@@ -1,4 +1,4 @@
-package search_use_case;
+package use_case;
 
 import Entity.Search;
 import Entity.SearchFactory;
