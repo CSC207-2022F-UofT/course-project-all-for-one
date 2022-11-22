@@ -2,7 +2,7 @@ import UI.FilePost;
 import UI.PostController;
 import UI.PostResponseFormatter;
 import UI.PostScreen;
-import Entity.PostFactory;
+import entities.PostFactory;
 import use_case.PostDsGateway;
 import use_case.PostInputBoundary;
 import use_case.PostInteractor;

@@ -1,5 +1,6 @@
 package gateway;
 
+import entities.MessageBoard;
 import use_case.MessageDsRequestModel;
 
 public interface MessageDsGateway {

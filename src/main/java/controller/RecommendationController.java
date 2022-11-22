@@ -1,7 +1,8 @@
 package controller;
 
 
-import Entity.PurchaseHistory;
+import entities.BrowsingHistory;
+import entities.PurchaseHistory;
 import gateway.RecommendationGateway;
 import use_case.RecommendationInputBoundry;
 import use_case.RecommendationRequestModel;

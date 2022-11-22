@@ -5,7 +5,9 @@ import entities.Post;
 import java.util.LinkedList;
 
 public class BrowsingResponsePresenter implements BrowsingPresenter{
-        public LinkedList<Post> createBrowsingHistoryPage(LinkedList<Post> posts){
-            return posts;
-        }
+
+    @Override
+    public LinkedList<Post> createBrowsingHistoryPage() {
+        return null;
+    }
 }

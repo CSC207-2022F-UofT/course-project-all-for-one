@@ -1,6 +1,7 @@
 package gateway;
 
-import Entity.Order;
+import entities.Order;
+
 import java.util.List;
 
 public interface PurchaseGateway {

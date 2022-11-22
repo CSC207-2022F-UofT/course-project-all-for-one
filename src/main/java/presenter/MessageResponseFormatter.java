@@ -1,4 +1,4 @@
-package UI;
+package presenter;
 
 import use_case.MessageResponseModel;
 

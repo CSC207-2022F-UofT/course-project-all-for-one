@@ -74,9 +74,9 @@ public class FilePost implements PostDsGateway {
                 str_post = str_post.replace("[","").
                         replace("]","").replace(" ","").
                         replace(",",":");
-                String line = "%s,%s,%s,%s,%s,%s,%s".formatted(
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s",
                         post.get_username(), post.get_title(), post.get_description(),
-                        String.valueOf(post.get_price()), post.get_status(),
+                        post.get_price(), post.get_status(),
                         str_post, post.getCreationTime());
                 writer.write(line);
                 writer.newLine();

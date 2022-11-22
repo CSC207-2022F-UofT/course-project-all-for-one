@@ -1,7 +1,7 @@
 package use_case;
 
-import Entity.Search;
-import Entity.SearchFactory;
+import entities.Search;
+import entities.SearchFactory;
 import gateway.SearchDsGateway;
 import presenter.SearchResponsePresenter;
 

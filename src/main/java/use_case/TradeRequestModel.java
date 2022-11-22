@@ -1,7 +1,7 @@
 package use_case;
 
-import Entity.Account;
-import Entity.Post;
+import entities.Account;
+import entities.Post;
 
 public class TradeRequestModel {
 

@@ -2,7 +2,8 @@ package UI;
 
 import entities.Post;
 
-import java.util.Arrays;
+import javax.swing.*;
+import java.awt.*;
 import java.util.LinkedList;
 
 public class BrowsingHistoryPage {
@@ -12,12 +13,12 @@ public class BrowsingHistoryPage {
         jf.setBounds(400, 300, 300, 200);
         JMenuBar bar = new JMenuBar();
         for (Post post : posts) {
-            JMenu menu = new JMenu(post.get_title());
-            JMenuItem item1 = new JMenuItem("Product: " + post.get_title());
-            JMenuItem item2 = new JMenuItem("Description: " + post.get_description());
-            JMenuItem item3 = new JMenuItem("Status: " + post.get_status());
-            JMenuItem item4 = new JMenuItem("Price: " + post.get_price());
-            JMenuItem item5 = new JMenuItem("Tag: " + Arrays.toString(post.get_tags()));
+            JMenu menu = new JMenu(post.getTitle());
+            JMenuItem item1 = new JMenuItem("Product: " + post.getTitle());
+            JMenuItem item2 = new JMenuItem("Description: " + post.getDescription());
+            JMenuItem item3 = new JMenuItem("Status: " + post.getStatus());
+            JMenuItem item4 = new JMenuItem("Price: " + post.getPrice());
+            JMenuItem item5 = new JMenuItem("Tag: " + post.getTagsString());
             JMenuItem item6 = new JMenuItem("Status: In Progress");
             menu.add(item1);
             menu.add(item2);

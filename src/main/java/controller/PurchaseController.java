@@ -1,6 +1,6 @@
 package controller;
 
-import Entity.Order;
+import entities.Order;
 import java.util.List;
 import gateway.PurchaseGateway;
 

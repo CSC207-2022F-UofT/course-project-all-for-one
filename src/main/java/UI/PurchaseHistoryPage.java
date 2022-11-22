@@ -1,8 +1,8 @@
 package UI;
 
-import javax.swing.*;
-import Entity.Order;
+import entities.Order;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 

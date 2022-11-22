@@ -1,7 +1,7 @@
 package controller;
 
-import Entity.Account;
-import Entity.Post;
+import entities.Account;
+import entities.Post;
 import use_case.TradeInputBoundry;
 import use_case.TradeRequestModel;
 import use_case.TradeResponseModel;

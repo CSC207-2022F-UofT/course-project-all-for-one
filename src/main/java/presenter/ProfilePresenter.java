@@ -1,4 +1,4 @@
-package main.java.presenter;
+package presenter;
 
 public class ProfilePresenter {
 }

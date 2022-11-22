@@ -1,4 +1,4 @@
-package gateway;
+package presenter;
 
 import use_case.MessageResponseModel;
 

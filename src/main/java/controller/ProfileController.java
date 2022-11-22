@@ -1,8 +1,8 @@
-package main.java.controller;
+package controller;
 
-import main.java.use_case.ProfileInputBoundary;
-import main.java.use_case.ProfileRequestModel;
-import main.java.use_case.ProfileResponseModel;
+import use_case.ProfileInputBoundary;
+import use_case.ProfileRequestModel;
+import use_case.ProfileResponseModel;
 
 public class ProfileController {
     static ProfileInputBoundary userinput;

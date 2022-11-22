@@ -1,6 +1,6 @@
-package main.java.UI;
+package UI;
 
-import main.java.Entity.Profile;
+import entities.Profile;
 
 import javax.swing.*;
 import java.awt.*;

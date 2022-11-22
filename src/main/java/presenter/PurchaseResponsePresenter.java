@@ -1,6 +1,6 @@
 package presenter;
 
-import Entity.Order;
+import entities.Order;
 import java.util.List;
 
 public class PurchaseResponsePresenter {

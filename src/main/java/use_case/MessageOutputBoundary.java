@@ -1,6 +1,6 @@
 package use_case;
 
-import Entity.MessageBoard;
+import entities.MessageBoard;
 
 public interface MessageOutputBoundary {
 

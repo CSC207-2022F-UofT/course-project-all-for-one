@@ -93,9 +93,9 @@ public class MainPage extends JPanel implements ActionListener {
                 JFrame recommendationFrame = new JFrame("Recommendation");
                 recommendationFrame.setBounds(500, 200, 300, 500);
 
-                Button[] buttonsAdded = new Button[responseModel.getRecommendation().getPosts().size()];
+                JButton[] buttonsAdded = new JButton[responseModel.getRecommendation().getPosts().size()];
                 for(int j = 0; j <responseModel.getRecommendation().getPosts().size(); j++){
-                    buttonsAdded[j] = new Button("Open post" + j);
+                    buttonsAdded[j] = new JButton("Open post" + j);
                     recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
                     recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
                     recommendationPanel.add(buttonsAdded[j]);

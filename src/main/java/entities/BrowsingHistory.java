@@ -1,4 +1,4 @@
-package entity;
+package entities;
 
 import java.util.LinkedList;
 import java.util.Objects;
@@ -25,7 +25,7 @@ public class BrowsingHistory {
 //        List<String> history = (List<String>) session.getAttribute("history");
 
     public LinkedList<Post> store_history(Post post) {
-        if (Objects.equals(post.get_status(), "Active")) {
+        if (Objects.equals(post.getStatus(), "Active")) {
             if (this.history.contains(post)) {
                 history.remove(post);
                 history.addFirst(post);

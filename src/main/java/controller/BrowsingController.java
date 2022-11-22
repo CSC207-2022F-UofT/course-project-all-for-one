@@ -5,6 +5,7 @@ import gateway.BrowsingGateway;
 
 import java.util.LinkedList;
 
+
 public class BrowsingController {
     private final BrowsingGateway BrowsingGateway;
     BrowsingGateway browsingGateway;

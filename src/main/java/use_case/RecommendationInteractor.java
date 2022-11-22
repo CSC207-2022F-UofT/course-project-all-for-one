@@ -1,12 +1,11 @@
 package use_case;
 
-import Entity.Recommendation;
+import entities.Order;
+import entities.Post;
+import entities.Recommendation;
 import gateway.RecommendationGateway;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RecommendationInteractor implements RecommendationInputBoundry{
     final RecommendationOutputBoundry recommendationOutputBoundry;
@@ -44,7 +43,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
             }
         }
 
-        Post[] posts = recommendationRequestModel.getBrowsingHistory().getPosts();
+        LinkedList<Post> posts = recommendationRequestModel.getBrowsingHistory().getHistory();
         for (Post post : posts){
             for(String tag :post.getTags()){
                 if (!tags.containsKey(tag)) {

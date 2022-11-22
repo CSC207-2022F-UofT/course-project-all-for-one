@@ -1,5 +1,7 @@
 package presenter;
 
+import entities.Post;
+
 import java.util.LinkedList;
 
 public interface BrowsingPresenter {

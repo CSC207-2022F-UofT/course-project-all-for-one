@@ -1,9 +1,9 @@
 package UI;
 
 import controller.TradeController;
-import Entity.Account;
-import Entity.OrderFactory;
-import Entity.Post;
+import entities.Account;
+import entities.OrderFactory;
+import entities.Post;
 import presenter.BuyPresenter;
 import presenter.TradePresenter;
 import use_case.TradeInputBoundry;
@@ -39,7 +39,7 @@ public class PostPage extends JPanel implements ActionListener {
 
         JLabel dPostDescription = new JLabel(Post.getDescription());
 
-        JLabel dPrice = new JLabel(Double.toString(Post.get_price()));
+        JLabel dPrice = new JLabel(Double.toString(Post.getPrice()));
 
         JLabel dCreationTime = new JLabel(CreationTime);
 

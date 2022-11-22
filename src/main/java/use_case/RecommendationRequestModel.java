@@ -1,6 +1,7 @@
 package use_case;
 
-import Entity.PurchaseHistory;
+import entities.BrowsingHistory;
+import entities.PurchaseHistory;
 
 public class RecommendationRequestModel {
      private PurchaseHistory purchaseHistory;

@@ -1,6 +1,6 @@
 package use_case;
 
-import Entity.Recommendation;
+import entities.Recommendation;
 
 public class RecommendationResponseModel {
     Recommendation recommendation;

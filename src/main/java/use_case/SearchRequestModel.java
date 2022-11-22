@@ -1,6 +1,6 @@
 package use_case;
 
-import Entity.Post;
+import entities.Post;
 
 import java.util.List;
 

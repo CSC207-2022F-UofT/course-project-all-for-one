@@ -1,6 +1,6 @@
 package UI;
 
-import Entity.Post;
+import entities.Post;
 
 import javax.swing.*;
 import java.awt.*;

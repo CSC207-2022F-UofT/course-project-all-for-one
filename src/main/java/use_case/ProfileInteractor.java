@@ -1,7 +1,7 @@
-package main.java.use_case;
+package use_case;
 
 
-import main.java.presenter.ProfilePresenter;
+import presenter.ProfilePresenter;
 
 public class ProfileInteractor implements  ProfileInputBoundary{
 

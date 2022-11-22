@@ -2,7 +2,7 @@ package presenter;
 
 import UI.ConfirmPage;
 import controller.TradeController;
-import Entity.*;
+import entities.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +22,7 @@ public class BuyPresenter {
         cardLayout.show(screens, "trade");
         confirm.pack();
         confirm.setVisible(true);
+        confirm.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
     }
 }

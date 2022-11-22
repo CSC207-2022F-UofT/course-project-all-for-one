@@ -1,7 +1,7 @@
 package use_case;
 
-import Entity.Order;
-import Entity.OrderFactory;
+import entities.Order;
+import entities.OrderFactory;
 import presenter.TradePresenter;
 
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ public class TradeInteractor implements TradeInputBoundry {
 
     @Override
     public TradeResponseModel create(TradeRequestModel requestModel) {
-        if (requestModel.getBuyer().getWallet().getBalance() < requestModel.getPost().get_price()) {
+        if (requestModel.getBuyer().getWallet().getBalance() < requestModel.getPost().getPrice()) {
             return tradePresenter.prepareFailView("Insufficient balance.");
         }
 
@@ -31,18 +31,18 @@ public class TradeInteractor implements TradeInputBoundry {
             return tradePresenter.prepareFailView("Item already sold.");
         }
 
-        requestModel.getBuyer().getWallet().subtractBalance(requestModel.getPost().get_price());
+        requestModel.getBuyer().getWallet().subtractBalance(requestModel.getPost().getPrice());
 
-        requestModel.getSeller().getWallet().addBalance(requestModel.getPost().get_price());
+        requestModel.getSeller().getWallet().addBalance(requestModel.getPost().getPrice());
 
         LocalDateTime now = LocalDateTime.now();
         String creationTime = now.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
 
-        Order order = OrderFactory.create(requestModel.getPost(), requestModel.getPost().get_price(),
+        Order order = OrderFactory.create(requestModel.getPost(), requestModel.getPost().getPrice(),
                 creationTime, requestModel.getName(),
                 requestModel.getAddress(), requestModel.getPhoneNumber(), "Order Placed");
 
-        requestModel.getPost().solding_post();
+        requestModel.getPost().setSold();
 
         TradeResponseModel tradeResponseModel = new TradeResponseModel("Order Confirmed", creationTime);
         return tradePresenter.prepareSuccessView(tradeResponseModel);

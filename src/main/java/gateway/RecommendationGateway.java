@@ -1,8 +1,9 @@
 package gateway;
 
 
-import Entity.Post;
-import Entity.PurchaseHistory;
+import entities.BrowsingHistory;
+import entities.Post;
+import entities.PurchaseHistory;
 
 import java.util.List;
 
@@ -29,5 +30,5 @@ public interface RecommendationGateway {
      * @param username username of the user that is acting
      * @return the browsing history object that is owned by the user with username in database
      */
-    //BrowsingHistory getBrowsingHistory(String username);
+    BrowsingHistory getBrowsingHistory(String username);
 }

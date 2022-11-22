@@ -1,7 +1,7 @@
 package use_case;
 
-import Entity.Message;
-import Entity.MessageBoard;
+import entities.Message;
+import entities.MessageBoard;
 import gateway.MessageDsGateway;
 import presenter.MessagePresenter;
 

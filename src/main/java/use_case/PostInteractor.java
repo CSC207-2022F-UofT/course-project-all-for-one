@@ -1,8 +1,8 @@
 package use_case;
 
-import Entity.Criteria;
-import Entity.Post;
-import Entity.PostFactory;
+import entities.Criteria;
+import entities.Post;
+import entities.PostFactory;
 
 import java.time.LocalDateTime;
 

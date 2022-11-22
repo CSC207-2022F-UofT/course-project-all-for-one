@@ -1,7 +1,9 @@
 package UI;
 
-import Controller.MessageController;
+import controller.MessageController;
 import gateway.MessageDsGateway;
+import presenter.MessagePresenter;
+import presenter.MessageResponseFormatter;
 import use_case.MessageInteractor;
 import use_case.MessageRequestModel;
 import use_case.MessageResponseModel;

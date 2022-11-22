@@ -1,4 +1,4 @@
-package Entity;
+package entities;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ public class Post {
     private final String Username;
     private final String Title;
     private final String Description;
-    private final String Status;
+    private String Status;
     private final double Price;
     private final ArrayList<String> Tags;
 
@@ -47,6 +47,10 @@ public class Post {
         Criteria criteria = new Criteria();
         Suggestion suggestion = criteria.evaluatePost(this);
         return suggestion.suggestion == null;
+    }
+
+    public void setSold(){
+        this.Status = "Sold";
     }
 
 

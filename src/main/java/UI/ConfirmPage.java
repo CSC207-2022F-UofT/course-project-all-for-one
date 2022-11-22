@@ -1,8 +1,8 @@
 package UI;
 
 import controller.TradeController;
-import Entity.Account;
-import Entity.Post;
+import entities.Account;
+import entities.Post;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,7 +45,7 @@ public class ConfirmPage extends JPanel implements ActionListener {
         JLabel dPost = new JLabel(Post.getTitle());
         dPost.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel dFinalPrice = new JLabel(Double.toString(Post.get_price()));
+        JLabel dFinalPrice = new JLabel(Double.toString(Post.getPrice()));
         dFinalPrice.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel dCreationTime = new JLabel(CreationTime);
@@ -62,14 +62,11 @@ public class ConfirmPage extends JPanel implements ActionListener {
                 new JLabel("Enter Your Address"), address);
 
         JButton pay = new JButton("Pay");
-        JButton cancel = new JButton("Cancel");
 
         JPanel buttons = new JPanel();
         buttons.add(pay);
-        buttons.add(cancel);
 
         pay.addActionListener(this);
-        cancel.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
