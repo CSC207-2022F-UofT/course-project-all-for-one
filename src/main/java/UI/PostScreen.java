@@ -26,7 +26,7 @@ public class PostScreen extends JPanel implements ActionListener {
     JTextField price = new JTextField(15);
     JTextField add_tag = new JTextField(15);
     ArrayList<String> tags = new ArrayList<String>();
-    JTextField tag_show = new JTextField(15);
+    final JLabel tag_show = new JLabel();
 
     /**
      * The controller
@@ -54,15 +54,22 @@ public class PostScreen extends JPanel implements ActionListener {
         TextPanelwithButton tagsInfo = new TextPanelwithButton(
                 add_tag, add);
 
+//        add.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent arg0) {
+//                tags.add(add_tag.getText());
+//                String str_tags = tags.toString();
+//                str_tags = str_tags.replace("[","").replace("]","");
+//                tag_show.setText(str_tags);
+//            }
+//        });
+
         JButton submit = new JButton("Submit");
-        JButton cancel = new JButton("Cancel");
         JPanel buttons = new JPanel();
         buttons.add(submit);
-        buttons.add(cancel);
 
         submit.addActionListener(this);
-        cancel.addActionListener(this);
-
+        add.addActionListener(this);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
@@ -72,6 +79,8 @@ public class PostScreen extends JPanel implements ActionListener {
         this.add(tagsInfo);
         this.add(tag_show);
         this.add(buttons);
+
+        this.setVisible(true);
 
     }
 
@@ -92,10 +101,13 @@ public class PostScreen extends JPanel implements ActionListener {
                 showMessageDialog(this, e.getMessage());
             }
         }
-        else if (evt.getActionCommand().equals("add tag")){
-            this.tags.add(add_tag.getText());
-            tag_show.setText(this.tags.toString());
+        else{
+            tags.add(add_tag.getText());
+            String str_tags = tags.toString();
+            str_tags = str_tags.replace("[","").replace("]","");
+            tag_show.setText(str_tags);
         }
+
 
     }
 }
