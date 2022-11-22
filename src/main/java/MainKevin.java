@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class Main {
+public class MainKevin {
     public static void main(String[] args) {
 
         // Build the main program window
