@@ -1,29 +1,45 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class Post {
-    String Title;
-    String Description;
-    private String Status;
-    private double price;
-    private String [] tags = {};
 
-    public Post(String input_title, String input_description, double input_price){
-        this.Title = input_title;
-        this.Description = input_description;
-        this.price = input_price;
-        this.Status = "Active";
-        this.tags = new String[]{};
+    import java.util.Objects;
+
+    public class Post {
+        private final String Title;
+        private final String Description;
+        private final String Status;
+        private final double Price;
+        private final String [] Tags;
+
+        public Post(String input_title, String input_description, double input_price, String[] tags){
+            this.Title = input_title;
+            this.Description = input_description;
+            this.Price = input_price;
+            this.Status = "Active";
+            this.Tags = tags;
+
+        }
+
+        public String get_title(){
+            return this.Title;
+        }
+        public String get_description(){
+            return this.Description;
+        }
+
+        public String[] get_tags() {
+            return this.Tags;
+        }
+
+        public String get_status(){
+            return this.Status;
+        }
+        public double get_price(){
+            return this.Price;
+        }
+
+
+
+
     }
 
-    public String get_Title(){
-        return this.Title;
-    }
-
-    public String get_status(){
-        return this.Status;
-    }
-
-}

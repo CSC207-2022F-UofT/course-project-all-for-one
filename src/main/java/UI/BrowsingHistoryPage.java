@@ -3,12 +3,15 @@ package UI;
 import entities.Post;
 
 import javax.swing.*;
+import javax.swing.event.AncestorListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.LinkedList;
 
 public class BrowsingHistoryPage {
-    public static void BrowsingHistoryPage(String[] args, LinkedList<Post> posts){
+    public BrowsingHistoryPage(LinkedList<Post> posts){
         JFrame jf = new JFrame("Browsing History");
         jf.setLayout(new FlowLayout(FlowLayout.CENTER));
         jf.setBounds(400, 300, 300, 200);
@@ -31,7 +34,12 @@ public class BrowsingHistoryPage {
             jf.add(bar);
         }
 
+
+
         jf.setVisible(true);
         jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
     }
+
+
 }
