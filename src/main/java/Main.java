@@ -34,7 +34,8 @@ public class Main {
         );
 
         // Build the GUI, plugging in the parts
-        PostScreen postScreen = new PostScreen(postController);
+        String username = "kevin";
+        PostScreen postScreen = new PostScreen(username, postController);
         screens.add(postScreen, "post");
         cardLayout.show(screens, "post");
         application.pack();
