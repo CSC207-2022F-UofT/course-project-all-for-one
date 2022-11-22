@@ -1,4 +1,4 @@
-package search_use_case;
+package presenter;
 
 public interface SearchResponsePresenter {
     SearchResponseModel prepareSuccessView(SearchResponseModel searchResponseModel);
