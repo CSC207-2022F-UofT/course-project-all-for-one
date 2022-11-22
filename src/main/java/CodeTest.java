@@ -1,3 +1,4 @@
+import entity.Post;
 import entity.Recommendation;
 import use_case.RecommendationResponseModel;
 
