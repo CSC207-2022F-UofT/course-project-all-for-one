@@ -1,11 +1,12 @@
 package use_case;
 
-import entities.Order;
-import entities.Post;
 import entities.Recommendation;
 import gateway.RecommendationGateway;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RecommendationInteractor implements RecommendationInputBoundry{
     final RecommendationOutputBoundry recommendationOutputBoundry;
@@ -30,29 +31,26 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
      * contain a specific set of tags in recommendationRequestModel
      */
     @Override
-    public RecommendationResponseModel create(RecommendationRequestModel recommendationRequestModel){
+    public RecommendationResponseModel create(RecommendationRequestModel recommendationRequestModel) {
         //find all tags in PurchaseHistory and BrowsingHistory
         Map<String, Integer> tags = new HashMap<>();
-        for (Order order : recommendationRequestModel.getPurchaseHistory().getOrders()){
-            for(String tag :order.getPost().getTags()){
-                if (!tags.containsKey(tag)) {
-                    tags.put(tag, 1);
-                } else {
-                    tags.put(tag, tags.get(tag) + 1);
-                }
+        for (String tag : recommendationRequestModel.getPurchaseHistoryTags()) {
+            if (!tags.containsKey(tag)) {
+                tags.put(tag, 1);
+            } else {
+                tags.put(tag, tags.get(tag) + 1);
             }
         }
 
-        LinkedList<Post> posts = recommendationRequestModel.getBrowsingHistory().getHistory();
-        for (Post post : posts){
-            for(String tag :post.getTags()){
-                if (!tags.containsKey(tag)) {
-                    tags.put(tag, 1);
-                } else {
-                    tags.put(tag, tags.get(tag) + 1);
-                }
+
+        for (String tag : recommendationRequestModel.getBrowsingHistoryTags()){
+            if (!tags.containsKey(tag)) {
+                tags.put(tag, 1);
+            } else {
+                tags.put(tag, tags.get(tag) + 1);
             }
         }
+
         // if there are no 5 tags, give a string to OutputBoundry.prepareFailView
 
         if(tags.size() < 5){
@@ -81,7 +79,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
 
 
         //get in total 30 items that have at least one of these tags in the post database
-        Recommendation recommendation = new Recommendation(recommendationGateway.findPosts(mostTags, recommendationRequestModel.getUsername()));
+        Recommendation recommendation = new Recommendation(recommendationGateway.findPosts(mostTags));
 
 
 

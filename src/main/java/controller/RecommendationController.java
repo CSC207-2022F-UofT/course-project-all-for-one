@@ -1,12 +1,12 @@
 package controller;
 
 
-import entities.BrowsingHistory;
-import entities.PurchaseHistory;
 import gateway.RecommendationGateway;
 import use_case.RecommendationInputBoundry;
 import use_case.RecommendationRequestModel;
 import use_case.RecommendationResponseModel;
+
+import java.util.List;
 
 public class RecommendationController {
     String username;
@@ -30,11 +30,11 @@ public class RecommendationController {
      * @return return a responsemodel to UI to handle
      */
     public RecommendationResponseModel generate() {
-        PurchaseHistory purchaseHistory = recommendationGateway.getPurchaseHistory(username);
-        BrowsingHistory browsingHistory = recommendationGateway.getBrowsingHistory(username);
+        List<String> purchaseHistoryTags = recommendationGateway.getPurchaseHistoryTags(username);
+        List<String> browsingHistoryTags = recommendationGateway.getBrowsingHistoryTags(username);
 
         RecommendationRequestModel recommendationRequestModel =
-                new RecommendationRequestModel(purchaseHistory, browsingHistory, username);
+                new RecommendationRequestModel(purchaseHistoryTags, browsingHistoryTags, username);
 
         return recommendationInputBoundry.create(recommendationRequestModel);
     }

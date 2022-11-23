@@ -1,40 +1,31 @@
 package use_case;
 
-import entities.BrowsingHistory;
-import entities.PurchaseHistory;
+import java.util.List;
 
 public class RecommendationRequestModel {
-     private PurchaseHistory purchaseHistory;
-     private BrowsingHistory browsingHistory;
+     private List<String> purchaseHistoryTags;
+     private List<String> browsingHistoryTags;
 
      private String username;
 
     /**
      *
-     * @param purchaseHistory purchase history of the acting user
-     * @param browsingHistory browsing history of the acting user
+     * @param purchaseHistoryTags purchase history of the acting user
+     * @param browsingHistoryTags browsing history of the acting user
      * @param username username of the user that is acting
      */
-    public RecommendationRequestModel(PurchaseHistory purchaseHistory, BrowsingHistory browsingHistory, String username){
-        this.purchaseHistory = purchaseHistory;
-        this.browsingHistory = browsingHistory;
+    public RecommendationRequestModel(List<String> purchaseHistoryTags, List<String> browsingHistoryTags, String username){
+        this.purchaseHistoryTags = purchaseHistoryTags;
+        this.browsingHistoryTags = browsingHistoryTags;
         this.username = username;
     }
 
-    /**
-     *
-     * @return the purchaseHistory in the request model object
-     */
-    public PurchaseHistory getPurchaseHistory() {
-        return purchaseHistory;
+    public List<String> getPurchaseHistoryTags() {
+        return purchaseHistoryTags;
     }
 
-    /**
-     *
-     * @return the browsing history in the request model object
-     */
-    public BrowsingHistory getBrowsingHistory() {
-        return browsingHistory;
+    public List<String> getBrowsingHistoryTags() {
+        return browsingHistoryTags;
     }
 
     /**

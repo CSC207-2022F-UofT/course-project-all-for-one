@@ -1,12 +1,13 @@
 package gateway;
 
+import entities.Post;
 import use_case.PostDsGateway;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class FilePost implements PostDsGateway {
+public class FilePost implements PostDsGateway, RecommendationGateway {
 
     private final File csvFile;
 
@@ -86,6 +87,43 @@ public class FilePost implements PostDsGateway {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * @param Tags     list of tags that are used to find Post object with these tags
+     * @return return a list of Post objects of length at most 30 that contain at least one tag in Tags
+     */
+    @Override
+    public List<Post> findPosts(List<String> Tags) {
+        List<Post> posts = new ArrayList<>();
+        for(String tag : Tags){
+            for(PostDsRequestModel postDsRequestModel: this.posts.values()){
+                if (postDsRequestModel.get_tags().contains(tag) && posts.size() < 30){
+                    posts.add(new Post(postDsRequestModel.get_username(),
+                            postDsRequestModel.get_title(), postDsRequestModel.get_description(),
+                            postDsRequestModel.get_price(), postDsRequestModel.get_tags()));
+                }
+            }
+        }
+        return posts;
+    }
+
+    /**
+     * @param username username of the user that is acting
+     * @return the purchase history object that is owned by the user with username in database
+     */
+    @Override
+    public List<String> getPurchaseHistoryTags(String username) {
+        return null;
+    }
+
+    /**
+     * @param username username of the user that is acting
+     * @return the browsing history object that is owned by the user with username in database
+     */
+    @Override
+    public List<String> getBrowsingHistoryTags(String username) {
+        return null;
     }
 }
 
