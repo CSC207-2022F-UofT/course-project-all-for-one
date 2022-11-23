@@ -1,7 +1,6 @@
-package UI;
+package gateway;
 
 import use_case.PostDsGateway;
-import use_case.PostDsRequestModel;
 
 import java.io.*;
 import java.time.LocalDateTime;

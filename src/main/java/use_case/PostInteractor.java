@@ -3,6 +3,7 @@ package use_case;
 import entities.Criteria;
 import entities.Post;
 import entities.PostFactory;
+import gateway.PostDsRequestModel;
 
 import java.time.LocalDateTime;
 

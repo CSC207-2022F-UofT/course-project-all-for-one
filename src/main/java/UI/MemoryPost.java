@@ -1,6 +1,6 @@
 package UI;
 import use_case.PostDsGateway;
-import use_case.PostDsRequestModel;
+import gateway.PostDsRequestModel;
 
 import java.util.HashMap;
 import java.util.Map;

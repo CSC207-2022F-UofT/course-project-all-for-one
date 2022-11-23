@@ -1,4 +1,4 @@
-package use_case;
+package gateway;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

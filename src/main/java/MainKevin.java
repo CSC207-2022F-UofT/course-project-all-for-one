@@ -1,4 +1,4 @@
-import UI.FilePost;
+import gateway.FilePost;
 import UI.PostController;
 import UI.PostResponseFormatter;
 import UI.PostScreen;
