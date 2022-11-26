@@ -1,3 +1,5 @@
+import UI.UserCenterPage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -96,6 +98,12 @@ public class MainJames {
 //                recommendationFrame.setVisible(true);
 //                recommendationFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 JOptionPane.showMessageDialog(jf, "Use more to have recommendation!");
+            }
+        });
+        userCenterButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UserCenterPage userCenterPage = new UserCenterPage("username");
             }
         });
         //add to JFrame

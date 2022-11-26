@@ -1,7 +1,6 @@
 package use_case;
 
 import entities.Recommendation;
-import gateway.RecommendationGateway;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,17 +10,17 @@ import java.util.Map;
 public class RecommendationInteractor implements RecommendationInputBoundry{
     final RecommendationOutputBoundry recommendationOutputBoundry;
 
-    final RecommendationGateway recommendationGateway;
+    final PostDsGateway postDsGateway;
 
     /**
      *
      * @param recommendationOutputBoundry
-     * @param recommendationGateway
+     * @param postDsGateway
      */
     public RecommendationInteractor(RecommendationOutputBoundry recommendationOutputBoundry,
-                                    RecommendationGateway recommendationGateway){
+                                    PostDsGateway postDsGateway){
         this.recommendationOutputBoundry = recommendationOutputBoundry;
-        this.recommendationGateway = recommendationGateway;
+        this.postDsGateway= postDsGateway;
     }
 
     /**
@@ -79,7 +78,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
 
 
         //get in total 30 items that have at least one of these tags in the post database
-        Recommendation recommendation = new Recommendation(recommendationGateway.findPosts(mostTags));
+        Recommendation recommendation = new Recommendation(postDsGateway.findPosts(mostTags));
 
 
 

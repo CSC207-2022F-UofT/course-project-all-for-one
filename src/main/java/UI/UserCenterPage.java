@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UserCenterPage implements ActionListener{
+        private final String username;
        JFrame frame = new JFrame();
        JLabel label = new JLabel();
 
@@ -17,7 +18,6 @@ public class UserCenterPage implements ActionListener{
        JButton Wallet = Button.getWallet();
        JButton PurchaseHistory = Button.getPurchaseHistory();
        JButton PostHistory = Button.getPostHistory();
-       JButton MessageBoard = Button.getMessageBoard();
        JButton BrowsingHistory = Button.getBrowsingHistory();
       //JButton Edit = new JButton("Edit/Create");
       //JButton Wallet = new JButton("Wallet");
@@ -27,8 +27,9 @@ public class UserCenterPage implements ActionListener{
       //JButton BrowsingHistory = new JButton("Browsing History");
 
 
-      public UserCenterPage(){
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      public UserCenterPage(String username){
+            this.username = username;
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setSize(420,400);
             frame.setLayout(new FlowLayout());
             frame.setVisible(true);
@@ -36,7 +37,6 @@ public class UserCenterPage implements ActionListener{
             frame.add(Wallet);
             frame.add(PurchaseHistory);
             frame.add(PostHistory);
-            frame.add(MessageBoard);
             frame.add(BrowsingHistory);
             frame.add(label);
 
@@ -56,10 +56,6 @@ public class UserCenterPage implements ActionListener{
             PostHistory.setBounds(100,400,80,50);
             PostHistory.setFocusable(false);
             PostHistory.addActionListener(this);
-
-            MessageBoard.setBounds(100,500,80,50);
-            MessageBoard.setFocusable(false);
-            MessageBoard.addActionListener(this);
 
             BrowsingHistory.setBounds(100,600,80,50);
             BrowsingHistory.setFocusable(false);
@@ -86,9 +82,6 @@ public class UserCenterPage implements ActionListener{
             //}
             //if (e.getSource() == PostHistory){
             //      PostHistoryPage postpage = new PostHistoryPage();
-            //}
-            //if (e.getSource() == MessageBoard){
-
             //}
             //if (e.getSource() == BrowsingHistory){
 

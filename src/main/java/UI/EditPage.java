@@ -27,7 +27,7 @@ public class EditPage extends JFrame implements ActionListener{
 
     public EditPage(){
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(420, 420);
         frame.setLayout(new FlowLayout());
         frame.setVisible(true);
@@ -104,10 +104,10 @@ public class EditPage extends JFrame implements ActionListener{
         System.out.println("Click " + e.getActionCommand());
         if (e.getSource() == save){
             frame.dispose();
-            UserCenterPage userCenterPage = new UserCenterPage();
+            UserCenterPage userCenterPage = new UserCenterPage(username);
         }
         if (e.getSource() == cancel){
-            UserCenterPage userCenterPage = new UserCenterPage();
+            UserCenterPage userCenterPage = new UserCenterPage(username);
             frame.dispose();
         }
 

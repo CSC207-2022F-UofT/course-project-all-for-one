@@ -25,39 +25,39 @@ public class PostDsRequestModel {
         this.creationTime = time;
 
     }
-    public void Revise_description(String revise_description){
+    public void reviseDescription(String revise_description){
         this.Description = revise_description;
     }
-    public void Revise_title(String revise_title){this.Title = revise_title;}
+    public void reviseTitle(String revise_title){this.Title = revise_title;}
 
-    public void Revise_price(double revise_price){
+    public void revisePrice(double revise_price){
         this.Price = revise_price;
     }
-    public String get_username(){return this.Username;}
-    public void Revise_username(String revise_username){this.Username = revise_username;}
-    public String get_title(){
+    public String getUsername(){return this.Username;}
+    public void reviseUsername(String revise_username){this.Username = revise_username;}
+    public String getTitle(){
         return this.Title;
     }
-    public String get_description(){
+    public String getDescription(){
         return this.Description;
     }
 
-    public ArrayList<String> get_tags() {
+    public ArrayList<String> getTags() {
         return this.Tags;
     }
 
-    public String get_status(){
+    public String getStatus(){
         return this.Status;
     }
-    public double get_price(){
+    public double getPrice(){
         return this.Price;
     }
 
-    public void add_tags(String tag) {
+    public void addTags(String tag) {
         this.Tags.add(tag);
     }
 
-    public void delete_tags(String tag) {
+    public void deleteTags(String tag) {
         this.Tags.remove(tag);
     }
 

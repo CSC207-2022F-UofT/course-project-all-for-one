@@ -7,7 +7,7 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class FilePost implements PostDsGateway, RecommendationGateway {
+public class FilePost implements PostDsGateway {
 
     private final File csvFile;
 
@@ -40,8 +40,9 @@ public class FilePost implements PostDsGateway, RecommendationGateway {
                 String title = String.valueOf(col[headers.get("Title")]);
                 String description = String.valueOf(col[headers.get("Description")]);
                 double price = Double.parseDouble(col[headers.get("Price")]);
-                String status = String.valueOf(col[headers.get("Status")]);
                 ArrayList<String> tags = (ArrayList<String>) Arrays.asList(String.valueOf(col[headers.get("Tags")]).split(":"));
+
+
                 String creationTimeText = String.valueOf(col[headers.get("CreationTime")]);
                 LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
                 PostDsRequestModel post = new PostDsRequestModel(username, title, description, price, tags, ldt);
@@ -58,7 +59,7 @@ public class FilePost implements PostDsGateway, RecommendationGateway {
      */
     @Override
     public void save(PostDsRequestModel requestModel) {
-        posts.put(requestModel.get_username(), requestModel);
+        posts.put(requestModel.getUsername(), requestModel);
         this.save();
     }
 
@@ -70,13 +71,13 @@ public class FilePost implements PostDsGateway, RecommendationGateway {
             writer.newLine();
 
             for (PostDsRequestModel post : posts.values()) {
-                String str_post = post.get_tags().toString();
+                String str_post = post.getTags().toString();
                 str_post = str_post.replace("[","").
                         replace("]","").replace(" ","").
                         replace(",",":");
                 String line = String.format("%s,%s,%s,%s,%s,%s,%s",
-                        post.get_username(), post.get_title(), post.get_description(),
-                        post.get_price(), post.get_status(),
+                        post.getUsername(), post.getTitle(), post.getDescription(),
+                        post.getPrice(), post.getStatus(),
                         str_post, post.getCreationTime());
                 writer.write(line);
                 writer.newLine();
@@ -98,33 +99,16 @@ public class FilePost implements PostDsGateway, RecommendationGateway {
         List<Post> posts = new ArrayList<>();
         for(String tag : Tags){
             for(PostDsRequestModel postDsRequestModel: this.posts.values()){
-                if (postDsRequestModel.get_tags().contains(tag) && posts.size() < 30){
-                    posts.add(new Post(postDsRequestModel.get_username(),
-                            postDsRequestModel.get_title(), postDsRequestModel.get_description(),
-                            postDsRequestModel.get_price(), postDsRequestModel.get_tags()));
+                if (postDsRequestModel.getTags().contains(tag) && posts.size() < 30){
+                    posts.add(new Post(postDsRequestModel.getUsername(),
+                            postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                            postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
                 }
             }
         }
         return posts;
     }
 
-    /**
-     * @param username username of the user that is acting
-     * @return the purchase history object that is owned by the user with username in database
-     */
-    @Override
-    public List<String> getPurchaseHistoryTags(String username) {
-        return null;
-    }
-
-    /**
-     * @param username username of the user that is acting
-     * @return the browsing history object that is owned by the user with username in database
-     */
-    @Override
-    public List<String> getBrowsingHistoryTags(String username) {
-        return null;
-    }
 }
 
 

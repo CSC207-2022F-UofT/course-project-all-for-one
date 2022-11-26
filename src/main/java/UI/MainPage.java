@@ -67,6 +67,12 @@ public class MainPage extends JPanel implements ActionListener {
 //                }
 //            }
 //        });
+        userCenterButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UserCenterPage userCenterPage = new UserCenterPage(username);
+            }
+        });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
