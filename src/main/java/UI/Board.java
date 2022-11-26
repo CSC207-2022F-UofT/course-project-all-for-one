@@ -80,6 +80,7 @@ public class Board extends JFrame {
                 controller = new MessageController(interactor);
                 controller.create(input);
                 model.addElement(input);
+                inputArea.setText("");
             }
         });
 
