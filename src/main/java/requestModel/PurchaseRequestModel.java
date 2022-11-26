@@ -1,12 +1,13 @@
-package entity;
+package requestModel;
 
 import entity.Order;
 import java.util.List;
 
-public class PurchaseHistory {
+public class PurchaseRequestModel {
+
     private List<Order> orders;
 
-    public PurchaseHistory(List<Order> orders) {
+    public PurchaseRequestModel(List<Order> orders){
         this.orders = orders;
     }
 
