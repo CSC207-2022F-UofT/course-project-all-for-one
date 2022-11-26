@@ -3,7 +3,7 @@
 //import gateway.FilePost;
 //import gateway.RecommendationGateway;
 //import presenter.RecommendationResponsePresenter;
-//import use_case.PostDsGateway;
+//import gateway.PostDsGateway;
 //import use_case.RecommendationInputBoundry;
 //import use_case.RecommendationInteractor;
 //import use_case.RecommendationOutputBoundry;

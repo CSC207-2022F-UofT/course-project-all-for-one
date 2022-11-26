@@ -3,34 +3,31 @@ package UI;
 import entities.Post;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
+
 
 public class SearchPage {
-    public static void SearchPage(String[] args, ArrayList<Post> posts){
-        JFrame jf = new JFrame("Browsing History");
-        jf.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jf.setBounds(400, 300, 300, 200);
-        JMenuBar bar = new JMenuBar();
-        for (Post post : posts) {
-            JMenu menu = new JMenu(post.getTitle());
-            JMenuItem item1 = new JMenuItem("Product: " + post.getTitle());
-            JMenuItem item2 = new JMenuItem("Description: " + post.getDescription());
-            JMenuItem item3 = new JMenuItem("Status: " + post.getStatus());
-            JMenuItem item4 = new JMenuItem("Price: " + post.getPrice());
-            JMenuItem item5 = new JMenuItem("Tag: " + post.getTagsString());
-            JMenuItem item6 = new JMenuItem("Status: In Progress");
-            menu.add(item1);
-            menu.add(item2);
-            menu.add(item3);
-            menu.add(item4);
-            menu.add(item5);
-            menu.add(item6);
-            bar.add(menu);
-            jf.add(bar);
+    private final String username;
+    public SearchPage(String username, List<Post> posts){
+        this.username = username;
+
+        JFrame searchFrame = new JFrame("Search Page");
+        searchFrame.setBounds(400, 300, 400, 300);
+
+        JScrollPane searchScrollPanel = new JScrollPane();
+
+
+        JButton[] buttonsAdded = new JButton[posts.size()];
+        for(int j = 0; j < posts.size(); j++){
+            buttonsAdded[j] = new JButton("Open post" + j);
+            searchScrollPanel.add(new JLabel(posts.get(j).getTitle()));
+            searchScrollPanel.add(new JLabel(posts.get(j).getDescription()));
+            searchScrollPanel.add(new JLabel(String.valueOf(posts.get(j).getPrice())));
+            searchScrollPanel.add(buttonsAdded[j]);
         }
 
-        jf.setVisible(true);
-        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        searchFrame.add(searchScrollPanel);
+        searchFrame.setVisible(true);
+        searchFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 }

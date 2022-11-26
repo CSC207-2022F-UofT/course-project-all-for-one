@@ -1,7 +1,6 @@
-package use_case;
+package gateway;
 
 import entities.Post;
-import gateway.PostDsRequestModel;
 
 import java.util.List;
 
@@ -14,4 +13,6 @@ public interface PostDsGateway {
      * @return return a list of Post objects of length at most 30 that contain at least one tag in Tags
      */
     List<Post> findPosts(List<String> Tags);
+
+    List<Post> findPostsWithKeyword(String keyword);
 }

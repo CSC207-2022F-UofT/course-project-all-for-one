@@ -1,7 +1,6 @@
 package gateway;
 
 import entities.Post;
-import use_case.PostDsGateway;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -114,6 +113,23 @@ public class FilePost implements PostDsGateway {
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
                             postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
                 }
+            }
+        }
+        return posts;
+    }
+
+    /**
+     * @param keyword want to find
+     * @return Posts with keyword in tags
+     */
+    @Override
+    public List<Post> findPostsWithKeyword(String keyword) {
+        List<Post> posts = new ArrayList<>();
+        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
+            if (postDsRequestModel.getTags().contains(keyword) && posts.size() < 30){
+                posts.add(new Post(postDsRequestModel.getUsername(),
+                        postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                        postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
             }
         }
         return posts;

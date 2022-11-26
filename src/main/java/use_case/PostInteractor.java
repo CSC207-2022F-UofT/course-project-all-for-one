@@ -3,6 +3,7 @@ package use_case;
 import entities.Criteria;
 import entities.Post;
 import entities.PostFactory;
+import gateway.PostDsGateway;
 import gateway.PostDsRequestModel;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class PostInteractor implements PostInputBoundary {
     final PostFactory postFactory;
 
     public PostInteractor(PostDsGateway postDfGateway, PostPresenter postPresenter,
-                                  PostFactory postFactory) {
+                          PostFactory postFactory) {
         this.postDsGateway = postDfGateway;
         this.postPresenter = postPresenter;
         this.postFactory = postFactory;

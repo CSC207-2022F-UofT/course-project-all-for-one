@@ -1,8 +1,23 @@
+import UI.PostController;
+import UI.PostResponseFormatter;
+import UI.PostScreen;
 import UI.UserCenterPage;
+import entities.Post;
+import entities.PostFactory;
+import entities.Recommendation;
+import gateway.FilePost;
+import gateway.PostDsGateway;
+import use_case.PostInputBoundary;
+import use_case.PostInteractor;
+import use_case.PostPresenter;
+import use_case.RecommendationResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainJames {
     public static void main(String[] args) {
@@ -37,67 +52,71 @@ public class MainJames {
 
         buttons.setLocation(100, 200);
 
+
+        ArrayList<String> tags = new ArrayList<>();
+        tags.add(0, "xxx");
         //assign functions to recommendationButton
         recommendationButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                List<Post> posts = new ArrayList<>();
-//                Post post1 = new Post("iphone13", "good", 1300);
-//                Post post2 = new Post("ipad pro", "take notes", 999);
-//                Post post3 = new Post("airpods", "good sounding", 230);
-//                posts.add(post1);
-//                posts.add(post2);
-//                posts.add(post3);
+                List<Post> posts = new ArrayList<>();
+                Post post1 = new Post("sadf","iphone13", "good",  1300, tags);
+                Post post2 = new Post("aswefwe","ipad pro", "take notes",  999, tags);
+                Post post3 = new Post("sfdgz","airpods", "good sounding", 230, tags);
+                posts.add(post1);
+                posts.add(post2);
+                posts.add(post3);
+
+                Recommendation recommendation1 = new Recommendation(posts);
+                RecommendationResponseModel responseModel = new RecommendationResponseModel(recommendation1);
+
+
+
+
+                JPanel recommendationPanel = new JPanel();
+                recommendationPanel.setLayout(new BoxLayout(recommendationPanel, BoxLayout.Y_AXIS));
+
+                JFrame recommendationFrame = new JFrame("Recommendation");
+                recommendationFrame.setBounds(500, 200, 300, 500);
+
+
+
+
+//                int j = 1;
+//                if (responseModel.getRecommendation().getPosts().size() < 3){
+//                    for(Post post: responseModel.getRecommendation().getPosts()){
+//                        recommendationPanel.add(new JLabel(post.getTitle()));
 //
-//                Recommendation recommendation1 = new Recommendation(posts);
-//                RecommendationResponseModel responseModel = new RecommendationResponseModel(recommendation1);
+//                        recommendationPanel.add(new JButton("Open post" + j));
+//                    }
+//
+//                } else{
+//                    JButton recomButton1 = new JButton("Open post 1");
+//                    JButton recomButton2 = new JButton("Open post 2");
+//                    JButton recomButton3 = new JButton("Open post 3");
+//
+//                    for(Post post: responseModel.getRecommendation().getPosts()){
+//                        recommendationPanel.add(new JLabel(post.getTitle()));
+//                    }
+//                    recommendationPanel.add(recomButton1);
+//                    recommendationPanel.add(recomButton2);
+//                    recommendationPanel.add(recomButton3);
 //
 //
-//
-//
-//                JPanel recommendationPanel = new JPanel();
-//                recommendationPanel.setLayout(new BoxLayout(recommendationPanel, BoxLayout.Y_AXIS));
-//
-//                JFrame recommendationFrame = new JFrame("Recommendation");
-//                recommendationFrame.setBounds(500, 200, 300, 500);
-//
-//
-//
-//
-////                int j = 1;
-////                if (responseModel.getRecommendation().getPosts().size() < 3){
-////                    for(Post post: responseModel.getRecommendation().getPosts()){
-////                        recommendationPanel.add(new JLabel(post.getTitle()));
-////
-////                        recommendationPanel.add(new JButton("Open post" + j));
-////                    }
-////
-////                } else{
-////                    JButton recomButton1 = new JButton("Open post 1");
-////                    JButton recomButton2 = new JButton("Open post 2");
-////                    JButton recomButton3 = new JButton("Open post 3");
-////
-////                    for(Post post: responseModel.getRecommendation().getPosts()){
-////                        recommendationPanel.add(new JLabel(post.getTitle()));
-////                    }
-////                    recommendationPanel.add(recomButton1);
-////                    recommendationPanel.add(recomButton2);
-////                    recommendationPanel.add(recomButton3);
-////
-////
-////                }
-//                Button[] buttonsAdded = new Button[responseModel.getRecommendation().getPosts().size()];
-//                for(int j = 0; j <responseModel.getRecommendation().getPosts().size(); j++){
-//                    buttonsAdded[j] = new Button("Open post" + j);
-//                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
-//                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
-//                    recommendationPanel.add(buttonsAdded[j]);
 //                }
-//
-//                recommendationFrame.add(recommendationPanel);
-//                recommendationFrame.setVisible(true);
-//                recommendationFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                JOptionPane.showMessageDialog(jf, "Use more to have recommendation!");
+                JButton[] buttonsAdded = new JButton[responseModel.getRecommendation().getPosts().size()];
+                for(int j = 0; j <responseModel.getRecommendation().getPosts().size(); j++){
+                    buttonsAdded[j] = new JButton("Open post" + j);
+                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
+                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
+                    recommendationPanel.add(new JLabel(String.valueOf(responseModel.getRecommendation().getPosts().get(j).getPrice())));
+                    recommendationPanel.add(buttonsAdded[j]);
+                }
+
+                recommendationFrame.add(recommendationPanel);
+                recommendationFrame.setVisible(true);
+                recommendationFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+//                JOptionPane.showMessageDialog(jf, "Use more to have recommendation!");
             }
         });
         userCenterButton.addActionListener(new AbstractAction() {
@@ -107,6 +126,36 @@ public class MainJames {
             }
         });
         //add to JFrame
+        addPostButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame application = new JFrame("Post Example");
+                CardLayout cardLayout = new CardLayout();
+                JPanel screens = new JPanel(cardLayout);
+                application.add(screens);
+
+                PostDsGateway post;
+                try {
+                    post = new FilePost("./posts.csv");
+                } catch (IOException error) {
+                    throw new RuntimeException("Could not create file.");
+                }
+                PostPresenter presenter = new PostResponseFormatter();
+                PostFactory postFactory = new PostFactory();
+                PostInputBoundary interactor = new PostInteractor(
+                        post, presenter, postFactory);
+                PostController postController = new PostController(
+                        interactor
+                );
+                PostScreen postScreen = new PostScreen("username", postController);
+
+                screens.add(postScreen, "post");
+                cardLayout.show(screens, "post");
+                application.pack();
+                application.setVisible(true);
+                application.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
+        });
 
         JPanel everything = new JPanel();
         everything.add(title);

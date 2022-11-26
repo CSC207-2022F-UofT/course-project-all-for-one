@@ -3,7 +3,7 @@ import UI.PostController;
 import UI.PostResponseFormatter;
 import UI.PostScreen;
 import entities.PostFactory;
-import use_case.PostDsGateway;
+import gateway.PostDsGateway;
 import use_case.PostInputBoundary;
 import use_case.PostInteractor;
 import use_case.PostPresenter;

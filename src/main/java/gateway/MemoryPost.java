@@ -1,7 +1,6 @@
 package gateway;
 
 import entities.Post;
-import use_case.PostDsGateway;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +35,23 @@ public class MemoryPost implements PostDsGateway {
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
                             postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
                 }
+            }
+        }
+        return posts;
+    }
+
+    /**
+     * @param keyword
+     * @return
+     */
+    @Override
+    public List<Post> findPostsWithKeyword(String keyword) {
+        List<Post> posts = new ArrayList<>();
+        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
+            if (postDsRequestModel.getTags().contains(keyword) && posts.size() < 30){
+                posts.add(new Post(postDsRequestModel.getUsername(),
+                        postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                        postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
             }
         }
         return posts;

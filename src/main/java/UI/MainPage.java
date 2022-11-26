@@ -2,13 +2,26 @@ package UI;
 
 
 import controller.RecommendationController;
+import controller.SearchController;
+import entities.Post;
+import entities.PostFactory;
+import gateway.FilePost;
+import gateway.PostDsGateway;
 import presenter.RecommendationFailedError;
+import presenter.SearchFailureError;
+import presenter.SearchFormatterPresenter;
+import presenter.SearchPresenter;
+import use_case.PostInputBoundary;
+import use_case.PostInteractor;
+import use_case.PostPresenter;
 import use_case.RecommendationResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.List;
 
 public class MainPage extends JPanel implements ActionListener {
 
@@ -74,6 +87,38 @@ public class MainPage extends JPanel implements ActionListener {
             }
         });
 
+        searchButton.addActionListener(this);
+        addPostButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame application = new JFrame("Post Example");
+                CardLayout cardLayout = new CardLayout();
+                JPanel screens = new JPanel(cardLayout);
+                application.add(screens);
+
+                PostDsGateway post;
+                try {
+                    post = new FilePost("./posts.csv");
+                } catch (IOException error) {
+                    throw new RuntimeException("Could not create file.");
+                }
+                PostPresenter presenter = new PostResponseFormatter();
+                PostFactory postFactory = new PostFactory();
+                PostInputBoundary interactor = new PostInteractor(
+                        post, presenter, postFactory);
+                PostController postController = new PostController(
+                        interactor
+                );
+                PostScreen postScreen = new PostScreen(username, postController);
+
+                screens.add(postScreen, "post");
+                cardLayout.show(screens, "post");
+                application.pack();
+                application.setVisible(true);
+                application.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
+        });
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
@@ -104,6 +149,7 @@ public class MainPage extends JPanel implements ActionListener {
                     buttonsAdded[j] = new JButton("Open post" + j);
                     recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
                     recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
+                    recommendationPanel.add(new JLabel(String.valueOf(responseModel.getRecommendation().getPosts().get(j).getPrice())));
                     recommendationPanel.add(buttonsAdded[j]);
                 }
 
@@ -128,6 +174,21 @@ public class MainPage extends JPanel implements ActionListener {
 
             addPostFrame.setVisible(true);
             addPostFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        } else if(e.getActionCommand().equals("Search")){
+            try{
+                SearchPresenter searchPresenter = new SearchFormatterPresenter();
+                PostDsGateway postDsGateway;
+                try {
+                    postDsGateway = new FilePost("./posts.csv");
+                } catch (IOException exception) {
+                    throw new RuntimeException("Could not create file.");
+                }
+                SearchController searchController = new SearchController(postDsGateway, searchPresenter);
+                List<Post> posts = searchController.create(searchKeywordsTextField.getText());
+                SearchPage searchPage = new SearchPage(username, posts);
+            } catch (SearchFailureError error){
+                JOptionPane.showMessageDialog(this, error.getMessage());
+            }
         }
     }
 }

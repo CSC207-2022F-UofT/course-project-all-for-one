@@ -1,6 +1,7 @@
 package use_case;
 
 import entities.Recommendation;
+import gateway.PostDsGateway;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +15,8 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
 
     /**
      *
-     * @param recommendationOutputBoundry
-     * @param postDsGateway
+     * @param recommendationOutputBoundry relay to presenter
+     * @param postDsGateway gateway to reach post file
      */
     public RecommendationInteractor(RecommendationOutputBoundry recommendationOutputBoundry,
                                     PostDsGateway postDsGateway){
