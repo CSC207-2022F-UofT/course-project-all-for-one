@@ -3,6 +3,9 @@ package gateway;
 
 import entities.Post;
 
+import entities.Post;
+import entities.PurchaseHistory;
+
 import java.util.List;
 
 public interface RecommendationGateway {

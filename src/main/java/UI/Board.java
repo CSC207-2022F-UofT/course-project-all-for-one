@@ -24,9 +24,7 @@ public class Board extends JFrame {
     JTextArea inputArea = new JTextArea(5, 10);
     JButton postButton = new JButton("Post");
 
-
     MessageController controller;
-
 
     MessageDsGateway dsGateway;
 
