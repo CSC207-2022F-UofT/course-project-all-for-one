@@ -5,6 +5,7 @@ import use_case.PostDsGateway;
 
 import java.io.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class FilePost implements PostDsGateway {
@@ -40,9 +41,12 @@ public class FilePost implements PostDsGateway {
                 String title = String.valueOf(col[headers.get("Title")]);
                 String description = String.valueOf(col[headers.get("Description")]);
                 double price = Double.parseDouble(col[headers.get("Price")]);
-                ArrayList<String> tags = (ArrayList<String>) Arrays.asList(String.valueOf(col[headers.get("Tags")]).split(":"));
-
-
+                String status = String.valueOf(col[headers.get("Status")]);
+                ArrayList<String> tags = new ArrayList<String>();
+                for (String t : String.valueOf(col[headers.get("Tags")]).split(":"))
+                {
+                    tags.add(t);
+                }
                 String creationTimeText = String.valueOf(col[headers.get("CreationTime")]);
                 LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
                 PostDsRequestModel post = new PostDsRequestModel(username, title, description, price, tags, ldt);
@@ -75,10 +79,14 @@ public class FilePost implements PostDsGateway {
                 str_post = str_post.replace("[","").
                         replace("]","").replace(" ","").
                         replace(",",":");
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s",
-                        post.getUsername(), post.getTitle(), post.getDescription(),
-                        post.getPrice(), post.getStatus(),
-                        str_post, post.getCreationTime());
+                String dateStr = post.getCreationTime().format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hh:mm:ss a"));
+
+//                String line = "%s, %s, %s, %s, %s, %s, %s".formatted(
+//                        post.get_username(), post.get_title(), post.get_description(),
+//                        String.valueOf(post.get_price()), post.get_status(),
+//                        str_post, dateStr);
+                String line = ""+post.getUsername()+","+post.getTitle()+","+post.getDescription()+","+
+                        post.getPrice() +","+post.getStatus()+","+str_post+","+dateStr;
                 writer.write(line);
                 writer.newLine();
             }
@@ -89,6 +97,8 @@ public class FilePost implements PostDsGateway {
             throw new RuntimeException(e);
         }
     }
+
+
 
     /**
      * @param Tags     list of tags that are used to find Post object with these tags

@@ -1,5 +1,4 @@
 package UI;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +18,7 @@ public class PostScreen extends JPanel implements ActionListener {
     /**
      * The password
      */
-    JTextField post_description = new JTextField(15);
+    JTextArea post_description = new JTextArea(5,15);
     /**
      * The second password to make sure the user understands
      */
@@ -45,7 +44,7 @@ public class PostScreen extends JPanel implements ActionListener {
 
         LabelTextPanel titleInfo = new LabelTextPanel(
                 new JLabel("Title:"), post_title);
-        LabelTextPanel descriptionInfo = new LabelTextPanel(
+        LabelTextAreaPanel descriptionInfo = new LabelTextAreaPanel(
                 new JLabel("Description:"), post_description);
         LabelTextPanel priceInfo = new LabelTextPanel(
                 new JLabel("Price:"), price);
