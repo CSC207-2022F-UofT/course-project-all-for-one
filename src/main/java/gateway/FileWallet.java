@@ -32,7 +32,7 @@ public class FileWallet implements WalletGateway {
                 String[] col = row.split(",");
                 String username = String.valueOf(col[headers.get("username")]);
                 String balance = String.valueOf(col[headers.get("balance")]);
-                WalletRequestModel wallet = new WalletRequestModel(username, balance);
+                WalletRequestModel wallet = new WalletRequestModel(username, Double.valueOf(balance));
                 accounts.put(username, wallet);
             }
 
