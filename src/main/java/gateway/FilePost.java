@@ -78,7 +78,7 @@ public class FilePost implements PostDsGateway {
                 str_post = str_post.replace("[","").
                         replace("]","").replace(" ","").
                         replace(",",":");
-                String dateStr = post.getCreationTime().format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hh:mm:ss a"));
+                String dateStr = post.getCreationTime().format(DateTimeFormatter.ofPattern("EEEE-MMMM-dd-yyyy-hh:mm:ss-a"));
 
 //                String line = "%s, %s, %s, %s, %s, %s, %s".formatted(
 //                        post.get_username(), post.get_title(), post.get_description(),

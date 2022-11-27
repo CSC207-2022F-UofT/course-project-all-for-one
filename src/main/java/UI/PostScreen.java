@@ -96,6 +96,12 @@ public class PostScreen extends JPanel implements ActionListener {
                         Double.parseDouble(price.getText()),
                         tags);
                 showMessageDialog(this, "Your post" +" "+ post_title.getText() + "has been created.");
+                post_title.setText(null);
+                post_description.setText(null);
+                price.setText(null);
+                add_tag.setText(null);
+                tags = new ArrayList<>();
+                tag_show.setText(null);
             } catch (Exception e) {
                 showMessageDialog(this, e.getMessage());
             }
