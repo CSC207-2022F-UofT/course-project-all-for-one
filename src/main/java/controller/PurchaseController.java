@@ -2,7 +2,6 @@ package controller;
 
 import entity.Order;
 import java.util.List;
-import gateway.PurchaseGateway;
 
 public class PurchaseController {
 
