@@ -2,6 +2,7 @@ package use_case;
 
 import entities.Order;
 import entities.OrderFactory;
+import gateway.OrderDsGateway;
 import presenter.TradePresenter;
 
 import java.time.LocalDateTime;
@@ -10,15 +11,17 @@ import java.util.Objects;
 
 public class TradeInteractor implements TradeInputBoundry {
 
+    final OrderDsGateway orderDsGateway;
     final TradePresenter tradePresenter;
     final OrderFactory orderFactory;
 
 
 
 
-    public TradeInteractor(TradePresenter tradePresenter, OrderFactory orderFactory) {
-        this.tradePresenter = tradePresenter;
-        this.orderFactory = orderFactory;
+    public TradeInteractor(OrderDsGateway orderDsGateway, TradePresenter tradePresenter1, OrderFactory orderFactory1) {
+        this.orderDsGateway = orderDsGateway;
+        this.tradePresenter = tradePresenter1;
+        this.orderFactory = orderFactory1;
     }
 
     @Override
@@ -38,11 +41,17 @@ public class TradeInteractor implements TradeInputBoundry {
         LocalDateTime now = LocalDateTime.now();
         String creationTime = now.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
 
-        Order order = OrderFactory.create(requestModel.getPost(), requestModel.getPost().getPrice(),
-                creationTime, requestModel.getName(),
-                requestModel.getAddress(), requestModel.getPhoneNumber(), "Order Placed");
+        Order order = OrderFactory.create(requestModel.getPost(), creationTime, requestModel.getName(),
+                requestModel.getAddress(), requestModel.getPhoneNumber(), "Shipped",
+                requestModel.getBuyerUsername(), requestModel.getBuyerUsername());
+
+        OrderDsRequestModel orderDsModel = new OrderDsRequestModel(order.getPost().getTitle(), now,
+                order.getPost().getPrice(), order.getName(), order.getAddress(), order.getPhoneNumber(),
+                order.getShipmentStatus(), order.getBuyerUsername(), order.getSellerUsername());
 
         requestModel.getPost().setSold();
+
+        orderDsGateway.save(orderDsModel);
 
         TradeResponseModel tradeResponseModel = new TradeResponseModel("Order Confirmed", creationTime);
         return tradePresenter.prepareSuccessView(tradeResponseModel);

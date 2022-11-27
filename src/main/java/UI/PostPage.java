@@ -4,6 +4,8 @@ import controller.TradeController;
 import entities.Account;
 import entities.OrderFactory;
 import entities.Post;
+import gateway.FileOrder;
+import gateway.OrderDsGateway;
 import presenter.BuyPresenter;
 import presenter.TradePresenter;
 import use_case.TradeInputBoundry;
@@ -12,6 +14,7 @@ import use_case.TradeInteractor;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class PostPage extends JPanel implements ActionListener {
 
@@ -65,10 +68,15 @@ public class PostPage extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
-
+        OrderDsGateway order;
+        try {
+            order = new FileOrder("./orders.csv");
+        } catch (IOException e) {
+            throw new RuntimeException("Could not create file.");
+        }
         TradePresenter presenter = new TradePresenter();
         OrderFactory orderFactory = new OrderFactory();
-        TradeInputBoundry interactor = new TradeInteractor(presenter, orderFactory);
+        TradeInputBoundry interactor = new TradeInteractor(order, presenter, orderFactory);
         TradeController controller = new TradeController(interactor);
 
         BuyPresenter.creatConfirmPage(Post, CreationTime, PossibleBuyer, Seller, controller);

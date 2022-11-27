@@ -86,8 +86,9 @@ public class ConfirmPage extends JPanel implements ActionListener {
         System.out.println("Click " + evt.getActionCommand());
 
         try {
-            TradeController.create(Post, CreationTime,
-                    name.getText(), address.getText(), phone.getText(), Buyer, Seller);
+            tradeController.create(Post, CreationTime,
+                    name.getText(), address.getText(), phone.getText(), Buyer.getUsername(), Seller.getUsername(),
+                    Buyer, Seller);
             JOptionPane.showMessageDialog(this, "Order Placed");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());

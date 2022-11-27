@@ -15,6 +15,10 @@ public class TradeRequestModel {
 
     public String PhoneNumber;
 
+    private String BuyerUsername;
+
+    private String SellerUsername;
+
     private Account Buyer;
 
     private Account Seller;
@@ -22,14 +26,17 @@ public class TradeRequestModel {
 
 
     public TradeRequestModel(Post post, String creationTime,
-                             String name, String address, String phoneNumber, Account buyer, Account seller) {
-        this.Post = post;
-        this.CreationTime = creationTime;
-        this.Name = name;
-        this.Address = address;
-        this.PhoneNumber = phoneNumber;
-        this.Buyer = buyer;
-        this.Seller = seller;
+                             String name, String address, String phoneNumber, String buyerUsername,
+                             String sellerUsername, Account buyer, Account seller) {
+        Post = post;
+        CreationTime = creationTime;
+        Name = name;
+        Address = address;
+        PhoneNumber = phoneNumber;
+        BuyerUsername = buyerUsername;
+        SellerUsername = sellerUsername;
+        Buyer = buyer;
+        Seller = seller;
     }
 
     Post getPost() {
@@ -58,5 +65,13 @@ public class TradeRequestModel {
 
     Account getSeller() {
         return this.Seller;
+    }
+
+    public String getBuyerUsername() {
+        return BuyerUsername;
+    }
+
+    public String getSellerUsername() {
+        return SellerUsername;
     }
 }

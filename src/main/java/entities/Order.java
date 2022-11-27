@@ -14,15 +14,21 @@ public class Order {
 
     private String ShipmentStatus;
 
+    private final String BuyerUsername;
+
+    private final String SellerUsername;
+
 
     Order(Post post, String creationTime, String name, String address, String phoneNumber,
-          String shipmentStatus) {
-        this.Post = post;
-        this.CreationTime = creationTime;
-        this.Name = name;
-        this.Address = address;
-        this.PhoneNumber = phoneNumber;
-        this.ShipmentStatus = shipmentStatus;
+          String shipmentStatus, String buyerUsername, String sellerUsername) {
+        Post = post;
+        CreationTime = creationTime;
+        Name = name;
+        Address = address;
+        PhoneNumber = phoneNumber;
+        ShipmentStatus = shipmentStatus;
+        BuyerUsername = buyerUsername;
+        SellerUsername = sellerUsername;
     }
 
     public Post getPost() {
@@ -47,5 +53,13 @@ public class Order {
 
     public String getCreationTime() {
         return this.CreationTime;
+    }
+
+    public String getBuyerUsername() {
+        return BuyerUsername;
+    }
+
+    public String getSellerUsername() {
+        return SellerUsername;
     }
 }

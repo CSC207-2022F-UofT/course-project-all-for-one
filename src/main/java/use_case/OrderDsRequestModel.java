@@ -1,34 +1,45 @@
 package use_case;
 
+import java.time.LocalDateTime;
+
 public class OrderDsRequestModel {
 
     private final String Title;
 
-    private final String CreationTime;
+    private final LocalDateTime CreationTime;
 
-    private String Name;
+    private final double Price;
 
-    private String Address;
+    private final String Name;
 
-    private String PhoneNumber;
+    private final String Address;
+
+    private final String PhoneNumber;
 
     private String ShipmentStatus;
 
-    public OrderDsRequestModel(String title, String creationTime, String name, String address,
-                               String phoneNumber, String shipmentStatus) {
-        this.Title = title;
-        this.CreationTime = creationTime;
-        this.Name = name;
-        this.Address = address;
-        this.PhoneNumber = phoneNumber;
-        this.ShipmentStatus = shipmentStatus;
+    private final String BuyerUsername;
+
+    private final String SellerUsername;
+
+    public OrderDsRequestModel(String title, LocalDateTime creationTime, double price, String name, String address,
+                               String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername) {
+        Title = title;
+        CreationTime = creationTime;
+        Price = price;
+        Name = name;
+        Address = address;
+        PhoneNumber = phoneNumber;
+        ShipmentStatus = shipmentStatus;
+        BuyerUsername = buyerUsername;
+        SellerUsername = sellerUsername;
     }
 
     public String getTitle() {
         return Title;
     }
 
-    public String getCreationTime() {
+    public LocalDateTime getCreationTime() {
         return CreationTime;
     }
 
@@ -46,5 +57,17 @@ public class OrderDsRequestModel {
 
     public String getShipmentStatus() {
         return ShipmentStatus;
+    }
+
+    public double getPrice() {
+        return Price;
+    }
+
+    public String getBuyerUsername() {
+        return BuyerUsername;
+    }
+
+    public String getSellerUsername() {
+        return SellerUsername;
     }
 }
