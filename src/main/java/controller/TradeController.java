@@ -6,6 +6,9 @@ import use_case.TradeInputBoundry;
 import use_case.TradeRequestModel;
 import use_case.TradeResponseModel;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class TradeController {
 
     TradeInputBoundry userInput;
@@ -14,10 +17,10 @@ public class TradeController {
         this.userInput = orderGateway;
     }
 
-    public TradeResponseModel create(Post post, String creationTime,
-                                            String name, String address, String phoneNumber, String buyerUsername,
+    public TradeResponseModel create(Post post, String name, String address, String phoneNumber, String buyerUsername,
                                             String sellerUsername, Account buyer, Account seller) {
-        TradeRequestModel requestModel = new TradeRequestModel(post, creationTime,
+        LocalDateTime now = LocalDateTime.now();
+        TradeRequestModel requestModel = new TradeRequestModel(post, now,
                 name, address, phoneNumber, buyerUsername, sellerUsername, buyer, seller);
 
         return userInput.create(requestModel);

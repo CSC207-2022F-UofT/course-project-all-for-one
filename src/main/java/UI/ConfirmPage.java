@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 
 public class ConfirmPage extends JPanel implements ActionListener {
 
@@ -86,8 +87,7 @@ public class ConfirmPage extends JPanel implements ActionListener {
         System.out.println("Click " + evt.getActionCommand());
 
         try {
-            tradeController.create(Post, CreationTime,
-                    name.getText(), address.getText(), phone.getText(), Buyer.getUsername(), Seller.getUsername(),
+            tradeController.create(Post, name.getText(), address.getText(), phone.getText(), Buyer.getUsername(), Seller.getUsername(),
                     Buyer, Seller);
             JOptionPane.showMessageDialog(this, "Order Placed");
         } catch (Exception e) {

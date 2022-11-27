@@ -28,7 +28,7 @@ public class FileOrder implements OrderDsGateway {
         headers.put("PhoneNumber", 5);
         headers.put("ShipmentStatus", 6);
         headers.put("BuyerUsername", 7);
-        headers.put("SellerUsername", 9);
+        headers.put("SellerUsername", 8);
 
 
 
@@ -52,11 +52,10 @@ public class FileOrder implements OrderDsGateway {
                 String shipmentStatus = String.valueOf(col[headers.get("ShipmentStatus")]);
                 String buyerUsername = String.valueOf(col[headers.get("BuyerUsername")]);
                 String sellerUsername = String.valueOf(col[headers.get("SellerUsername")]);
-                LocalDateTime creationTime = LocalDateTime.parse(creationTimeString);
-                OrderDsRequestModel order = new OrderDsRequestModel(title, creationTime, price, name, address,
+//                LocalDateTime creationTime = LocalDateTime.parse(creationTimeString);
+                OrderDsRequestModel order = new OrderDsRequestModel(title, creationTimeString, price, name, address,
                         phoneNumber, shipmentStatus, buyerUsername, sellerUsername);
                 orders.put(buyerUsername, order);
-                orders.put(sellerUsername, order);
             }
 
             reader.close();
@@ -65,7 +64,6 @@ public class FileOrder implements OrderDsGateway {
 
     @Override
     public void save(OrderDsRequestModel requestModel) {
-        orders.put(requestModel.getSellerUsername(), requestModel);
         orders.put(requestModel.getBuyerUsername(), requestModel);
         this.save();
     }
@@ -78,8 +76,8 @@ public class FileOrder implements OrderDsGateway {
             writer.newLine();
 
             for (OrderDsRequestModel order : orders.values()) {
-                String creationTimeString = order.getCreationTime().format(DateTimeFormatter.ofPattern("EEEE-MMMM-dd-yyyy-hh:mm:ss-a"));
-                String line = "" + order.getTitle() + "," + creationTimeString + "," + order.getPrice() + "," +
+//                String creationTimeString = order.getCreationTime().format(DateTimeFormatter.ofPattern("EEEE-MMMM-dd-yyyy-hh:mm:ss-a"));
+                String line = "" + order.getTitle() + "," + order.getCreationTime() + "," + order.getPrice() + "," +
                         order.getName() + "," + order.getAddress() + "," + order.getPhoneNumber() + "," +
                         order.getShipmentStatus() + "," + order.getBuyerUsername() + "," + order.getSellerUsername();
                 writer.write(line);

@@ -6,7 +6,7 @@ public class OrderDsRequestModel {
 
     private final String Title;
 
-    private final LocalDateTime CreationTime;
+    private final String CreationTime;
 
     private final double Price;
 
@@ -22,7 +22,7 @@ public class OrderDsRequestModel {
 
     private final String SellerUsername;
 
-    public OrderDsRequestModel(String title, LocalDateTime creationTime, double price, String name, String address,
+    public OrderDsRequestModel(String title, String creationTime, double price, String name, String address,
                                String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername) {
         Title = title;
         CreationTime = creationTime;
@@ -39,7 +39,7 @@ public class OrderDsRequestModel {
         return Title;
     }
 
-    public LocalDateTime getCreationTime() {
+    public String getCreationTime() {
         return CreationTime;
     }
 

@@ -3,11 +3,13 @@ package use_case;
 import entities.Account;
 import entities.Post;
 
+import java.time.LocalDateTime;
+
 public class TradeRequestModel {
 
     public Post Post;
 
-    public String CreationTime;
+    public LocalDateTime CreationTime;
 
     public String Name;
 
@@ -25,7 +27,7 @@ public class TradeRequestModel {
 
 
 
-    public TradeRequestModel(Post post, String creationTime,
+    public TradeRequestModel(Post post, LocalDateTime creationTime,
                              String name, String address, String phoneNumber, String buyerUsername,
                              String sellerUsername, Account buyer, Account seller) {
         Post = post;
@@ -43,7 +45,7 @@ public class TradeRequestModel {
         return this.Post;
     }
 
-    String getCreationTime() {
+    LocalDateTime getCreationTime() {
         return this.CreationTime;
     }
 

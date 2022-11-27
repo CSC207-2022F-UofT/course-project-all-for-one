@@ -22,18 +22,18 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class MainXavier {
+public class  MainXavier {
     public static void main(String[] args) throws FileNotFoundException {
 
 
 
         ArrayList<String> tags = new ArrayList<>();
         tags.add(0, "xxx");
-        Post testPost = new Post("Steve", "iphone18", "DNE", 10, tags);
+        Post testPost = new Post("Steve", "iphone19", "DNE", 10, tags);
         String testCreationTime = "today";
         Wallet testBuyerWallet = new Wallet(100);
         Wallet testSellerWaller = new Wallet(50);
-        Account testBuyer = AccountFactory.create("steve", "123456", testBuyerWallet);
+        Account testBuyer = AccountFactory.create("ddddd", "123456", testBuyerWallet);
         Account testSeller = AccountFactory.create("xavier", "654321", testSellerWaller);
 
 
