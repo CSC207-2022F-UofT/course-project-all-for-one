@@ -2,7 +2,7 @@ package use_case;
 
 public class WalletRequestModel {
 
-    private String username;
+    private final String username;
     private double balance;
 
     public WalletRequestModel(String username, double balance) {
