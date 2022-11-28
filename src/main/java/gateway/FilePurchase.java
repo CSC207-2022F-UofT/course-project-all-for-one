@@ -14,7 +14,6 @@ public class FilePurchase implements PurchaseGateway {
 
         csvFile = new File(csvPath);
 
-
         BufferedReader reader = new BufferedReader(new FileReader(csvFile));
         reader.readLine();
 
@@ -31,8 +30,6 @@ public class FilePurchase implements PurchaseGateway {
         }
 
         reader.close();
-
-
     }
 
     @Override
