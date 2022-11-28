@@ -19,11 +19,13 @@ public class SearchPage {
 
         JButton[] buttonsAdded = new JButton[posts.size()];
         for(int j = 0; j < posts.size(); j++){
+            JPanel jp1 = new JPanel();
             buttonsAdded[j] = new JButton("Open post" + j);
-            searScrollPanelViewPort.add(new JLabel(posts.get(j).getTitle()));
-            searScrollPanelViewPort.add(new JLabel(posts.get(j).getDescription()));
-            searScrollPanelViewPort.add(new JLabel(String.valueOf(posts.get(j).getPrice())));
-            searScrollPanelViewPort.add(buttonsAdded[j]);
+            jp1.add(new JLabel(posts.get(j).getTitle()));
+            jp1.add(new JLabel(posts.get(j).getDescription()));
+            jp1.add(new JLabel(String.valueOf(posts.get(j).getPrice())));
+            jp1.add(buttonsAdded[j]);
+            searScrollPanelViewPort.add(jp1);
         }
 
         searchScrollPanel.setViewportView(searScrollPanelViewPort);

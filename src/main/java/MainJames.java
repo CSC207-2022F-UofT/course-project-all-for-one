@@ -1,7 +1,4 @@
-import UI.PostController;
-import UI.PostResponseFormatter;
-import UI.PostScreen;
-import UI.UserCenterPage;
+import UI.*;
 import entities.Post;
 import entities.PostFactory;
 import entities.Recommendation;
@@ -55,17 +52,20 @@ public class MainJames {
 
         ArrayList<String> tags = new ArrayList<>();
         tags.add(0, "xxx");
+        List<Post> posts = new ArrayList<>();
+        Post post1 = new Post("sadf","iphone13", "good",  1300, tags);
+        Post post2 = new Post("aswefwe","ipad pro", "take notes",  999, tags);
+        Post post3 = new Post("sfdgz","airpods", "good sounding", 230, tags);
+        posts.add(post1);
+        posts.add(post2);
+        posts.add(post3);
+
+
         //assign functions to recommendationButton
         recommendationButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<Post> posts = new ArrayList<>();
-                Post post1 = new Post("sadf","iphone13", "good",  1300, tags);
-                Post post2 = new Post("aswefwe","ipad pro", "take notes",  999, tags);
-                Post post3 = new Post("sfdgz","airpods", "good sounding", 230, tags);
-                posts.add(post1);
-                posts.add(post2);
-                posts.add(post3);
+
 
                 Recommendation recommendation1 = new Recommendation(posts);
                 RecommendationResponseModel responseModel = new RecommendationResponseModel(recommendation1);
@@ -154,6 +154,13 @@ public class MainJames {
                 application.pack();
                 application.setVisible(true);
                 application.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
+        });
+
+        searchButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SearchPage searchPage = new SearchPage("username", posts);
             }
         });
 
