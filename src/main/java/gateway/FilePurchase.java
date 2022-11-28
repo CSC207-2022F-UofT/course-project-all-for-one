@@ -60,7 +60,6 @@ public class FilePurchase implements PurchaseGateway {
                 String line = String.format("%s".repeat(n.intValue()), purchase.getCreationTimes());
                 writer.write(line);
                 writer.newLine();
-
             }
 
             writer.close();
