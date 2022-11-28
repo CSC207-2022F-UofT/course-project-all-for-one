@@ -54,7 +54,7 @@ public class FileWallet implements WalletGateway {
             writer.newLine();
 
             for (WalletRequestModel wallet : accounts.values()) {
-                String line = String.format("%s", wallet.getBalance());
+                String line = String.format("%s, %s", wallet.getUsername(), wallet.getBalance());
                 writer.write(line);
                 writer.newLine();
             }
