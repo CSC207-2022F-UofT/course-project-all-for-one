@@ -1,8 +1,10 @@
 package use_case;
 
-import entities.Order;
 import entities.OrderFactory;
-import presenter.TradePresenter;
+import entities.Order;
+import entities.PhysicalOrder;
+import entities.PhysicalOrderFactory;
+import gateway.OrderDsGateway;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,25 +12,27 @@ import java.util.Objects;
 
 public class TradeInteractor implements TradeInputBoundry {
 
-    final TradePresenter tradePresenter;
+    final OrderDsGateway orderDsGateway;
+    final TradeOutputBoundry tradeOutputBoundry;
     final OrderFactory orderFactory;
 
 
 
 
-    public TradeInteractor(TradePresenter tradePresenter, OrderFactory orderFactory) {
-        this.tradePresenter = tradePresenter;
-        this.orderFactory = orderFactory;
+    public TradeInteractor(OrderDsGateway orderDsGateway, TradeOutputBoundry tradeOutputBoundry1, OrderFactory orderFactory1) {
+        this.orderDsGateway = orderDsGateway;
+        this.tradeOutputBoundry = tradeOutputBoundry1;
+        this.orderFactory = orderFactory1;
     }
 
     @Override
     public TradeResponseModel create(TradeRequestModel requestModel) {
         if (requestModel.getBuyer().getWallet().getBalance() < requestModel.getPost().getPrice()) {
-            return tradePresenter.prepareFailView("Insufficient balance.");
+            return tradeOutputBoundry.prepareFailView("Insufficient balance.");
         }
 
         if (Objects.equals(requestModel.getPost().getStatus(), "Sold")) {
-            return tradePresenter.prepareFailView("Item already sold.");
+            return tradeOutputBoundry.prepareFailView("Item already sold.");
         }
 
         requestModel.getBuyer().getWallet().subtractBalance(requestModel.getPost().getPrice());
@@ -38,14 +42,20 @@ public class TradeInteractor implements TradeInputBoundry {
         LocalDateTime now = LocalDateTime.now();
         String creationTime = now.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
 
-        Order order = OrderFactory.create(requestModel.getPost(), requestModel.getPost().getPrice(),
-                creationTime, requestModel.getName(),
-                requestModel.getAddress(), requestModel.getPhoneNumber(), "Order Placed");
+        Order order = orderFactory.create(requestModel.getPost(), creationTime, requestModel.getName(),
+                requestModel.getAddress(), requestModel.getPhoneNumber(), "Shipped",
+                requestModel.getBuyerUsername(), requestModel.getSellerUsername());
+
+        OrderDsRequestModel orderDsModel = new OrderDsRequestModel(order.getPost().getTitle(), creationTime,
+                order.getPost().getPrice(), order.getName(), order.getAddress(), order.getPhoneNumber(),
+                order.getShipmentStatus(), order.getBuyerUsername(), order.getSellerUsername());
 
         requestModel.getPost().setSold();
 
+        orderDsGateway.save(orderDsModel);
+
         TradeResponseModel tradeResponseModel = new TradeResponseModel("Order Confirmed", creationTime);
-        return tradePresenter.prepareSuccessView(tradeResponseModel);
+        return tradeOutputBoundry.prepareSuccessView(tradeResponseModel);
 
     }
 }

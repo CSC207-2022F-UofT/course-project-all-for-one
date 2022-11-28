@@ -3,13 +3,13 @@ package entities;
 import java.util.List;
 
 public class PurchaseHistory {
-    private List<Order> orders;
+    private List<PhysicalOrder> physicalOrders;
 
-    public PurchaseHistory(List<Order> orders) {
-        this.orders = orders;
+    public PurchaseHistory(List<PhysicalOrder> physicalOrders) {
+        this.physicalOrders = physicalOrders;
     }
 
-    public List<Order> getOrders(){
-        return orders;
+    public List<PhysicalOrder> getOrders(){
+        return physicalOrders;
     }
 }

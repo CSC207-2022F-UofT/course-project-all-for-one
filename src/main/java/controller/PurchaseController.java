@@ -1,6 +1,6 @@
 package controller;
 
-import entities.Order;
+import entities.PhysicalOrder;
 import java.util.List;
 import gateway.PurchaseGateway;
 
@@ -12,7 +12,7 @@ public class PurchaseController {
         this.purchaseGateway = purchaseGateway;
     }
 
-    public List<Order> useGateway(String username){
+    public List<PhysicalOrder> useGateway(String username){
         return purchaseGateway.getOrders(username);
     }
 }

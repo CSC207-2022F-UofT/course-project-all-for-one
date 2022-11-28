@@ -6,18 +6,22 @@ import use_case.TradeInputBoundry;
 import use_case.TradeRequestModel;
 import use_case.TradeResponseModel;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class TradeController {
 
-    static TradeInputBoundry userInput;
+    TradeInputBoundry userInput;
 
     public TradeController(TradeInputBoundry orderGateway) {
         this.userInput = orderGateway;
     }
 
-    public static TradeResponseModel create(Post post, String creationTime,
-                                            String name, String address, String phoneNumber, Account buyer, Account seller) {
-        TradeRequestModel requestModel = new TradeRequestModel(post, creationTime,
-                name, address, phoneNumber, buyer, seller);
+    public TradeResponseModel create(Post post, String name, String address, String phoneNumber, String buyerUsername,
+                                            String sellerUsername, Account buyer, Account seller) {
+        LocalDateTime now = LocalDateTime.now();
+        TradeRequestModel requestModel = new TradeRequestModel(post, now,
+                name, address, phoneNumber, buyerUsername, sellerUsername, buyer, seller);
 
         return userInput.create(requestModel);
     }

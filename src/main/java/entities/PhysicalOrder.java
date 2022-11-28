@@ -1,14 +1,10 @@
-package use_case;
+package entities;
 
-import java.time.LocalDateTime;
+public class PhysicalOrder implements Order {
 
-public class OrderDsRequestModel {
-
-    private final String Title;
+    private final Post Post;
 
     private final String CreationTime;
-
-    private final double Price;
 
     private final String Name;
 
@@ -22,11 +18,11 @@ public class OrderDsRequestModel {
 
     private final String SellerUsername;
 
-    public OrderDsRequestModel(String title, String creationTime, double price, String name, String address,
-                               String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername) {
-        Title = title;
+
+    PhysicalOrder(Post post, String creationTime, String name, String address, String phoneNumber,
+                  String shipmentStatus, String buyerUsername, String sellerUsername) {
+        Post = post;
         CreationTime = creationTime;
-        Price = price;
         Name = name;
         Address = address;
         PhoneNumber = phoneNumber;
@@ -34,39 +30,42 @@ public class OrderDsRequestModel {
         BuyerUsername = buyerUsername;
         SellerUsername = sellerUsername;
     }
-
-    public String getTitle() {
-        return Title;
+    @Override
+    public Post getPost() {
+        return this.Post;
     }
 
-    public String getCreationTime() {
-        return CreationTime;
-    }
-
+    @Override
     public String getName() {
-        return Name;
+        return this.Name;
     }
 
+    @Override
     public String getAddress() {
-        return Address;
+        return this.Address;
     }
 
+    @Override
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return this.Address;
     }
 
+    @Override
     public String getShipmentStatus() {
-        return ShipmentStatus;
+        return this.ShipmentStatus;
     }
 
-    public double getPrice() {
-        return Price;
+    @Override
+    public String getCreationTime() {
+        return this.CreationTime;
     }
 
+    @Override
     public String getBuyerUsername() {
         return BuyerUsername;
     }
 
+    @Override
     public String getSellerUsername() {
         return SellerUsername;
     }
