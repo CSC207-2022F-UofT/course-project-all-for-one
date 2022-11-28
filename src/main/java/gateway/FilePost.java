@@ -46,8 +46,9 @@ public class FilePost implements PostDsGateway {
                 {
                     tags.add(t);
                 }
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 String creationTimeText = String.valueOf(col[headers.get("CreationTime")]);
-                LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
+                LocalDateTime ldt = LocalDateTime.parse(creationTimeText, dateTimeFormatter);
                 PostDsRequestModel post = new PostDsRequestModel(username, title, description, price, tags, ldt);
                 posts.put(username, post);
             }
@@ -78,7 +79,8 @@ public class FilePost implements PostDsGateway {
                 str_post = str_post.replace("[","").
                         replace("]","").replace(" ","").
                         replace(",",":");
-                String dateStr = post.getCreationTime().format(DateTimeFormatter.ofPattern("EEEE-MMMM-dd-yyyy-hh:mm:ss-a"));
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                String dateStr = post.getCreationTime().format(dateTimeFormatter);;
 
 //                String line = "%s, %s, %s, %s, %s, %s, %s".formatted(
 //                        post.get_username(), post.get_title(), post.get_description(),

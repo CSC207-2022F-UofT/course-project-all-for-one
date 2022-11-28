@@ -1,3 +1,6 @@
+import entities.Account;
+import entities.AccountFactory;
+import entities.Wallet;
 import gateway.FilePost;
 import UI.PostController;
 import UI.PostResponseFormatter;
@@ -38,7 +41,9 @@ public class MainKevin {
 
         // Build the GUI, plugging in the parts
         String username = "kevin";
-        PostScreen postScreen = new PostScreen(username, postController);
+        Wallet testBuyerWallet = new Wallet(100);
+        Account testBuyer = AccountFactory.create("ddddd", "123456", testBuyerWallet);
+        PostScreen postScreen = new PostScreen(testBuyer.getUsername(), postController);
         screens.add(postScreen, "post");
         cardLayout.show(screens, "post");
         application.pack();
