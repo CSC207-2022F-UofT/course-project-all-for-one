@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 //import UI.MainPage;
 //import controller.RecommendationController;
 //import gateway.FilePost;
@@ -30,3 +32,13 @@
 //        JPanel mainPagePanel = new MainPage("username", new RecommendationController(recommendationInputBoundry, ));
 //    }
 //}
+class MainJamesReal {
+    public static void main(String[] args) {
+        JFrame jf = new JFrame();
+        jf.setBounds(400,400,400,400);
+
+
+        jf.setVisible(true);
+        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+}

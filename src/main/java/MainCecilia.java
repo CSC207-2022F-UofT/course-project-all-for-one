@@ -8,7 +8,10 @@ public class MainCecilia {
     public static void main(String[] args) {
         JFrame searchFrame = new JFrame("Search Page");
         searchFrame.setBounds(400, 300, 400, 300);
-        JScrollPane searchScrollPanel = new JScrollPane();
+
+
+        JPanel searScrollPanelViewPort = new JPanel();
+        searScrollPanelViewPort.setLayout(new BoxLayout(searScrollPanelViewPort, BoxLayout.Y_AXIS));
 
         ArrayList<String> tags = new ArrayList<>();
         tags.add(0, "xxx");
@@ -23,12 +26,17 @@ public class MainCecilia {
         List<JButton> buttonsAdded = new ArrayList<>();
         for(int j = 0; j < posts.size(); j++){
             buttonsAdded.add(new JButton("Open post" + j)) ;
-            searchScrollPanel.add(new JLabel(posts.get(j).getTitle()));
-            searchScrollPanel.add(new JLabel(posts.get(j).getDescription()));
-            searchScrollPanel.add(new JLabel(String.valueOf(posts.get(j).getPrice())));
-            searchScrollPanel.add(buttonsAdded.get(j));
+            JPanel postPanel = new JPanel();
+            postPanel.add(new JLabel(posts.get(j).getTitle()));
+            postPanel.add(new JLabel(posts.get(j).getDescription()));
+            postPanel.add(new JLabel(String.valueOf(posts.get(j).getPrice())));
+            postPanel.add(buttonsAdded.get(j));
+            searScrollPanelViewPort.add(postPanel);
         }
 
+        JScrollPane searchScrollPanel = new JScrollPane(searScrollPanelViewPort,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         searchFrame.add(searchScrollPanel);
         searchFrame.setVisible(true);
         searchFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

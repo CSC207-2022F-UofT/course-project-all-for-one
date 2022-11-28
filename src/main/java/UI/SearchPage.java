@@ -15,17 +15,18 @@ public class SearchPage {
         searchFrame.setBounds(400, 300, 400, 300);
 
         JScrollPane searchScrollPanel = new JScrollPane();
-
+        JPanel searScrollPanelViewPort = new JPanel();
 
         JButton[] buttonsAdded = new JButton[posts.size()];
         for(int j = 0; j < posts.size(); j++){
             buttonsAdded[j] = new JButton("Open post" + j);
-            searchScrollPanel.add(new JLabel(posts.get(j).getTitle()));
-            searchScrollPanel.add(new JLabel(posts.get(j).getDescription()));
-            searchScrollPanel.add(new JLabel(String.valueOf(posts.get(j).getPrice())));
-            searchScrollPanel.add(buttonsAdded[j]);
+            searScrollPanelViewPort.add(new JLabel(posts.get(j).getTitle()));
+            searScrollPanelViewPort.add(new JLabel(posts.get(j).getDescription()));
+            searScrollPanelViewPort.add(new JLabel(String.valueOf(posts.get(j).getPrice())));
+            searScrollPanelViewPort.add(buttonsAdded[j]);
         }
 
+        searchScrollPanel.setViewportView(searScrollPanelViewPort);
         searchFrame.add(searchScrollPanel);
         searchFrame.setVisible(true);
         searchFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
