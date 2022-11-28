@@ -67,17 +67,17 @@ public class MainJames {
             public void actionPerformed(ActionEvent e) {
 
 
+
                 Recommendation recommendation1 = new Recommendation(posts);
                 RecommendationResponseModel responseModel = new RecommendationResponseModel(recommendation1);
 
 
 
-
-                JPanel recommendationPanel = new JPanel();
-                recommendationPanel.setLayout(new BoxLayout(recommendationPanel, BoxLayout.Y_AXIS));
-
                 JFrame recommendationFrame = new JFrame("Recommendation");
-                recommendationFrame.setBounds(500, 200, 300, 500);
+                recommendationFrame.setBounds(500, 200, 500, 500);
+
+                JPanel recommendationScrollPanelViewPort = new JPanel();
+                recommendationScrollPanelViewPort.setLayout(new BoxLayout(recommendationScrollPanelViewPort, BoxLayout.Y_AXIS));
 
 
 
@@ -85,9 +85,9 @@ public class MainJames {
 //                int j = 1;
 //                if (responseModel.getRecommendation().getPosts().size() < 3){
 //                    for(Post post: responseModel.getRecommendation().getPosts()){
-//                        recommendationPanel.add(new JLabel(post.getTitle()));
+//                        recommendationScrollPanel.add(new JLabel(post.getTitle()));
 //
-//                        recommendationPanel.add(new JButton("Open post" + j));
+//                        recommendationScrollPanel.add(new JButton("Open post" + j));
 //                    }
 //
 //                } else{
@@ -96,24 +96,31 @@ public class MainJames {
 //                    JButton recomButton3 = new JButton("Open post 3");
 //
 //                    for(Post post: responseModel.getRecommendation().getPosts()){
-//                        recommendationPanel.add(new JLabel(post.getTitle()));
+//                        recommendationScrollPanel.add(new JLabel(post.getTitle()));
 //                    }
-//                    recommendationPanel.add(recomButton1);
-//                    recommendationPanel.add(recomButton2);
-//                    recommendationPanel.add(recomButton3);
+//                    recommendationScrollPanel.add(recomButton1);
+//                    recommendationScrollPanel.add(recomButton2);
+//                    recommendationScrollPanel.add(recomButton3);
 //
 //
 //                }
+
+
                 JButton[] buttonsAdded = new JButton[responseModel.getRecommendation().getPosts().size()];
                 for(int j = 0; j <responseModel.getRecommendation().getPosts().size(); j++){
+                    JPanel jp1 = new JPanel();
                     buttonsAdded[j] = new JButton("Open post" + j);
-                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
-                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
-                    recommendationPanel.add(new JLabel(String.valueOf(responseModel.getRecommendation().getPosts().get(j).getPrice())));
-                    recommendationPanel.add(buttonsAdded[j]);
+                    jp1.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
+                    jp1.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
+                    jp1.add(new JLabel(String.valueOf(responseModel.getRecommendation().getPosts().get(j).getPrice())));
+                    jp1.add(buttonsAdded[j]);
+                    recommendationScrollPanelViewPort.add(jp1);
                 }
 
-                recommendationFrame.add(recommendationPanel);
+                JScrollPane recommendationScrollPanel = new JScrollPane(recommendationScrollPanelViewPort, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                        JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                recommendationScrollPanel.setViewportView(recommendationScrollPanelViewPort);
+                recommendationFrame.add(recommendationScrollPanel);
                 recommendationFrame.setVisible(true);
                 recommendationFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 //                JOptionPane.showMessageDialog(jf, "Use more to have recommendation!");

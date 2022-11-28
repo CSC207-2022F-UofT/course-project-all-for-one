@@ -14,9 +14,9 @@ public class SearchPage {
         JFrame searchFrame = new JFrame("Search Page");
         searchFrame.setBounds(400, 300, 400, 300);
 
-        JScrollPane searchScrollPanel = new JScrollPane();
-        JPanel searScrollPanelViewPort = new JPanel();
 
+        JPanel searScrollPanelViewPort = new JPanel();
+        searScrollPanelViewPort.setLayout(new BoxLayout(searScrollPanelViewPort, BoxLayout.Y_AXIS));
         JButton[] buttonsAdded = new JButton[posts.size()];
         for(int j = 0; j < posts.size(); j++){
             JPanel jp1 = new JPanel();
@@ -27,7 +27,8 @@ public class SearchPage {
             jp1.add(buttonsAdded[j]);
             searScrollPanelViewPort.add(jp1);
         }
-
+        JScrollPane searchScrollPanel = new JScrollPane(searScrollPanelViewPort, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         searchScrollPanel.setViewportView(searScrollPanelViewPort);
         searchFrame.add(searchScrollPanel);
         searchFrame.setVisible(true);
