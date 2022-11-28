@@ -2,7 +2,7 @@ package UI;
 
 import controller.TradeController;
 import entities.Account;
-import entities.OrderFactory;
+import entities.PhysicalOrderFactory;
 import entities.Post;
 import gateway.FileOrder;
 import gateway.OrderDsGateway;
@@ -136,8 +136,8 @@ public class PostPage extends JFrame implements ActionListener {
                 throw new RuntimeException("Could not create file.");
             }
             TradePresenter presenter = new TradePresenter();
-            OrderFactory orderFactory = new OrderFactory();
-            TradeInputBoundry interactor = new TradeInteractor(order, presenter, orderFactory);
+            PhysicalOrderFactory physicalOrderFactory = new PhysicalOrderFactory();
+            TradeInputBoundry interactor = new TradeInteractor(order, presenter, physicalOrderFactory);
             TradeController controller = new TradeController(interactor);
 
             BuyPresenter.creatConfirmPage(Post, CreationTime, PossibleBuyer, Seller, controller);

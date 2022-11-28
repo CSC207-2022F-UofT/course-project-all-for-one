@@ -1,10 +1,10 @@
 package presenter;
 
-import entities.Order;
+import entities.PhysicalOrder;
 import java.util.List;
 
 public class PurchaseResponsePresenter {
-    public List<Order> createPurchaseHistoryPage(List<Order> orders){
-        return orders;
+    public List<PhysicalOrder> createPurchaseHistoryPage(List<PhysicalOrder> physicalOrders){
+        return physicalOrders;
     }
 }

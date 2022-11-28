@@ -1,9 +1,9 @@
 package gateway;
 
-import entities.Order;
+import entities.PhysicalOrder;
 
 import java.util.List;
 
 public interface PurchaseGateway {
-    List<Order> getOrders(String username);
+    List<PhysicalOrder> getOrders(String username);
 }

@@ -1,65 +1,19 @@
 package entities;
 
-public class Order {
+public interface Order {
+    Post getPost();
 
-    private final Post Post;
+    String getName();
 
-    private final String CreationTime;
+    String getAddress();
 
-    private final String Name;
+    String getPhoneNumber();
 
-    private final String Address;
+    String getShipmentStatus();
 
-    private final String PhoneNumber;
+    String getCreationTime();
 
-    private String ShipmentStatus;
+    String getBuyerUsername();
 
-    private final String BuyerUsername;
-
-    private final String SellerUsername;
-
-
-    Order(Post post, String creationTime, String name, String address, String phoneNumber,
-          String shipmentStatus, String buyerUsername, String sellerUsername) {
-        Post = post;
-        CreationTime = creationTime;
-        Name = name;
-        Address = address;
-        PhoneNumber = phoneNumber;
-        ShipmentStatus = shipmentStatus;
-        BuyerUsername = buyerUsername;
-        SellerUsername = sellerUsername;
-    }
-
-    public Post getPost() {
-        return this.Post;
-    }
-
-    public String getName() {
-        return this.Name;
-    }
-
-    public String getAddress() {
-        return this.Address;
-    }
-
-    public String getPhoneNumber() {
-        return this.Address;
-    }
-
-    public String getShipmentStatus() {
-        return this.ShipmentStatus;
-    }
-
-    public String getCreationTime() {
-        return this.CreationTime;
-    }
-
-    public String getBuyerUsername() {
-        return BuyerUsername;
-    }
-
-    public String getSellerUsername() {
-        return SellerUsername;
-    }
+    String getSellerUsername();
 }
