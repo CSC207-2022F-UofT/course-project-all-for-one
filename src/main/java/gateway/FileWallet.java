@@ -31,8 +31,8 @@ public class FileWallet implements WalletGateway {
             while ((row = reader.readLine()) != null) {
                 String[] col = row.split(",");
                 String username = String.valueOf(col[headers.get("username")]);
-                String balance = String.valueOf(col[headers.get("balance")]);
-                WalletRequestModel wallet = new WalletRequestModel(username, Double.valueOf(balance));
+                double balance = Double.valueOf(col[headers.get("balance")]);
+                WalletRequestModel wallet = new WalletRequestModel(username, balance);
                 accounts.put(username, wallet);
             }
 
