@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PurchaseRequestModel {
 
-    private String username;
+    private final String username;
 
     private List<String> creation_times;
 
