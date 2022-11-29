@@ -13,6 +13,7 @@ public class FilePost implements PostDsGateway {
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
 
+
     private final Map<String, PostDsRequestModel> posts = new HashMap<>();
 
     public FilePost(String csvPath) throws IOException {
@@ -63,7 +64,7 @@ public class FilePost implements PostDsGateway {
      */
     @Override
     public void save(PostDsRequestModel requestModel) {
-        posts.put(requestModel.getUsername(), requestModel);
+        posts.put(String.valueOf(requestModel.hashCode()), requestModel);
         this.save();
     }
 

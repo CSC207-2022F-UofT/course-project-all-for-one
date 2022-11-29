@@ -36,6 +36,7 @@ public class PostScreen extends JPanel implements ActionListener {
      * A window with a title and a JButton.
      */
     public PostScreen(String username, PostController controller) {
+        this.username = username;
 
         this.postController = controller;
 
@@ -95,7 +96,7 @@ public class PostScreen extends JPanel implements ActionListener {
                         String.valueOf(post_description.getText()),
                         Double.parseDouble(price.getText()),
                         tags);
-                showMessageDialog(this, "Your post" +" "+ post_title.getText() + "has been created.");
+                showMessageDialog(this, "Your post" +" "+ post_title.getText() +" "+ "has been created.");
                 post_title.setText(null);
                 post_description.setText(null);
                 price.setText(null);
@@ -111,6 +112,7 @@ public class PostScreen extends JPanel implements ActionListener {
             String str_tags = tags.toString();
             str_tags = str_tags.replace("[","").replace("]","");
             tag_show.setText(str_tags);
+            add_tag.setText(null);
         }
 
 
