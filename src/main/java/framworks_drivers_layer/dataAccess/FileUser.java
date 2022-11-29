@@ -1,8 +1,7 @@
 package framworks_drivers_layer.dataAccess;
 
-import application_business_rules_layer.userUseCases.UserDsGateway;
+import application_business_rules_layer.userUseCases.UserRegisterDsGateway;
 import application_business_rules_layer.userUseCases.UserRegisterDsRequestModel;
-import enterprise_business_rules_layer.accountEntities.Account;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -10,7 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUser implements UserDsGateway {
+public class FileUser implements UserRegisterDsGateway {
 
     private final File csvFile;
 
@@ -39,13 +38,14 @@ public class FileUser implements UserDsGateway {
                 String username = String.valueOf(col[headers.get("username")]);
                 String password = String.valueOf(col[headers.get("password")]);
                 String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
-                Double wallet = Double.parseDouble(col[headers.get("wallet")]);
+                String wallet = String.valueOf(col[headers.get("wallet")]);
                 LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
                 UserRegisterDsRequestModel user = new UserRegisterDsRequestModel(username, password, ldt, wallet);
                 accounts.put(username, user);
             }
 
             reader.close();
+
         }
     }
 
@@ -91,19 +91,5 @@ public class FileUser implements UserDsGateway {
         return accounts.containsKey(identifier);
     }
 
-    @Override
-    public boolean isPasswordCorrect (String username, String password) {
-        return accounts.get(username).equals(password);
-    }
-
-    @Override
-    public String getPassword(String username) {
-        return accounts.get(username).getPassword();
-    }
-
-    @Override
-    public Double getBalance(String username) {
-        return accounts.get(username).getWalletBalance();
-    }
 
 }

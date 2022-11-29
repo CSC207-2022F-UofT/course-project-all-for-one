@@ -10,6 +10,10 @@ public class Wallet {
         return balance;
     }
 
+    public String getBalanceString() {
+        return Double.toString(balance);
+    }
+
     public void addBalance(double transactionAmount){
         balance += transactionAmount;
     }

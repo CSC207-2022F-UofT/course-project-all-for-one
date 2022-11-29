@@ -10,9 +10,9 @@ public class UserRegisterDsRequestModel {
     private String password;
     private final LocalDateTime creationTime;
 
-    private double walletBalance;
+    private String walletBalance;
 
-    public UserRegisterDsRequestModel(String name, String password, LocalDateTime creationTime, double walletBalance) {
+    public UserRegisterDsRequestModel(String name, String password, LocalDateTime creationTime, String walletBalance) {
         this.name = name;
         this.password = password;
         this.creationTime = creationTime;
@@ -35,7 +35,7 @@ public class UserRegisterDsRequestModel {
         return creationTime;
     }
 
-    public double getWalletBalance() {
+    public String getWalletBalance() {
         return this.walletBalance;
     }
 

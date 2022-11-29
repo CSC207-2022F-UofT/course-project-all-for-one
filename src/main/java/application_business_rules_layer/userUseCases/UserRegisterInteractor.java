@@ -8,20 +8,20 @@ import java.time.LocalDateTime;
 
 public class UserRegisterInteractor implements UserRegisterInputBoundary {
 
-    final UserDsGateway userDsGateway;
+    final UserRegisterDsGateway userRegisterDsGateway;
     final UserRegisterOutputBoundry userRegisterOutputBoundry;
     final AccountFactory accountFactory;
 
-    public UserRegisterInteractor(UserDsGateway userDsGateway, UserRegisterOutputBoundry userRegisterOutputBoundry1,
+    public UserRegisterInteractor(UserRegisterDsGateway userRegisterDsGateway, UserRegisterOutputBoundry userRegisterOutputBoundry1,
                                   AccountFactory accountFactory) {
-        this.userDsGateway = userDsGateway;
+        this.userRegisterDsGateway = userRegisterDsGateway;
         this.userRegisterOutputBoundry = userRegisterOutputBoundry1;
         this.accountFactory = accountFactory;
     }
 
     @Override
     public UserRegisterResponseModel create(UserRegisterRequestModel requestModel) {
-        if (userDsGateway.existsByName(requestModel.getUsername())){
+        if (userRegisterDsGateway.existsByName(requestModel.getUsername())){
             return userRegisterOutputBoundry.prepareFailView("Username already exists.");
         } else if (!requestModel.getPassword().equals(requestModel.getRepeatedPassword())) {
             return userRegisterOutputBoundry.prepareFailView("Passwords don't match.");
@@ -30,8 +30,9 @@ public class UserRegisterInteractor implements UserRegisterInputBoundary {
         Wallet wallet = new Wallet(1000);
         Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword(), wallet);
         LocalDateTime now = LocalDateTime.now();
-        UserRegisterDsRequestModel userRegisterDsRequestModel = new UserRegisterDsRequestModel(account.getUsername(), account.getPassword(), now, account.getWallet().getBalance());
-        userDsGateway.save(userRegisterDsRequestModel);
+        UserRegisterDsRequestModel userRegisterDsRequestModel = new UserRegisterDsRequestModel(account.getUsername(), account.getPassword(), now,
+                account.getWallet().getBalanceString());
+        userRegisterDsGateway.save(userRegisterDsRequestModel);
 
         UserRegisterResponseModel accountResponseModel = new UserRegisterResponseModel(account.getUsername(), now.toString());
         return userRegisterOutputBoundry.prepareSuccessView(accountResponseModel);

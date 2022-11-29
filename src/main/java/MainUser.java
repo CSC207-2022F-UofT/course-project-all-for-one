@@ -1,9 +1,8 @@
-import application_business_rules_layer.userUseCases.UserDsGateway;
+import application_business_rules_layer.userUseCases.UserRegisterDsGateway;
 import application_business_rules_layer.userUseCases.UserRegisterInputBoundary;
 import application_business_rules_layer.userUseCases.UserRegisterInteractor;
 import application_business_rules_layer.userUseCases.UserRegisterOutputBoundry;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
-import framworks_drivers_layer.views.*;
 import Interface_adapters_layer.controller.UserRegisterController;
 import framworks_drivers_layer.dataAccess.FileUser;
 import Interface_adapters_layer.presenter.UserRegisterPresenter;
@@ -23,7 +22,7 @@ public class MainUser {
         application.add(screens);
 
         // Create the parts to plug into the Use Case+Entities engine
-        UserDsGateway user;
+        UserRegisterDsGateway user;
         try {
             user = new FileUser("./users.csv");
         } catch (IOException e) {
