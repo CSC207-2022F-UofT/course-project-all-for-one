@@ -1,12 +1,12 @@
-import gateway.FilePost;
-import UI.PostController;
-import UI.PostResponseFormatter;
-import UI.PostScreen;
-import entities.PostFactory;
-import gateway.PostDsGateway;
-import use_case.PostInputBoundary;
-import use_case.PostInteractor;
-import use_case.PostPresenter;
+import framworks_drivers_layer.dataAccess.FilePost;
+import framworks_drivers_layer.views.PostController;
+import framworks_drivers_layer.views.PostResponseFormatter;
+import framworks_drivers_layer.views.PostCreationPage;
+import enterprise_business_rules_layer.postEntities.PostFactory;
+import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postUseCases.PostInputBoundary;
+import application_business_rules_layer.postUseCases.PostInteractor;
+import application_business_rules_layer.postUseCases.PostOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +28,7 @@ public class MainKevin {
         } catch (IOException e) {
             throw new RuntimeException("Could not create file.");
         }
-        PostPresenter presenter = new PostResponseFormatter();
+        PostOutputBoundary presenter = new PostResponseFormatter();
         PostFactory postFactory = new PostFactory();
         PostInputBoundary interactor = new PostInteractor(
                 post, presenter, postFactory);
@@ -38,8 +38,8 @@ public class MainKevin {
 
         // Build the GUI, plugging in the parts
         String username = "kevin";
-        PostScreen postScreen = new PostScreen(username, postController);
-        screens.add(postScreen, "post");
+        PostCreationPage postCreationPage = new PostCreationPage(username, postController);
+        screens.add(postCreationPage, "post");
         cardLayout.show(screens, "post");
         application.pack();
         application.setVisible(true);

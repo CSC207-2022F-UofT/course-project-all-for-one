@@ -1,16 +1,16 @@
-import UI.PostController;
-import UI.PostResponseFormatter;
-import UI.PostScreen;
-import UI.UserCenterPage;
-import entities.Post;
-import entities.PostFactory;
-import entities.Recommendation;
-import gateway.FilePost;
-import gateway.PostDsGateway;
-import use_case.PostInputBoundary;
-import use_case.PostInteractor;
-import use_case.PostPresenter;
-import use_case.RecommendationResponseModel;
+import framworks_drivers_layer.views.PostController;
+import framworks_drivers_layer.views.PostResponseFormatter;
+import framworks_drivers_layer.views.PostCreationPage;
+import framworks_drivers_layer.views.UserCenterPage;
+import enterprise_business_rules_layer.postEntities.Post;
+import enterprise_business_rules_layer.postEntities.PostFactory;
+import enterprise_business_rules_layer.Recommendation;
+import framworks_drivers_layer.dataAccess.FilePost;
+import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postUseCases.PostInputBoundary;
+import application_business_rules_layer.postUseCases.PostInteractor;
+import application_business_rules_layer.postUseCases.PostOutputBoundary;
+import application_business_rules_layer.recommendationUseCases.RecommendationResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -140,16 +140,16 @@ public class MainJames {
                 } catch (IOException error) {
                     throw new RuntimeException("Could not create file.");
                 }
-                PostPresenter presenter = new PostResponseFormatter();
+                PostOutputBoundary presenter = new PostResponseFormatter();
                 PostFactory postFactory = new PostFactory();
                 PostInputBoundary interactor = new PostInteractor(
                         post, presenter, postFactory);
                 PostController postController = new PostController(
                         interactor
                 );
-                PostScreen postScreen = new PostScreen("username", postController);
+                PostCreationPage postCreationPage = new PostCreationPage("username", postController);
 
-                screens.add(postScreen, "post");
+                screens.add(postCreationPage, "post");
                 cardLayout.show(screens, "post");
                 application.pack();
                 application.setVisible(true);

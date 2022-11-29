@@ -1,24 +1,22 @@
 //package main.java;
 //
 //
-//import main.java.UI.UserCenterPage;
+//import main.java.framworks_drivers.UI.UserCenterPage;
 //
 //public class Main {
 //    public static void main(String[] args) {
 //        UserCenterPage userCenterPage = new UserCenterPage();
 //=======
 
-import UI.Board;
-import UI.PostPage;
-import entities.Account;
-import entities.AccountFactory;
-import entities.Post;
-import entities.Wallet;
-import gateway.MessageDataManagement;
-import gateway.MessageDsGateway;
+import framworks_drivers_layer.views.PostPage;
+import enterprise_business_rules_layer.accountEntities.Account;
+import enterprise_business_rules_layer.accountEntities.AccountFactory;
+import enterprise_business_rules_layer.postEntities.Post;
+import enterprise_business_rules_layer.Wallet;
+import framworks_drivers_layer.dataAccess.FileMessage;
+import application_business_rules_layer.messageUseCases.MessageDsGateway;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -37,7 +35,7 @@ public class  MainXavier {
         Account testSeller = AccountFactory.create("xavier", "654321", testSellerWaller);
 
 
-        MessageDsGateway Messages = new MessageDataManagement("./MessageBoard.csv");
+        MessageDsGateway Messages = new FileMessage("./MessageBoard.csv");
         JFrame postPage = new PostPage(testPost, testCreationTime, testBuyer, testSeller, Messages);
         postPage.setVisible(true);
     }

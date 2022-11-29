@@ -1,9 +1,9 @@
-//import UI.MainPage;
-//import controller.RecommendationController;
-//import gateway.FilePost;
-//import gateway.RecommendationGateway;
-//import presenter.RecommendationResponsePresenter;
-//import gateway.PostDsGateway;
+//import framworks_drivers.UI.MainPage;
+//import Interface_adapters.presenter.controller.RecommendationController;
+//import Interface_adapters.gateway.FilePost;
+//import Interface_adapters.gateway.RecommendationGateway;
+//import Interface_adapters.presenter.RecommendationResponsePresenter;
+//import Interface_adapters.gateway.PostDsGateway;
 //import use_case.RecommendationInputBoundry;
 //import use_case.RecommendationInteractor;
 //import use_case.RecommendationOutputBoundry;
