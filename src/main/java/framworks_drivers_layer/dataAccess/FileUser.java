@@ -1,6 +1,6 @@
 package framworks_drivers_layer.dataAccess;
 
-import application_business_rules_layer.userUseCases.UserRegisterDsGateway;
+import application_business_rules_layer.userUseCases.UserDsGateway;
 import application_business_rules_layer.userUseCases.UserRegisterDsRequestModel;
 
 import java.io.*;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUser implements UserRegisterDsGateway {
+public class FileUser implements UserDsGateway {
 
     private final File csvFile;
 
@@ -91,5 +91,19 @@ public class FileUser implements UserRegisterDsGateway {
         return accounts.containsKey(identifier);
     }
 
+    @Override
+    public boolean isPasswordCorrect (String username, String password) {
+        return accounts.get(username).getPassword().equals(password);
+    }
+
+    @Override
+    public String getPassword(String username) {
+        return accounts.get(username).getPassword();
+    }
+
+    @Override
+    public double getBalance(String username) {
+        return accounts.get(username).getWalletBalance();
+    }
 
 }

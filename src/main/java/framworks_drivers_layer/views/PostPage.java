@@ -1,15 +1,11 @@
 package framworks_drivers_layer.views;
 
-import Interface_adapters_layer.controller.TradeController;
 import enterprise_business_rules_layer.accountEntities.Account;
-import enterprise_business_rules_layer.orderEntities.PhysicalOrderFactory;
 import enterprise_business_rules_layer.postEntities.Post;
 import framworks_drivers_layer.dataAccess.FileOrder;
 import application_business_rules_layer.tradeUseCases.OrderDsGateway;
 import Interface_adapters_layer.presenter.BuyPresenter;
-import Interface_adapters_layer.presenter.TradePresenter;
-import application_business_rules_layer.tradeUseCases.TradeInputBoundry;
-import application_business_rules_layer.tradeUseCases.TradeInteractor;
+
 
 import Interface_adapters_layer.controller.MessageController;
 import application_business_rules_layer.messageUseCases.MessageDsGateway;
@@ -135,12 +131,8 @@ public class PostPage extends JFrame implements ActionListener {
             } catch (IOException e) {
                 throw new RuntimeException("Could not create file.");
             }
-            TradePresenter presenter = new TradePresenter();
-            PhysicalOrderFactory physicalOrderFactory = new PhysicalOrderFactory();
-            TradeInputBoundry interactor = new TradeInteractor(order, presenter, physicalOrderFactory);
-            TradeController controller = new TradeController(interactor);
 
-            BuyPresenter.creatConfirmPage(Post, CreationTime, PossibleBuyer, Seller, controller);
+            BuyPresenter.creatConfirmPage(Post, CreationTime, PossibleBuyer, Seller, order);
         }
         else{
             String input = inputArea.getText();

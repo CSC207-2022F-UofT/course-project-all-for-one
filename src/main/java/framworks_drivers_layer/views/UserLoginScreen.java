@@ -1,11 +1,20 @@
 package framworks_drivers_layer.views;
 
 import Interface_adapters_layer.controller.UserLoginController;
+import Interface_adapters_layer.controller.UserRegisterController;
+import Interface_adapters_layer.presenter.UserRegisterPresenter;
+import application_business_rules_layer.userUseCases.UserDsGateway;
+import application_business_rules_layer.userUseCases.UserRegisterInputBoundary;
+import application_business_rules_layer.userUseCases.UserRegisterInteractor;
+import application_business_rules_layer.userUseCases.UserRegisterOutputBoundry;
+import enterprise_business_rules_layer.accountEntities.AccountFactory;
+import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -42,11 +51,14 @@ public class UserLoginScreen extends JPanel implements ActionListener {
                 new JLabel("Enter password"), password);
 
         JButton login = new JButton("Login");
+        JButton register = new JButton("Sign Up");
 
         JPanel buttons = new JPanel();
         buttons.add(login);
+        buttons.add(register);
 
         login.addActionListener(this);
+        register.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -62,13 +74,39 @@ public class UserLoginScreen extends JPanel implements ActionListener {
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
+        if (evt.getActionCommand().equals("Login")) {
+            try {
+                userLoginController.create(username.getText(),
+                        String.valueOf(password.getPassword()));
+            JOptionPane.showMessageDialog(this, "welcome");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        } else {
+            UserDsGateway gateway;
+            try {
+                gateway = new FileUser("./users.csv");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            UserRegisterOutputBoundry outputBoundry = new UserRegisterPresenter();
+            AccountFactory accountFactory = new AccountFactory();
+            UserRegisterInputBoundary interactor = new UserRegisterInteractor(gateway, outputBoundry, accountFactory);
+            UserRegisterController controller = new UserRegisterController(interactor);
+            UserRegisterScreen registerScreen = new UserRegisterScreen(controller);
 
-        try {
-            userLoginController.create(username.getText(),
-                    String.valueOf(password.getPassword()));
-//            JOptionPane.showMessageDialog(this, "%s created.".formatted(username.getText()));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JFrame register = new JFrame("Sign Up Page");
+            CardLayout cardLayout = new CardLayout();
+            JPanel screens = new JPanel(cardLayout);
+            register.add(screens);
+
+            screens.add(registerScreen, "welcome");
+            cardLayout.show(screens, "trade");
+            register.pack();
+            register.setVisible(true);
+            register.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         }
+
+
     }
 }

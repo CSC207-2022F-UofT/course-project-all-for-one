@@ -8,20 +8,20 @@ import java.time.LocalDateTime;
 
 public class UserRegisterInteractor implements UserRegisterInputBoundary {
 
-    final UserRegisterDsGateway userRegisterDsGateway;
+    final UserDsGateway userDsGateway;
     final UserRegisterOutputBoundry userRegisterOutputBoundry;
     final AccountFactory accountFactory;
 
-    public UserRegisterInteractor(UserRegisterDsGateway userRegisterDsGateway, UserRegisterOutputBoundry userRegisterOutputBoundry1,
+    public UserRegisterInteractor(UserDsGateway userDsGateway, UserRegisterOutputBoundry userRegisterOutputBoundry1,
                                   AccountFactory accountFactory) {
-        this.userRegisterDsGateway = userRegisterDsGateway;
+        this.userDsGateway = userDsGateway;
         this.userRegisterOutputBoundry = userRegisterOutputBoundry1;
         this.accountFactory = accountFactory;
     }
 
     @Override
     public UserRegisterResponseModel create(UserRegisterRequestModel requestModel) {
-        if (userRegisterDsGateway.existsByName(requestModel.getUsername())){
+        if (userDsGateway.existsByName(requestModel.getUsername())){
             return userRegisterOutputBoundry.prepareFailView("Username already exists.");
         } else if (!requestModel.getPassword().equals(requestModel.getRepeatedPassword())) {
             return userRegisterOutputBoundry.prepareFailView("Passwords don't match.");
@@ -32,7 +32,7 @@ public class UserRegisterInteractor implements UserRegisterInputBoundary {
         LocalDateTime now = LocalDateTime.now();
         UserRegisterDsRequestModel userRegisterDsRequestModel = new UserRegisterDsRequestModel(account.getUsername(), account.getPassword(), now,
                 account.getWallet().getBalance());
-        userRegisterDsGateway.save(userRegisterDsRequestModel);
+        userDsGateway.save(userRegisterDsRequestModel);
 
         UserRegisterResponseModel accountResponseModel = new UserRegisterResponseModel(account.getUsername(), now.toString());
         return userRegisterOutputBoundry.prepareSuccessView(accountResponseModel);

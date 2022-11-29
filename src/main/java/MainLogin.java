@@ -1,25 +1,25 @@
-import application_business_rules_layer.userUseCases.UserDsGateway;
-import application_business_rules_layer.userUseCases.UserRegisterInputBoundary;
-import application_business_rules_layer.userUseCases.UserRegisterInteractor;
-import application_business_rules_layer.userUseCases.UserRegisterOutputBoundry;
+import Interface_adapters_layer.controller.UserLoginController;
+import Interface_adapters_layer.presenter.UserLoginPresenter;
+import application_business_rules_layer.userUseCases.*;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
 import Interface_adapters_layer.controller.UserRegisterController;
 import framworks_drivers_layer.dataAccess.FileUser;
 import Interface_adapters_layer.presenter.UserRegisterPresenter;
+import framworks_drivers_layer.views.UserLoginScreen;
 import framworks_drivers_layer.views.UserRegisterScreen;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class MainUser {
+public class MainLogin {
     public static void main(String[] args) {
 
         // Build the main program window
-        JFrame application = new JFrame("Login Example");
+        JFrame login = new JFrame("Login Example");
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
-        application.add(screens);
+        login.add(screens);
 
         // Create the parts to plug into the Use Case+Entities engine
         UserDsGateway user;
@@ -28,20 +28,19 @@ public class MainUser {
         } catch (IOException e) {
             throw new RuntimeException("Could not create file.");
         }
-        UserRegisterOutputBoundry presenter = new UserRegisterPresenter();
+
+        UserLoginOutputBoundary presenter = new UserLoginPresenter();
         AccountFactory accountFactory = new AccountFactory();
-        UserRegisterInputBoundary interactor = new UserRegisterInteractor(
+        UserLoginInputBoundary interactor = new UserLoginInteractor(
                 user, presenter, accountFactory);
-        UserRegisterController userRegisterController = new UserRegisterController(
-                interactor
-        );
+        UserLoginController controller = new UserLoginController(interactor);
 
         // Build the GUI, plugging in the parts
-        UserRegisterScreen registerScreen = new UserRegisterScreen(userRegisterController);
-        screens.add(registerScreen, "welcome");
+        UserLoginScreen loginScreen = new UserLoginScreen(controller);
+        screens.add(loginScreen, "welcome");
         cardLayout.show(screens, "register");
-        application.pack();
-        application.setVisible(true);
+        login.pack();
+        login.setVisible(true);
 
         // Unused screens; we'll uncomment this later
 //        WelcomeScreen welcomeScreen = new WelcomeScreen();
