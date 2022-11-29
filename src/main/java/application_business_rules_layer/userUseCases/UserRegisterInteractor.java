@@ -31,7 +31,7 @@ public class UserRegisterInteractor implements UserRegisterInputBoundary {
         Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword(), wallet);
         LocalDateTime now = LocalDateTime.now();
         UserRegisterDsRequestModel userRegisterDsRequestModel = new UserRegisterDsRequestModel(account.getUsername(), account.getPassword(), now,
-                account.getWallet().getBalanceString());
+                account.getWallet().getBalance());
         userRegisterDsGateway.save(userRegisterDsRequestModel);
 
         UserRegisterResponseModel accountResponseModel = new UserRegisterResponseModel(account.getUsername(), now.toString());

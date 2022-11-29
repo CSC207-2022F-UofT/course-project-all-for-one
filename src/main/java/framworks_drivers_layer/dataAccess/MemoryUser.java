@@ -27,7 +27,7 @@ public class MemoryUser implements UserLoginDsGateway {
     }
 
     @Override
-    public String getBalance(String username) {
+    public double getBalance(String username) {
         return accounts.get(username).getWalletBalance();
     }
 

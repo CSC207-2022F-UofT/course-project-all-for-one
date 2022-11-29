@@ -5,5 +5,5 @@ public interface UserLoginDsGateway {
 
     String getPassword (String username);
 
-    String getBalance (String username);
+    double getBalance (String username);
 }

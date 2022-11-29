@@ -21,9 +21,8 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
         if (!userLoginDsGateway.isPasswordCorrect(requestModel.getUsername(), requestModel.getPassword())){
             return userLoginOutputBoundary.prepareFailView("Your username or password is not valid.");
         }
-        String balance = userLoginDsGateway.getBalance(requestModel.getUsername());
-        Double balanceD = Double.parseDouble(balance);
-        Wallet wallet = new Wallet(balanceD);
+        double balance = userLoginDsGateway.getBalance(requestModel.getUsername());
+        Wallet wallet = new Wallet(balance);
 
         Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword(),wallet);
         account.setLoginStatus(true);
