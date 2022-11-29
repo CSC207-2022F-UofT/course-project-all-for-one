@@ -1,5 +1,6 @@
 package application_business_rules_layer.userUseCases;
 
+import enterprise_business_rules_layer.Wallet;
 import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
 
@@ -26,12 +27,10 @@ public class UserRegisterInteractor implements UserRegisterInputBoundary {
             return userRegisterOutputBoundry.prepareFailView("Passwords don't match.");
         }
 
-        Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword(), requestModel.getWallet());
-        if (!account.passwordIsValid()) {
-            return userRegisterOutputBoundry.prepareFailView("Password does not satisfy the criteria.");
-        }
+        Wallet wallet = new Wallet(1000);
+        Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword(), wallet);
         LocalDateTime now = LocalDateTime.now();
-        UserRegisterDsRequestModel userRegisterDsRequestModel = new UserRegisterDsRequestModel(account.getUsername(), account.getPassword(), now, account.getWallet());
+        UserRegisterDsRequestModel userRegisterDsRequestModel = new UserRegisterDsRequestModel(account.getUsername(), account.getPassword(), now, account.getWallet().getBalance());
         userDsGateway.save(userRegisterDsRequestModel);
 
         UserRegisterResponseModel accountResponseModel = new UserRegisterResponseModel(account.getUsername(), now.toString());

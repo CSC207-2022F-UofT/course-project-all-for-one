@@ -8,13 +8,11 @@ public class UserRegisterRequestModel {
     private String password;
     private String repeatedPassword;
 
-    private Wallet wallet;
 
-    public UserRegisterRequestModel(String username, String password, String repeatedPassword, Wallet wallet){
+    public UserRegisterRequestModel(String username, String password, String repeatedPassword){
         this.username = username;
         this.password = password;
         this.repeatedPassword = repeatedPassword;
-        this.wallet = wallet;
     }
 
     public String getUsername() {
@@ -41,7 +39,4 @@ public class UserRegisterRequestModel {
         this.repeatedPassword = repeatedPassword;
     }
 
-    public Wallet getWallet() {
-        return this.wallet;
-    }
 }

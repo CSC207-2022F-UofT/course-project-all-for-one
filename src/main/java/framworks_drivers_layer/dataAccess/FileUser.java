@@ -67,7 +67,8 @@ public class FileUser implements UserDsGateway {
             writer.newLine();
 
             for (UserRegisterDsRequestModel user : accounts.values()) {
-                String line = "" + user.getName() + "," + user.getPassword() + "," + user.getCreationTime();
+                String line = "" + user.getName() + "," + user.getPassword() + "," + user.getCreationTime() + ","
+                        + user.getWalletBalance();
                 writer.write(line);
                 writer.newLine();
             }
@@ -98,6 +99,11 @@ public class FileUser implements UserDsGateway {
     @Override
     public String getPassword(String username) {
         return accounts.get(username).getPassword();
+    }
+
+    @Override
+    public Double getBalance(String username) {
+        return accounts.get(username).getWalletBalance();
     }
 
 }

@@ -61,7 +61,7 @@ public class FileOrder implements OrderDsGateway {
 
     @Override
     public void save(OrderDsRequestModel requestModel) {
-        orders.put(requestModel.getBuyerUsername(), requestModel);
+        orders.put(String.valueOf(requestModel.hashCode()), requestModel);
         this.save();
     }
 
@@ -73,7 +73,6 @@ public class FileOrder implements OrderDsGateway {
             writer.newLine();
 
             for (OrderDsRequestModel order : orders.values()) {
-//                String creationTimeString = order.getCreationTime().format(DateTimeFormatter.ofPattern("EEEE-MMMM-dd-yyyy-hh:mm:ss-a"));
                 String line = "" + order.getTitle() + "," + order.getCreationTime() + "," + order.getPrice() + "," +
                         order.getName() + "," + order.getAddress() + "," + order.getPhoneNumber() + "," +
                         order.getShipmentStatus() + "," + order.getBuyerUsername() + "," + order.getSellerUsername();

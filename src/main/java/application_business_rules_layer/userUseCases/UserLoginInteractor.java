@@ -1,5 +1,6 @@
 package application_business_rules_layer.userUseCases;
 
+import enterprise_business_rules_layer.Wallet;
 import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
 
@@ -23,8 +24,10 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
         !userLoginDsGateway.isPasswordCorrect(requestModel.getUsername(), requestModel.getPassword())){
             return userLoginOutputBoundary.prepareFailView("Your username or password is not valid.");
         }
+        Double balance = userLoginDsGateway.getBalance(requestModel.getUsername());
+        Wallet wallet = new Wallet(balance);
 
-        Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword());
+        Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword(),wallet);
         account.setLoginStatus(true);
 
 

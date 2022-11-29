@@ -16,11 +16,6 @@ public class Account {
         this.password = password;
         this.Wallet = wallet;
     }
-    //TODO implement valid password criteria
-
-    public boolean passwordIsValid() {
-        return false;
-    }
 
 
     public void setLoginStatus(boolean loginStatus) {

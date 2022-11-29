@@ -7,12 +7,10 @@ public class UserLoginRequestModel {
     private String username;
     private String password;
 
-    private Wallet wallet;
 
-    public UserLoginRequestModel(String username, String password, Wallet wallet){
+    public UserLoginRequestModel(String username, String password){
         this.username = username;
         this.password = password;
-        this.wallet = wallet;
     }
 
     public String getUsername(){
@@ -31,7 +29,5 @@ public class UserLoginRequestModel {
         this.password = password;
     }
 
-    public Wallet getWallet() {
-        return this.wallet;
-    }
+
 }

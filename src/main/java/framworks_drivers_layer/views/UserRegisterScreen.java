@@ -74,7 +74,7 @@ public class UserRegisterScreen extends JPanel implements ActionListener {
             userRegisterController.create(username.getText(),
                     String.valueOf(password.getPassword()),
                     String.valueOf(repeatPassword.getPassword()));
-//            JOptionPane.showMessageDialog(this, "%s created.".formatted(username.getText()));
+//            JOptionPane.showMessageDialog(this, username.getText() + " created.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
