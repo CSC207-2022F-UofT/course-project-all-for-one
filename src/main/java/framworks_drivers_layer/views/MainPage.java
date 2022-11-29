@@ -87,7 +87,12 @@ public class MainPage extends JPanel implements ActionListener {
             }
         });
 
-        searchButton.addActionListener(this);
+        searchButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
         addPostButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -134,26 +139,34 @@ public class MainPage extends JPanel implements ActionListener {
      */
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("recommendationButton")){
+        if (e.getActionCommand().equals("Recommendation")){
             try{
                 RecommendationResponseModel responseModel = recommendationController.generate();
 
-                JScrollPane recommendationPanel = new JScrollPane();
-                recommendationPanel.setLayout(new BoxLayout(recommendationPanel, BoxLayout.Y_AXIS));
-
                 JFrame recommendationFrame = new JFrame("Recommendation");
-                recommendationFrame.setBounds(500, 200, 300, 500);
+                recommendationFrame.setBounds(500, 200, 500, 500);
+
+
+                JPanel recommendationScrollPanelViewPort = new JPanel();
+                recommendationScrollPanelViewPort.setLayout(new BoxLayout(recommendationScrollPanelViewPort, BoxLayout.Y_AXIS));
+
+
 
                 JButton[] buttonsAdded = new JButton[responseModel.getRecommendation().getPosts().size()];
                 for(int j = 0; j <responseModel.getRecommendation().getPosts().size(); j++){
+                    JPanel jp1 = new JPanel();
                     buttonsAdded[j] = new JButton("Open post" + j);
-                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
-                    recommendationPanel.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
-                    recommendationPanel.add(new JLabel(String.valueOf(responseModel.getRecommendation().getPosts().get(j).getPrice())));
-                    recommendationPanel.add(buttonsAdded[j]);
+                    jp1.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
+                    jp1.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
+                    jp1.add(new JLabel(String.valueOf(responseModel.getRecommendation().getPosts().get(j).getPrice())));
+                    jp1.add(buttonsAdded[j]);
+                    recommendationScrollPanelViewPort.add(jp1);
                 }
 
-                recommendationFrame.add(recommendationPanel);
+                JScrollPane recommendationScrollPanel = new JScrollPane(recommendationScrollPanelViewPort, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                        JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                recommendationScrollPanel.setViewportView(recommendationScrollPanelViewPort);
+                recommendationFrame.add(recommendationScrollPanel);
                 recommendationFrame.setVisible(true);
                 recommendationFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -164,16 +177,7 @@ public class MainPage extends JPanel implements ActionListener {
             }
 
 
-        } else if (e.getActionCommand().equals("addPostButton")){
-            JFrame addPostFrame = new JFrame("Add Post");
-            addPostFrame.setBounds(400, 300, 400,300);
 
-
-            // PostScreen postscreen = new PostScreen(username, postcontroller);
-
-
-            addPostFrame.setVisible(true);
-            addPostFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         } else if(e.getActionCommand().equals("Search")){
             try{
                 SearchPresenter searchPresenter = new SearchFormatterPresenter();
