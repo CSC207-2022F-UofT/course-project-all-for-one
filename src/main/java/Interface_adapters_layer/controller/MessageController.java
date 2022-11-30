@@ -21,9 +21,9 @@ public class MessageController {
      * @param message the input message
      * @return a responsemodel to framworks_drivers.UI to handle
      */
-    public MessageResponseModel create(String message, String username) {
+    public MessageResponseModel create(String message, String username, String boardName) {
 
-        MessageRequestModel requestModel = new MessageRequestModel(message, username);
+        MessageRequestModel requestModel = new MessageRequestModel(message, username, boardName);
 
         return messageInput.create(requestModel);
     }
