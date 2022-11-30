@@ -9,26 +9,26 @@ public class MessageInteractor implements MessageInputBoundary {
     final MessageDsGateway messageGateway;
     final MessagePresenter messagePresenter;
 
-    /**
-     *
-     * @param messageDsGateway relay to Interface_adapters.presenter
-     * @param messagePresenter Interface_adapters.gateway to reach message file
-     */
+    private Message message;
+
+    private MessageBoard messageBoard;
+
+
+
+
     public MessageInteractor(MessageDsGateway messageDsGateway, MessagePresenter messagePresenter) {
         this.messageGateway = messageDsGateway;
         this.messagePresenter = messagePresenter;
     }
 
-    /**
-     *
-     * @param requestModel pack of input data need to be processed
-     * @return MessageResponseModel has a formatted list contained all messages of the given MessageBoard
-     */
     @Override
     public MessageResponseModel create(MessageRequestModel requestModel) {
+//        if (requestModel.getDelete() != null) {
+//            messageGateway.delete(requestModel.getDelete().getContent()); //if input a delete message, delete it
+//        }
 
         Message add = requestModel.getMessage();
-        MessageBoard board = messageGateway.getBoard(requestModel.getBoardName());
+        MessageBoard board = messageGateway.getBoard("iphone");
         board.addMessage(add);  //add new message to the board
         messageGateway.save(new MessageDsRequestModel(board, add));  // write the new MessageBoard to file}
 
@@ -36,5 +36,36 @@ public class MessageInteractor implements MessageInputBoundary {
 
         return messagePresenter.displayBoard(responseModel);
 
+
     }
 }
+
+
+
+//    private Message message;
+//    private MessageBoard messageBoard;
+//
+//
+//
+//    public MessageInteractor(MessageOutputBoundary messageOutputBoundary) {
+//        this.messageOutputBoundary = messageOutputBoundary;
+//
+//    }
+//
+//    @Override
+//    public void inputMessage(String content, MessageBoard board) {
+//        this.message = new Message(content);
+//        this.messageBoard = board;
+//        AddMessage.addMessage(this.message, this.messageBoard);
+//        messageOutputBoundary.displayMessage(this.messageBoard);
+//
+//    }
+//
+//    @Override
+//    public void deleteMessage(String content, MessageBoard board) {
+//        this.message = new Message(content);
+//        this.messageBoard = board;
+//        DeleteMessage.deleteMessage(this.message, this.messageBoard);
+//        messageOutputBoundary.displayMessage(this.messageBoard);
+//    }
+//}
