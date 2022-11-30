@@ -45,7 +45,7 @@ public class TradeInteractor implements TradeInputBoundry {
 
         OrderDsRequestModel orderDsModel = new OrderDsRequestModel(order.getPost().getTitle(), creationTime,
                 order.getPost().getPrice(), order.getName(), order.getAddress(), order.getPhoneNumber(),
-                order.getShipmentStatus(), order.getBuyerUsername(), order.getSellerUsername());
+                order.getShipmentStatus(), order.getBuyerUsername(), order.getSellerUsername(), order.getPost().getTags());
 
         requestModel.getPost().setSold();
 

@@ -87,12 +87,8 @@ public class MainPage extends JPanel implements ActionListener {
             }
         });
 
-        searchButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        searchButton.addActionListener(this);
 
-            }
-        });
         addPostButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -121,6 +117,7 @@ public class MainPage extends JPanel implements ActionListener {
                 application.pack();
                 application.setVisible(true);
                 application.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                application.setLocation(600, 300);
             }
         });
 
@@ -185,7 +182,7 @@ public class MainPage extends JPanel implements ActionListener {
                 try {
                     postDsGateway = new FilePost("./posts.csv");
                 } catch (IOException exception) {
-                    throw new RuntimeException("Could not create file.");
+                    throw new RuntimeException("Could not create posts.csv.");
                 }
                 SearchController searchController = new SearchController(postDsGateway, searchPresenter);
                 List<Post> posts = searchController.create(searchKeywordsTextField.getText());

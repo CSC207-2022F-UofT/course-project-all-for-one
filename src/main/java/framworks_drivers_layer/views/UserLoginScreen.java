@@ -1,13 +1,22 @@
 package framworks_drivers_layer.views;
 
+import Interface_adapters_layer.controller.RecommendationController;
 import Interface_adapters_layer.controller.UserLoginController;
 import Interface_adapters_layer.controller.UserRegisterController;
+import Interface_adapters_layer.presenter.RecommendationResponsePresenter;
 import Interface_adapters_layer.presenter.UserRegisterPresenter;
+import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.recommendationUseCases.RecommendationInputBoundry;
+import application_business_rules_layer.recommendationUseCases.RecommendationInteractor;
+import application_business_rules_layer.recommendationUseCases.RecommendationOutputBoundry;
+import application_business_rules_layer.tradeUseCases.OrderDsGateway;
 import application_business_rules_layer.userUseCases.UserDsGateway;
 import application_business_rules_layer.userUseCases.UserRegisterInputBoundary;
 import application_business_rules_layer.userUseCases.UserRegisterInteractor;
 import application_business_rules_layer.userUseCases.UserRegisterOutputBoundry;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
+import framworks_drivers_layer.dataAccess.FileOrder;
+import framworks_drivers_layer.dataAccess.FilePost;
 import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
@@ -16,11 +25,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-
 // Frameworks/Drivers layer
 
-public class UserLoginScreen extends JPanel implements ActionListener {
+public class UserLoginScreen extends JFrame implements ActionListener {
     /**
      * The username chosen by the user
      */
@@ -42,6 +49,10 @@ public class UserLoginScreen extends JPanel implements ActionListener {
 
         this.userLoginController = controller;
 
+        this.setBounds(500, 300, 300, 200);
+
+
+        JPanel loginPanel = new JPanel();
         JLabel title = new JLabel("Login Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -60,13 +71,14 @@ public class UserLoginScreen extends JPanel implements ActionListener {
         login.addActionListener(this);
         register.addActionListener(this);
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
 
-        this.add(title);
-        this.add(usernameInfo);
-        this.add(passwordInfo);
-        this.add(buttons);
-
+        loginPanel.add(title);
+        loginPanel.add(usernameInfo);
+        loginPanel.add(passwordInfo);
+        loginPanel.add(buttons);
+        this.add(loginPanel);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
@@ -78,7 +90,35 @@ public class UserLoginScreen extends JPanel implements ActionListener {
             try {
                 userLoginController.create(username.getText(),
                         String.valueOf(password.getPassword()));
-            JOptionPane.showMessageDialog(this, "welcome");
+
+                this.dispose();
+                // create main page
+                JFrame jf = new JFrame("main");
+                jf.setBounds(400, 300, 600, 300);
+                RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter();
+                PostDsGateway post;
+                try {
+                    post = new FilePost("./posts.csv");
+                } catch (IOException e) {
+                    throw new RuntimeException("Could not create posts.csv.");
+                }
+                RecommendationInputBoundry recommendationInputBoundry = new RecommendationInteractor(recommendationOutputBoundry, post);
+                OrderDsGateway orderDsGateway;
+                try{
+                    orderDsGateway = new FileOrder("./orders.csv");
+                } catch (IOException e){
+                    throw new RuntimeException("Could not create orders.csv");
+                }
+                RecommendationController recommendationController = new RecommendationController(username.getText(), recommendationInputBoundry, orderDsGateway);
+                MainPage mainPage = new MainPage(username.getText(), recommendationController);
+
+                jf.add(mainPage);
+                jf.setVisible(true);
+                jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+
+
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -93,18 +133,10 @@ public class UserLoginScreen extends JPanel implements ActionListener {
             AccountFactory accountFactory = new AccountFactory();
             UserRegisterInputBoundary interactor = new UserRegisterInteractor(gateway, outputBoundry, accountFactory);
             UserRegisterController controller = new UserRegisterController(interactor);
-            UserRegisterScreen registerScreen = new UserRegisterScreen(controller);
 
-            JFrame register = new JFrame("Sign Up Page");
-            CardLayout cardLayout = new CardLayout();
-            JPanel screens = new JPanel(cardLayout);
-            register.add(screens);
-
-            screens.add(registerScreen, "welcome");
-            cardLayout.show(screens, "trade");
-            register.pack();
-            register.setVisible(true);
-            register.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            UserRegisterScreen userRegisterScreen = new UserRegisterScreen(controller);
+            userRegisterScreen.setVisible(true);
+            userRegisterScreen.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         }
 
 

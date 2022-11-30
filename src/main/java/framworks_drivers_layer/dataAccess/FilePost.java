@@ -44,11 +44,7 @@ public class FilePost implements PostDsGateway {
                 String description = String.valueOf(col[headers.get("Description")]);
                 double price = Double.parseDouble(col[headers.get("Price")]);
                 String status = String.valueOf(col[headers.get("Status")]);
-                ArrayList<String> tags = new ArrayList<String>();
-                for (String t : String.valueOf(col[headers.get("Tags")]).split(":"))
-                {
-                    tags.add(t);
-                }
+                ArrayList<String> tags = new ArrayList<String>(Arrays.asList(String.valueOf(col[headers.get("Tags")]).split(":")));
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 String creationTimeText = String.valueOf(col[headers.get("CreationTime")]);
                 LocalDateTime ldt = LocalDateTime.parse(creationTimeText, dateTimeFormatter);
@@ -113,7 +109,7 @@ public class FilePost implements PostDsGateway {
         List<Post> posts = new ArrayList<>();
         for(String tag : Tags){
             for(PostDsRequestModel postDsRequestModel: this.posts.values()){
-                if (postDsRequestModel.getTags().contains(tag) && posts.size() < 30){
+                if (postDsRequestModel.getTags().contains(tag) && posts.size() < 5){
                     posts.add(new Post(postDsRequestModel.getUsername(),
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
                             postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
@@ -131,10 +127,23 @@ public class FilePost implements PostDsGateway {
     public List<Post> findPostsWithKeyword(String keyword) {
         List<Post> posts = new ArrayList<>();
         for(PostDsRequestModel postDsRequestModel: this.posts.values()){
-            if (postDsRequestModel.getTags().contains(keyword) && posts.size() < 30){
-                posts.add(new Post(postDsRequestModel.getUsername(),
-                        postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
-                        postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+            if (posts.size() < 10){
+                if(postDsRequestModel.getTitle().toLowerCase().strip().equals(keyword.toLowerCase().strip())){
+                    posts.add(new Post(postDsRequestModel.getUsername(),
+                            postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                            postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+                } else{
+                    for(String tag: postDsRequestModel.getTags()){
+                        if (tag.toLowerCase().strip().equals(keyword.toLowerCase().strip())){
+                            posts.add(new Post(postDsRequestModel.getUsername(),
+                                    postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                                    postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+                        }
+
+                    }
+                }
+
+
             }
         }
         return posts;

@@ -1,8 +1,9 @@
 package application_business_rules_layer.tradeUseCases;
 
-import application_business_rules_layer.tradeUseCases.OrderDsRequestModel;
+import java.util.List;
 
 public interface OrderDsGateway {
     void save(OrderDsRequestModel requestModel);
+    List<String> getPurchaseHistoryTagsData(String username);
 
 }

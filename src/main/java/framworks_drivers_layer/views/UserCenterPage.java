@@ -30,7 +30,7 @@ public class UserCenterPage implements ActionListener{
       public UserCenterPage(String username){
             this.username = username;
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.setSize(420,400);
+            frame.setBounds(600, 300, 420,400);
             frame.setLayout(new FlowLayout());
             frame.setVisible(true);
             frame.add(Edit);
@@ -62,9 +62,9 @@ public class UserCenterPage implements ActionListener{
             BrowsingHistory.addActionListener(this);
 
             JPanel panel1 = new JPanel();
-            TextArea prfoilearea = new TextArea(Profile.getAge() + Profile.getUsername()+ Profile.getAddress() +
+            TextArea profileArea = new TextArea(Profile.getAge() + Profile.getUsername()+ Profile.getAddress() +
                     Profile.getDescription() + Profile.getPhone());
-            panel1.add(prfoilearea);
+            panel1.add(profileArea);
 
             frame.add(panel1);
       }
