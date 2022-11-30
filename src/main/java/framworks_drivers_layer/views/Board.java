@@ -1,12 +1,9 @@
 package framworks_drivers_layer.views;
 
 import Interface_adapters_layer.controller.MessageController;
-import application_business_rules_layer.messageUseCases.MessageDsGateway;
+import application_business_rules_layer.messageUseCases.*;
 import Interface_adapters_layer.presenter.MessagePresenter;
 import Interface_adapters_layer.presenter.MessageResponseFormatter;
-import application_business_rules_layer.messageUseCases.MessageInteractor;
-import application_business_rules_layer.messageUseCases.MessageRequestModel;
-import application_business_rules_layer.messageUseCases.MessageResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+
 public class Board extends JFrame {
+
+    String username = "Jack";
 
     JList<String> messageList = new JList<>();
     DefaultListModel<String> model = new DefaultListModel<>();
@@ -74,12 +74,11 @@ public class Board extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String input = inputArea.getText();
-                MessageRequestModel requestModel = new MessageRequestModel(input);
                 MessagePresenter presenter = new MessageResponseFormatter();
-                MessageInteractor interactor = new MessageInteractor(dsGateway, presenter);
-                controller = new MessageController(interactor);
-                controller.create(input);
-                model.addElement(input);
+                MessageInputBoundary inputBoundary = new MessageInteractor(dsGateway, presenter);
+                controller = new MessageController(inputBoundary);
+                controller.create(input, username);
+                model.addElement(username+": "+input);
                 inputArea.setText("");
             }
         });

@@ -7,13 +7,16 @@ import application_business_rules_layer.messageUseCases.MessageDsRequestModel;
 
 import java.io.*;
 import java.util.List;
+import java.util.Objects;
 
 public class FileMessage implements MessageDsGateway {
 
     private final File csvFile;
+    private String csvPath;
 
     public FileMessage(String csvPath) {
         csvFile = new File(csvPath);
+        this.csvPath = csvPath;
     }
 
 
@@ -23,12 +26,18 @@ public class FileMessage implements MessageDsGateway {
         MessageBoard board = new MessageBoard(boardName);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(csvFile));
+
             String line;
             Message message;
+
             while((line = reader.readLine()) != null){
-                message = new Message(line);
-                board.addMessage(message);
+                String[] lst = line.split(",");
+                if (Objects.equals(lst[0], boardName)) {
+                    message = new Message(lst[2],lst[1]);
+                    board.addMessage(message);
+                }
             }
+
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,11 +52,11 @@ public class FileMessage implements MessageDsGateway {
     @Override
     public void save(MessageDsRequestModel requestModel) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile));
-            for (List<Message> board: requestModel.getBoard()){
-                for( Message message: board) {
-                writer.write(message.getContent() + "\n");}
-            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(csvPath, true));
+            String line = requestModel.getBoard().getName() + "," + requestModel.getMessage().getUsername() + ","
+                    + requestModel.getMessage().getContent() + "\n";
+            writer.write(line);
+
 
             writer.close();
         } catch (IOException e) {

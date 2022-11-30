@@ -40,4 +40,8 @@ public class MessageBoard implements Iterable<List<Message>>{
             return temp;
         }
     }
+
+    public String getName() {
+        return name;
+    }
 }

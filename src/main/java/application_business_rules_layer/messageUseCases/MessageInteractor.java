@@ -30,7 +30,7 @@ public class MessageInteractor implements MessageInputBoundary {
         Message add = requestModel.getMessage();
         MessageBoard board = messageGateway.getBoard("MessageBoard");
         board.addMessage(add);  //add new message to the board
-        messageGateway.save(new MessageDsRequestModel(board));  // write the new MessageBoard to file}
+        messageGateway.save(new MessageDsRequestModel(board, add));  // write the new MessageBoard to file}
 
         MessageResponseModel responseModel = new MessageResponseModel(board);
 

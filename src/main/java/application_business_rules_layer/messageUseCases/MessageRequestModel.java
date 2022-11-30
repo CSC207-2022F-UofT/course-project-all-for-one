@@ -11,8 +11,8 @@ public class MessageRequestModel {
 
     private Message delete;
 
-    public MessageRequestModel(String input) {
-        this.message = new Message(input);
+    public MessageRequestModel(String input, String username) {
+        this.message = new Message(input, username);
 //        this.delete = new Message(delete);
     }
 
