@@ -4,7 +4,11 @@ public class Message {
     private String content;
     private String username;
 
-
+    /**
+     *
+     * @param content the content of a message
+     * @param username the username of the user who post the message
+     */
     public Message(String content, String username) {
         this.content = content;
         this.username = username;

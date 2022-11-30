@@ -11,45 +11,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-
 public class Board extends JFrame {
 
-    String username = "Jack";
+    String username;
+    String boardName;
 
     JList<String> messageList = new JList<>();
     DefaultListModel<String> model = new DefaultListModel<>();
-
     JPanel mainPanel = new JPanel();
-
     JTextArea inputArea = new JTextArea(5, 10);
     JButton postButton = new JButton("Post");
 
     MessageController controller;
-
     MessageDsGateway dsGateway;
-
     MessageResponseModel responseModel;
 
 
 
-    public Board(MessageDsGateway dsGateway) {
-//        this.Interface_adapters.presenter.controller = Interface_adapters.presenter.controller;
-//        this.Interface_adapters.presenter = Interface_adapters.presenter;
+    public Board(MessageDsGateway dsGateway, String boardName) {
+        this.boardName = boardName;
         this.dsGateway = dsGateway;
-        this.responseModel = new MessageResponseModel(dsGateway.getBoard("iphone"));
-
+        this.responseModel = new MessageResponseModel(dsGateway.getBoard(boardName));
         JPanel boardPanel = new JPanel();
-
         JPanel enterPanel = new JPanel();
-
-
         messageList.setModel(model);
         MessagePresenter presenter = new MessageResponseFormatter();
         List<String> lst = presenter.displayBoard(responseModel).getMessageList();
         if (!lst.isEmpty()) {
             model.addAll(lst);}
-
-
             mainPanel.setLayout(new BorderLayout());
 
             boardPanel.setLayout(new BorderLayout());
@@ -79,7 +68,7 @@ public class Board extends JFrame {
                     MessagePresenter presenter = new MessageResponseFormatter();
                     MessageInputBoundary inputBoundary = new MessageInteractor(dsGateway, presenter);
                     controller = new MessageController(inputBoundary);
-                    controller.create(input, username);
+                    controller.create(input, username, boardName);
                     model.addElement(username + ": " + input);
                     inputArea.setText("");
                 }
@@ -89,7 +78,23 @@ public class Board extends JFrame {
             this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             this.pack();
         }
+
+    public String getUsername() {
+        return username;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getBoardName() {
+        return boardName;
+    }
+
+    public void setBoardName(String boardName) {
+        this.boardName = boardName;
+    }
+}
 
 
 

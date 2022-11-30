@@ -6,13 +6,12 @@ import enterprise_business_rules_layer.messageEntities.MessageBoard;
 import application_business_rules_layer.messageUseCases.MessageDsRequestModel;
 
 import java.io.*;
-import java.util.List;
 import java.util.Objects;
 
 public class FileMessage implements MessageDsGateway {
 
     private final File csvFile;
-    private String csvPath;
+    private final String csvPath;
 
     public FileMessage(String csvPath) {
         csvFile = new File(csvPath);
@@ -20,7 +19,11 @@ public class FileMessage implements MessageDsGateway {
     }
 
 
-
+    /**
+     *
+     * @param boardName the name of the message board
+     * @return the message board of the given board name
+     */
     @Override
     public MessageBoard getBoard(String boardName) {
         MessageBoard board = new MessageBoard(boardName);
@@ -47,14 +50,14 @@ public class FileMessage implements MessageDsGateway {
 
     /**
      * Add requestModel to storage.
-     * @param requestModel the user information to save.
+     * @param requestModel the message information to save.
      */
     @Override
     public void save(MessageDsRequestModel requestModel) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(csvPath, true));
-            String line = requestModel.getBoard().getName() + "," + requestModel.getMessage().getUsername() + ","
-                    + requestModel.getMessage().getContent() + "\n";
+            String line = requestModel.board().getName() + "," + requestModel.message().getUsername() + ","
+                    + requestModel.message().getContent() + "\n";
             writer.write(line);
 
 

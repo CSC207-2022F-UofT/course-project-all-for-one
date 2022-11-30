@@ -56,7 +56,7 @@ public class PostPage extends JFrame implements ActionListener {
         this.PossibleBuyer = possibleBuyer;
         this.Seller = seller;
         this.dsGateway = dsGateway;
-        this.responseModel = new MessageResponseModel(dsGateway.getBoard("message"));
+        this.responseModel = new MessageResponseModel(dsGateway.getBoard(post.getTitle()));
 
         JPanel mainPanel = new JPanel();
         JPanel postPanel = new JPanel();
@@ -136,11 +136,11 @@ public class PostPage extends JFrame implements ActionListener {
         }
         else{
             String input = inputArea.getText();
-            MessageRequestModel requestModel = new MessageRequestModel(input, Post.getUsername());
+            MessageRequestModel requestModel = new MessageRequestModel(input, Post.getUsername(), Post.getTitle());
             MessagePresenter presenter = new MessageResponseFormatter();
             MessageInteractor interactor = new MessageInteractor(dsGateway, presenter);
             controller = new MessageController(interactor);
-            controller.create(input, Post.getUsername());
+            controller.create(input, Post.getUsername(), Post.getTitle());
             model.addElement(input);
             inputArea.setText("");
         }
