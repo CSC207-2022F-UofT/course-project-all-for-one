@@ -56,8 +56,8 @@ public class FileMessage implements MessageDsGateway {
     public void save(MessageDsRequestModel requestModel) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(csvPath, true));
-            String line = requestModel.board().getName() + "," + requestModel.message().getUsername() + ","
-                    + requestModel.message().getContent() + "\n";
+            String line = requestModel.getBoard().getName() + "," + requestModel.getMessage().getUsername() + ","
+                    + requestModel.getMessage().getContent() + "\n";
             writer.write(line);
 
 
