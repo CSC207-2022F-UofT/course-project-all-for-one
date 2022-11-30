@@ -15,7 +15,7 @@ public class MessageResponseModel {
         this.messageList = new ArrayList<>();
         for (List<Message> ml : board) {
             for (Message m : ml) {
-                messageList.add(m.getContent());
+                messageList.add(m.getUsername() + ": " + m.getContent());
             }
         }
     }
@@ -23,25 +23,4 @@ public class MessageResponseModel {
     public List<String> getMessageList() {
         return messageList;
     }
-
-    public void setMessageList(List<String> messageList) {
-        this.messageList = messageList;
-    }
-
-    //    public Message getMessage() {
-//        return message;
-//    }
-//
-//    public void setMessage(Message message) {
-//        this.message = message;
-//    }
-//
-//    public MessageBoard getBoard() {
-//        return board;
-//    }
-//
-//    public void setBoard(MessageBoard board) {
-//        this.board = board;
-
 }
-

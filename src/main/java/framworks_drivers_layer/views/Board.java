@@ -36,7 +36,7 @@ public class Board extends JFrame {
 //        this.Interface_adapters.presenter.controller = Interface_adapters.presenter.controller;
 //        this.Interface_adapters.presenter = Interface_adapters.presenter;
         this.dsGateway = dsGateway;
-        this.responseModel = new MessageResponseModel(dsGateway.getBoard("message"));
+        this.responseModel = new MessageResponseModel(dsGateway.getBoard("iphone"));
 
         JPanel boardPanel = new JPanel();
 
@@ -46,20 +46,22 @@ public class Board extends JFrame {
         messageList.setModel(model);
         MessagePresenter presenter = new MessageResponseFormatter();
         List<String> lst = presenter.displayBoard(responseModel).getMessageList();
-        if (!lst.isEmpty()) {model.addAll(lst);
+        if (!lst.isEmpty()) {
+            model.addAll(lst);}
 
 
-        mainPanel.setLayout(new BorderLayout());
+            mainPanel.setLayout(new BorderLayout());
 
-        boardPanel.setLayout(new BorderLayout());
-        boardPanel.add(new JScrollPane(messageList));
+            boardPanel.setLayout(new BorderLayout());
+            boardPanel.add(new JScrollPane(messageList));
 
-        enterPanel.setLayout(new BorderLayout());
-        enterPanel.add(inputArea, BorderLayout.WEST);
-        enterPanel.add(postButton, BorderLayout.EAST);
+            enterPanel.setLayout(new BorderLayout());
+            enterPanel.add(inputArea, BorderLayout.WEST);
+            enterPanel.add(postButton, BorderLayout.EAST);
 
-        mainPanel.add(boardPanel, BorderLayout.NORTH);
-        mainPanel.add(enterPanel, BorderLayout.SOUTH);}
+            mainPanel.add(boardPanel, BorderLayout.NORTH);
+            mainPanel.add(enterPanel, BorderLayout.SOUTH);
+
 
 //        messageList.addListSelectionListener(new ListSelectionListener() {
 //            @Override
@@ -70,29 +72,32 @@ public class Board extends JFrame {
 //            }
 //        });
 
-        postButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String input = inputArea.getText();
-                MessagePresenter presenter = new MessageResponseFormatter();
-                MessageInputBoundary inputBoundary = new MessageInteractor(dsGateway, presenter);
-                controller = new MessageController(inputBoundary);
-                controller.create(input, username);
-                model.addElement(username+": "+input);
-                inputArea.setText("");
-            }
-        });
+            postButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String input = inputArea.getText();
+                    MessagePresenter presenter = new MessageResponseFormatter();
+                    MessageInputBoundary inputBoundary = new MessageInteractor(dsGateway, presenter);
+                    controller = new MessageController(inputBoundary);
+                    controller.create(input, username);
+                    model.addElement(username + ": " + input);
+                    inputArea.setText("");
+                }
+            });
 
-        this.add(mainPanel);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.pack();
-
-
-
+            this.add(mainPanel);
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            this.pack();
         }
+    }
 
 
 
-}
+
+
+
+
+
+
 
 

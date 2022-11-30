@@ -28,7 +28,7 @@ public class MessageInteractor implements MessageInputBoundary {
 //        }
 
         Message add = requestModel.getMessage();
-        MessageBoard board = messageGateway.getBoard("MessageBoard");
+        MessageBoard board = messageGateway.getBoard("iphone");
         board.addMessage(add);  //add new message to the board
         messageGateway.save(new MessageDsRequestModel(board, add));  // write the new MessageBoard to file}
 
