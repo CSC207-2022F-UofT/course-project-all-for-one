@@ -67,8 +67,6 @@ public class PostPage extends JFrame implements ActionListener {
 
 
 
-
-
         messageList.setModel(model);
         MessagePresenter presenter = new MessageResponseFormatter();
         List<String> lst = presenter.displayBoard(responseModel).getMessageList();
