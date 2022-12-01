@@ -10,6 +10,8 @@ public class Post {
     private final double Price;
     private final ArrayList<String> Tags;
 
+    private final String Id;
+
     public Post(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags){
         this.Username = input_username;
         this.Title = input_title;
@@ -17,6 +19,7 @@ public class Post {
         this.Price = input_price;
         this.Status = "Active";
         this.Tags = tags;
+        this.Id = String.valueOf(this.hashCode());
     }
 
     public String getTitle(){
@@ -28,6 +31,8 @@ public class Post {
     public String getDescription(){
         return this.Description;
     }
+
+    public String getId() {return this.Id;}
 
     public ArrayList<String> getTags() {
         return this.Tags;

@@ -3,7 +3,7 @@
 //import Interface_adapters.gateway.FilePost;
 //import Interface_adapters.gateway.RecommendationGateway;
 //import Interface_adapters.presenter.RecommendationResponsePresenter;
-//import Interface_adapters.gateway.PostDsGateway;
+//import Interface_adapters.gateway.PostCreateDsGateway;
 //import use_case.RecommendationInputBoundry;
 //import use_case.RecommendationInteractor;
 //import use_case.RecommendationOutputBoundry;
@@ -18,7 +18,7 @@
 //
 //        RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter();
 //
-//        PostDsGateway postDsGateway;
+//        PostCreateDsGateway postDsGateway;
 //        try {
 //            postDsGateway = new FilePost("./posts.csv");
 //        } catch (IOException e) {

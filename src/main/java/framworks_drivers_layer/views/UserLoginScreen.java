@@ -5,7 +5,7 @@ import Interface_adapters_layer.controller.UserLoginController;
 import Interface_adapters_layer.controller.UserRegisterController;
 import Interface_adapters_layer.presenter.RecommendationResponsePresenter;
 import Interface_adapters_layer.presenter.UserRegisterPresenter;
-import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
 import application_business_rules_layer.recommendationUseCases.RecommendationInputBoundry;
 import application_business_rules_layer.recommendationUseCases.RecommendationInteractor;
 import application_business_rules_layer.recommendationUseCases.RecommendationOutputBoundry;
@@ -96,7 +96,7 @@ public class UserLoginScreen extends JFrame implements ActionListener {
                 JFrame jf = new JFrame("main");
                 jf.setBounds(400, 300, 600, 300);
                 RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter();
-                PostDsGateway post;
+                PostCreateDsGateway post;
                 try {
                     post = new FilePost("./posts.csv");
                 } catch (IOException e) {

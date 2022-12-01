@@ -1,11 +1,11 @@
-package application_business_rules_layer.postUseCases;
+package application_business_rules_layer.postcreateUseCases;
 
 import enterprise_business_rules_layer.postEntities.Post;
 
 import java.util.List;
 
-public interface PostDsGateway {
-    void save(PostDsRequestModel requestModel);
+public interface PostCreateDsGateway {
+    void save(PostCreateDsRequestModel requestModel);
 
     /**
      *

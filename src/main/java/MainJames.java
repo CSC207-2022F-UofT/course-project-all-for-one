@@ -1,6 +1,6 @@
 import Interface_adapters_layer.controller.RecommendationController;
 import Interface_adapters_layer.presenter.RecommendationResponsePresenter;
-import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
 import application_business_rules_layer.recommendationUseCases.RecommendationInputBoundry;
 import application_business_rules_layer.recommendationUseCases.RecommendationInteractor;
 import application_business_rules_layer.recommendationUseCases.RecommendationOutputBoundry;
@@ -33,7 +33,7 @@ public class MainJames {
         jf.setBounds(400, 300, 600, 300);
         String username = "Nuan Wen";
         RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter();
-        PostDsGateway post;
+        PostCreateDsGateway post;
         try {
             post = new FilePost("./posts.csv");
         } catch (IOException e) {

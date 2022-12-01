@@ -1,7 +1,7 @@
 package framworks_drivers_layer.dataAccess;
 
-import application_business_rules_layer.postUseCases.PostDsRequestModel;
-import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
+import application_business_rules_layer.postcreateUseCases.PostCreateDsRequestModel;
 import enterprise_business_rules_layer.postEntities.Post;
 
 import java.util.ArrayList;
@@ -9,16 +9,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MemoryPost implements PostDsGateway {
+public class MemoryPost implements PostCreateDsGateway {
 
-    final private Map<String, PostDsRequestModel> posts = new HashMap<>();
+    final private Map<String, PostCreateDsRequestModel> posts = new HashMap<>();
 
 
     /**
      * @param requestModel the data to save
      */
     @Override
-    public void save(PostDsRequestModel requestModel) {
+    public void save(PostCreateDsRequestModel requestModel) {
         System.out.println("Save " + requestModel.getUsername() + ": " + requestModel.getTitle());
         posts.put(requestModel.getUsername(), requestModel);
     }
@@ -31,7 +31,7 @@ public class MemoryPost implements PostDsGateway {
     public List<Post> findPosts(List<String> Tags) {
         List<Post> posts = new ArrayList<>();
         for(String tag : Tags){
-            for(PostDsRequestModel postDsRequestModel: this.posts.values()){
+            for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
                 if (postDsRequestModel.getTags().contains(tag) && posts.size() < 30){
                     posts.add(new Post(postDsRequestModel.getUsername(),
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
@@ -49,7 +49,7 @@ public class MemoryPost implements PostDsGateway {
     @Override
     public List<Post> findPostsWithKeyword(String keyword) {
         List<Post> posts = new ArrayList<>();
-        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
+        for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
             if (postDsRequestModel.getTags().contains(keyword) && posts.size() < 30){
                 posts.add(new Post(postDsRequestModel.getUsername(),
                         postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
