@@ -1,5 +1,7 @@
 package application_business_rules_layer.tradeUseCases;
 
+import java.util.List;
+
 public class OrderDsRequestModel {
 
     private final String Title;
@@ -20,8 +22,10 @@ public class OrderDsRequestModel {
 
     private final String SellerUsername;
 
+    private final List<String> Tags;
+
     public OrderDsRequestModel(String title, String creationTime, double price, String name, String address,
-                               String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername) {
+                               String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername, List<String> tags) {
         Title = title;
         CreationTime = creationTime;
         Price = price;
@@ -31,6 +35,7 @@ public class OrderDsRequestModel {
         ShipmentStatus = shipmentStatus;
         BuyerUsername = buyerUsername;
         SellerUsername = sellerUsername;
+        Tags = tags;
     }
 
     public String getTitle() {
@@ -67,5 +72,9 @@ public class OrderDsRequestModel {
 
     public String getSellerUsername() {
         return SellerUsername;
+    }
+
+    public List<String> getTags() {
+        return Tags;
     }
 }

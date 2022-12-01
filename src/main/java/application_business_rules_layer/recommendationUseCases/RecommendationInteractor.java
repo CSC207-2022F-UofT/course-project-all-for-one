@@ -1,7 +1,7 @@
 package application_business_rules_layer.recommendationUseCases;
 
 import enterprise_business_rules_layer.Recommendation;
-import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
 public class RecommendationInteractor implements RecommendationInputBoundry{
     final RecommendationOutputBoundry recommendationOutputBoundry;
 
-    final PostDsGateway postDsGateway;
+    final PostCreateDsGateway postDsGateway;
 
     /**
      *
@@ -19,7 +19,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
      * @param postDsGateway Interface_adapters.gateway to reach post file
      */
     public RecommendationInteractor(RecommendationOutputBoundry recommendationOutputBoundry,
-                                    PostDsGateway postDsGateway){
+                                    PostCreateDsGateway postDsGateway){
         this.recommendationOutputBoundry = recommendationOutputBoundry;
         this.postDsGateway= postDsGateway;
     }
@@ -32,7 +32,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
      */
     @Override
     public RecommendationResponseModel create(RecommendationRequestModel recommendationRequestModel) {
-        //find all tags in PurchaseHistory and BrowsingHistory
+        //find all tags in PurchaseHistory
         Map<String, Integer> tags = new HashMap<>();
         for (String tag : recommendationRequestModel.getPurchaseHistoryTags()) {
             if (!tags.containsKey(tag)) {
@@ -42,26 +42,17 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
             }
         }
 
+        // if there are no 3 tags, give a string to OutputBoundry.prepareFailView
 
-        for (String tag : recommendationRequestModel.getBrowsingHistoryTags()){
-            if (!tags.containsKey(tag)) {
-                tags.put(tag, 1);
-            } else {
-                tags.put(tag, tags.get(tag) + 1);
-            }
-        }
-
-        // if there are no 5 tags, give a string to OutputBoundry.prepareFailView
-
-        if(tags.size() < 5){
+        if(tags.size() < 3){
             return recommendationOutputBoundry.prepareFailView("Please use more to have recommendation!");
         }
-        //find the 5 most tags in those tags
+        //find the 3 most tags in those tags
         Integer max = 0;
         String mostTag = "";
         List<String> mostTags = new ArrayList<>();
         int i = 0;
-        while (i < 5){
+        while (i < 3){
             for(String key: tags.keySet()){
                 if (tags.get(key) > max){
                     max=tags.get(key);
@@ -78,7 +69,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
 
 
 
-        //get in total 30 items that have at least one of these tags in the post database
+        //get in total 5 items that have at least one of these tags in the post database
         Recommendation recommendation = new Recommendation(postDsGateway.findPosts(mostTags));
 
 

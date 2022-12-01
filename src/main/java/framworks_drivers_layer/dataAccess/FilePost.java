@@ -1,7 +1,7 @@
 package framworks_drivers_layer.dataAccess;
 
-import application_business_rules_layer.postUseCases.PostDsGateway;
-import application_business_rules_layer.postUseCases.PostDsRequestModel;
+import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
+import application_business_rules_layer.postcreateUseCases.PostCreateDsRequestModel;
 import enterprise_business_rules_layer.postEntities.Post;
 
 import java.io.*;
@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class FilePost implements PostDsGateway {
+public class FilePost implements PostCreateDsGateway {
 
     private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
 
 
-    private final Map<String, PostDsRequestModel> posts = new HashMap<>();
+    private final Map<String, PostCreateDsRequestModel> posts = new HashMap<>();
 
     public FilePost(String csvPath) throws IOException {
         csvFile = new File(csvPath);
@@ -44,15 +44,11 @@ public class FilePost implements PostDsGateway {
                 String description = String.valueOf(col[headers.get("Description")]);
                 double price = Double.parseDouble(col[headers.get("Price")]);
                 String status = String.valueOf(col[headers.get("Status")]);
-                ArrayList<String> tags = new ArrayList<String>();
-                for (String t : String.valueOf(col[headers.get("Tags")]).split(":"))
-                {
-                    tags.add(t);
-                }
+                ArrayList<String> tags = new ArrayList<String>(Arrays.asList(String.valueOf(col[headers.get("Tags")]).split(":")));
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 String creationTimeText = String.valueOf(col[headers.get("CreationTime")]);
                 LocalDateTime ldt = LocalDateTime.parse(creationTimeText, dateTimeFormatter);
-                PostDsRequestModel post = new PostDsRequestModel(username, title, description, price, tags, ldt);
+                PostCreateDsRequestModel post = new PostCreateDsRequestModel(username, title, description, price, tags, ldt);
                 posts.put(username, post);
             }
 
@@ -65,8 +61,8 @@ public class FilePost implements PostDsGateway {
      * @param requestModel the user information to save.
      */
     @Override
-    public void save(PostDsRequestModel requestModel) {
-        posts.put(String.valueOf(requestModel.hashCode()), requestModel);
+    public void save(PostCreateDsRequestModel requestModel) {
+        posts.put(requestModel.getId(), requestModel);
         this.save();
     }
 
@@ -77,7 +73,7 @@ public class FilePost implements PostDsGateway {
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            for (PostDsRequestModel post : posts.values()) {
+            for (PostCreateDsRequestModel post : posts.values()) {
                 String str_post = post.getTags().toString();
                 str_post = str_post.replace("[","").
                         replace("]","").replace(" ","").
@@ -112,8 +108,8 @@ public class FilePost implements PostDsGateway {
     public List<Post> findPosts(List<String> Tags) {
         List<Post> posts = new ArrayList<>();
         for(String tag : Tags){
-            for(PostDsRequestModel postDsRequestModel: this.posts.values()){
-                if (postDsRequestModel.getTags().contains(tag) && posts.size() < 30){
+            for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
+                if (postDsRequestModel.getTags().contains(tag) && posts.size() < 5){
                     posts.add(new Post(postDsRequestModel.getUsername(),
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
                             postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
@@ -130,11 +126,24 @@ public class FilePost implements PostDsGateway {
     @Override
     public List<Post> findPostsWithKeyword(String keyword) {
         List<Post> posts = new ArrayList<>();
-        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
-            if (postDsRequestModel.getTags().contains(keyword) && posts.size() < 30){
-                posts.add(new Post(postDsRequestModel.getUsername(),
-                        postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
-                        postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+        for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
+            if (posts.size() < 10){
+                if(postDsRequestModel.getTitle().toLowerCase().strip().equals(keyword.toLowerCase().strip())){
+                    posts.add(new Post(postDsRequestModel.getUsername(),
+                            postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                            postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+                } else{
+                    for(String tag: postDsRequestModel.getTags()){
+                        if (tag.toLowerCase().strip().equals(keyword.toLowerCase().strip())){
+                            posts.add(new Post(postDsRequestModel.getUsername(),
+                                    postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                                    postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+                        }
+
+                    }
+                }
+
+
             }
         }
         return posts;

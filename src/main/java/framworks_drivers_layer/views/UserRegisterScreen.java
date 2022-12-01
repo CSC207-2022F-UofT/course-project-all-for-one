@@ -7,11 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-
 // Frameworks/Drivers layer
 
-public class UserRegisterScreen extends JPanel implements ActionListener {
+public class UserRegisterScreen extends JFrame implements ActionListener {
     /**
      * The username chosen by the user
      */
@@ -37,6 +35,9 @@ public class UserRegisterScreen extends JPanel implements ActionListener {
 
         this.userRegisterController = controller;
 
+        this.setName("Sign up page");
+        this.setBounds(400, 300, 400, 300);
+        JPanel registerPanel = new JPanel();
         JLabel title = new JLabel("Register Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -54,13 +55,15 @@ public class UserRegisterScreen extends JPanel implements ActionListener {
 
         signUp.addActionListener(this);
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        registerPanel.setLayout(new BoxLayout(registerPanel, BoxLayout.Y_AXIS));
 
-        this.add(title);
-        this.add(usernameInfo);
-        this.add(passwordInfo);
-        this.add(repeatPasswordInfo);
-        this.add(buttons);
+        registerPanel.add(title);
+        registerPanel.add(usernameInfo);
+        registerPanel.add(passwordInfo);
+        registerPanel.add(repeatPasswordInfo);
+        registerPanel.add(buttons);
+        this.add(registerPanel);
+
 
     }
 
@@ -75,6 +78,7 @@ public class UserRegisterScreen extends JPanel implements ActionListener {
                     String.valueOf(password.getPassword()),
                     String.valueOf(repeatPassword.getPassword()));
             JOptionPane.showMessageDialog(this, username.getText() + " created.");
+            this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

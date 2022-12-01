@@ -26,6 +26,7 @@ public class FileOrder implements OrderDsGateway {
         headers.put("ShipmentStatus", 6);
         headers.put("BuyerUsername", 7);
         headers.put("SellerUsername", 8);
+        headers.put("Tags", 9);
 
 
 
@@ -49,9 +50,14 @@ public class FileOrder implements OrderDsGateway {
                 String shipmentStatus = String.valueOf(col[headers.get("ShipmentStatus")]);
                 String buyerUsername = String.valueOf(col[headers.get("BuyerUsername")]);
                 String sellerUsername = String.valueOf(col[headers.get("SellerUsername")]);
+                ArrayList<String> tags = new ArrayList<>();
+                for (String t : String.valueOf(col[headers.get("Tags")]).split(":"))
+                {
+                    tags.add(t);
+                }
 //                LocalDateTime creationTime = LocalDateTime.parse(creationTimeString);
                 OrderDsRequestModel order = new OrderDsRequestModel(title, creationTimeString, price, name, address,
-                        phoneNumber, shipmentStatus, buyerUsername, sellerUsername);
+                        phoneNumber, shipmentStatus, buyerUsername, sellerUsername, tags);
                 orders.put(buyerUsername, order);
             }
 
@@ -73,9 +79,14 @@ public class FileOrder implements OrderDsGateway {
             writer.newLine();
 
             for (OrderDsRequestModel order : orders.values()) {
+                String tags = order.getTags().toString();
+                tags = tags.replace("[","").
+                        replace("]","").replace(" ","").
+                        replace(",",":");
                 String line = "" + order.getTitle() + "," + order.getCreationTime() + "," + order.getPrice() + "," +
                         order.getName() + "," + order.getAddress() + "," + order.getPhoneNumber() + "," +
-                        order.getShipmentStatus() + "," + order.getBuyerUsername() + "," + order.getSellerUsername();
+                        order.getShipmentStatus() + "," + order.getBuyerUsername() + "," +
+                        order.getSellerUsername() + "," + tags;
                 writer.write(line);
                 writer.newLine();
             }
@@ -87,6 +98,15 @@ public class FileOrder implements OrderDsGateway {
         }
     }
 
+    public List<String> getPurchaseHistoryTagsData(String username){
+        List<String> tags = new ArrayList<>();
+        for(String buyerName : orders.keySet()){
+            if(username.equals(buyerName)){
+                tags.addAll(orders.get(buyerName).getTags());
+            }
+        }
+        return tags;
+    }
 }
 
 

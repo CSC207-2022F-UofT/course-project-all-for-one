@@ -1,11 +1,11 @@
-package application_business_rules_layer.postUseCases;
+package application_business_rules_layer.postcreateUseCases;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 // Use case layer
 
-public class PostDsRequestModel {
+public class PostCreateDsRequestModel {
     private String Username;
 
     private String Title;
@@ -15,7 +15,9 @@ public class PostDsRequestModel {
     private ArrayList<String> Tags;
     private final LocalDateTime creationTime;
 
-    public PostDsRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags, LocalDateTime time){
+    private String Id;
+
+    public PostCreateDsRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags, LocalDateTime time){
         this.Username = input_username;
         this.Title = input_title;
         this.Description = input_description;
@@ -23,6 +25,7 @@ public class PostDsRequestModel {
         this.Status = "Active";
         this.Tags = tags;
         this.creationTime = time;
+        this.Id = String.valueOf(this.hashCode());
 
     }
     public void reviseDescription(String revise_description){
@@ -41,6 +44,8 @@ public class PostDsRequestModel {
     public String getDescription(){
         return this.Description;
     }
+
+    public String getId() {return this.Id;}
 
     public ArrayList<String> getTags() {
         return this.Tags;

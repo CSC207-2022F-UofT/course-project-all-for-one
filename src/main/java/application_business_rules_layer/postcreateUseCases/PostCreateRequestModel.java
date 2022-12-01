@@ -1,24 +1,26 @@
-package application_business_rules_layer.postUseCases;
+package application_business_rules_layer.postcreateUseCases;
 
 // Use case layer
 
 import java.util.ArrayList;
 
-public class PostRequestModel {
+public class PostCreateRequestModel {
     private String Username;
     private String Title;
     private String Description;
     private String Status;
     private double Price;
     private ArrayList<String> Tags;
+    private String Id;
 
-    public PostRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags){
+    public PostCreateRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags){
         this.Username = input_username;
         this.Title = input_title;
         this.Description = input_description;
         this.Price = input_price;
         this.Status = "Active";
         this.Tags = tags;
+        this.Id = String.valueOf(this.hashCode());
 
     }
 
@@ -41,6 +43,8 @@ public class PostRequestModel {
     public ArrayList<String> get_tags() {
         return this.Tags;
     }
+
+    public String getId() {return this.Id;}
 
     public String get_status(){
         return this.Status;

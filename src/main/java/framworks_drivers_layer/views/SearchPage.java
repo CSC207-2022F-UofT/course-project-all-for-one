@@ -8,9 +8,11 @@ import java.util.List;
 
 public class SearchPage {
     private final String username;
+
+    private final List<Post> posts ;
     public SearchPage(String username, List<Post> posts){
         this.username = username;
-
+        this.posts = posts;
         JFrame searchFrame = new JFrame("Search Page");
         searchFrame.setBounds(400, 300, 400, 300);
 

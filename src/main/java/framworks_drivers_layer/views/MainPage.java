@@ -6,14 +6,14 @@ import Interface_adapters_layer.controller.SearchController;
 import enterprise_business_rules_layer.postEntities.Post;
 import enterprise_business_rules_layer.postEntities.PostFactory;
 import framworks_drivers_layer.dataAccess.FilePost;
-import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
 import Interface_adapters_layer.presenter.RecommendationFailedError;
 import Interface_adapters_layer.presenter.SearchFailureError;
 import Interface_adapters_layer.presenter.SearchFormatterPresenter;
 import Interface_adapters_layer.presenter.SearchPresenter;
-import application_business_rules_layer.postUseCases.PostInputBoundary;
-import application_business_rules_layer.postUseCases.PostInteractor;
-import application_business_rules_layer.postUseCases.PostOutputBoundary;
+import application_business_rules_layer.postcreateUseCases.PostCreateInputBoundary;
+import application_business_rules_layer.postcreateUseCases.PostCreateInteractor;
+import application_business_rules_layer.postcreateUseCases.PostCreateOutputBoundary;
 import application_business_rules_layer.recommendationUseCases.RecommendationResponseModel;
 
 import javax.swing.*;
@@ -87,12 +87,8 @@ public class MainPage extends JPanel implements ActionListener {
             }
         });
 
-        searchButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        searchButton.addActionListener(this);
 
-            }
-        });
         addPostButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,15 +97,15 @@ public class MainPage extends JPanel implements ActionListener {
                 JPanel screens = new JPanel(cardLayout);
                 application.add(screens);
 
-                PostDsGateway post;
+                PostCreateDsGateway post;
                 try {
                     post = new FilePost("./posts.csv");
                 } catch (IOException error) {
                     throw new RuntimeException("Could not create file.");
                 }
-                PostOutputBoundary presenter = new PostResponseFormatter();
+                PostCreateOutputBoundary presenter = new PostResponseFormatter();
                 PostFactory postFactory = new PostFactory();
-                PostInputBoundary interactor = new PostInteractor(
+                PostCreateInputBoundary interactor = new PostCreateInteractor(
                         post, presenter, postFactory);
                 PostController postController = new PostController(
                         interactor
@@ -121,6 +117,7 @@ public class MainPage extends JPanel implements ActionListener {
                 application.pack();
                 application.setVisible(true);
                 application.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                application.setLocation(600, 300);
             }
         });
 
@@ -181,11 +178,11 @@ public class MainPage extends JPanel implements ActionListener {
         } else if(e.getActionCommand().equals("Search")){
             try{
                 SearchPresenter searchPresenter = new SearchFormatterPresenter();
-                PostDsGateway postDsGateway;
+                PostCreateDsGateway postDsGateway;
                 try {
                     postDsGateway = new FilePost("./posts.csv");
                 } catch (IOException exception) {
-                    throw new RuntimeException("Could not create file.");
+                    throw new RuntimeException("Could not create posts.csv.");
                 }
                 SearchController searchController = new SearchController(postDsGateway, searchPresenter);
                 List<Post> posts = searchController.create(searchKeywordsTextField.getText());
