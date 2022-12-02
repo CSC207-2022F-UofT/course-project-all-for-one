@@ -123,6 +123,7 @@ public class UserLoginScreen extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
         } else {
+            this.dispose();
             UserDsGateway gateway;
             try {
                 gateway = new FileUser("./users.csv");

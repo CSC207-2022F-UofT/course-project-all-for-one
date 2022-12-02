@@ -19,24 +19,17 @@ public class ConfirmOrderPage extends JPanel implements ActionListener {
 
     public Post Post;
 
-    public String CreationTime;
 
-    public Account Buyer;
-
-    public Account Seller;
+    public String buyerUsername;
 
 
     TradeController tradeController;
 
-    public ConfirmOrderPage(Post post, String creationTime, Account buyer, Account seller,
-                            TradeController tradeController) {
+    public ConfirmOrderPage(Post post, String buyerUsername, TradeController tradeController) {
 
         this.tradeController = tradeController;
-
         this.Post = post;
-        this.CreationTime = creationTime;
-        this.Buyer = buyer;
-        this.Seller = seller;
+        this.buyerUsername = buyerUsername;
 
 
         JLabel title = new JLabel("Confirm Your Purchase");
@@ -48,10 +41,8 @@ public class ConfirmOrderPage extends JPanel implements ActionListener {
         JLabel dFinalPrice = new JLabel(Double.toString(Post.getPrice()));
         dFinalPrice.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel dCreationTime = new JLabel(CreationTime);
-        dCreationTime.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel dSeller = new JLabel(Seller.getUsername());
+        JLabel dSeller = new JLabel(post.getUsername());
         dSeller.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         LabelTextPanel nameInfo = new LabelTextPanel(
@@ -73,7 +64,6 @@ public class ConfirmOrderPage extends JPanel implements ActionListener {
         this.add(title);
         this.add(dPost);
         this.add(dFinalPrice);
-        this.add(dCreationTime);
         this.add(dSeller);
         this.add(nameInfo);
         this.add(phoneInfo);
@@ -86,8 +76,7 @@ public class ConfirmOrderPage extends JPanel implements ActionListener {
         System.out.println("Click " + evt.getActionCommand());
 
         try {
-            tradeController.create(Post, name.getText(), address.getText(), phone.getText(), Buyer.getUsername(), Seller.getUsername(),
-                    Buyer, Seller);
+            tradeController.create(Post, name.getText(), phone.getText(), address.getText(), buyerUsername);
             JOptionPane.showMessageDialog(this, "Order Placed");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());

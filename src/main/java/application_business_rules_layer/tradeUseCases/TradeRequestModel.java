@@ -9,7 +9,7 @@ public class TradeRequestModel {
 
     public Post Post;
 
-    public LocalDateTime CreationTime;
+    private LocalDateTime CreationTime;
 
     public String Name;
 
@@ -19,26 +19,16 @@ public class TradeRequestModel {
 
     private String BuyerUsername;
 
-    private String SellerUsername;
-
-    private Account Buyer;
-
-    private Account Seller;
 
 
-
-    public TradeRequestModel(Post post, LocalDateTime creationTime,
-                             String name, String address, String phoneNumber, String buyerUsername,
-                             String sellerUsername, Account buyer, Account seller) {
+    public TradeRequestModel(Post post, LocalDateTime creationTime, String name,  String address, String phoneNumber,
+                              String buyerUsername) {
         Post = post;
         CreationTime = creationTime;
         Name = name;
         Address = address;
         PhoneNumber = phoneNumber;
         BuyerUsername = buyerUsername;
-        SellerUsername = sellerUsername;
-        Buyer = buyer;
-        Seller = seller;
     }
 
     Post getPost() {
@@ -61,19 +51,11 @@ public class TradeRequestModel {
         return this.PhoneNumber;
     }
 
-    Account getBuyer() {
-        return this.Buyer;
-    }
-
-    Account getSeller() {
-        return this.Seller;
-    }
-
     public String getBuyerUsername() {
         return BuyerUsername;
     }
 
     public String getSellerUsername() {
-        return SellerUsername;
+        return Post.getUsername();
     }
 }

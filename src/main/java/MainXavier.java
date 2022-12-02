@@ -31,12 +31,11 @@ public class  MainXavier {
         String testCreationTime = "today";
         Wallet testBuyerWallet = new Wallet(100);
         Wallet testSellerWaller = new Wallet(50);
-        Account testBuyer = AccountFactory.create("ddddd", "123456", testBuyerWallet);
-        Account testSeller = AccountFactory.create("xavier", "654321", testSellerWaller);
+        String testBuyerUsername = "steve";
 
 
         MessageDsGateway Messages = new FileMessage("./MessageBoard.csv");
-        JFrame postPage = new PostPage(testPost, testCreationTime, testBuyer, testSeller, Messages);
+        JFrame postPage = new PostPage(testPost, testBuyerUsername, Messages);
         postPage.setVisible(true);
     }
 }

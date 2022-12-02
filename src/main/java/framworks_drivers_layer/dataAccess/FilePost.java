@@ -4,6 +4,7 @@ import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
 import application_business_rules_layer.postcreateUseCases.PostCreateDsRequestModel;
 import enterprise_business_rules_layer.postEntities.Post;
 
+import javax.swing.text.html.HTML;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -51,7 +52,7 @@ public class FilePost implements PostCreateDsGateway {
                 PostCreateDsRequestModel post = new PostCreateDsRequestModel(username, title, description, price, tags, ldt);
                 posts.put(username, post);
             }
-
+            System.out.println(posts.keySet());
             reader.close();
         }
     }
@@ -107,14 +108,16 @@ public class FilePost implements PostCreateDsGateway {
     @Override
     public List<Post> findPosts(List<String> Tags) {
         List<Post> posts = new ArrayList<>();
-        for(String tag : Tags){
-            for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
+        for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
+            for (String tag: Tags){
                 if (postDsRequestModel.getTags().contains(tag) && posts.size() < 5){
                     posts.add(new Post(postDsRequestModel.getUsername(),
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
                             postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+                    break;
                 }
             }
+
         }
         return posts;
     }
@@ -128,7 +131,7 @@ public class FilePost implements PostCreateDsGateway {
         List<Post> posts = new ArrayList<>();
         for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
             if (posts.size() < 10){
-                if(postDsRequestModel.getTitle().toLowerCase().strip().equals(keyword.toLowerCase().strip())){
+                if(postDsRequestModel.getTitle().toLowerCase().strip().contains(keyword.toLowerCase().strip())){
                     posts.add(new Post(postDsRequestModel.getUsername(),
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
                             postDsRequestModel.getPrice(), postDsRequestModel.getTags()));

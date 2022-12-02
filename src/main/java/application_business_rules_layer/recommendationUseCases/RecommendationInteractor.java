@@ -34,8 +34,19 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
     public RecommendationResponseModel create(RecommendationRequestModel recommendationRequestModel) {
         //find all tags in PurchaseHistory
         Map<String, Integer> tags = new HashMap<>();
+
+
+
+
         for (String tag : recommendationRequestModel.getPurchaseHistoryTags()) {
-            if (!tags.containsKey(tag)) {
+            boolean contain = false;
+            for(String tagsAdded: tags.keySet()){
+                if (tag.contains(tagsAdded)) {
+                    contain = true;
+                    break;
+                }
+            }
+            if (!tags.containsKey(tag) && !contain) {
                 tags.put(tag, 1);
             } else {
                 tags.put(tag, tags.get(tag) + 1);
@@ -51,8 +62,8 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
         Integer max = 0;
         String mostTag = "";
         List<String> mostTags = new ArrayList<>();
-        int i = 0;
-        while (i < 3){
+
+        while (mostTags.size() < 3){
             for(String key: tags.keySet()){
                 if (tags.get(key) > max){
                     max=tags.get(key);
@@ -62,7 +73,6 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
             mostTags.add(mostTag);
             tags.remove(mostTag);
 
-            i = i+1;
         }
 
 
@@ -73,7 +83,9 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
         Recommendation recommendation = new Recommendation(postDsGateway.findPosts(mostTags));
 
 
-
+        if (recommendation.getPosts().size() == 0){
+            return recommendationOutputBoundry.prepareFailView("There is no recommendation for you now!");
+        }
         RecommendationResponseModel recommendationResponseModel = new RecommendationResponseModel(recommendation);
         return recommendationOutputBoundry.prepareRecommendationView(recommendationResponseModel);
     }

@@ -16,11 +16,9 @@ public class TradeController {
         this.userInput = orderGateway;
     }
 
-    public TradeResponseModel create(Post post, String name, String address, String phoneNumber, String buyerUsername,
-                                            String sellerUsername, Account buyer, Account seller) {
+    public TradeResponseModel create(Post post, String name, String phoneNumber, String address, String buyerUsername) {
         LocalDateTime now = LocalDateTime.now();
-        TradeRequestModel requestModel = new TradeRequestModel(post, now,
-                name, address, phoneNumber, buyerUsername, sellerUsername, buyer, seller);
+        TradeRequestModel requestModel = new TradeRequestModel(post, now, name, address, phoneNumber, buyerUsername);
 
         return userInput.create(requestModel);
     }

@@ -1,7 +1,7 @@
 package framworks_drivers_layer.dataAccess;
 
 import application_business_rules_layer.userUseCases.UserDsGateway;
-import application_business_rules_layer.userUseCases.UserRegisterDsRequestModel;
+import application_business_rules_layer.userUseCases.UserDsRequestModel;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ public class FileUser implements UserDsGateway {
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
 
-    private final Map<String, UserRegisterDsRequestModel> accounts = new HashMap<>();
+    private final Map<String, UserDsRequestModel> accounts = new HashMap<>();
 
     public FileUser(String csvPath) throws IOException {
         csvFile = new File(csvPath);
@@ -40,7 +40,7 @@ public class FileUser implements UserDsGateway {
                 String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
                 double balance = Double.parseDouble(col[headers.get("balance")]);
                 LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
-                UserRegisterDsRequestModel user = new UserRegisterDsRequestModel(username, password, ldt, balance);
+                UserDsRequestModel user = new UserDsRequestModel(username, password, ldt, balance);
                 accounts.put(username, user);
             }
 
@@ -54,8 +54,14 @@ public class FileUser implements UserDsGateway {
      * @param requestModel the user information to save.
      */
     @Override
-    public void save(UserRegisterDsRequestModel requestModel) {
+    public void save(UserDsRequestModel requestModel) {
         accounts.put(requestModel.getName(), requestModel);
+        this.save();
+    }
+
+    @Override
+    public void changeBalance(String username, double newBalance) {
+        accounts.get(username).setWalletBalance(newBalance);
         this.save();
     }
 
@@ -66,7 +72,7 @@ public class FileUser implements UserDsGateway {
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            for (UserRegisterDsRequestModel user : accounts.values()) {
+            for (UserDsRequestModel user : accounts.values()) {
                 String line = "" + user.getName() + "," + user.getPassword() + "," + user.getCreationTime() + ","
                         + user.getWalletBalance();
                 writer.write(line);
@@ -105,5 +111,8 @@ public class FileUser implements UserDsGateway {
     public double getBalance(String username) {
         return accounts.get(username).getWalletBalance();
     }
+
+
+
 
 }

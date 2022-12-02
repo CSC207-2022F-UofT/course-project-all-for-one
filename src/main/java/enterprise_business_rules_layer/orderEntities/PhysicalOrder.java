@@ -49,7 +49,7 @@ public class PhysicalOrder implements Order {
 
     @Override
     public String getPhoneNumber() {
-        return this.Address;
+        return this.PhoneNumber;
     }
 
     @Override

@@ -9,7 +9,9 @@ public interface UserDsGateway {
 
     double getBalance (String username);
 
-    void save(UserRegisterDsRequestModel requestModel);
+    void save(UserDsRequestModel requestModel);
+
+    void changeBalance (String username, double newBalance);
 
 
 }

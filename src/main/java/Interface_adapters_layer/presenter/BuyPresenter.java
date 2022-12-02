@@ -3,6 +3,7 @@ package Interface_adapters_layer.presenter;
 import application_business_rules_layer.tradeUseCases.OrderDsGateway;
 import application_business_rules_layer.tradeUseCases.TradeInputBoundry;
 import application_business_rules_layer.tradeUseCases.TradeInteractor;
+import application_business_rules_layer.userUseCases.UserDsGateway;
 import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.orderEntities.PhysicalOrderFactory;
 import enterprise_business_rules_layer.postEntities.Post;
@@ -14,11 +15,12 @@ import java.awt.*;
 
 public class BuyPresenter {
 
-    public static void creatConfirmPage(Post post, String creationTime, Account buyer, Account seller, OrderDsGateway order) {
+    public static void creatConfirmPage(Post post, String buyUsername,
+                                        OrderDsGateway order, UserDsGateway user) {
 
         TradePresenter presenter = new TradePresenter();
         PhysicalOrderFactory physicalOrderFactory = new PhysicalOrderFactory();
-        TradeInputBoundry interactor = new TradeInteractor(order, presenter, physicalOrderFactory);
+        TradeInputBoundry interactor = new TradeInteractor(order, user, presenter, physicalOrderFactory);
         TradeController controller = new TradeController(interactor);
 
         JFrame confirm = new JFrame("confirm page");
@@ -26,8 +28,7 @@ public class BuyPresenter {
         JPanel screens = new JPanel(cardLayout);
         confirm.add(screens);
 
-        ConfirmOrderPage confirmOrderPage = new ConfirmOrderPage(post, creationTime, buyer, seller,
-                controller);
+        ConfirmOrderPage confirmOrderPage = new ConfirmOrderPage(post, buyUsername, controller);
         screens.add(confirmOrderPage, "welcome");
         cardLayout.show(screens, "trade");
         confirm.pack();

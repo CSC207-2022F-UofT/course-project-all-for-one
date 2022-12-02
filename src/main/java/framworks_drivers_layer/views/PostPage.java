@@ -1,5 +1,6 @@
 package framworks_drivers_layer.views;
 
+import application_business_rules_layer.userUseCases.UserDsGateway;
 import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.postEntities.Post;
 import framworks_drivers_layer.dataAccess.FileOrder;
@@ -14,6 +15,7 @@ import Interface_adapters_layer.presenter.MessageResponseFormatter;
 import application_business_rules_layer.messageUseCases.MessageInteractor;
 import application_business_rules_layer.messageUseCases.MessageRequestModel;
 import application_business_rules_layer.messageUseCases.MessageResponseModel;
+import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,12 +28,7 @@ public class PostPage extends JFrame implements ActionListener {
 
     public Post Post;
 
-    public String CreationTime;
-
-    Account PossibleBuyer;
-
-    public Account Seller;
-
+    String buyerUsername;
 
     MessageController controller;
 
@@ -48,13 +45,11 @@ public class PostPage extends JFrame implements ActionListener {
 
 
 
-    public PostPage(Post post, String creationTime, Account possibleBuyer, Account seller, MessageDsGateway dsGateway) {
+    public PostPage(Post post, String buyerUsername, MessageDsGateway dsGateway) {
 
 
         this.Post = post;
-        this.CreationTime = creationTime;
-        this.PossibleBuyer = possibleBuyer;
-        this.Seller = seller;
+        this.buyerUsername = buyerUsername;
         this.dsGateway = dsGateway;
         this.responseModel = new MessageResponseModel(dsGateway.getBoard(post.getTitle()));
 
@@ -74,8 +69,7 @@ public class PostPage extends JFrame implements ActionListener {
         JLabel dPostTitle = new JLabel(Post.getTitle());
         JLabel dPostDescription = new JLabel(Post.getDescription());
         JLabel dPrice = new JLabel(Double.toString(Post.getPrice()));
-        JLabel dCreationTime = new JLabel(CreationTime);
-        JLabel dSeller = new JLabel(Seller.getUsername());
+        JLabel dSeller = new JLabel(post.getUsername());
 
         JButton buyButton = new JButton("Buy");
         JButton postButton = new JButton("Post");
@@ -84,7 +78,6 @@ public class PostPage extends JFrame implements ActionListener {
         postInfoPanel.add(dPostTitle);
         postInfoPanel.add(dPostDescription);
         postInfoPanel.add(dPrice);
-        postInfoPanel.add(dCreationTime);
         postInfoPanel.add(dSeller);
 
         postPanel.setLayout(new BorderLayout());
@@ -130,7 +123,14 @@ public class PostPage extends JFrame implements ActionListener {
                 throw new RuntimeException("Could not create file.");
             }
 
-            BuyPresenter.creatConfirmPage(Post, CreationTime, PossibleBuyer, Seller, order);
+            UserDsGateway user;
+            try {
+                user = new FileUser("./users.csv");
+            } catch (IOException e) {
+                throw new RuntimeException("Could not create file.");
+            }
+
+            BuyPresenter.creatConfirmPage(Post, buyerUsername, order, user);
         }
         else{
             String input = inputArea.getText();

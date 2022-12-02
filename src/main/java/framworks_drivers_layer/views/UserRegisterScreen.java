@@ -1,11 +1,20 @@
 package framworks_drivers_layer.views;
 
+import Interface_adapters_layer.controller.UserLoginController;
 import Interface_adapters_layer.controller.UserRegisterController;
+import Interface_adapters_layer.presenter.UserLoginPresenter;
+import application_business_rules_layer.userUseCases.UserDsGateway;
+import application_business_rules_layer.userUseCases.UserLoginInputBoundary;
+import application_business_rules_layer.userUseCases.UserLoginInteractor;
+import application_business_rules_layer.userUseCases.UserLoginOutputBoundary;
+import enterprise_business_rules_layer.accountEntities.AccountFactory;
+import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 // Frameworks/Drivers layer
 
@@ -79,6 +88,26 @@ public class UserRegisterScreen extends JFrame implements ActionListener {
                     String.valueOf(repeatPassword.getPassword()));
             JOptionPane.showMessageDialog(this, username.getText() + " created.");
             this.dispose();
+
+            UserDsGateway user;
+            try {
+                user = new FileUser("./users.csv");
+            } catch (IOException e) {
+                throw new RuntimeException("Could not create file.");
+            }
+
+            UserLoginOutputBoundary presenter = new UserLoginPresenter();
+            AccountFactory accountFactory = new AccountFactory();
+            UserLoginInputBoundary interactor = new UserLoginInteractor(
+                    user, presenter, accountFactory);
+            UserLoginController controller = new UserLoginController(interactor);
+
+            // Build the GUI, plugging in the parts
+            UserLoginScreen loginScreen = new UserLoginScreen(controller);
+
+
+            loginScreen.setVisible(true);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

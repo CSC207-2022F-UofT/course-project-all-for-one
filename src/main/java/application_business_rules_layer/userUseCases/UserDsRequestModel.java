@@ -1,10 +1,8 @@
 package application_business_rules_layer.userUseCases;
 
-import enterprise_business_rules_layer.Wallet;
-
 import java.time.LocalDateTime;
 
-public class UserRegisterDsRequestModel {
+public class UserDsRequestModel {
 
     private final String name;
     private String password;
@@ -12,7 +10,7 @@ public class UserRegisterDsRequestModel {
 
     private double walletBalance;
 
-    public UserRegisterDsRequestModel(String name, String password, LocalDateTime creationTime, double walletBalance) {
+    public UserDsRequestModel(String name, String password, LocalDateTime creationTime, double walletBalance) {
         this.name = name;
         this.password = password;
         this.creationTime = creationTime;
@@ -37,6 +35,10 @@ public class UserRegisterDsRequestModel {
 
     public double getWalletBalance() {
         return this.walletBalance;
+    }
+
+    public void setWalletBalance(double newBalance) {
+        this.walletBalance = newBalance;
     }
 
 
