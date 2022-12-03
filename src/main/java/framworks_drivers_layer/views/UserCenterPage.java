@@ -1,6 +1,7 @@
 package framworks_drivers_layer.views;
 
 
+import application_business_rules_layer.profileUseCases.ProfileRequestModel;
 import enterprise_business_rules_layer.Profile;
 
 import javax.swing.*;
@@ -18,7 +19,6 @@ public class UserCenterPage implements ActionListener{
        JButton Wallet = framworks_drivers_layer.views.Button.getWallet();
        JButton PurchaseHistory = framworks_drivers_layer.views.Button.getPurchaseHistory();
        JButton PostHistory = framworks_drivers_layer.views.Button.getPostHistory();
-       JButton BrowsingHistory = Button.getBrowsingHistory();
       //JButton Edit = new JButton("Edit/Create");
       //JButton Wallet = new JButton("Wallet");
       //JButton PurchaseHistory = new JButton("Purchase History");
@@ -37,7 +37,6 @@ public class UserCenterPage implements ActionListener{
             frame.add(Wallet);
             frame.add(PurchaseHistory);
             frame.add(PostHistory);
-            frame.add(BrowsingHistory);
             frame.add(label);
 
 
@@ -57,11 +56,8 @@ public class UserCenterPage implements ActionListener{
             PostHistory.setFocusable(false);
             PostHistory.addActionListener(this);
 
-            BrowsingHistory.setBounds(100,600,80,50);
-            BrowsingHistory.setFocusable(false);
-            BrowsingHistory.addActionListener(this);
-
             JPanel panel1 = new JPanel();
+
             TextArea profileArea = new TextArea(Profile.getAge() + Profile.getUsername()+ Profile.getAddress() +
                     Profile.getDescription() + Profile.getPhone());
             panel1.add(profileArea);
@@ -82,9 +78,6 @@ public class UserCenterPage implements ActionListener{
             //}
             //if (e.getSource() == PostHistory){
             //      PostHistoryPage postpage = new PostHistoryPage();
-            //}
-            //if (e.getSource() == BrowsingHistory){
-
             //}
       }
 

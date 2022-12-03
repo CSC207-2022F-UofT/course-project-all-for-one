@@ -52,7 +52,7 @@ public class FilePost implements PostCreateDsGateway {
                 PostCreateDsRequestModel post = new PostCreateDsRequestModel(username, title, description, price, tags, ldt);
                 posts.put(username, post);
             }
-            System.out.println(posts.keySet());
+            System.out.println(posts.values().size());
             reader.close();
         }
     }

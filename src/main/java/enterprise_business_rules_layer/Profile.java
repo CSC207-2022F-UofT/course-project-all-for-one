@@ -1,6 +1,5 @@
 package enterprise_business_rules_layer;
 
-import java.util.ArrayList;
 
 public class Profile {
     private static String age;
@@ -9,23 +8,17 @@ public class Profile {
     private static String address;
     private static String phone;
 
-    static ArrayList<String> profile = new ArrayList<String>();
-    public Profile(){
-        profile.add(age);
-        profile.add(username);
-        profile.add(description);
-        profile.add(address);
-        profile.add(phone);
+    private static String gender;
+    public Profile(String age, String username, String gender, String description, String phone, String address){
+        this.age = age;
+        this.username = username;
+        this.gender = gender;
+        this.description = description;
+        this.phone = phone;
+        this.address = address;
     }
 
 
-   // public void setAge(String age){ this.age = age;}
-    //public void setUsername(String username){this.username = username;}
-    //public void setDescription(String description){this.description = description;}
-    //public void setAddress(String address){this.address = address;}
-   // public void setPhone(String phone){this.phone = phone;}
-
-    //public void setProfile(ArrayList<String> profile){this.profile = profile;}
 
     public static String getAge(){return age;}
     public static String getUsername(){return username;}
@@ -33,7 +26,7 @@ public class Profile {
     public static String getAddress(){return address;}
     public static String getPhone(){return phone;}
 
-    public static ArrayList<String> getProfile(){return profile;}
+
 
 }
 
