@@ -134,11 +134,11 @@ public class PostPage extends JFrame implements ActionListener {
         }
         else{
             String input = inputArea.getText();
-            MessageRequestModel requestModel = new MessageRequestModel(input, Post.getUsername(), Post.getTitle());
+            MessageRequestModel requestModel = new MessageRequestModel(input, buyerUsername, Post.getTitle());
             MessagePresenter presenter = new MessageResponseFormatter();
             MessageInteractor interactor = new MessageInteractor(dsGateway, presenter);
             controller = new MessageController(interactor);
-            controller.create(input, Post.getUsername(), Post.getTitle());
+            controller.create(input, buyerUsername, Post.getTitle());
             model.addElement(input);
             inputArea.setText("");
         }

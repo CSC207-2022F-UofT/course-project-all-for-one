@@ -26,9 +26,14 @@ public class Board extends JFrame {
     MessageDsGateway dsGateway;
     MessageResponseModel responseModel;
 
-
+    /**
+     *
+     * @param dsGateway the MessageDsGateway
+     * @param boardName the name of MessageBoard
+     */
 
     public Board(MessageDsGateway dsGateway, String boardName) {
+
         this.boardName = boardName;
         this.dsGateway = dsGateway;
         this.responseModel = new MessageResponseModel(dsGateway.getBoard(boardName));
@@ -79,21 +84,9 @@ public class Board extends JFrame {
             this.pack();
         }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
-    public String getBoardName() {
-        return boardName;
-    }
 
-    public void setBoardName(String boardName) {
-        this.boardName = boardName;
-    }
 }
 
 

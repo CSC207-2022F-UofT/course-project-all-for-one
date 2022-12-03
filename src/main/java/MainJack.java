@@ -11,6 +11,7 @@ public class MainJack {
 
 
         MessageDsGateway Messages = new FileMessage("./MessageBoard.csv");
+
         JFrame board = new Board(Messages, "iphone");
         board.setVisible(true);
 

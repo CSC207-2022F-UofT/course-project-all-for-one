@@ -14,6 +14,7 @@ public class MessageController {
 
     public MessageController(MessageInputBoundary input) {
         this.messageInput = input;
+
     }
 
     /**

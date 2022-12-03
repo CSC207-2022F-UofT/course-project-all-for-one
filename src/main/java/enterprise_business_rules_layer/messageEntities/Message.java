@@ -1,8 +1,8 @@
 package enterprise_business_rules_layer.messageEntities;
 
 public class Message {
-    private String content;
-    private String username;
+    private final String content;
+    private final String username;
 
     /**
      *
@@ -14,14 +14,17 @@ public class Message {
         this.username = username;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
+    /**
+     * @return the content of the Message.
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     *
+     * @return the username of the Message.
+     */
     public String getUsername() {
         return username;
     }
