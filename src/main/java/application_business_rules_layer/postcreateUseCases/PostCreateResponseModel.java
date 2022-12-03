@@ -10,13 +10,6 @@ public class PostCreateResponseModel {
         this.creationTime = creationTime;
     }
 
-    public String getLogin() {
-        return result;
-    }
-
-    public void setLogin(String result) {
-        this.result = result;
-    }
 
     public String getCreationTime() {
         return creationTime;
