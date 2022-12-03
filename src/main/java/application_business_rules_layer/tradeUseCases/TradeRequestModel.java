@@ -4,20 +4,21 @@ import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.postEntities.Post;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TradeRequestModel {
 
-    public Post Post;
+    private final Post Post;
 
-    private LocalDateTime CreationTime;
+    private final LocalDateTime CreationTime;
 
-    public String Name;
+    private final String Name;
 
-    public String Address;
+    private final String Address;
 
-    public String PhoneNumber;
+    private final String PhoneNumber;
 
-    private String BuyerUsername;
+    private final String BuyerUsername;
 
 
 
@@ -31,31 +32,59 @@ public class TradeRequestModel {
         BuyerUsername = buyerUsername;
     }
 
+    /**
+     *
+     * @return the Post object to be processed
+     */
     Post getPost() {
         return this.Post;
     }
 
-    LocalDateTime getCreationTime() {
-        return this.CreationTime;
-    }
-
+    /**
+     *
+     * @return the name of the shipment information to be processed
+     */
     String getName() {
         return this.Name;
     }
 
+    /**
+     *
+     * @return the address of the shipment information to be processed
+     */
     String getAddress() {
         return this.Address;
     }
 
+    /**
+     *
+     * @return the phone number of the shipment information to be processed
+     */
     String getPhoneNumber() {
         return this.PhoneNumber;
     }
 
+    /**
+     *
+     * @return the username of the buyer to be processed
+     */
     public String getBuyerUsername() {
         return BuyerUsername;
     }
 
+    /**
+     *
+     * @return the username of the seller to be processed
+     */
     public String getSellerUsername() {
         return Post.getUsername();
+    }
+
+    /**
+     *
+     * @return the String form of the creation time of the transaction to be processed
+     */
+    public String getCreationTimeString() {
+        return this.CreationTime.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
     }
 }

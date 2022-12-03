@@ -1,16 +1,28 @@
 package application_business_rules_layer.tradeUseCases;
 
 public class TradeResponseModel {
-    String Success;
+    private final String SuccessMessage;
 
-    String TradeTime;
+    private final String TradeTime;
 
-    public TradeResponseModel(String success, String creationTime) {
-        this.Success = success;
+    public TradeResponseModel(String successMessage, String creationTime) {
+        this.SuccessMessage = successMessage;
         this.TradeTime = creationTime;
     }
 
-    public String getSuccess() {return this.Success;}
+    /**
+     *
+     * @return the message that the transaction is successful
+     */
+    public String getSuccessMessage() {
+        return this.SuccessMessage;
+    }
 
-    public String getCreationTime() {return this.TradeTime;}
+    /**
+     *
+     * @return the time of the transaction
+     */
+    public String getCreationTime() {
+        return this.TradeTime;
+    }
 }

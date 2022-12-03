@@ -1,10 +1,9 @@
 package Interface_adapters_layer.presenter;
 
 import application_business_rules_layer.tradeUseCases.OrderDsGateway;
-import application_business_rules_layer.tradeUseCases.TradeInputBoundry;
+import application_business_rules_layer.tradeUseCases.TradeInputBoundary;
 import application_business_rules_layer.tradeUseCases.TradeInteractor;
 import application_business_rules_layer.userUseCases.UserDsGateway;
-import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.orderEntities.PhysicalOrderFactory;
 import enterprise_business_rules_layer.postEntities.Post;
 import framworks_drivers_layer.views.ConfirmOrderPage;
@@ -20,7 +19,7 @@ public class BuyPresenter {
 
         TradePresenter presenter = new TradePresenter();
         PhysicalOrderFactory physicalOrderFactory = new PhysicalOrderFactory();
-        TradeInputBoundry interactor = new TradeInteractor(order, user, presenter, physicalOrderFactory);
+        TradeInputBoundary interactor = new TradeInteractor(order, user, presenter, physicalOrderFactory);
         TradeController controller = new TradeController(interactor);
 
         JFrame confirm = new JFrame("confirm page");
