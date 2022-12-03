@@ -59,9 +59,9 @@ public class FileProfile implements ProfileGateway{
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            for (ProfileRequestModel user : profile.values()) {
-                String line = "" + user.getUsername() + "," + user.getAge() + "," + user.getGender() + ","
-                        + user.getDescription()+ "," + user.getAddress() + "," + user.getPhone();
+            for (ProfileRequestModel profile : profile.values()) {
+                String line = "" + profile.getUsername() + "," + profile.getAge() + "," + profile.getGender() + ","
+                        + profile.getDescription()+ "," + profile.getAddress() + "," + profile.getPhone();
                 writer.write(line);
                 writer.newLine();
             }
@@ -113,21 +113,28 @@ public class FileProfile implements ProfileGateway{
 
     @Override
     public void changeGender(String username, String gender) {
+
         profile.get(username).setGender(gender);
+        this.save();
     }
 
     @Override
     public void changeDescription(String username, String description) {
         profile.get(username).setDescription(description);
+        this.save();
     }
 
     @Override
     public void changePhone(String username, String phone) {
+
         profile.get(username).setPhone(phone);
+        this.save();
     }
 
     @Override
     public void changeAddress(String username, String address) {
-       profile.get(username).setAddress(address);
+
+        profile.get(username).setAddress(address);
+        this.save();
     }
 }
