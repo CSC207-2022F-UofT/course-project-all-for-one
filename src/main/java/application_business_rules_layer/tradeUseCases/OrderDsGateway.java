@@ -6,7 +6,7 @@ public interface OrderDsGateway {
 
     /**
      *
-     * @param requestModel save order data to database
+     * @param requestModel the order data to save
      */
     void save(OrderDsRequestModel requestModel);
 

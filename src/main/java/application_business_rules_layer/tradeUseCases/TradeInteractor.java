@@ -17,7 +17,7 @@ public class TradeInteractor implements TradeInputBoundary {
      *
      * @param orderDsGateway Interface_adapters.gateway to reach order database
      * @param userDsGateway Interface_adapters.gateway to reach user database
-     * @param tradeOutputBoundary  relay to Interface-adapters.presenter
+     * @param tradeOutputBoundary  relay to Interface_adapters.presenter
      * @param orderFactory factory to create Order entity
      */
     public TradeInteractor(OrderDsGateway orderDsGateway, UserDsGateway userDsGateway,
