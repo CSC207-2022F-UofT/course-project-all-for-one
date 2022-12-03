@@ -1,4 +1,4 @@
-package application_business_rules_layer.postcreateUseCases;
+package application_business_rules_layer.postUseCases;
 
 import enterprise_business_rules_layer.postEntities.Criteria;
 import enterprise_business_rules_layer.postEntities.Post;
@@ -8,21 +8,21 @@ import java.time.LocalDateTime;
 
 // Use case layer
 
-public class PostCreateInteractor implements PostCreateInputBoundary {
+public class PostInteractor implements PostInputBoundary {
 
-    final PostCreateDsGateway postDsGateway;
-    final PostCreateOutputBoundary postOutputBoundary;
+    final PostDsGateway postDsGateway;
+    final PostOutputBoundary postOutputBoundary;
     final PostFactory postFactory;
 
-    public PostCreateInteractor(PostCreateDsGateway postDfGateway, PostCreateOutputBoundary postOutputBoundary,
-                                PostFactory postFactory) {
+    public PostInteractor(PostDsGateway postDfGateway, PostOutputBoundary postOutputBoundary,
+                          PostFactory postFactory) {
         this.postDsGateway = postDfGateway;
         this.postOutputBoundary = postOutputBoundary;
         this.postFactory = postFactory;
     }
 
     @Override
-    public PostCreateResponseModel create(PostCreateRequestModel requestModel) {
+    public PostResponseModel create(PostRequestModel requestModel) {
 
         Post post = postFactory.create(requestModel.get_username(), requestModel.get_title(), requestModel.get_description(), requestModel.get_price(), requestModel.get_tags());
         Criteria criteria = new Criteria();
@@ -31,10 +31,16 @@ public class PostCreateInteractor implements PostCreateInputBoundary {
         }
 
         LocalDateTime now = LocalDateTime.now();
-        PostCreateDsRequestModel postDsModel = new PostCreateDsRequestModel(post.getUsername(), post.getTitle(), post.getDescription(), post.getPrice(), post.getTags(), now);
+        PostDsRequestModel postDsModel = new PostDsRequestModel(post.getUsername(), post.getTitle(), post.getDescription(), post.getPrice(), post.getTags(), now);
         postDsGateway.save(postDsModel);
 
-        PostCreateResponseModel accountResponseModel = new PostCreateResponseModel(post.getTitle(), now.toString());
+        PostResponseModel accountResponseModel = new PostResponseModel(post.getTitle(), now.toString());
         return postOutputBoundary.prepareSuccessView(accountResponseModel);
     }
+
+    @Override
+    public void deletion(PostRequestModel requestModel){
+        postDsGateway.delete(requestModel.getId());
+    }
+
 }

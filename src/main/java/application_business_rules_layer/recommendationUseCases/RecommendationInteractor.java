@@ -1,7 +1,7 @@
 package application_business_rules_layer.recommendationUseCases;
 
+import application_business_rules_layer.postUseCases.PostDsGateway;
 import enterprise_business_rules_layer.Recommendation;
-import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
 public class RecommendationInteractor implements RecommendationInputBoundry{
     final RecommendationOutputBoundry recommendationOutputBoundry;
 
-    final PostCreateDsGateway postDsGateway;
+    final PostDsGateway postDsGateway;
 
     /**
      *
@@ -19,7 +19,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
      * @param postDsGateway Interface_adapters.gateway to reach post file
      */
     public RecommendationInteractor(RecommendationOutputBoundry recommendationOutputBoundry,
-                                    PostCreateDsGateway postDsGateway){
+                                    PostDsGateway postDsGateway){
         this.recommendationOutputBoundry = recommendationOutputBoundry;
         this.postDsGateway= postDsGateway;
     }

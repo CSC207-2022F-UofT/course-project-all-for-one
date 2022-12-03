@@ -6,17 +6,23 @@ import java.util.List;
 
 public class MessageBoard implements Iterable<List<Message>>{
 
-    private String name;
-    private List<Message> messages = new ArrayList<>();
-    private int BOARD_SIZE = 5;
+    private final String name;
+    private final List<Message> messages = new ArrayList<>();
+    private final int BOARD_SIZE = 5;
 
+    /**
+     *
+     * @param name the name of the MessageBoard.
+     */
     public MessageBoard(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @param m the message added to the MessageBoard.
+     */
     public void addMessage(Message m) {messages.add(m);}
-
-    public void removeMessage(Message m) {messages.remove(m);}
 
     @Override
 
@@ -41,6 +47,10 @@ public class MessageBoard implements Iterable<List<Message>>{
         }
     }
 
+    /**
+     *
+     * @return the name of the MessageBoard.
+     */
     public String getName() {
         return name;
     }

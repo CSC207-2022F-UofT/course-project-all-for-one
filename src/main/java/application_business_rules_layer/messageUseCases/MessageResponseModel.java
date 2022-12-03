@@ -10,6 +10,10 @@ public class MessageResponseModel {
 
     List<String> messageList;
 
+    /**
+     *
+     * @param board the MessageBoard that is used to creat ResponseModel object.
+     */
 
     public MessageResponseModel(MessageBoard board) {
         this.messageList = new ArrayList<>();
@@ -20,6 +24,10 @@ public class MessageResponseModel {
         }
     }
 
+    /**
+     *
+     * @return A list of message content and username in certain format in ResponseModel.
+     */
     public List<String> getMessageList() {
         return messageList;
     }

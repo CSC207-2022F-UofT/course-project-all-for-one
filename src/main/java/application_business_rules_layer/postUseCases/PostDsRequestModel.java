@@ -1,11 +1,11 @@
-package application_business_rules_layer.postcreateUseCases;
+package application_business_rules_layer.postUseCases;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 // Use case layer
 
-public class PostCreateDsRequestModel {
+public class PostDsRequestModel {
     private String Username;
 
     private String Title;
@@ -17,7 +17,7 @@ public class PostCreateDsRequestModel {
 
     private String Id;
 
-    public PostCreateDsRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags, LocalDateTime time){
+    public PostDsRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags, LocalDateTime time){
         this.Username = input_username;
         this.Title = input_title;
         this.Description = input_description;

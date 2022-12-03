@@ -1,10 +1,10 @@
-package application_business_rules_layer.postcreateUseCases;
+package application_business_rules_layer.postUseCases;
 
 // Use case layer
 
 import java.util.ArrayList;
 
-public class PostCreateRequestModel {
+public class PostRequestModel {
     private String Username;
     private String Title;
     private String Description;
@@ -13,7 +13,16 @@ public class PostCreateRequestModel {
     private ArrayList<String> Tags;
     private String Id;
 
-    public PostCreateRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags){
+    /**
+     *
+     * @param input_username username of the acting user
+     * @param input_title user's input title of the post
+     * @param input_description user's input description of the posting item
+     * @param input_price user's input price of the posting item
+     * @param tags user's input tags of the posting item
+     */
+
+    public PostRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags){
         this.Username = input_username;
         this.Title = input_title;
         this.Description = input_description;
