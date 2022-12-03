@@ -6,6 +6,7 @@ public class Profile {
     private static String username;
     private static String description;
     private static String address;
+
     private static String phone;
 
     private static String gender;
@@ -25,6 +26,8 @@ public class Profile {
     public static String getDescription(){return description;}
     public static String getAddress(){return address;}
     public static String getPhone(){return phone;}
+
+    public static String getGender(){return gender;}
 
 
 
