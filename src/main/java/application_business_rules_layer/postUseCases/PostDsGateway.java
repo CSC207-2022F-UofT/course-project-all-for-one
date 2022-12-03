@@ -1,11 +1,17 @@
-package application_business_rules_layer.postcreateUseCases;
+package application_business_rules_layer.postUseCases;
 
 import enterprise_business_rules_layer.postEntities.Post;
 
 import java.util.List;
 
-public interface PostCreateDsGateway {
-    void save(PostCreateDsRequestModel requestModel);
+public interface PostDsGateway {
+    /**
+     *
+     * @param requestModel a request model that is used to store the information needed to request creating a post
+     */
+    void save(PostDsRequestModel requestModel);
+
+    void delete(String id);
 
     /**
      *

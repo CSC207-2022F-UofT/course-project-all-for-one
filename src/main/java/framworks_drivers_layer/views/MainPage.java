@@ -6,14 +6,14 @@ import Interface_adapters_layer.controller.SearchController;
 import enterprise_business_rules_layer.postEntities.Post;
 import enterprise_business_rules_layer.postEntities.PostFactory;
 import framworks_drivers_layer.dataAccess.FilePost;
-import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
+import application_business_rules_layer.postUseCases.PostDsGateway;
 import Interface_adapters_layer.presenter.RecommendationFailedError;
 import Interface_adapters_layer.presenter.SearchFailureError;
 import Interface_adapters_layer.presenter.SearchFormatterPresenter;
 import Interface_adapters_layer.presenter.SearchPresenter;
-import application_business_rules_layer.postcreateUseCases.PostCreateInputBoundary;
-import application_business_rules_layer.postcreateUseCases.PostCreateInteractor;
-import application_business_rules_layer.postcreateUseCases.PostCreateOutputBoundary;
+import application_business_rules_layer.postUseCases.PostInputBoundary;
+import application_business_rules_layer.postUseCases.PostInteractor;
+import application_business_rules_layer.postUseCases.PostOutputBoundary;
 import application_business_rules_layer.recommendationUseCases.RecommendationResponseModel;
 
 import javax.swing.*;
@@ -97,15 +97,15 @@ public class MainPage extends JPanel implements ActionListener {
                 JPanel screens = new JPanel(cardLayout);
                 application.add(screens);
 
-                PostCreateDsGateway post;
+                PostDsGateway post;
                 try {
                     post = new FilePost("./posts.csv");
                 } catch (IOException error) {
                     throw new RuntimeException("Could not create file.");
                 }
-                PostCreateOutputBoundary presenter = new PostResponseFormatter();
+                PostOutputBoundary presenter = new PostResponseFormatter();
                 PostFactory postFactory = new PostFactory();
-                PostCreateInputBoundary interactor = new PostCreateInteractor(
+                PostInputBoundary interactor = new PostInteractor(
                         post, presenter, postFactory);
                 PostController postController = new PostController(
                         interactor
@@ -151,7 +151,7 @@ public class MainPage extends JPanel implements ActionListener {
         } else if(e.getActionCommand().equals("Search")){
             try{
                 SearchPresenter searchPresenter = new SearchFormatterPresenter();
-                PostCreateDsGateway postDsGateway;
+                PostDsGateway postDsGateway;
                 try {
                     postDsGateway = new FilePost("./posts.csv");
                 } catch (IOException exception) {

@@ -1,11 +1,11 @@
-package application_business_rules_layer.postcreateUseCases;
+package application_business_rules_layer.postUseCases;
 
-public class PostCreateResponseModel {
+public class PostResponseModel {
 
     String result;
     String creationTime;
 
-    public PostCreateResponseModel(String result, String creationTime) {
+    public PostResponseModel(String result, String creationTime) {
         this.result = result;
         this.creationTime = creationTime;
     }
