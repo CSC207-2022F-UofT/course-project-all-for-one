@@ -99,16 +99,16 @@ public class UserRegisterScreen extends JFrame implements ActionListener {
                 throw new RuntimeException("Could not create file.");
             }
 
-            ProfileGateway profile;
-            try {
-                profile = new FileProfile("./profile.csv");
-            } catch (IOException e) {
-                throw new RuntimeException("Could not create file.");
-            }
-
-            ProfileRequestModel profileRequestModel = new ProfileRequestModel(username.getText()," "," "," "," " +
-                    " "," ");
-            profile.save(profileRequestModel);
+//            ProfileGateway profile;
+//            try {
+//                profile = new FileProfile("./profile.csv");
+//            } catch (IOException e) {
+//                throw new RuntimeException("Could not create file.");
+//            }
+//
+//            ProfileRequestModel profileRequestModel = new ProfileRequestModel(username.getText()," "," "," "," " +
+//                    " "," ");
+//            profile.save(profileRequestModel);
 
             UserLoginOutputBoundary presenter = new UserLoginPresenter();
             AccountFactory accountFactory = new AccountFactory();

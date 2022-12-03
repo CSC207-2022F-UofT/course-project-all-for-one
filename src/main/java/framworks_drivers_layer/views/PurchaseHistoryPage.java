@@ -1,5 +1,6 @@
 package framworks_drivers_layer.views;
 
+import enterprise_business_rules_layer.orderEntities.Order;
 import enterprise_business_rules_layer.orderEntities.PhysicalOrder;
 
 import javax.swing.*;
@@ -7,19 +8,19 @@ import java.awt.*;
 import java.util.List;
 
 public class PurchaseHistoryPage {
-    public static void PurchaseHistoryPage(String[] args, List<PhysicalOrder> physicalOrders){
+    public static void PurchaseHistoryPage(String[] args, List<Order> orders){
         JFrame jf = new JFrame("Purchase History");
         jf.setLayout(new FlowLayout(FlowLayout.CENTER));
         jf.setBounds(400, 300, 300, 200);
         JMenuBar bar = new JMenuBar();
-        for (PhysicalOrder physicalOrder : physicalOrders) {
-           JMenu menu = new JMenu(physicalOrder.getCreationTime());
-           JMenuItem item1 = new JMenuItem("Product: " + physicalOrder.getPost().getTitle());
-           JMenuItem item2 = new JMenuItem("Price: $" + physicalOrder.getPost().getPrice());
-           JMenuItem item3 = new JMenuItem("Name: " + physicalOrder.getName());
-           JMenuItem item4 = new JMenuItem("Address: " + physicalOrder.getAddress());
-           JMenuItem item5 = new JMenuItem("Phone Number: " + physicalOrder.getPhoneNumber());
-           JMenuItem item6 = new JMenuItem("Status: " + physicalOrder.getShipmentStatus());
+        for (Order order : orders) {
+           JMenu menu = new JMenu(order.getCreationTime());
+           JMenuItem item1 = new JMenuItem("Product: " + order.getPost().getTitle());
+           JMenuItem item2 = new JMenuItem("Price: $" + order.getPost().getPrice());
+           JMenuItem item3 = new JMenuItem("Name: " + order.getName());
+           JMenuItem item4 = new JMenuItem("Address: " + order.getAddress());
+           JMenuItem item5 = new JMenuItem("Phone Number: " + order.getPhoneNumber());
+           JMenuItem item6 = new JMenuItem("Status: " + order.getShipmentStatus());
            menu.add(item1);
            menu.add(item2);
            menu.add(item3);

@@ -20,29 +20,17 @@ public class UserLoginResponseModel {
 
     OrderDsGateway orderDsGateway;
 
-    UserDsGateway userDsGateway;
 
-    UserRegisterOutputBoundary userRegisterOutputBoundary;
-
-    UserRegisterInputBoundary userRegisterInputBoundary;
-
-    AccountFactory accountFactory;
 
     public UserLoginResponseModel(Account user, RecommendationOutputBoundry recommendationOutputBoundry,
                                   PostDsGateway postDsGateway, RecommendationInputBoundry recommendationInputBoundry,
-                                  OrderDsGateway orderDsGateway, UserDsGateway userDsGateway,
-                                  UserRegisterOutputBoundary userRegisterOutputBoundary,
-                                  UserRegisterInputBoundary userRegisterInputBoundary,
-                                  AccountFactory accountFactory) {
+                                  OrderDsGateway orderDsGateway) {
         this.user = user;
         this.recommendationOutputBoundry = recommendationOutputBoundry;
         this.postDsGateway = postDsGateway;
         this.recommendationInputBoundry = recommendationInputBoundry;
         this.orderDsGateway = orderDsGateway;
-        this.userDsGateway = userDsGateway;
-        this.userRegisterOutputBoundary = userRegisterOutputBoundary;
-        this.userRegisterInputBoundary = userRegisterInputBoundary;
-        this.accountFactory = accountFactory;
+
     }
 
 
@@ -66,19 +54,5 @@ public class UserLoginResponseModel {
         return orderDsGateway;
     }
 
-    public UserDsGateway getUserDsGateway() {
-        return userDsGateway;
-    }
 
-    public UserRegisterOutputBoundary getUserRegisterOutputBoundary() {
-        return userRegisterOutputBoundary;
-    }
-
-    public UserRegisterInputBoundary getUserRegisterInputBoundary() {
-        return userRegisterInputBoundary;
-    }
-
-    public AccountFactory getAccountFactory() {
-        return accountFactory;
-    }
 }

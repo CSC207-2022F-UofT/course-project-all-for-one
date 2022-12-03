@@ -73,22 +73,7 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
             throw new RuntimeException("Could not create orders.csv");
         }
 
-        UserDsGateway userGateway;
-        try {
-            userGateway = new FileUser("./users.csv");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        UserRegisterOutputBoundary userRegisterOutputBoundary = new UserRegisterPresenter();
-        AccountFactory accountFactory = new AccountFactory();
-        UserRegisterInputBoundary userRegisterInputBoundary = new UserRegisterInteractor(userGateway, userRegisterOutputBoundary,
-                accountFactory);
-
-
-        UserLoginResponseModel responseModel = new UserLoginResponseModel(account, recommendationOutputBoundry,
-                post, recommendationInputBoundry, orderDsGateway, userGateway, userRegisterOutputBoundary,
-                userRegisterInputBoundary, accountFactory);
-        return responseModel;
+        return new UserLoginResponseModel(account, recommendationOutputBoundry, post, recommendationInputBoundry,
+                orderDsGateway);
     }
 }

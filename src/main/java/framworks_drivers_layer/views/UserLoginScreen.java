@@ -83,11 +83,12 @@ public class UserLoginScreen extends JFrame implements ActionListener {
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
-        UserLoginResponseModel responseModel = userLoginController.create(username.getText(),
-                String.valueOf(password.getPassword()));
+
 
         if (evt.getActionCommand().equals("Login")) {
             try {
+                UserLoginResponseModel responseModel = userLoginController.create(username.getText(),
+                        String.valueOf(password.getPassword()));
                 this.dispose();
 
                 // create main page
@@ -109,7 +110,19 @@ public class UserLoginScreen extends JFrame implements ActionListener {
         } else {
             this.dispose();
 
-            UserRegisterController controller = new UserRegisterController(responseModel.getUserRegisterInputBoundary());
+            UserDsGateway userGateway;
+            try {
+                userGateway = new FileUser("./users.csv");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            UserRegisterOutputBoundary userRegisterOutputBoundary = new UserRegisterPresenter();
+            AccountFactory accountFactory = new AccountFactory();
+            UserRegisterInputBoundary userRegisterInputBoundary = new UserRegisterInteractor(userGateway, userRegisterOutputBoundary,
+                    accountFactory);
+
+            UserRegisterController controller = new UserRegisterController(userRegisterInputBoundary);
             UserRegisterScreen userRegisterScreen = new UserRegisterScreen(controller);
             userRegisterScreen.setVisible(true);
             userRegisterScreen.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
