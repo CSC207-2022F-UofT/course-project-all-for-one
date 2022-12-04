@@ -68,6 +68,9 @@ public class FilePost implements PostDsGateway {
         this.save();
     }
 
+    /**
+     * Save the information of the post in the csv file
+     */
     private void save() {
         BufferedWriter writer;
         try {

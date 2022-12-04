@@ -10,11 +10,18 @@ public class PostResponseModel {
         this.creationTime = creationTime;
     }
 
-
+    /**
+     *
+     * @return the creation time in the request model object
+     */
     public String getCreationTime() {
         return creationTime;
     }
 
+    /**
+     *
+     * @ set the creation time in the request model object
+     */
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
     }
