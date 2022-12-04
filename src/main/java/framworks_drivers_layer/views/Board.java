@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Board extends JFrame {
 
-    String username;
+    String username = "Jack";
     String boardName;
 
     JList<String> messageList = new JList<>();

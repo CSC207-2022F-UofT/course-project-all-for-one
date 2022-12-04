@@ -49,5 +49,6 @@ public class SearchPage implements ActionListener{
         JFrame postPage = new PostPage(posts.get(j), username, Messages);
         postPage.setVisible(true);
 
+
     }
 }
