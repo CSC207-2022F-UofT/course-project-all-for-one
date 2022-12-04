@@ -1,8 +1,6 @@
 package application_business_rules_layer.userUseCases;
 
-import Interface_adapters_layer.controller.RecommendationController;
 import Interface_adapters_layer.presenter.RecommendationResponsePresenter;
-import Interface_adapters_layer.presenter.UserRegisterPresenter;
 import application_business_rules_layer.postUseCases.PostDsGateway;
 import application_business_rules_layer.recommendationUseCases.RecommendationInputBoundry;
 import application_business_rules_layer.recommendationUseCases.RecommendationInteractor;
@@ -13,7 +11,6 @@ import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
 import framworks_drivers_layer.dataAccess.FileOrder;
 import framworks_drivers_layer.dataAccess.FilePost;
-import framworks_drivers_layer.dataAccess.FileUser;
 
 import java.io.IOException;
 
@@ -43,9 +40,12 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
      */
     @Override
     public UserLoginResponseModel create(UserLoginRequestModel requestModel) {
-
+        if(!userDsGateway.existsByName(requestModel.getUsername())){
+            return userLoginOutputBoundary.prepareFailView("Your username does not exist.");
+        }
         // determine if the password user input match with the password of the username in the database
-        if (!userDsGateway.isPasswordCorrect(requestModel.getUsername(), requestModel.getPassword())){
+        if (!userDsGateway.isPasswordCorrect(requestModel.getUsername(), requestModel.getPassword())
+        ){
             return userLoginOutputBoundary.prepareFailView("Your username or password is not valid.");
         }
 

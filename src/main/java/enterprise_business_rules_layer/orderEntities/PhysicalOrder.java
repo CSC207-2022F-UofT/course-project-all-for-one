@@ -20,6 +20,8 @@ public class PhysicalOrder implements Order {
 
     private final String SellerUsername;
 
+    private final String ID;
+
 
 
     PhysicalOrder(Post post, String creationTime, String name, String address, String phoneNumber,
@@ -32,6 +34,7 @@ public class PhysicalOrder implements Order {
         ShipmentStatus = shipmentStatus;
         BuyerUsername = buyerUsername;
         SellerUsername = sellerUsername;
+        this.ID = String.valueOf(this.hashCode());
     }
     @Override
     public Post getPost() {
@@ -73,4 +76,7 @@ public class PhysicalOrder implements Order {
         return SellerUsername;
     }
 
+    public String getID() {
+        return ID;
+    }
 }

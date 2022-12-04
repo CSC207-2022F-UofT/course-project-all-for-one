@@ -58,7 +58,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
         if(tags.size() < 3){
             return recommendationOutputBoundry.prepareFailView("Please use more to have recommendation!");
         }
-        //find the 3 most tags in those tags
+//        find the 3 most tags in those tags
         Integer max = 0;
         String mostTag = "";
         List<String> mostTags = new ArrayList<>();
@@ -72,10 +72,9 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
             }
             mostTags.add(mostTag);
             tags.remove(mostTag);
-
+            max = 0;
         }
-
-
+        System.out.println(mostTags);
 
 
 

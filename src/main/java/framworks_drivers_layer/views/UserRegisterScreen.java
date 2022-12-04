@@ -3,14 +3,11 @@ package framworks_drivers_layer.views;
 import Interface_adapters_layer.controller.UserLoginController;
 import Interface_adapters_layer.controller.UserRegisterController;
 import Interface_adapters_layer.presenter.UserLoginPresenter;
-import application_business_rules_layer.profileUseCases.ProfileGateway;
-import application_business_rules_layer.profileUseCases.ProfileRequestModel;
 import application_business_rules_layer.userUseCases.UserDsGateway;
 import application_business_rules_layer.userUseCases.UserLoginInputBoundary;
 import application_business_rules_layer.userUseCases.UserLoginInteractor;
 import application_business_rules_layer.userUseCases.UserLoginOutputBoundary;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
-import framworks_drivers_layer.dataAccess.FileProfile;
 import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;

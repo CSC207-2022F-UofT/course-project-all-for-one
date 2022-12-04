@@ -99,6 +99,7 @@ public class FileUser implements UserDsGateway {
 
     @Override
     public boolean isPasswordCorrect (String username, String password) {
+
         return accounts.get(username).getPassword().equals(password);
     }
 

@@ -27,6 +27,7 @@ public class FileOrder implements OrderDsGateway {
         headers.put("BuyerUsername", 7);
         headers.put("SellerUsername", 8);
         headers.put("Tags", 9);
+        headers.put("ID", 10);
 
 
 
@@ -56,8 +57,9 @@ public class FileOrder implements OrderDsGateway {
                     tags.add(t);
                 }
 //                LocalDateTime creationTime = LocalDateTime.parse(creationTimeString);
+                String id = String.valueOf(col[headers.get("ID")]);
                 OrderDsRequestModel order = new OrderDsRequestModel(title, creationTimeString, price, name, address,
-                        phoneNumber, shipmentStatus, buyerUsername, sellerUsername, tags);
+                        phoneNumber, shipmentStatus, buyerUsername, sellerUsername, tags, id);
                 orders.put(order.getId(), order);
             }
 
@@ -86,7 +88,7 @@ public class FileOrder implements OrderDsGateway {
                 String line = "" + order.getTitle() + "," + order.getCreationTime() + "," + order.getPrice() + "," +
                         order.getName() + "," + order.getAddress() + "," + order.getPhoneNumber() + "," +
                         order.getShipmentStatus() + "," + order.getBuyerUsername() + "," +
-                        order.getSellerUsername() + "," + tags;
+                        order.getSellerUsername() + "," + tags + "," + order.getId();
                 writer.write(line);
                 writer.newLine();
             }

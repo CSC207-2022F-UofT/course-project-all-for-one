@@ -68,7 +68,7 @@ public class TradeInteractor implements TradeInputBoundary {
         OrderDsRequestModel orderDsModel = new OrderDsRequestModel(order.getPost().getTitle(), order.getCreationTime(),
                 order.getPost().getPrice(), order.getName(), order.getAddress(), order.getPhoneNumber(),
                 order.getShipmentStatus(), order.getBuyerUsername(), order.getSellerUsername(),
-                order.getPost().getTags());
+                order.getPost().getTags(), order.getID());
 
         // set the status of the post being purchased to sold
         requestModel.getPost().setSold();

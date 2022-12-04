@@ -28,11 +28,12 @@ public class RecommendationPage extends JFrame implements ActionListener {
         JButton[] buttonsAdded = new JButton[posts.size()];
         for(int j = 0; j < posts.size(); j++){
             JPanel jp1 = new JPanel();
+            jp1.setLayout(new BoxLayout(jp1, BoxLayout.Y_AXIS));
             buttonsAdded[j] = new JButton("Open post" + j);
             buttonsAdded[j].addActionListener(this);
-            jp1.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getTitle()));
-            jp1.add(new JLabel(responseModel.getRecommendation().getPosts().get(j).getDescription()));
-            jp1.add(new JLabel(String.valueOf(responseModel.getRecommendation().getPosts().get(j).getPrice())));
+            jp1.add(new JLabel("Title: " + responseModel.getRecommendation().getPosts().get(j).getTitle()));
+            jp1.add(new JLabel("Description: " + responseModel.getRecommendation().getPosts().get(j).getDescription()));
+            jp1.add(new JLabel("Price: " + String.valueOf(responseModel.getRecommendation().getPosts().get(j).getPrice())));
             jp1.add(buttonsAdded[j]);
             recommendationScrollPanelViewPort.add(jp1);
         }
@@ -41,6 +42,7 @@ public class RecommendationPage extends JFrame implements ActionListener {
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         recommendationScrollPanel.setViewportView(recommendationScrollPanelViewPort);
         this.add(recommendationScrollPanel);
+        this.pack();
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 

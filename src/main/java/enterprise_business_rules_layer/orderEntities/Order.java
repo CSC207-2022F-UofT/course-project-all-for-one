@@ -19,4 +19,6 @@ public interface Order {
 
     String getSellerUsername();
 
+    String getID();
+
 }

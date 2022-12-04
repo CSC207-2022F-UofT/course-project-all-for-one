@@ -64,10 +64,10 @@ public class PostPage extends JFrame implements ActionListener {
         MessagePresenter presenter = new MessageResponseFormatter();
         List<String> lst = presenter.displayBoard(responseModel).getMessageList();
 
-        JLabel dPostTitle = new JLabel("Post Title:" + Post.getTitle());
-        JLabel dPostDescription = new JLabel("Description:" + Post.getDescription());
-        JLabel dPrice = new JLabel("Price:" + Double.toString(Post.getPrice()));
-        JLabel dSeller = new JLabel("Seller:" + post.getUsername());
+        JLabel dPostTitle = new JLabel("Title: " + Post.getTitle());
+        JLabel dPostDescription = new JLabel("Description: " + Post.getDescription());
+        JLabel dPrice = new JLabel("Price: " + Double.toString(Post.getPrice()));
+        JLabel dSeller = new JLabel("Seller: " + post.getUsername());
 
         JButton buyButton = new JButton("Buy");
         JButton postButton = new JButton("Post");

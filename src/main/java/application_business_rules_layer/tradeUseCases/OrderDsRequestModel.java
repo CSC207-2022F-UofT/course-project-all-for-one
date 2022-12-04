@@ -27,7 +27,7 @@ public class OrderDsRequestModel {
     private final String Id;
 
     public OrderDsRequestModel(String title, String creationTime, double price, String name, String address,
-                               String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername, List<String> tags) {
+                               String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername, List<String> tags, String id) {
         Title = title;
         CreationTime = creationTime;
         Price = price;
@@ -38,7 +38,7 @@ public class OrderDsRequestModel {
         BuyerUsername = buyerUsername;
         SellerUsername = sellerUsername;
         Tags = tags;
-        this.Id = String.valueOf(this.hashCode());
+        this.Id = id;
     }
 
     /**
