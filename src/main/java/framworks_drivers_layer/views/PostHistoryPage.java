@@ -25,11 +25,12 @@ public class PostHistoryPage implements ActionListener {
         JButton[] buttonsAdded = new JButton[posts.size()];
         for(int j = 0; j < posts.size(); j++){
             JPanel jp1 = new JPanel();
+            jp1.setLayout(new BoxLayout(jp1, BoxLayout.Y_AXIS));
             buttonsAdded[j] = new JButton("Open post" + j);
             buttonsAdded[j].addActionListener(this);
-            jp1.add(new JLabel(posts.get(j).getTitle()));
-            jp1.add(new JLabel(posts.get(j).getDescription()));
-            jp1.add(new JLabel(String.valueOf(posts.get(j).getPrice())));
+            jp1.add(new JLabel("Title: " + posts.get(j).getTitle()));
+            jp1.add(new JLabel("Description: " + posts.get(j).getDescription()));
+            jp1.add(new JLabel("Price: " + posts.get(j).getPrice()));
             jp1.add(buttonsAdded[j]);
             postScrollPanelViewPort.add(jp1);
         }
