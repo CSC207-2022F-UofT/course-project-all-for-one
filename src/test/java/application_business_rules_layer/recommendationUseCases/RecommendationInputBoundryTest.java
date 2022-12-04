@@ -1,49 +1,61 @@
-//package application_business_rules_layer.recommendationUseCases;
-//
-//import Interface_adapters_layer.presenter.RecommendationResponsePresenter;
-//import application_business_rules_layer.postUseCases.PostDsGateway;
-//import application_business_rules_layer.postUseCases.PostDsRequestModel;
-//import framworks_drivers_layer.dataAccess.MemoryPost;
-//import org.junit.jupiter.api.Test;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.assertNotNull;
-//import static org.junit.jupiter.api.Assertions.fail;
-//
-//class RecommendationInputBoundryTest {
-//
-//    @Test
-//    void create() {
-//        PostDsGateway postDsGateway = new MemoryPost();
-//        PostDsRequestModel post1 = new PostDsRequestModel("a")
-//        postDsGateway.save();
-//        RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter(){
-//            @Override
-//            public RecommendationResponseModel prepareRecommendationView(RecommendationResponseModel recommendationResponseModel) {
-//
-//                assertEquals("paul", recommendationResponseModel);
-//                assertNotNull(user.getCreationTime()); // any creation time is fine.
-//                assertTrue(userRepository.existsByName("paul"));
-//                return null;
-//            }
-//
-//            @Override
-//            public UserRegisterResponseModel prepareFailView(String error) {
-//                fail("Use case failure is unexpected.");
-//                return null;
-//            }
-//        };
-//
-//
-//        List<String> tags = new ArrayList<>();
-//        tags.add("iphone");tags.add("iphone");tags.add("iphone");
-//        tags.add("gaming");tags.add("gaming");tags.add("gaming");tags.add("gaming");
-//        tags.add("computer");tags.add("computer");tags.add("computer");
-//        tags.add("should not be added");
-//        RecommendationRequestModel recommendationRequestModel = new RecommendationRequestModel(tags, "Nuan Wen");
-//        RecommendationInputBoundry recommendationInputBoundry = new RecommendationInteractor(recommendationOutputBoundry, postDsGateway);
-//        recommendationInputBoundry.create(recommendationRequestModel);
-//    }
-//}
+package application_business_rules_layer.recommendationUseCases;
+
+import Interface_adapters_layer.presenter.RecommendationResponsePresenter;
+import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postUseCases.PostDsRequestModel;
+import framworks_drivers_layer.dataAccess.MemoryPost;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.fail;
+
+class RecommendationInputBoundryTest {
+
+    @Test
+    void create() {
+        ArrayList<String> purchaseHistoryTags = new ArrayList<>();
+        purchaseHistoryTags.add("iphone");purchaseHistoryTags.add("iphone");purchaseHistoryTags.add("iphone");
+        purchaseHistoryTags.add("gaming");purchaseHistoryTags.add("gaming");purchaseHistoryTags.add("gaming");purchaseHistoryTags.add("gaming");
+        purchaseHistoryTags.add("computer");purchaseHistoryTags.add("computer");purchaseHistoryTags.add("computer");
+        purchaseHistoryTags.add("should not be added");
+
+        ArrayList<String> tagsOfPost12 = new ArrayList<>();
+        tagsOfPost12.add("iphone");
+        tagsOfPost12.add("apple");
+
+        PostDsGateway postDsGateway = new MemoryPost();
+        PostDsRequestModel post1 = new PostDsRequestModel(
+                "Seller1", "iphone1", "good", 1, tagsOfPost12 , LocalDateTime.now(), "1");
+
+        PostDsRequestModel post2 = new PostDsRequestModel(
+                "Seller2", "iphone2", "good", 1, tagsOfPost12 , LocalDateTime.now(), "2");
+
+
+
+        postDsGateway.save(post1); postDsGateway.save(post2);
+        RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter(){
+            @Override
+            public RecommendationResponseModel prepareRecommendationView(RecommendationResponseModel recommendationResponseModel) {
+
+                Assertions.assertEquals(2, recommendationResponseModel.getRecommendation().getPosts().size());
+                return null;
+            }
+
+            @Override
+            public RecommendationResponseModel prepareFailView(String error) {
+                System.out.println(error);
+                fail("Use case failure is not expected.");
+                return null;
+            }
+        };
+
+
+
+        RecommendationRequestModel recommendationRequestModel = new RecommendationRequestModel(purchaseHistoryTags, "Nuan Wen");
+        RecommendationInputBoundry recommendationInputBoundry = new RecommendationInteractor(recommendationOutputBoundry, postDsGateway);
+        recommendationInputBoundry.create(recommendationRequestModel);
+    }
+}
