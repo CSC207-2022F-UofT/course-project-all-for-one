@@ -39,7 +39,7 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
     /**
      *
      * @param requestModel UserLoginRequestModel that serves as the input needed for processing
-     * @return UserLoginResponseModel object that contains the success message.
+     * @return UserLoginResponseModel object that contains needed objects for user interface.
      */
     @Override
     public UserLoginResponseModel create(UserLoginRequestModel requestModel) {
@@ -49,22 +49,19 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
             return userLoginOutputBoundary.prepareFailView("Your username or password is not valid.");
         }
 
-        //
+        // create an Account entity
         double balance = userDsGateway.getBalance(requestModel.getUsername());
         Wallet wallet = new Wallet(balance);
-
         Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword(),wallet);
-        account.setLoginStatus(true);
 
+        // initialize objects for UserLoginResponseModel
         RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter();
-
         PostDsGateway post;
         try {
             post = new FilePost("./posts.csv");
         } catch (IOException e) {
             throw new RuntimeException("Could not create posts.csv.");
         }
-
         RecommendationInputBoundry recommendationInputBoundry = new RecommendationInteractor(recommendationOutputBoundry, post);
         OrderDsGateway orderDsGateway;
         try{
@@ -73,7 +70,6 @@ public class UserLoginInteractor implements UserLoginInputBoundary {
             throw new RuntimeException("Could not create orders.csv");
         }
 
-        return new UserLoginResponseModel(account, recommendationOutputBoundry, post, recommendationInputBoundry,
-                orderDsGateway);
+        return new UserLoginResponseModel(requestModel.getUsername(), recommendationInputBoundry, orderDsGateway);
     }
 }

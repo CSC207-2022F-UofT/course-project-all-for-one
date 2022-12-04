@@ -1,55 +1,43 @@
 package application_business_rules_layer.userUseCases;
 
-import Interface_adapters_layer.controller.RecommendationController;
-import Interface_adapters_layer.controller.UserLoginController;
-import application_business_rules_layer.postUseCases.PostDsGateway;
 import application_business_rules_layer.recommendationUseCases.RecommendationInputBoundry;
-import application_business_rules_layer.recommendationUseCases.RecommendationOutputBoundry;
 import application_business_rules_layer.tradeUseCases.OrderDsGateway;
 import enterprise_business_rules_layer.accountEntities.Account;
-import enterprise_business_rules_layer.accountEntities.AccountFactory;
 
 public class UserLoginResponseModel {
-    Account user;
 
-    RecommendationOutputBoundry recommendationOutputBoundry;
-
-    PostDsGateway postDsGateway;
-
+    String username;
     RecommendationInputBoundry recommendationInputBoundry;
 
     OrderDsGateway orderDsGateway;
 
-
-
-    public UserLoginResponseModel(Account user, RecommendationOutputBoundry recommendationOutputBoundry,
-                                  PostDsGateway postDsGateway, RecommendationInputBoundry recommendationInputBoundry,
+    public UserLoginResponseModel(String username, RecommendationInputBoundry recommendationInputBoundry,
                                   OrderDsGateway orderDsGateway) {
-        this.user = user;
-        this.recommendationOutputBoundry = recommendationOutputBoundry;
-        this.postDsGateway = postDsGateway;
+        this.username = username;
         this.recommendationInputBoundry = recommendationInputBoundry;
         this.orderDsGateway = orderDsGateway;
-
     }
 
-
-    public Account getUser() {
-        return this.user;
+    /**
+     *
+     * @return the username after processing by the use case
+     */
+    public String getUsername() {
+        return username;
     }
 
-    public RecommendationOutputBoundry getRecommendationOutputBoundry() {
-        return recommendationOutputBoundry;
-    }
-
-    public PostDsGateway getPostDsGateway() {
-        return postDsGateway;
-    }
-
+    /**
+     *
+     * @return RecommendationInputBoundary object after processing
+     */
     public RecommendationInputBoundry getRecommendationInputBoundry() {
         return recommendationInputBoundry;
     }
 
+    /**
+     *
+     * @return OrderDsGateway object after processing
+     */
     public OrderDsGateway getOrderDsGateway() {
         return orderDsGateway;
     }

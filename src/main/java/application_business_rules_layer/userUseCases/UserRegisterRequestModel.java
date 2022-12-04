@@ -4,9 +4,9 @@ import enterprise_business_rules_layer.Wallet;
 
 public class UserRegisterRequestModel {
 
-    private String username;
-    private String password;
-    private String repeatedPassword;
+    private final String username;
+    private final String password;
+    private final String repeatedPassword;
 
 
     public UserRegisterRequestModel(String username, String password, String repeatedPassword){
@@ -15,28 +15,29 @@ public class UserRegisterRequestModel {
         this.repeatedPassword = repeatedPassword;
     }
 
+    /**
+     *
+     * @return the username to be processed by the use case
+     */
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
+    /**
+     *
+     * @return the password to be processed by the use case
+     */
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    /**
+     *
+     * @return the repeated password to be processed by the use case
+     */
     public String getRepeatedPassword() {
         return repeatedPassword;
     }
 
-    public void setRepeatedPassword(String repeatedPassword) {
-        this.repeatedPassword = repeatedPassword;
-    }
 
 }

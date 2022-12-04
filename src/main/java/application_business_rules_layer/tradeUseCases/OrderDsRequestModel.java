@@ -16,7 +16,7 @@ public class OrderDsRequestModel {
 
     private final String PhoneNumber;
 
-    private String ShipmentStatus;
+    private final String ShipmentStatus;
 
     private final String BuyerUsername;
 
