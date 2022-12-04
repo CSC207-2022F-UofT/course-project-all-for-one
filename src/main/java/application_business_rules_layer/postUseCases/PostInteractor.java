@@ -14,6 +14,12 @@ public class PostInteractor implements PostInputBoundary {
     final PostOutputBoundary postOutputBoundary;
     final PostFactory postFactory;
 
+    /**
+     *
+     * @param postOutputBoundary relay to Interface_adapters.presenter
+     * @param postDfGateway Interface_adapters.gateway to reach post file
+     * @param postFactory a factory in entity to create an instance of post
+     */
     public PostInteractor(PostDsGateway postDfGateway, PostOutputBoundary postOutputBoundary,
                           PostFactory postFactory) {
         this.postDsGateway = postDfGateway;
@@ -21,6 +27,11 @@ public class PostInteractor implements PostInputBoundary {
         this.postFactory = postFactory;
     }
 
+    /**
+     *
+     * @param requestModel the PostRequestModel that serves as the input needed processing the post creation
+     * @return the PostResponseModel that shows a result of the creation: preparing a success/failure view
+     */
     @Override
     public PostResponseModel create(PostRequestModel requestModel) {
 

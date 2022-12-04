@@ -60,7 +60,7 @@ public class FilePost implements PostDsGateway {
 
     /**
      * Add requestModel to storage.
-     * @param requestModel the user information to save.
+     * @param requestModel the post's information to save.
      */
     @Override
     public void save(PostDsRequestModel requestModel) {
@@ -68,6 +68,9 @@ public class FilePost implements PostDsGateway {
         this.save();
     }
 
+    /**
+     * Save the information of the post in the csv file
+     */
     private void save() {
         BufferedWriter writer;
         try {

@@ -41,7 +41,16 @@ public class PostRequestModel {
         this.Price = revise_price;
     }
 
+    /**
+     *
+     * @return the username in the request model object
+     */
     public String get_username(){return this.Username;}
+
+    /**
+     *
+     * @return the title in the request model object
+     */
     public String get_title(){
         return this.Title;
     }

@@ -8,9 +8,14 @@ public interface PostDsGateway {
     /**
      *
      * @param requestModel a request model that is used to store the information needed to request creating a post
+     * @ save the required information to posts' database
      */
     void save(PostDsRequestModel requestModel);
-
+    /**
+     *
+     * @param id the id of the post that is required to delete
+     * @ delete the required information to posts' database
+     */
     void delete(String id);
 
     /**
