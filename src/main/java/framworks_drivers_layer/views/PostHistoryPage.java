@@ -38,7 +38,6 @@ public class PostHistoryPage extends JFrame implements ActionListener {
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         searchScrollPanel.setViewportView(postScrollPanelViewPort);
         this.add(searchScrollPanel);
-        this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 

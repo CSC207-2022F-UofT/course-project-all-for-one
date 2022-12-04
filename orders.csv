@@ -1,9 +1,0 @@
-Title,CreationTime,Price,Name,Address,PhoneNumber,ShipmentStatus,BuyerUsername,SellerUsername,Tags,ID
-iphone1,11:24:21,1.0,,,,Shipped,a,c,iphone:apple,1495461076
-aasdf,11:48:32,12.0,a, , ,Shipped,a,c,,1351493453
-macbook1,11:25:34,1.0,,,,Shipped,a,c,macbook:apple:computer,39041780
-aaa1,11:40:47,1.0,,,,Shipped,c,a,,1441239098
-iphone 3,11:24:54,1.0,,,,Shipped,a,c,iphone:apple,1074441312
-milktea,11:28:10,1.0,,,,Shipped,a,c,milktea,1457079632
-iphone rec,11:28:34,1.0,,,,Shipped,a,c,iphone:apple,1016626314
-iphone2,11:24:33,1.0,,,,Shipped,a,c,iphone:apple,568868009

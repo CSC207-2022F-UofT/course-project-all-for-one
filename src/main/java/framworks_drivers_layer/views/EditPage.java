@@ -2,7 +2,6 @@ package framworks_drivers_layer.views;
 
 import application_business_rules_layer.profileUseCases.ProfileGateway;
 import application_business_rules_layer.profileUseCases.ProfileRequestModel;
-import enterprise_business_rules_layer.Profile;
 import framworks_drivers_layer.dataAccess.FileProfile;
 
 import javax.swing.*;
@@ -21,7 +20,6 @@ public class EditPage extends JFrame implements ActionListener{
     JTextField textdescription = new JTextField();
     JTextField textphone = new JTextField();
     JTextField textgender = new JTextField();
-    JFrame frame = new JFrame();
     JButton save = new JButton("save");
 
     JButton cancel = new JButton("cancel");
@@ -46,10 +44,10 @@ public class EditPage extends JFrame implements ActionListener{
 
 
 
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(420, 420);
-        frame.setLayout(new FlowLayout());
-        frame.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setSize(420, 420);
+        this.setLayout(new FlowLayout());
+        this.setVisible(true);
 
 
         textage.setText(age);
@@ -113,15 +111,15 @@ public class EditPage extends JFrame implements ActionListener{
         panel6.add(save);
 
 
-        frame.add(panel1);
-        frame.add(panel2);
-        frame.add(panel3);
-        frame.add(panel4);
-        frame.add(panel5);
-        frame.add(panel7);
-        frame.add(panel6);
+        this.add(panel1);
+        this.add(panel2);
+        this.add(panel3);
+        this.add(panel4);
+        this.add(panel5);
+        this.add(panel7);
+        this.add(panel6);
 
-        frame.setTitle("Profile");
+        this.setTitle("Profile");
 
 
 
@@ -133,7 +131,7 @@ public class EditPage extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
         if (evt.getSource() == save){
-            frame.dispose();
+            this.dispose();
 
             ProfileGateway profile;
             try {
@@ -152,7 +150,7 @@ public class EditPage extends JFrame implements ActionListener{
 
         }
         if (evt.getSource() == cancel){
-            frame.dispose();
+            this.dispose();
             UserCenterPage userCenterPage = new UserCenterPage(username);
 
         }

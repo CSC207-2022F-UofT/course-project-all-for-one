@@ -10,8 +10,7 @@ public class PurchaseHistoryPage extends JFrame {
 
     public PurchaseHistoryPage(String username, List<OrderDsRequestModel> orders) {
 
-        JFrame purchaseHistoryFrame = new JFrame("Purchase History Page");
-        purchaseHistoryFrame.setBounds(400, 300, 400, 300);
+        this.setBounds(400, 300, 400, 300);
 
         JPanel history = new JPanel();
         history.setLayout(new BoxLayout(history, BoxLayout.Y_AXIS));
@@ -35,9 +34,8 @@ public class PurchaseHistoryPage extends JFrame {
         JScrollPane historyScrollPanel = new JScrollPane(history, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         historyScrollPanel.setViewportView(history);
-        purchaseHistoryFrame.add(historyScrollPanel);
-        purchaseHistoryFrame.setVisible(true);
-        purchaseHistoryFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.add(historyScrollPanel);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 

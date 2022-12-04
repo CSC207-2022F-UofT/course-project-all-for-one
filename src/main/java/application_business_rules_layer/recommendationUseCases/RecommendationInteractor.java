@@ -39,14 +39,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
 
 
         for (String tag : recommendationRequestModel.getPurchaseHistoryTags()) {
-            boolean contain = false;
-            for(String tagsAdded: tags.keySet()){
-                if (tag.contains(tagsAdded)) {
-                    contain = true;
-                    break;
-                }
-            }
-            if (!tags.containsKey(tag) && !contain) {
+            if (!tags.containsKey(tag)) {
                 tags.put(tag, 1);
             } else {
                 tags.put(tag, tags.get(tag) + 1);
@@ -75,6 +68,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
             max = 0;
         }
         System.out.println(mostTags);
+        System.out.println(mostTags.size());
 
 
 
