@@ -1,6 +1,8 @@
 package framworks_drivers_layer.views;
 
 import Interface_adapters_layer.controller.TradeController;
+import Interface_adapters_layer.view_interfaces.TradeViewInterface;
+import application_business_rules_layer.tradeUseCases.TradeResponseModel;
 import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.postEntities.Post;
 
@@ -9,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ConfirmOrderPage extends JPanel implements ActionListener {
+public class ConfirmOrderPage extends JPanel implements ActionListener, TradeViewInterface {
 
     JTextField name = new JTextField(20);
 
@@ -71,13 +73,21 @@ public class ConfirmOrderPage extends JPanel implements ActionListener {
         this.add(buttons);
     }
 
+    @Override
+    public void showSuccessMessage(TradeResponseModel responseModel){
+        JOptionPane.showMessageDialog(this, responseModel.getSuccessMessage() + " at " +
+                responseModel.getCreationTime());
+    }
+
 
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
 
         try {
-            tradeController.create(Post, name.getText(), phone.getText(), address.getText(), buyerUsername);
-            JOptionPane.showMessageDialog(this, "Order Placed");
+            TradeResponseModel responseModel = tradeController.create(Post, name.getText(), phone.getText(),
+                    address.getText(), buyerUsername);
+            showSuccessMessage(responseModel);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

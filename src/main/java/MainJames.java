@@ -47,7 +47,7 @@ public class MainJames {
             throw new RuntimeException("Could not create orders.csv");
         }
         RecommendationController recommendationController = new RecommendationController(username, recommendationInputBoundry, orderDsGateway);
-        MainPage mainPage = new MainPage(username, recommendationController);
+        MainPage mainPage = new MainPage(username);
 
         jf.add(mainPage);
         jf.setVisible(true);

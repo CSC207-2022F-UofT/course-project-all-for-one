@@ -1,7 +1,7 @@
 import application_business_rules_layer.userUseCases.UserDsGateway;
 import application_business_rules_layer.userUseCases.UserRegisterInputBoundary;
 import application_business_rules_layer.userUseCases.UserRegisterInteractor;
-import application_business_rules_layer.userUseCases.UserRegisterOutputBoundry;
+import application_business_rules_layer.userUseCases.UserRegisterOutputBoundary;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
 import Interface_adapters_layer.controller.UserRegisterController;
 import framworks_drivers_layer.dataAccess.FileUser;
@@ -28,7 +28,7 @@ public class MainUser {
         } catch (IOException e) {
             throw new RuntimeException("Could not create file.");
         }
-        UserRegisterOutputBoundry presenter = new UserRegisterPresenter();
+        UserRegisterOutputBoundary presenter = new UserRegisterPresenter();
         AccountFactory accountFactory = new AccountFactory();
         UserRegisterInputBoundary interactor = new UserRegisterInteractor(
                 user, presenter, accountFactory);

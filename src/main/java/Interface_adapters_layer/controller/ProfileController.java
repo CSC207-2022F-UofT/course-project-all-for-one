@@ -11,9 +11,9 @@ public class ProfileController {
         this.userinput = UserDsGateway;
     }
 
-    public static ProfileResponseModel create(int age, String username, String address, String description, String phone)
+    public static ProfileResponseModel create(String age, String username, String address,String gender, String description, String phone)
     {
-        ProfileRequestModel requestModel = new ProfileRequestModel(age,address,username,description,phone);
+        ProfileRequestModel requestModel = new ProfileRequestModel(username,age,gender,address,description,phone);
         return userinput.create(requestModel);
     }
 }

@@ -21,6 +21,7 @@ public class PhysicalOrder implements Order {
     private final String SellerUsername;
 
 
+
     PhysicalOrder(Post post, String creationTime, String name, String address, String phoneNumber,
                   String shipmentStatus, String buyerUsername, String sellerUsername) {
         Post = post;
@@ -71,4 +72,5 @@ public class PhysicalOrder implements Order {
     public String getSellerUsername() {
         return SellerUsername;
     }
+
 }

@@ -8,5 +8,4 @@ public interface PostInputBoundary {
      */
     PostResponseModel create(PostRequestModel requestModel);
 
-    void deletion(PostRequestModel requestModel);
 }

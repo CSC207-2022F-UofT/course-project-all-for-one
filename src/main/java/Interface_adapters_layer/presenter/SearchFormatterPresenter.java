@@ -11,5 +11,5 @@ public class SearchFormatterPresenter implements SearchPresenter{
     }
 
     @Override
-    public List<Post> prepareFailureSearchView(){throw new SearchFailureError("No match found!");}
+    public List<Post> prepareFailureSearchView(String errorMessage){throw new SearchFailureError(errorMessage);}
 }

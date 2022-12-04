@@ -9,22 +9,33 @@ import java.time.LocalDateTime;
 public class UserRegisterInteractor implements UserRegisterInputBoundary {
 
     final UserDsGateway userDsGateway;
-    final UserRegisterOutputBoundry userRegisterOutputBoundry;
+    final UserRegisterOutputBoundary userRegisterOutputBoundary;
     final AccountFactory accountFactory;
 
-    public UserRegisterInteractor(UserDsGateway userDsGateway, UserRegisterOutputBoundry userRegisterOutputBoundry1,
+    /**
+     *
+     * @param userDsGateway Interface_adapters.gateway to reach user database
+     * @param userRegisterOutputBoundary relay to Interface_adapters.presenter
+     * @param accountFactory factory to create Account entity
+     */
+    public UserRegisterInteractor(UserDsGateway userDsGateway, UserRegisterOutputBoundary userRegisterOutputBoundary,
                                   AccountFactory accountFactory) {
         this.userDsGateway = userDsGateway;
-        this.userRegisterOutputBoundry = userRegisterOutputBoundry1;
+        this.userRegisterOutputBoundary = userRegisterOutputBoundary;
         this.accountFactory = accountFactory;
     }
 
     @Override
     public UserRegisterResponseModel create(UserRegisterRequestModel requestModel) {
+
+        // determine if the username already existed in the database
         if (userDsGateway.existsByName(requestModel.getUsername())){
-            return userRegisterOutputBoundry.prepareFailView("Username already exists.");
-        } else if (!requestModel.getPassword().equals(requestModel.getRepeatedPassword())) {
-            return userRegisterOutputBoundry.prepareFailView("Passwords don't match.");
+            return userRegisterOutputBoundary.prepareFailView("Username already exists.");
+        }
+
+        // determine if the two passwords user input are the same
+        else if (!requestModel.getPassword().equals(requestModel.getRepeatedPassword())) {
+            return userRegisterOutputBoundary.prepareFailView("Passwords don't match.");
         }
 
         Wallet wallet = new Wallet(1000);
@@ -35,6 +46,6 @@ public class UserRegisterInteractor implements UserRegisterInputBoundary {
         userDsGateway.save(userDsRequestModel);
 
         UserRegisterResponseModel accountResponseModel = new UserRegisterResponseModel(account.getUsername(), now.toString());
-        return userRegisterOutputBoundry.prepareSuccessView(accountResponseModel);
+        return userRegisterOutputBoundary.prepareSuccessView(accountResponseModel);
     }
 }

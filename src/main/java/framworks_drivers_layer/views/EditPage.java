@@ -8,11 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EditPage extends JFrame implements ActionListener{
-    static String age = Profile.getAge();
+     String age = Profile.getAge();
     static String username = Profile.getUsername();
     static String description = Profile.getDescription();
     static String address = Profile.getAddress();
     static String phone = Profile.getPhone();
+
+    static String gender = Profile.getGender();
 
 
     JTextField textage = new JTextField();
@@ -20,6 +22,7 @@ public class EditPage extends JFrame implements ActionListener{
     JTextField textaddress = new JTextField();
     JTextField textdescription = new JTextField();
     JTextField textphone = new JTextField();
+    JTextField textgender = new JTextField();
     JFrame frame = new JFrame();
     JButton save = new JButton("save");
 
@@ -38,6 +41,7 @@ public class EditPage extends JFrame implements ActionListener{
         textaddress.setText(address);
         textdescription.setText(description);
         textphone.setText(phone);
+        textgender.setText(gender);
 
 
         textage.setPreferredSize(new Dimension(100,40));
@@ -51,6 +55,7 @@ public class EditPage extends JFrame implements ActionListener{
         this.add(textaddress);
         this.add(textdescription);
         this.add(textphone);
+        this.add(textgender);
 
         save.addActionListener(this);
         cancel.addActionListener(this);
@@ -84,11 +89,15 @@ public class EditPage extends JFrame implements ActionListener{
         panel6.add(cancel);
         panel6.add(save);
 
+        JPanel panel7 = new JPanel();
+        panel7.add(new JLabel("Please input your gender"));
+
         frame.add(panel1);
         frame.add(panel2);
         frame.add(panel3);
         frame.add(panel4);
         frame.add(panel5);
+        frame.add(panel7);
         frame.add(panel6);
 
         frame.setTitle("Profile");

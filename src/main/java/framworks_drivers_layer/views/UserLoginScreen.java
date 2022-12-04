@@ -3,20 +3,9 @@ package framworks_drivers_layer.views;
 import Interface_adapters_layer.controller.RecommendationController;
 import Interface_adapters_layer.controller.UserLoginController;
 import Interface_adapters_layer.controller.UserRegisterController;
-import Interface_adapters_layer.presenter.RecommendationResponsePresenter;
 import Interface_adapters_layer.presenter.UserRegisterPresenter;
-import application_business_rules_layer.postUseCases.PostDsGateway;
-import application_business_rules_layer.recommendationUseCases.RecommendationInputBoundry;
-import application_business_rules_layer.recommendationUseCases.RecommendationInteractor;
-import application_business_rules_layer.recommendationUseCases.RecommendationOutputBoundry;
-import application_business_rules_layer.tradeUseCases.OrderDsGateway;
-import application_business_rules_layer.userUseCases.UserDsGateway;
-import application_business_rules_layer.userUseCases.UserRegisterInputBoundary;
-import application_business_rules_layer.userUseCases.UserRegisterInteractor;
-import application_business_rules_layer.userUseCases.UserRegisterOutputBoundry;
+import application_business_rules_layer.userUseCases.*;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
-import framworks_drivers_layer.dataAccess.FileOrder;
-import framworks_drivers_layer.dataAccess.FilePost;
 import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
@@ -86,55 +75,46 @@ public class UserLoginScreen extends JFrame implements ActionListener {
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
+
+
         if (evt.getActionCommand().equals("Login")) {
             try {
-                userLoginController.create(username.getText(),
+                UserLoginResponseModel responseModel = userLoginController.create(username.getText(),
                         String.valueOf(password.getPassword()));
-
                 this.dispose();
+
                 // create main page
                 JFrame jf = new JFrame("main");
                 jf.setBounds(400, 300, 600, 300);
-                RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter();
-                PostDsGateway post;
-                try {
-                    post = new FilePost("./posts.csv");
-                } catch (IOException e) {
-                    throw new RuntimeException("Could not create posts.csv.");
-                }
-                RecommendationInputBoundry recommendationInputBoundry = new RecommendationInteractor(recommendationOutputBoundry, post);
-                OrderDsGateway orderDsGateway;
-                try{
-                    orderDsGateway = new FileOrder("./orders.csv");
-                } catch (IOException e){
-                    throw new RuntimeException("Could not create orders.csv");
-                }
-                RecommendationController recommendationController = new RecommendationController(username.getText(), recommendationInputBoundry, orderDsGateway);
-                MainPage mainPage = new MainPage(username.getText(), recommendationController);
+
+                RecommendationController recommendationController = new RecommendationController(username.getText(),
+                        responseModel.getRecommendationInputBoundry(), responseModel.getOrderDsGateway());
+                MainPage mainPage = new MainPage(username.getText());
 
                 jf.add(mainPage);
                 jf.setVisible(true);
                 jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-
-
-
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
+
         } else {
             this.dispose();
-            UserDsGateway gateway;
+
+            UserDsGateway userGateway;
             try {
-                gateway = new FileUser("./users.csv");
+                userGateway = new FileUser("./users.csv");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            UserRegisterOutputBoundry outputBoundry = new UserRegisterPresenter();
-            AccountFactory accountFactory = new AccountFactory();
-            UserRegisterInputBoundary interactor = new UserRegisterInteractor(gateway, outputBoundry, accountFactory);
-            UserRegisterController controller = new UserRegisterController(interactor);
 
+            UserRegisterOutputBoundary userRegisterOutputBoundary = new UserRegisterPresenter();
+            AccountFactory accountFactory = new AccountFactory();
+            UserRegisterInputBoundary userRegisterInputBoundary = new UserRegisterInteractor(userGateway, userRegisterOutputBoundary,
+                    accountFactory);
+
+            UserRegisterController controller = new UserRegisterController(userRegisterInputBoundary);
             UserRegisterScreen userRegisterScreen = new UserRegisterScreen(controller);
             userRegisterScreen.setVisible(true);
             userRegisterScreen.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
