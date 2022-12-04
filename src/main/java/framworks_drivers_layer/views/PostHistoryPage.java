@@ -9,15 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class PostHistoryPage implements ActionListener {
+public class PostHistoryPage extends JFrame implements ActionListener {
     private final String username;
 
     private final List<Post> posts ;
     public PostHistoryPage(String username, List<Post> posts){
         this.username = username;
         this.posts = posts;
-        JFrame postHistory_page = new JFrame("PostHistory Page");
-        postHistory_page.setBounds(400, 300, 400, 300);
+
+        this.setBounds(400, 300, 400, 300);
 
 
         JPanel postScrollPanelViewPort = new JPanel();
@@ -37,9 +37,9 @@ public class PostHistoryPage implements ActionListener {
         JScrollPane searchScrollPanel = new JScrollPane(postScrollPanelViewPort, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         searchScrollPanel.setViewportView(postScrollPanelViewPort);
-        postHistory_page.add(searchScrollPanel);
-        postHistory_page.setVisible(true);
-        postHistory_page.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.add(searchScrollPanel);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     @Override
@@ -48,6 +48,7 @@ public class PostHistoryPage implements ActionListener {
         MessageDsGateway Messages = new FileMessage("./MessageBoard.csv");
         JFrame postPage = new PostPage(posts.get(j), username, Messages);
         postPage.setVisible(true);
+        this.dispose();
 
     }
 }

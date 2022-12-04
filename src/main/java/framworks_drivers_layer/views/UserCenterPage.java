@@ -1,23 +1,16 @@
 package framworks_drivers_layer.views;
 
 
-import Interface_adapters_layer.presenter.ProfilePresenter;
 import application_business_rules_layer.postUseCases.PostDsGateway;
 import application_business_rules_layer.profileUseCases.ProfileGateway;
-import application_business_rules_layer.profileUseCases.ProfileRequestModel;
 import application_business_rules_layer.tradeUseCases.OrderDsGateway;
 import application_business_rules_layer.userUseCases.UserDsGateway;
-import enterprise_business_rules_layer.Profile;
-import enterprise_business_rules_layer.PurchaseHistory;
-import enterprise_business_rules_layer.Wallet;
-import enterprise_business_rules_layer.postEntities.Post;
 import framworks_drivers_layer.dataAccess.FileOrder;
 import framworks_drivers_layer.dataAccess.FilePost;
 import framworks_drivers_layer.dataAccess.FileProfile;
 import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -91,6 +84,7 @@ public class UserCenterPage extends JFrame implements ActionListener{
       public void actionPerformed(ActionEvent evt) {
            if (evt.getActionCommand().equals("Edit/Create")){
                   EditPage editPage = new EditPage(username);
+                  editPage.setVisible(true);
                   this.dispose();
             }
             if (evt.getActionCommand().equals("Wallet")){
@@ -113,8 +107,8 @@ public class UserCenterPage extends JFrame implements ActionListener{
                         throw new RuntimeException("Could not create file.");
                   }
 
-                  PurchaseHistoryPage purchaseHistory = new PurchaseHistoryPage(order.getPurchaseHistory(username));
-
+                  PurchaseHistoryPage purchaseHistory = new PurchaseHistoryPage(username, order.getPurchaseHistory(username));
+                  purchaseHistory.setVisible(true);
 
             }
             if (evt.getActionCommand().equals("Post History")){
@@ -125,6 +119,7 @@ public class UserCenterPage extends JFrame implements ActionListener{
                         throw new RuntimeException("Could not create file.");
                   }
                   PostHistoryPage postHistoryPage = new PostHistoryPage(username,post.allPosts(username));
+                  postHistoryPage.setVisible(true);
             }
       }
 

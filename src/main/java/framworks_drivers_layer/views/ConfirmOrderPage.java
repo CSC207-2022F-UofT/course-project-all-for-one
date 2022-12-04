@@ -2,14 +2,16 @@ package framworks_drivers_layer.views;
 
 import Interface_adapters_layer.controller.TradeController;
 import Interface_adapters_layer.view_interfaces.TradeViewInterface;
+import application_business_rules_layer.profileUseCases.ProfileGateway;
 import application_business_rules_layer.tradeUseCases.TradeResponseModel;
-import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.postEntities.Post;
+import framworks_drivers_layer.dataAccess.FileProfile;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ConfirmOrderPage extends JPanel implements ActionListener, TradeViewInterface {
 
@@ -33,6 +35,12 @@ public class ConfirmOrderPage extends JPanel implements ActionListener, TradeVie
         this.Post = post;
         this.buyerUsername = buyerUsername;
 
+        ProfileGateway profile;
+        try {
+            profile = new FileProfile("./profile.csv");
+        } catch (IOException e) {
+            throw new RuntimeException("Could not create file.");
+        }
 
         JLabel title = new JLabel("Confirm Your Purchase");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -47,6 +55,9 @@ public class ConfirmOrderPage extends JPanel implements ActionListener, TradeVie
         JLabel dSeller = new JLabel(post.getUsername());
         dSeller.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        name.setText(buyerUsername);
+        phone.setText(profile.getPhone(buyerUsername));
+        address.setText(profile.getAddress(buyerUsername));
         LabelTextPanel nameInfo = new LabelTextPanel(
                 new JLabel("Enter Your Name"), name);
         LabelTextPanel phoneInfo = new LabelTextPanel(
