@@ -26,4 +26,6 @@ public interface PostDsGateway {
     List<Post> findPosts(List<String> Tags);
 
     List<Post> findPostsWithKeyword(String keyword);
+
+    List<Post> allPosts(String username);
 }
