@@ -24,6 +24,8 @@ public class OrderDsRequestModel {
 
     private final List<String> Tags;
 
+    private final String Id;
+
     public OrderDsRequestModel(String title, String creationTime, double price, String name, String address,
                                String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername, List<String> tags) {
         Title = title;
@@ -36,6 +38,7 @@ public class OrderDsRequestModel {
         BuyerUsername = buyerUsername;
         SellerUsername = sellerUsername;
         Tags = tags;
+        this.Id = String.valueOf(this.hashCode());
     }
 
     /**
@@ -116,5 +119,13 @@ public class OrderDsRequestModel {
      */
     public List<String> getTags() {
         return Tags;
+    }
+
+    /**
+     *
+     * @return the hashcode of the orderdsrequestmodel object
+     */
+    public String getId() {
+        return Id;
     }
 }

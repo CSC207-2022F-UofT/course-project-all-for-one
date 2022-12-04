@@ -20,7 +20,9 @@ public class SearchController {
     public List<Post> create(String keyword){
         List<Post> posts = postDsGateway.findPostsWithKeyword(keyword);
         if (posts.size() == 0){
-            return searchPresenter.prepareFailureSearchView();
+            return searchPresenter.prepareFailureSearchView("No match found!");
+        } else if(keyword.length() == 0){
+            return searchPresenter.prepareFailureSearchView("Please enter a keyword!");
         } else{
             return searchPresenter.prepareSuccessSearchView(posts);
         }

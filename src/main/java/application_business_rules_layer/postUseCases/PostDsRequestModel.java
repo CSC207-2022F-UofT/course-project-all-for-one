@@ -17,7 +17,7 @@ public class PostDsRequestModel {
 
     private String Id;
 
-    public PostDsRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags, LocalDateTime time){
+    public PostDsRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags, LocalDateTime time, String inputId){
         this.Username = input_username;
         this.Title = input_title;
         this.Description = input_description;
@@ -25,7 +25,7 @@ public class PostDsRequestModel {
         this.Status = "Active";
         this.Tags = tags;
         this.creationTime = time;
-        this.Id = String.valueOf(this.hashCode());
+        this.Id = inputId;
 
     }
     public void reviseDescription(String revise_description){

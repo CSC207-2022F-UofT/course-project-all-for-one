@@ -1,5 +1,6 @@
 package application_business_rules_layer.tradeUseCases;
 
+import application_business_rules_layer.postUseCases.PostDsGateway;
 import application_business_rules_layer.userUseCases.UserDsGateway;
 import enterprise_business_rules_layer.orderEntities.OrderFactory;
 import enterprise_business_rules_layer.orderEntities.Order;
@@ -12,6 +13,7 @@ public class TradeInteractor implements TradeInputBoundary {
     final UserDsGateway userDsGateway;
     final TradeOutputBoundry tradeOutputBoundry;
     final OrderFactory orderFactory;
+    final PostDsGateway postDsGateway;
 
     /**
      *
@@ -21,11 +23,12 @@ public class TradeInteractor implements TradeInputBoundary {
      * @param orderFactory factory to create Order entity
      */
     public TradeInteractor(OrderDsGateway orderDsGateway, UserDsGateway userDsGateway,
-                           TradeOutputBoundry tradeOutputBoundary, OrderFactory orderFactory) {
+                           TradeOutputBoundry tradeOutputBoundary, OrderFactory orderFactory, PostDsGateway postDsGateway) {
         this.orderDsGateway = orderDsGateway;
         this.userDsGateway = userDsGateway;
         this.tradeOutputBoundry = tradeOutputBoundary;
         this.orderFactory = orderFactory;
+        this.postDsGateway = postDsGateway;
     }
 
     /**
@@ -72,6 +75,7 @@ public class TradeInteractor implements TradeInputBoundary {
 
         // save the order to database
         orderDsGateway.save(orderDsModel);
+        postDsGateway.delete(requestModel.getPost().getId());
 
         // display success transaction message to user
         TradeResponseModel tradeResponseModel = new TradeResponseModel("Order Confirmed", order.getCreationTime());

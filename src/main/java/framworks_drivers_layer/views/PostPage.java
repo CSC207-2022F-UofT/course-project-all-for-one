@@ -1,20 +1,17 @@
 package framworks_drivers_layer.views;
 
-import application_business_rules_layer.userUseCases.UserDsGateway;
-import enterprise_business_rules_layer.accountEntities.Account;
-import enterprise_business_rules_layer.postEntities.Post;
-import framworks_drivers_layer.dataAccess.FileOrder;
-import application_business_rules_layer.tradeUseCases.OrderDsGateway;
-import Interface_adapters_layer.presenter.BuyPresenter;
-
-
 import Interface_adapters_layer.controller.MessageController;
-import application_business_rules_layer.messageUseCases.MessageDsGateway;
+import Interface_adapters_layer.presenter.BuyPresenter;
 import Interface_adapters_layer.presenter.MessagePresenter;
 import Interface_adapters_layer.presenter.MessageResponseFormatter;
+import application_business_rules_layer.messageUseCases.MessageDsGateway;
 import application_business_rules_layer.messageUseCases.MessageInteractor;
 import application_business_rules_layer.messageUseCases.MessageRequestModel;
 import application_business_rules_layer.messageUseCases.MessageResponseModel;
+import application_business_rules_layer.tradeUseCases.OrderDsGateway;
+import application_business_rules_layer.userUseCases.UserDsGateway;
+import enterprise_business_rules_layer.postEntities.Post;
+import framworks_drivers_layer.dataAccess.FileOrder;
 import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
@@ -46,6 +43,7 @@ public class PostPage extends JFrame implements ActionListener {
 
 
     public PostPage(Post post, String buyerUsername, MessageDsGateway dsGateway) {
+        this.setLocation(450, 300);
 
 
         this.Post = post;
@@ -66,10 +64,10 @@ public class PostPage extends JFrame implements ActionListener {
         MessagePresenter presenter = new MessageResponseFormatter();
         List<String> lst = presenter.displayBoard(responseModel).getMessageList();
 
-        JLabel dPostTitle = new JLabel(Post.getTitle());
-        JLabel dPostDescription = new JLabel(Post.getDescription());
-        JLabel dPrice = new JLabel(Double.toString(Post.getPrice()));
-        JLabel dSeller = new JLabel(post.getUsername());
+        JLabel dPostTitle = new JLabel("Post Title:" + Post.getTitle());
+        JLabel dPostDescription = new JLabel("Description:" + Post.getDescription());
+        JLabel dPrice = new JLabel("Price:" + Double.toString(Post.getPrice()));
+        JLabel dSeller = new JLabel("Seller:" + post.getUsername());
 
         JButton buyButton = new JButton("Buy");
         JButton postButton = new JButton("Post");
@@ -99,9 +97,9 @@ public class PostPage extends JFrame implements ActionListener {
             messagePanel.add(boardPanel, BorderLayout.NORTH);
             messagePanel.add(enterPanel, BorderLayout.SOUTH);
         }
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(postPanel, BorderLayout.NORTH);
-        mainPanel.add(messagePanel, BorderLayout.SOUTH);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(postPanel);
+        mainPanel.add(messagePanel);
 
         buyButton.addActionListener(this);
         postButton.addActionListener(this);

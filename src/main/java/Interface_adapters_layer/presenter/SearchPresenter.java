@@ -7,5 +7,5 @@ import java.util.List;
 public interface SearchPresenter {
     List<Post> prepareSuccessSearchView(List<Post> posts);
 
-    List<Post> prepareFailureSearchView();
+    List<Post> prepareFailureSearchView(String errorMessage);
 }

@@ -58,7 +58,7 @@ public class FileOrder implements OrderDsGateway {
 //                LocalDateTime creationTime = LocalDateTime.parse(creationTimeString);
                 OrderDsRequestModel order = new OrderDsRequestModel(title, creationTimeString, price, name, address,
                         phoneNumber, shipmentStatus, buyerUsername, sellerUsername, tags);
-                orders.put(buyerUsername, order);
+                orders.put(order.getId(), order);
             }
 
             reader.close();
@@ -100,9 +100,9 @@ public class FileOrder implements OrderDsGateway {
 
     public List<String> getPurchaseHistoryTagsData(String username){
         List<String> tags = new ArrayList<>();
-        for(String buyerName : orders.keySet()){
-            if(username.equals(buyerName)){
-                tags.addAll(orders.get(buyerName).getTags());
+        for(OrderDsRequestModel orderDsRequestModel: orders.values()){
+            if(username.equals(orderDsRequestModel.getBuyerUsername())){
+                tags.addAll(orderDsRequestModel.getTags());
             }
         }
         return tags;

@@ -3,14 +3,16 @@ package framworks_drivers_layer.views;
 
 import Interface_adapters_layer.controller.RecommendationController;
 import Interface_adapters_layer.controller.SearchController;
+import Interface_adapters_layer.presenter.*;
+import application_business_rules_layer.recommendationUseCases.RecommendationInputBoundry;
+import application_business_rules_layer.recommendationUseCases.RecommendationInteractor;
+import application_business_rules_layer.recommendationUseCases.RecommendationOutputBoundry;
+import application_business_rules_layer.tradeUseCases.OrderDsGateway;
 import enterprise_business_rules_layer.postEntities.Post;
 import enterprise_business_rules_layer.postEntities.PostFactory;
+import framworks_drivers_layer.dataAccess.FileOrder;
 import framworks_drivers_layer.dataAccess.FilePost;
 import application_business_rules_layer.postUseCases.PostDsGateway;
-import Interface_adapters_layer.presenter.RecommendationFailedError;
-import Interface_adapters_layer.presenter.SearchFailureError;
-import Interface_adapters_layer.presenter.SearchFormatterPresenter;
-import Interface_adapters_layer.presenter.SearchPresenter;
 import application_business_rules_layer.postUseCases.PostInputBoundary;
 import application_business_rules_layer.postUseCases.PostInteractor;
 import application_business_rules_layer.postUseCases.PostOutputBoundary;
@@ -26,17 +28,14 @@ import java.util.List;
 public class MainPage extends JPanel implements ActionListener {
 
     String username;
-    RecommendationController recommendationController;
     JTextField searchKeywordsTextField = new JTextField(20);
 
     /**
      *
      * @param username username of the user that is acting
-     * @param recommendationController the RecommendationController that would control which use case to use in this page
      */
-    public MainPage(String username, RecommendationController recommendationController){
+    public MainPage(String username){
 
-        this.recommendationController = recommendationController;
 
         this.username = username;
 
@@ -138,6 +137,25 @@ public class MainPage extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Recommendation")){
             try{
+                RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter();
+
+                PostDsGateway post;
+                try {
+                    post = new FilePost("./posts.csv");
+                } catch (IOException error) {
+                    throw new RuntimeException("Could not create posts.csv.");
+                }
+
+                RecommendationInputBoundry recommendationInputBoundry = new RecommendationInteractor(recommendationOutputBoundry, post);
+                OrderDsGateway orderDsGateway;
+                try{
+                    orderDsGateway = new FileOrder("./orders.csv");
+                } catch (IOException error){
+                    throw new RuntimeException("Could not create orders.csv");
+                }
+
+                RecommendationController recommendationController = new RecommendationController(username,
+                        recommendationInputBoundry, orderDsGateway);
                 RecommendationResponseModel responseModel = recommendationController.generate();
 
                 RecommendationPage recommendationPage = new RecommendationPage(responseModel, username);

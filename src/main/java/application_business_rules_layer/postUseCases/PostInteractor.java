@@ -31,16 +31,12 @@ public class PostInteractor implements PostInputBoundary {
         }
 
         LocalDateTime now = LocalDateTime.now();
-        PostDsRequestModel postDsModel = new PostDsRequestModel(post.getUsername(), post.getTitle(), post.getDescription(), post.getPrice(), post.getTags(), now);
+        PostDsRequestModel postDsModel = new PostDsRequestModel(post.getUsername(), post.getTitle(), post.getDescription(), post.getPrice(), post.getTags(), now, post.getId());
         postDsGateway.save(postDsModel);
 
         PostResponseModel accountResponseModel = new PostResponseModel(post.getTitle(), now.toString());
         return postOutputBoundary.prepareSuccessView(accountResponseModel);
     }
 
-    @Override
-    public void deletion(PostRequestModel requestModel){
-        postDsGateway.delete(requestModel.getId());
-    }
 
 }

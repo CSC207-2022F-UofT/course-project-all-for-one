@@ -3,17 +3,9 @@ package framworks_drivers_layer.views;
 import Interface_adapters_layer.controller.RecommendationController;
 import Interface_adapters_layer.controller.UserLoginController;
 import Interface_adapters_layer.controller.UserRegisterController;
-import Interface_adapters_layer.presenter.RecommendationResponsePresenter;
 import Interface_adapters_layer.presenter.UserRegisterPresenter;
-import application_business_rules_layer.postUseCases.PostDsGateway;
-import application_business_rules_layer.recommendationUseCases.RecommendationInputBoundry;
-import application_business_rules_layer.recommendationUseCases.RecommendationInteractor;
-import application_business_rules_layer.recommendationUseCases.RecommendationOutputBoundry;
-import application_business_rules_layer.tradeUseCases.OrderDsGateway;
 import application_business_rules_layer.userUseCases.*;
 import enterprise_business_rules_layer.accountEntities.AccountFactory;
-import framworks_drivers_layer.dataAccess.FileOrder;
-import framworks_drivers_layer.dataAccess.FilePost;
 import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
@@ -97,7 +89,7 @@ public class UserLoginScreen extends JFrame implements ActionListener {
 
                 RecommendationController recommendationController = new RecommendationController(username.getText(),
                         responseModel.getRecommendationInputBoundry(), responseModel.getOrderDsGateway());
-                MainPage mainPage = new MainPage(username.getText(), recommendationController);
+                MainPage mainPage = new MainPage(username.getText());
 
                 jf.add(mainPage);
                 jf.setVisible(true);

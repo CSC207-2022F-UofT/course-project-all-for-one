@@ -1,6 +1,5 @@
 import Interface_adapters_layer.controller.UserLoginController;
 import Interface_adapters_layer.presenter.UserLoginPresenter;
-import application_business_rules_layer.profileUseCases.ProfileGateway;
 import application_business_rules_layer.userUseCases.UserDsGateway;
 import application_business_rules_layer.userUseCases.UserLoginInputBoundary;
 import application_business_rules_layer.userUseCases.UserLoginInteractor;
