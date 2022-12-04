@@ -1,7 +1,7 @@
 package framworks_drivers_layer.dataAccess;
 
-import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
-import application_business_rules_layer.postcreateUseCases.PostCreateDsRequestModel;
+import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postUseCases.PostDsRequestModel;
 import enterprise_business_rules_layer.postEntities.Post;
 
 import java.util.ArrayList;
@@ -9,18 +9,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MemoryPost implements PostCreateDsGateway {
+public class MemoryPost implements PostDsGateway {
 
-    final private Map<String, PostCreateDsRequestModel> posts = new HashMap<>();
+    final private Map<String, PostDsRequestModel> posts = new HashMap<>();
 
 
     /**
      * @param requestModel the data to save
      */
     @Override
-    public void save(PostCreateDsRequestModel requestModel) {
+    public void save(PostDsRequestModel requestModel) {
         System.out.println("Save " + requestModel.getUsername() + ": " + requestModel.getTitle());
-        posts.put(requestModel.getUsername(), requestModel);
+        posts.put(requestModel.getId(), requestModel);
+    }
+    @Override
+    public void delete(String id) {
+        System.out.println("Delete post " + ": " + "id: " + id);
+        posts.remove(id);
     }
 
     /**
@@ -31,7 +36,7 @@ public class MemoryPost implements PostCreateDsGateway {
     public List<Post> findPosts(List<String> Tags) {
         List<Post> posts = new ArrayList<>();
         for(String tag : Tags){
-            for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
+            for(PostDsRequestModel postDsRequestModel: this.posts.values()){
                 if (postDsRequestModel.getTags().contains(tag) && posts.size() < 30){
                     posts.add(new Post(postDsRequestModel.getUsername(),
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
@@ -49,11 +54,24 @@ public class MemoryPost implements PostCreateDsGateway {
     @Override
     public List<Post> findPostsWithKeyword(String keyword) {
         List<Post> posts = new ArrayList<>();
-        for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
+        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
             if (postDsRequestModel.getTags().contains(keyword) && posts.size() < 30){
                 posts.add(new Post(postDsRequestModel.getUsername(),
                         postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
                         postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+            }
+        }
+        return posts;
+    }
+
+    @Override
+    public List<Post> allPosts(String username) {
+        List<Post> posts = new ArrayList<>();
+        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
+            if (postDsRequestModel.getUsername().equals(username)){
+                posts.add(new Post(postDsRequestModel.getUsername(),
+                        postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                        postDsRequestModel.getPrice(), postDsRequestModel.getTags(),postDsRequestModel.getId()));
             }
         }
         return posts;

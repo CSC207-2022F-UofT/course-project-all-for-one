@@ -19,7 +19,7 @@ public class MemoryOrder implements OrderDsGateway {
     @Override
     public void save(OrderDsRequestModel requestModel) {
         System.out.println("Save " + requestModel.getSellerUsername() + ": " + requestModel.getTitle());
-        orders.put(requestModel.getSellerUsername(), requestModel);
+        orders.put(requestModel.getId(), requestModel);
     }
 
     /**
@@ -27,14 +27,29 @@ public class MemoryOrder implements OrderDsGateway {
      * @return tags of items that are bought by username
      */
     @Override
-    public List<String> getPurchaseHistoryTagsData(String username) {
+    public List<String> getPurchaseHistoryTagsData(String username){
         List<String> tags = new ArrayList<>();
-        for(String buyerName : orders.keySet()){
-            if(username.equals(buyerName)){
-                tags.addAll(orders.get(buyerName).getTags());
+        for(OrderDsRequestModel orderDsRequestModel: orders.values()){
+            if(username.equals(orderDsRequestModel.getBuyerUsername())){
+                tags.addAll(orderDsRequestModel.getTags());
             }
         }
         return tags;
+    }
+
+    /**
+     * @param username the purchasehistory of the username want to find
+     * @return
+     */
+    @Override
+    public List<OrderDsRequestModel> getPurchaseHistory(String username) {
+        List<OrderDsRequestModel> purchaseHistory = new ArrayList<>();
+        for(OrderDsRequestModel order : orders.values()) {
+            if(username.equals(order.getBuyerUsername())) {
+                purchaseHistory.add(order);
+            }
+        }
+        return purchaseHistory;
     }
 
 }

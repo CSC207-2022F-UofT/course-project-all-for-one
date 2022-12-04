@@ -1,20 +1,19 @@
 package framworks_drivers_layer.views;
 
-import application_business_rules_layer.userUseCases.UserDsGateway;
-import enterprise_business_rules_layer.accountEntities.Account;
-import enterprise_business_rules_layer.postEntities.Post;
-import framworks_drivers_layer.dataAccess.FileOrder;
-import application_business_rules_layer.tradeUseCases.OrderDsGateway;
-import Interface_adapters_layer.presenter.BuyPresenter;
-
-
 import Interface_adapters_layer.controller.MessageController;
-import application_business_rules_layer.messageUseCases.MessageDsGateway;
+import Interface_adapters_layer.presenter.BuyPresenter;
 import Interface_adapters_layer.presenter.MessagePresenter;
 import Interface_adapters_layer.presenter.MessageResponseFormatter;
+import application_business_rules_layer.messageUseCases.MessageDsGateway;
 import application_business_rules_layer.messageUseCases.MessageInteractor;
 import application_business_rules_layer.messageUseCases.MessageRequestModel;
 import application_business_rules_layer.messageUseCases.MessageResponseModel;
+import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.tradeUseCases.OrderDsGateway;
+import application_business_rules_layer.userUseCases.UserDsGateway;
+import enterprise_business_rules_layer.postEntities.Post;
+import framworks_drivers_layer.dataAccess.FileOrder;
+import framworks_drivers_layer.dataAccess.FilePost;
 import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
@@ -46,6 +45,7 @@ public class PostPage extends JFrame implements ActionListener {
 
 
     public PostPage(Post post, String buyerUsername, MessageDsGateway dsGateway) {
+        this.setLocation(450, 300);
 
 
         this.Post = post;
@@ -66,12 +66,11 @@ public class PostPage extends JFrame implements ActionListener {
         MessagePresenter presenter = new MessageResponseFormatter();
         List<String> lst = presenter.displayBoard(responseModel).getMessageList();
 
-        JLabel dPostTitle = new JLabel(Post.getTitle());
-        JLabel dPostDescription = new JLabel(Post.getDescription());
-        JLabel dPrice = new JLabel(Double.toString(Post.getPrice()));
-        JLabel dSeller = new JLabel(post.getUsername());
+        JLabel dPostTitle = new JLabel("Title: " + Post.getTitle());
+        JLabel dPostDescription = new JLabel("Description: " + Post.getDescription());
+        JLabel dPrice = new JLabel("Price: " + Post.getPrice());
+        JLabel dSeller = new JLabel("Seller: " + post.getUsername());
 
-        JButton buyButton = new JButton("Buy");
         JButton postButton = new JButton("Post");
 
         postInfoPanel.setLayout(new BoxLayout(postInfoPanel, BoxLayout.Y_AXIS));
@@ -82,7 +81,17 @@ public class PostPage extends JFrame implements ActionListener {
 
         postPanel.setLayout(new BorderLayout());
         postPanel.add(postInfoPanel, BorderLayout.WEST);
-        postPanel.add(buyButton, BorderLayout.EAST);
+
+        if (!Post.getUsername().equals(buyerUsername)){
+            JButton buyButton = new JButton("Buy");
+            postPanel.add(buyButton, BorderLayout.EAST);
+            buyButton.addActionListener(this);
+        }
+        else{
+            JButton deleteButton = new JButton("Delete");
+            postPanel.add(deleteButton, BorderLayout.EAST);
+            deleteButton.addActionListener(this);
+        }
 
 
         if (!lst.isEmpty()) {
@@ -99,11 +108,10 @@ public class PostPage extends JFrame implements ActionListener {
             messagePanel.add(boardPanel, BorderLayout.NORTH);
             messagePanel.add(enterPanel, BorderLayout.SOUTH);
         }
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(postPanel, BorderLayout.NORTH);
-        mainPanel.add(messagePanel, BorderLayout.SOUTH);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(postPanel);
+        mainPanel.add(messagePanel);
 
-        buyButton.addActionListener(this);
         postButton.addActionListener(this);
 
 
@@ -127,10 +135,20 @@ public class PostPage extends JFrame implements ActionListener {
             try {
                 user = new FileUser("./users.csv");
             } catch (IOException e) {
-                throw new RuntimeException("Could not create file.");
+                throw new RuntimeException("Could not create users.csv.");
             }
-
             BuyPresenter.creatConfirmPage(Post, buyerUsername, order, user);
+
+        }
+        else if (evt.getActionCommand().equals("Delete")) {
+            this.dispose();
+            PostDsGateway post;
+            try {
+                post = new FilePost("./posts.csv");
+            } catch (IOException e) {
+                throw new RuntimeException("Could not create posts.csv.");
+            }
+            post.delete(this.Post.getId());
         }
         else{
             String input = inputArea.getText();

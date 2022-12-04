@@ -1,23 +1,22 @@
 package framworks_drivers_layer.dataAccess;
 
-import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
-import application_business_rules_layer.postcreateUseCases.PostCreateDsRequestModel;
+import application_business_rules_layer.postUseCases.PostDsGateway;
+import application_business_rules_layer.postUseCases.PostDsRequestModel;
 import enterprise_business_rules_layer.postEntities.Post;
 
-import javax.swing.text.html.HTML;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class FilePost implements PostCreateDsGateway {
+public class FilePost implements PostDsGateway {
 
     private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
 
 
-    private final Map<String, PostCreateDsRequestModel> posts = new HashMap<>();
+    private final Map<String, PostDsRequestModel> posts = new HashMap<>();
 
     public FilePost(String csvPath) throws IOException {
         csvFile = new File(csvPath);
@@ -29,6 +28,7 @@ public class FilePost implements PostCreateDsGateway {
         headers.put("Status", 4);
         headers.put("Tags", 5);
         headers.put("CreationTime", 6);
+        headers.put("ID", 7);
 
         if (csvFile.length() == 0) {
             save();
@@ -49,24 +49,28 @@ public class FilePost implements PostCreateDsGateway {
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 String creationTimeText = String.valueOf(col[headers.get("CreationTime")]);
                 LocalDateTime ldt = LocalDateTime.parse(creationTimeText, dateTimeFormatter);
-                PostCreateDsRequestModel post = new PostCreateDsRequestModel(username, title, description, price, tags, ldt);
-                posts.put(username, post);
+                String id = String.valueOf(col[headers.get("ID")]);
+                PostDsRequestModel post = new PostDsRequestModel(username, title, description, price, tags, ldt, id);
+                posts.put(post.getId(), post);
             }
-            System.out.println(posts.keySet());
+
             reader.close();
         }
     }
 
     /**
      * Add requestModel to storage.
-     * @param requestModel the user information to save.
+     * @param requestModel the post's information to save.
      */
     @Override
-    public void save(PostCreateDsRequestModel requestModel) {
+    public void save(PostDsRequestModel requestModel) {
         posts.put(requestModel.getId(), requestModel);
         this.save();
     }
 
+    /**
+     * Save the information of the post in the csv file
+     */
     private void save() {
         BufferedWriter writer;
         try {
@@ -74,7 +78,7 @@ public class FilePost implements PostCreateDsGateway {
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            for (PostCreateDsRequestModel post : posts.values()) {
+            for (PostDsRequestModel post : posts.values()) {
                 String str_post = post.getTags().toString();
                 str_post = str_post.replace("[","").
                         replace("]","").replace(" ","").
@@ -87,7 +91,7 @@ public class FilePost implements PostCreateDsGateway {
 //                        String.valueOf(post.get_price()), post.get_status(),
 //                        str_post, dateStr);
                 String line = ""+post.getUsername()+","+post.getTitle()+","+post.getDescription()+","+
-                        post.getPrice() +","+post.getStatus()+","+str_post+","+dateStr;
+                        post.getPrice() +","+post.getStatus()+","+str_post+","+dateStr+","+post.getId();
                 writer.write(line);
                 writer.newLine();
             }
@@ -99,6 +103,12 @@ public class FilePost implements PostCreateDsGateway {
         }
     }
 
+    @Override
+    public void delete(String id) {
+        posts.remove(id);
+        this.save();
+    }
+
 
 
     /**
@@ -108,17 +118,18 @@ public class FilePost implements PostCreateDsGateway {
     @Override
     public List<Post> findPosts(List<String> Tags) {
         List<Post> posts = new ArrayList<>();
-        for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
+        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
             for (String tag: Tags){
                 if (postDsRequestModel.getTags().contains(tag) && posts.size() < 5){
                     posts.add(new Post(postDsRequestModel.getUsername(),
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
-                            postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+                            postDsRequestModel.getPrice(), postDsRequestModel.getTags(),postDsRequestModel.getId()));
                     break;
                 }
             }
 
         }
+
         return posts;
     }
 
@@ -129,18 +140,18 @@ public class FilePost implements PostCreateDsGateway {
     @Override
     public List<Post> findPostsWithKeyword(String keyword) {
         List<Post> posts = new ArrayList<>();
-        for(PostCreateDsRequestModel postDsRequestModel: this.posts.values()){
+        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
             if (posts.size() < 10){
                 if(postDsRequestModel.getTitle().toLowerCase().strip().contains(keyword.toLowerCase().strip())){
                     posts.add(new Post(postDsRequestModel.getUsername(),
                             postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
-                            postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+                            postDsRequestModel.getPrice(), postDsRequestModel.getTags(),postDsRequestModel.getId()));
                 } else{
                     for(String tag: postDsRequestModel.getTags()){
                         if (tag.toLowerCase().strip().equals(keyword.toLowerCase().strip())){
                             posts.add(new Post(postDsRequestModel.getUsername(),
                                     postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
-                                    postDsRequestModel.getPrice(), postDsRequestModel.getTags()));
+                                    postDsRequestModel.getPrice(), postDsRequestModel.getTags(),postDsRequestModel.getId()));
                         }
 
                     }
@@ -152,4 +163,17 @@ public class FilePost implements PostCreateDsGateway {
         return posts;
     }
 
+    @Override
+    public List<Post> allPosts(String username) {
+        List<Post> posts = new ArrayList<>();
+        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
+            if (postDsRequestModel.getUsername().equals(username)){
+                posts.add(new Post(postDsRequestModel.getUsername(),
+                        postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                        postDsRequestModel.getPrice(), postDsRequestModel.getTags(),postDsRequestModel.getId()));
+                }
+            }
+        return posts;
+    }
 }
+

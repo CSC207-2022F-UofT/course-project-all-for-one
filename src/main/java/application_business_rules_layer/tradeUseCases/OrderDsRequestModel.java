@@ -16,7 +16,7 @@ public class OrderDsRequestModel {
 
     private final String PhoneNumber;
 
-    private String ShipmentStatus;
+    private final String ShipmentStatus;
 
     private final String BuyerUsername;
 
@@ -24,8 +24,10 @@ public class OrderDsRequestModel {
 
     private final List<String> Tags;
 
+    private final String Id;
+
     public OrderDsRequestModel(String title, String creationTime, double price, String name, String address,
-                               String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername, List<String> tags) {
+                               String phoneNumber, String shipmentStatus, String buyerUsername, String sellerUsername, List<String> tags, String id) {
         Title = title;
         CreationTime = creationTime;
         Price = price;
@@ -36,45 +38,94 @@ public class OrderDsRequestModel {
         BuyerUsername = buyerUsername;
         SellerUsername = sellerUsername;
         Tags = tags;
+        this.Id = id;
     }
 
+    /**
+     *
+     * @return the title of the order to be saved in database
+     */
     public String getTitle() {
         return Title;
     }
 
+    /**
+     *
+     * @return the creation time of the order to be saved in database
+     */
     public String getCreationTime() {
         return CreationTime;
     }
 
+    /**
+     *
+     * @return the name of the shipment information of the order to be saved in database
+     */
     public String getName() {
         return Name;
     }
 
+    /**
+     *
+     * @return the address of the shipment information of the order to be saved in database
+     */
     public String getAddress() {
         return Address;
     }
 
+    /**
+     *
+     * @return the phone number of the shipment information of the order to be saved in database
+     */
     public String getPhoneNumber() {
         return PhoneNumber;
     }
 
+    /**
+     *
+     * @return the shipment status of the order to be saved in database
+     */
     public String getShipmentStatus() {
         return ShipmentStatus;
     }
 
+    /**
+     *
+     * @return the transaction value of the order to be saved in database
+     */
     public double getPrice() {
         return Price;
     }
 
+    /**
+     *
+     * @return the username of the buyer of the order to be saved in database
+     */
     public String getBuyerUsername() {
         return BuyerUsername;
     }
 
+    /**
+     *
+     * @return the username of the seller of the order to be saved in database
+     */
     public String getSellerUsername() {
         return SellerUsername;
     }
 
+    /**
+     *
+     * @return the list of tags of the order to be saved in database
+     */
     public List<String> getTags() {
         return Tags;
+    }
+
+    /**
+     *
+     * @return the hashcode of the orderdsrequestmodel object
+     */
+    public String getId() {
+        return Id;
     }
 }

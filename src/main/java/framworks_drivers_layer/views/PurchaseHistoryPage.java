@@ -1,36 +1,43 @@
 package framworks_drivers_layer.views;
 
-import enterprise_business_rules_layer.orderEntities.PhysicalOrder;
+import application_business_rules_layer.tradeUseCases.OrderDsRequestModel;
 
 import javax.swing.*;
-import java.awt.*;
+
 import java.util.List;
 
-public class PurchaseHistoryPage {
-    public static void PurchaseHistoryPage(String[] args, List<PhysicalOrder> physicalOrders){
-        JFrame jf = new JFrame("Purchase History");
-        jf.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jf.setBounds(400, 300, 300, 200);
-        JMenuBar bar = new JMenuBar();
-        for (PhysicalOrder physicalOrder : physicalOrders) {
-           JMenu menu = new JMenu(physicalOrder.getCreationTime());
-           JMenuItem item1 = new JMenuItem("Product: " + physicalOrder.getPost().getTitle());
-           JMenuItem item2 = new JMenuItem("Price: $" + physicalOrder.getPost().getPrice());
-           JMenuItem item3 = new JMenuItem("Name: " + physicalOrder.getName());
-           JMenuItem item4 = new JMenuItem("Address: " + physicalOrder.getAddress());
-           JMenuItem item5 = new JMenuItem("Phone Number: " + physicalOrder.getPhoneNumber());
-           JMenuItem item6 = new JMenuItem("Status: " + physicalOrder.getShipmentStatus());
-           menu.add(item1);
-           menu.add(item2);
-           menu.add(item3);
-           menu.add(item4);
-           menu.add(item5);
-           menu.add(item6);
-           bar.add(menu);
-           jf.add(bar);
-        }
+public class PurchaseHistoryPage extends JFrame {
 
-        jf.setVisible(true);
-        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    public PurchaseHistoryPage(String username, List<OrderDsRequestModel> orders) {
+
+        this.setBounds(400, 300, 400, 300);
+
+        JPanel history = new JPanel();
+        history.setLayout(new BoxLayout(history, BoxLayout.Y_AXIS));
+        for(int j = 0; j < orders.size(); j++){
+            JPanel jp1 = new JPanel();
+            jp1.setLayout(new BoxLayout(jp1, BoxLayout.Y_AXIS));
+            if (orders.get(j).getBuyerUsername().equals(username)){
+                jp1.add(new JLabel("Item" + (j + 1) + "(As Buyer)"));
+                jp1.add(new JLabel("Title: " + orders.get(j).getTitle()));
+                jp1.add(new JLabel("Seller: " + orders.get(j).getSellerUsername()));
+            } else {
+                jp1.add(new JLabel("Item" + (j + 1) + "(As Seller)"));
+                jp1.add(new JLabel("Title: " + orders.get(j).getTitle()));
+                jp1.add(new JLabel("Buyer: " + orders.get(j).getBuyerUsername()));
+            }
+            jp1.add(new JLabel("Price: " + orders.get(j).getPrice()));
+            jp1.add(new JLabel(" "));
+            history.add(jp1);
+
+        }
+        JScrollPane historyScrollPanel = new JScrollPane(history, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        historyScrollPanel.setViewportView(history);
+        this.add(historyScrollPanel);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
+
+
 }
+

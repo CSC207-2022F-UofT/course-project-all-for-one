@@ -20,4 +20,5 @@ public class UserRegisterController {
 
         return userInput.create(requestModel);
     }
+
 }

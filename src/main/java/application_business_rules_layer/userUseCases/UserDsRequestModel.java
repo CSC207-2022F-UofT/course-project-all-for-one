@@ -17,26 +17,42 @@ public class UserDsRequestModel {
         this.walletBalance = walletBalance;
     }
 
+    /**
+     *
+     * @return the username of the user to be saved in database
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return the password of the user to be saved in database
+     */
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    /**
+     *
+     * @return the creation time of the user to be saved in database
+     */
     public LocalDateTime getCreationTime() {
         return creationTime;
     }
 
+    /**
+     *
+     * @return the balance of the user to be saved in database
+     */
     public double getWalletBalance() {
         return this.walletBalance;
     }
 
+    /**
+     *
+     * @param newBalance the new balance wanted to be saved in database
+     */
     public void setWalletBalance(double newBalance) {
         this.walletBalance = newBalance;
     }

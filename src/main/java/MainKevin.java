@@ -1,12 +1,12 @@
-import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
+import application_business_rules_layer.postUseCases.PostDsGateway;
 import framworks_drivers_layer.dataAccess.FilePost;
 import framworks_drivers_layer.views.PostController;
 import framworks_drivers_layer.views.PostResponseFormatter;
 import framworks_drivers_layer.views.PostCreationPage;
 import enterprise_business_rules_layer.postEntities.PostFactory;
-import application_business_rules_layer.postcreateUseCases.PostCreateInputBoundary;
-import application_business_rules_layer.postcreateUseCases.PostCreateInteractor;
-import application_business_rules_layer.postcreateUseCases.PostCreateOutputBoundary;
+import application_business_rules_layer.postUseCases.PostInputBoundary;
+import application_business_rules_layer.postUseCases.PostInteractor;
+import application_business_rules_layer.postUseCases.PostOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,15 +22,15 @@ public class MainKevin {
         application.add(screens);
 
         // Create the parts to plug into the Use Case+Entities engine
-        PostCreateDsGateway post;
+        PostDsGateway post;
         try {
             post = new FilePost("./posts.csv");
         } catch (IOException e) {
             throw new RuntimeException("Could not create file.");
         }
-        PostCreateOutputBoundary presenter = new PostResponseFormatter();
+        PostOutputBoundary presenter = new PostResponseFormatter();
         PostFactory postFactory = new PostFactory();
-        PostCreateInputBoundary interactor = new PostCreateInteractor(
+        PostInputBoundary interactor = new PostInteractor(
                 post, presenter, postFactory);
         PostController postController = new PostController(
                 interactor

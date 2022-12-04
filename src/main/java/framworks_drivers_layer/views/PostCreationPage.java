@@ -1,14 +1,11 @@
 package framworks_drivers_layer.views;
-import framworks_drivers_layer.views.LabelTextAreaPanel;
-import framworks_drivers_layer.views.LabelTextPanel;
-import framworks_drivers_layer.views.PostController;
-import framworks_drivers_layer.views.TextPanelwithButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -113,10 +110,28 @@ public class PostCreationPage extends JPanel implements ActionListener {
             }
         }
         else{
-            tags.add(add_tag.getText());
-            String str_tags = tags.toString();
-            str_tags = str_tags.replace("[","").replace("]","");
-            tag_show.setText(str_tags);
+            String t = add_tag.getText();
+            Boolean Duplicate = false;
+            for (String tag : tags) {
+                if (tag.equals(t)) {
+                    Duplicate = true;
+                }
+            }
+            if (Duplicate) {
+                showMessageDialog(this, "Duplicate tag");
+            }
+            else if(Objects.equals(t.strip(), "")){
+                showMessageDialog(this, "Tag cannot be empty");
+            }
+            else if(!Objects.equals(t.strip(), "")){
+                tags.add(t);
+                String str_tags = tags.toString();
+                str_tags = str_tags.replace("[","").replace("]","");
+                tag_show.setText(str_tags);
+            }
+
+
+
             add_tag.setText(null);
         }
 

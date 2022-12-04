@@ -1,11 +1,9 @@
 package application_business_rules_layer.userUseCases;
 
-import enterprise_business_rules_layer.Wallet;
-
 public class UserLoginRequestModel {
 
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
 
     public UserLoginRequestModel(String username, String password){
@@ -13,20 +11,20 @@ public class UserLoginRequestModel {
         this.password = password;
     }
 
+    /**
+     *
+     * @return the username to be processed by the use case
+     */
     public String getUsername(){
         return username;
     }
 
-    public void setUsername(String username){
-        this.username = username;
-    }
-
+    /**
+     *
+     * @return the password to be processed by the use case
+     */
     public String getPassword(){
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
 

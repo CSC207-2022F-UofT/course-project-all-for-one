@@ -1,7 +1,7 @@
 package application_business_rules_layer.recommendationUseCases;
 
+import application_business_rules_layer.postUseCases.PostDsGateway;
 import enterprise_business_rules_layer.Recommendation;
-import application_business_rules_layer.postcreateUseCases.PostCreateDsGateway;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
 public class RecommendationInteractor implements RecommendationInputBoundry{
     final RecommendationOutputBoundry recommendationOutputBoundry;
 
-    final PostCreateDsGateway postDsGateway;
+    final PostDsGateway postDsGateway;
 
     /**
      *
@@ -19,7 +19,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
      * @param postDsGateway Interface_adapters.gateway to reach post file
      */
     public RecommendationInteractor(RecommendationOutputBoundry recommendationOutputBoundry,
-                                    PostCreateDsGateway postDsGateway){
+                                    PostDsGateway postDsGateway){
         this.recommendationOutputBoundry = recommendationOutputBoundry;
         this.postDsGateway= postDsGateway;
     }
@@ -39,14 +39,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
 
 
         for (String tag : recommendationRequestModel.getPurchaseHistoryTags()) {
-            boolean contain = false;
-            for(String tagsAdded: tags.keySet()){
-                if (tag.contains(tagsAdded)) {
-                    contain = true;
-                    break;
-                }
-            }
-            if (!tags.containsKey(tag) && !contain) {
+            if (!tags.containsKey(tag)) {
                 tags.put(tag, 1);
             } else {
                 tags.put(tag, tags.get(tag) + 1);
@@ -58,7 +51,7 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
         if(tags.size() < 3){
             return recommendationOutputBoundry.prepareFailView("Please use more to have recommendation!");
         }
-        //find the 3 most tags in those tags
+//        find the 3 most tags in those tags
         Integer max = 0;
         String mostTag = "";
         List<String> mostTags = new ArrayList<>();
@@ -72,10 +65,10 @@ public class RecommendationInteractor implements RecommendationInputBoundry{
             }
             mostTags.add(mostTag);
             tags.remove(mostTag);
-
+            max = 0;
         }
-
-
+        System.out.println(mostTags);
+        System.out.println(mostTags.size());
 
 
 

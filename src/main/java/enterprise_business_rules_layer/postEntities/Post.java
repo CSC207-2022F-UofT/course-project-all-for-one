@@ -22,6 +22,16 @@ public class Post {
         this.Id = String.valueOf(this.hashCode());
     }
 
+    public Post(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags, String input_id){
+        this.Username = input_username;
+        this.Title = input_title;
+        this.Description = input_description;
+        this.Price = input_price;
+        this.Status = "Active";
+        this.Tags = tags;
+        this.Id = input_id;
+    }
+
     public String getTitle(){
         return this.Title;
     }
