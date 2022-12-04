@@ -109,6 +109,16 @@ public class FileOrder implements OrderDsGateway {
         }
         return tags;
     }
+
+    public List<OrderDsRequestModel> getPurchaseHistory(String username) {
+        List<OrderDsRequestModel> purchaseHistory = new ArrayList<>();
+        for(OrderDsRequestModel order : orders.values()) {
+            if(username.equals(order.getBuyerUsername())) {
+                purchaseHistory.add(order);
+            }
+        }
+        return purchaseHistory;
+    }
 }
 
 

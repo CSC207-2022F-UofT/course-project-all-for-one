@@ -46,6 +46,6 @@ public class UserRegisterInteractor implements UserRegisterInputBoundary {
         userDsGateway.save(userDsRequestModel);
 
         UserRegisterResponseModel accountResponseModel = new UserRegisterResponseModel(account.getUsername(), now.toString());
-        return userRegisterOutputBoundary.prepareSuccessView(accountResponseModel);
+        return accountResponseModel;
     }
 }

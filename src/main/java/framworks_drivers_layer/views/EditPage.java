@@ -45,6 +45,7 @@ public class EditPage extends JFrame implements ActionListener{
         String phone = profile.getPhone(username);
 
 
+
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(420, 420);
         frame.setLayout(new FlowLayout());
@@ -64,6 +65,7 @@ public class EditPage extends JFrame implements ActionListener{
         textaddress.setPreferredSize(new Dimension(100,40));
         textdescription.setPreferredSize(new Dimension(100,40));
         textphone.setPreferredSize(new Dimension(100,40));
+        textgender.setPreferredSize(new Dimension(100,40));
 
         textusername.setFocusable(false);
 
@@ -102,12 +104,14 @@ public class EditPage extends JFrame implements ActionListener{
         panel5.add(new JLabel("Please input your phone-number"));
         panel5.add(textphone);
 
+        JPanel panel7 = new JPanel();
+        panel7.add(new JLabel("Please input your gender"));
+        panel7.add(textgender);
+
         JPanel panel6 = new JPanel();
         panel6.add(cancel);
         panel6.add(save);
 
-        JPanel panel7 = new JPanel();
-        panel7.add(new JLabel("Please input your gender"));
 
         frame.add(panel1);
         frame.add(panel2);

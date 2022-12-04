@@ -63,4 +63,17 @@ public class MemoryPost implements PostDsGateway {
         }
         return posts;
     }
+
+    @Override
+    public List<Post> allPosts(String username) {
+        List<Post> posts = new ArrayList<>();
+        for(PostDsRequestModel postDsRequestModel: this.posts.values()){
+            if (postDsRequestModel.getUsername().equals(username)){
+                posts.add(new Post(postDsRequestModel.getUsername(),
+                        postDsRequestModel.getTitle(), postDsRequestModel.getDescription(),
+                        postDsRequestModel.getPrice(), postDsRequestModel.getTags(),postDsRequestModel.getId()));
+            }
+        }
+        return posts;
+    }
 }

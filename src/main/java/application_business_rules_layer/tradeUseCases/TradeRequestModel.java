@@ -1,6 +1,5 @@
 package application_business_rules_layer.tradeUseCases;
 
-import enterprise_business_rules_layer.accountEntities.Account;
 import enterprise_business_rules_layer.postEntities.Post;
 
 import java.time.LocalDateTime;

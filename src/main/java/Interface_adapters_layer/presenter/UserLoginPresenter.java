@@ -19,12 +19,11 @@ import java.io.IOException;
 
 public class UserLoginPresenter implements UserLoginOutputBoundary {
 
-    @Override
-    public UserLoginResponseModel prepareSuccessView(UserLoginResponseModel response) {
-        return response;
-
-
-    }
+    /**
+     *
+     * @param error the type of error
+     * @return the error message
+     */
     @Override
     public UserLoginResponseModel prepareFailView(String error) {
         throw new UserLoginFailed(error);

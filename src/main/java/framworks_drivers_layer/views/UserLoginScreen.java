@@ -87,9 +87,7 @@ public class UserLoginScreen extends JFrame implements ActionListener {
                 JFrame jf = new JFrame("main");
                 jf.setBounds(400, 300, 600, 300);
 
-                RecommendationController recommendationController = new RecommendationController(username.getText(),
-                        responseModel.getRecommendationInputBoundry(), responseModel.getOrderDsGateway());
-                MainPage mainPage = new MainPage(username.getText());
+                MainPage mainPage = new MainPage(responseModel.getUsername());
 
                 jf.add(mainPage);
                 jf.setVisible(true);

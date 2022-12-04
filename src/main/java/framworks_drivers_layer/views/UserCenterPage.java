@@ -2,10 +2,19 @@ package framworks_drivers_layer.views;
 
 
 import Interface_adapters_layer.presenter.ProfilePresenter;
+import application_business_rules_layer.postUseCases.PostDsGateway;
 import application_business_rules_layer.profileUseCases.ProfileGateway;
 import application_business_rules_layer.profileUseCases.ProfileRequestModel;
+import application_business_rules_layer.tradeUseCases.OrderDsGateway;
+import application_business_rules_layer.userUseCases.UserDsGateway;
 import enterprise_business_rules_layer.Profile;
+import enterprise_business_rules_layer.PurchaseHistory;
+import enterprise_business_rules_layer.Wallet;
+import enterprise_business_rules_layer.postEntities.Post;
+import framworks_drivers_layer.dataAccess.FileOrder;
+import framworks_drivers_layer.dataAccess.FilePost;
 import framworks_drivers_layer.dataAccess.FileProfile;
+import framworks_drivers_layer.dataAccess.FileUser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,19 +88,44 @@ public class UserCenterPage extends JFrame implements ActionListener{
       }
 
       @Override
-      public void actionPerformed(ActionEvent e) {
-           if (e.getActionCommand().equals("Edit/Create")){
+      public void actionPerformed(ActionEvent evt) {
+           if (evt.getActionCommand().equals("Edit/Create")){
                   EditPage editPage = new EditPage(username);
                   this.dispose();
             }
-            //if (e.getSource() == Wallet){
-            //}
-            //if (e.getSource() == PurchaseHistory){
+            if (evt.getActionCommand().equals("Wallet")){
+                  UserDsGateway user;
+                  try {
+                        user = new FileUser("./users.csv");
+                  } catch (IOException e) {
+                        throw new RuntimeException("Could not create file.");
+                  }
+                  double balance = user.getBalance(username);
+                  BalancePage balancePage = new BalancePage(balance);
+                  balancePage.setVisible(true);
+                  //balancePage.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            }
+            if (evt.getActionCommand().equals("Purchase History")){
+                  OrderDsGateway order;
+                  try {
+                        order = new FileOrder("./orders.csv");
+                  } catch (IOException e) {
+                        throw new RuntimeException("Could not create file.");
+                  }
 
-            //}
-            //if (e.getSource() == PostHistory){
-            //      PostHistoryPage postpage = new PostHistoryPage();
-            //}
+                  PurchaseHistoryPage purchaseHistory = new PurchaseHistoryPage(order.getPurchaseHistory(username));
+
+
+            }
+            if (evt.getActionCommand().equals("Post History")){
+                  PostDsGateway post;
+                  try {
+                        post = new FilePost("./posts.csv");
+                  } catch (IOException e) {
+                        throw new RuntimeException("Could not create file.");
+                  }
+                  PostHistoryPage postHistoryPage = new PostHistoryPage(username,post.allPosts(username));
+            }
       }
 
 

@@ -75,11 +75,12 @@ public class TradeInteractor implements TradeInputBoundary {
 
         // save the order to database
         orderDsGateway.save(orderDsModel);
+
+        // delete the post purchased
         postDsGateway.delete(requestModel.getPost().getId());
 
         // display success transaction message to user
         TradeResponseModel tradeResponseModel = new TradeResponseModel("Order Confirmed", order.getCreationTime());
         return tradeOutputBoundry.prepareSuccessView(tradeResponseModel);
-
     }
 }

@@ -8,12 +8,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class UserRegisterPresenter implements UserRegisterOutputBoundary {
-    @Override
-    public UserRegisterResponseModel prepareSuccessView(UserRegisterResponseModel response) {
-        LocalDateTime responseTime = LocalDateTime.parse(response.getCreationTime());
-        response.setCreationTime(responseTime.format(DateTimeFormatter.ofPattern("hh:mm:ss")));
-        return response;
-    }
 
     @Override
     public UserRegisterResponseModel prepareFailView(String error) {

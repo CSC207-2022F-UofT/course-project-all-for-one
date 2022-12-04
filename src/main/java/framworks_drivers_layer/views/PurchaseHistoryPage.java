@@ -1,37 +1,38 @@
 package framworks_drivers_layer.views;
 
-import enterprise_business_rules_layer.orderEntities.Order;
-import enterprise_business_rules_layer.orderEntities.PhysicalOrder;
+import application_business_rules_layer.tradeUseCases.OrderDsRequestModel;
 
 import javax.swing.*;
-import java.awt.*;
+
 import java.util.List;
 
-public class PurchaseHistoryPage {
-    public static void PurchaseHistoryPage(String[] args, List<Order> orders){
-        JFrame jf = new JFrame("Purchase History");
-        jf.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jf.setBounds(400, 300, 300, 200);
-        JMenuBar bar = new JMenuBar();
-        for (Order order : orders) {
-           JMenu menu = new JMenu(order.getCreationTime());
-           JMenuItem item1 = new JMenuItem("Product: " + order.getPost().getTitle());
-           JMenuItem item2 = new JMenuItem("Price: $" + order.getPost().getPrice());
-           JMenuItem item3 = new JMenuItem("Name: " + order.getName());
-           JMenuItem item4 = new JMenuItem("Address: " + order.getAddress());
-           JMenuItem item5 = new JMenuItem("Phone Number: " + order.getPhoneNumber());
-           JMenuItem item6 = new JMenuItem("Status: " + order.getShipmentStatus());
-           menu.add(item1);
-           menu.add(item2);
-           menu.add(item3);
-           menu.add(item4);
-           menu.add(item5);
-           menu.add(item6);
-           bar.add(menu);
-           jf.add(bar);
-        }
+public class PurchaseHistoryPage extends JFrame {
 
-        jf.setVisible(true);
-        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    private final List<OrderDsRequestModel> orders;
+
+    public PurchaseHistoryPage(List<OrderDsRequestModel> orders) {
+        this.orders = orders;
+
+        JFrame purchaseHistoryFrame = new JFrame("Purchase History Page");
+        purchaseHistoryFrame.setBounds(400, 300, 400, 300);
+
+        JPanel history = new JPanel();
+        history.setLayout(new BoxLayout(history, BoxLayout.Y_AXIS));
+        for(int j = 0; j < orders.size(); j++){
+            JPanel jp1 = new JPanel();
+            jp1.add(new JLabel(orders.get(j).getTitle()));
+            jp1.add(new JLabel(orders.get(j).getSellerUsername()));
+            jp1.add(new JLabel(String.valueOf(orders.get(j).getPrice())));
+            history.add(jp1);
+        }
+        JScrollPane historyScrollPanel = new JScrollPane(history, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        historyScrollPanel.setViewportView(history);
+        purchaseHistoryFrame.add(historyScrollPanel);
+        purchaseHistoryFrame.setVisible(true);
+        purchaseHistoryFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
+
+
 }
+
