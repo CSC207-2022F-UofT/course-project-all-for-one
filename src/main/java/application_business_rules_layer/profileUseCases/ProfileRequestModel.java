@@ -9,12 +9,10 @@ public class ProfileRequestModel {
      private String description;
      private String phone;
 
-     private String name;
 
      private String gender;
 
      public ProfileRequestModel(String username,String age, String gender, String address, String description, String phone) {
-          this.name = name;
           this.age = age;
           this.username = username;
           this.address = address;

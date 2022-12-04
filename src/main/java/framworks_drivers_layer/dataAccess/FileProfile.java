@@ -21,9 +21,9 @@ public class FileProfile implements ProfileGateway{
         headers.put("username", 0);
         headers.put("age", 1);
         headers.put("gender", 2);
-        headers.put("self-description", 3);
+        headers.put("description", 3);
         headers.put("address", 4);
-        headers.put("phone-number",5);
+        headers.put("phone",5);
 
 
 

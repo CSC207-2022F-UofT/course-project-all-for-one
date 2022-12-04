@@ -1,20 +1,18 @@
 package framworks_drivers_layer.views;
 
+import application_business_rules_layer.profileUseCases.ProfileGateway;
+import application_business_rules_layer.profileUseCases.ProfileRequestModel;
 import enterprise_business_rules_layer.Profile;
+import framworks_drivers_layer.dataAccess.FileProfile;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class EditPage extends JFrame implements ActionListener{
-     String age = Profile.getAge();
-    static String username = Profile.getUsername();
-    static String description = Profile.getDescription();
-    static String address = Profile.getAddress();
-    static String phone = Profile.getPhone();
-
-    static String gender = Profile.getGender();
+    final String username;
 
 
     JTextField textage = new JTextField();
@@ -28,7 +26,24 @@ public class EditPage extends JFrame implements ActionListener{
 
     JButton cancel = new JButton("cancel");
 
-    public EditPage(){
+
+    public EditPage(String username){
+        this.username = username;
+
+
+        ProfileGateway profile;
+        try {
+            profile = new FileProfile("./profile.csv");
+        } catch (IOException e) {
+            throw new RuntimeException("Could not create profile.csv.");
+        }
+
+        String age = profile.getAge(username);
+        String gender = profile.getGender(username);
+        String description = profile.getDescription(username);
+        String address = profile.getAddress(username);
+        String phone = profile.getPhone(username);
+
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(420, 420);
@@ -50,8 +65,10 @@ public class EditPage extends JFrame implements ActionListener{
         textdescription.setPreferredSize(new Dimension(100,40));
         textphone.setPreferredSize(new Dimension(100,40));
 
-        this.add(textage);
+        textusername.setFocusable(false);
+
         this.add(textusername);
+        this.add(textage);
         this.add(textaddress);
         this.add(textdescription);
         this.add(textphone);
@@ -62,13 +79,13 @@ public class EditPage extends JFrame implements ActionListener{
 
 
         JPanel panel1 = new JPanel();
-        panel1.add(new JLabel("Please input your age"));
-        panel1.add(textage);
+        panel1.add(new JLabel("Please input your username"));
+        panel1.add(textusername);
 
 
         JPanel panel2 = new JPanel();
-        panel2.add(new JLabel("Please input your username"));
-        panel2.add(textusername);
+        panel2.add(new JLabel("Please input your age"));
+        panel2.add(textage);
 
 
         JPanel panel3 = new JPanel();
@@ -109,15 +126,31 @@ public class EditPage extends JFrame implements ActionListener{
 
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Click " + e.getActionCommand());
-        if (e.getSource() == save){
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
+        if (evt.getSource() == save){
             frame.dispose();
+
+            ProfileGateway profile;
+            try {
+                profile = new FileProfile("./profile.csv");
+            } catch (IOException e) {
+                throw new RuntimeException("Could not create profile.csv.");
+            }
+            ProfileRequestModel profileRequestModel = new ProfileRequestModel(username, textage.getText(),textgender.getText(),
+                    textaddress.getText(),textdescription.getText(),textphone.getText());
+            profile.save(profileRequestModel);
+
+
+
+
             UserCenterPage userCenterPage = new UserCenterPage(username);
+
         }
-        if (e.getSource() == cancel){
-            UserCenterPage userCenterPage = new UserCenterPage(username);
+        if (evt.getSource() == cancel){
             frame.dispose();
+            UserCenterPage userCenterPage = new UserCenterPage(username);
+
         }
 
     }

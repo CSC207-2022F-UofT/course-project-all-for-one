@@ -83,6 +83,7 @@ public class MainPage extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserCenterPage userCenterPage = new UserCenterPage(username);
+
             }
         });
 
