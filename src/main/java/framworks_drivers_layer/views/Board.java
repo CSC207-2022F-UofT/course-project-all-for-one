@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Board extends JFrame {
 
-    String username = "Jack";
+    String username;
     String boardName;
 
     JList<String> messageList = new JList<>();
@@ -26,13 +26,18 @@ public class Board extends JFrame {
     MessageDsGateway dsGateway;
     MessageResponseModel responseModel;
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     /**
      *
      * @param dsGateway the MessageDsGateway
      * @param boardName the name of MessageBoard
      */
 
-    public Board(MessageDsGateway dsGateway, String boardName) {
+    public Board(MessageDsGateway dsGateway, String boardName, String username) {
+        this.username = username;
 
         this.boardName = boardName;
         this.dsGateway = dsGateway;

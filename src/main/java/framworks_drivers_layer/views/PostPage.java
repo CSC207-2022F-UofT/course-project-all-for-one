@@ -94,23 +94,29 @@ public class PostPage extends JFrame implements ActionListener {
         }
 
 
-        if (!lst.isEmpty()) {
-            model.addAll(lst);
-            messagePanel.setLayout(new BorderLayout());
 
-            boardPanel.setLayout(new BorderLayout());
-            boardPanel.add(new JScrollPane(messageList));
+//        if (!lst.isEmpty()) {
+//            model.addAll(lst);
+//            messagePanel.setLayout(new BorderLayout());
+//
+//            boardPanel.setLayout(new BorderLayout());
+//            boardPanel.add(new JScrollPane(messageList));
+//
+//            enterPanel.setLayout(new BorderLayout());
+//            enterPanel.add(inputArea, BorderLayout.WEST);
+//            enterPanel.add(postButton, BorderLayout.EAST);
+//
+//            messagePanel.add(boardPanel, BorderLayout.NORTH);
+//            messagePanel.add(enterPanel, BorderLayout.SOUTH);
+//        }
+        JFrame board = new Board(dsGateway, Post.getTitle(), buyerUsername);
 
-            enterPanel.setLayout(new BorderLayout());
-            enterPanel.add(inputArea, BorderLayout.WEST);
-            enterPanel.add(postButton, BorderLayout.EAST);
-
-            messagePanel.add(boardPanel, BorderLayout.NORTH);
-            messagePanel.add(enterPanel, BorderLayout.SOUTH);
-        }
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
         mainPanel.add(postPanel);
-        mainPanel.add(messagePanel);
+
+        board.setVisible(true);
+
 
         postButton.addActionListener(this);
 
