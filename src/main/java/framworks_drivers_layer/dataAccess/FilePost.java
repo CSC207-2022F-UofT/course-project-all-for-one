@@ -60,7 +60,7 @@ public class FilePost implements PostDsGateway {
 
     /**
      * Add requestModel to storage.
-     * @param requestModel the user information to save.
+     * @param requestModel the post's information to save.
      */
     @Override
     public void save(PostDsRequestModel requestModel) {
