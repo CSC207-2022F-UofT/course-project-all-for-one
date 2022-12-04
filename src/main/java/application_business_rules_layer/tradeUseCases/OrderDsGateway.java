@@ -17,4 +17,6 @@ public interface OrderDsGateway {
      */
     List<String> getPurchaseHistoryTagsData(String username);
 
+    List<OrderDsRequestModel> getPurchaseHistory(String username);
+
 }

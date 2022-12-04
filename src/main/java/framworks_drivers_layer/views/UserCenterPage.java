@@ -110,7 +110,8 @@ public class UserCenterPage extends JFrame implements ActionListener{
                         throw new RuntimeException("Could not create file.");
                   }
 
-                  //PurchaseHistory purchaseHistory = new PurchaseHistory();
+                  PurchaseHistoryPage purchaseHistory = new PurchaseHistoryPage(order.getPurchaseHistory(username));
+
 
             }
             //if (e.getSource() == PostHistory){
