@@ -17,33 +17,20 @@ public class Criteria {
         // Check if post title contains empty spaces
         if (post.getTitle().isBlank()) {
             suggestion.setSuggestion("Title should not be empty");
-            return suggestion;
         }
         // Check if post description contains empty spaces
-        if (post.getDescription().isBlank()) {
+        else if (post.getDescription().isBlank()) {
             suggestion.setSuggestion("Description should not be empty");
-            return suggestion;
         }
         // Check if post description is greater than or equal to 3 chars
-        if (post.getDescription().length() < 3) {
+        else if (post.getDescription().length() < 3) {
             suggestion.setSuggestion("Please add more detail for your description");
-            return suggestion;
         }
         // Check if post description is lesser than 1500 chars
-        if (post.getDescription().length() > 10000) {
+        else if (post.getDescription().length() > 10000) {
             suggestion.setSuggestion("Description too long, max char is 1500");
-            return suggestion;
         }
-        // Check if post description is greater than or equal to 3 chars
-        if (post.getTitle().length() < 3) {
-            suggestion.setSuggestion("Please add more detail for your title");
-            return suggestion;
-        }
-        // Check if post title is lesser than 80 chars
-        if (post.getTitle().length() > 80) {
-            suggestion.setSuggestion("Title is too long, max char is 80");
-            return suggestion;
-        }
+
 
         return suggestion;
     }
