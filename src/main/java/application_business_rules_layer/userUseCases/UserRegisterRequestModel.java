@@ -1,7 +1,5 @@
 package application_business_rules_layer.userUseCases;
 
-import enterprise_business_rules_layer.Wallet;
-
 public class UserRegisterRequestModel {
 
     private final String username;

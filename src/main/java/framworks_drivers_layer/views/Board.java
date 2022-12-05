@@ -2,7 +2,7 @@ package framworks_drivers_layer.views;
 
 import Interface_adapters_layer.controller.MessageController;
 import application_business_rules_layer.messageUseCases.*;
-import Interface_adapters_layer.presenter.MessagePresenter;
+import application_business_rules_layer.messageUseCases.MessageOutputBoundary;
 import Interface_adapters_layer.presenter.MessageResponseFormatter;
 
 import javax.swing.*;
@@ -45,7 +45,7 @@ public class Board extends JFrame {
         JPanel boardPanel = new JPanel();
         JPanel enterPanel = new JPanel();
         messageList.setModel(model);
-        MessagePresenter presenter = new MessageResponseFormatter();
+        MessageOutputBoundary presenter = new MessageResponseFormatter();
         List<String> lst = presenter.displayBoard(responseModel).getMessageList();
         if (!lst.isEmpty()) {
             model.addAll(lst);}
@@ -75,7 +75,7 @@ public class Board extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String input = inputArea.getText();
-                    MessagePresenter presenter = new MessageResponseFormatter();
+                    MessageOutputBoundary presenter = new MessageResponseFormatter();
                     MessageInputBoundary inputBoundary = new MessageInteractor(dsGateway, presenter);
                     controller = new MessageController(inputBoundary);
                     controller.create(input, username, boardName);

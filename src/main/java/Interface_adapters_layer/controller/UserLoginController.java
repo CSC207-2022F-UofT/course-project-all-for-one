@@ -3,7 +3,6 @@ package Interface_adapters_layer.controller;
 import application_business_rules_layer.userUseCases.UserLoginInputBoundary;
 import application_business_rules_layer.userUseCases.UserLoginResponseModel;
 import application_business_rules_layer.userUseCases.UserLoginRequestModel;
-import enterprise_business_rules_layer.Wallet;
 
 // Interface adapters layer
 

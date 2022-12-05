@@ -62,7 +62,9 @@ public class PostRequestModel {
         return this.Tags;
     }
 
-    public String getId() {return this.Id;}
+    public String getId() {
+        return this.Id;
+    }
 
     public String get_status(){
         return this.Status;

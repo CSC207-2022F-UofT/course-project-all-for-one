@@ -14,12 +14,12 @@ public class EditPage extends JFrame implements ActionListener{
     final String username;
 
 
-    JTextField textage = new JTextField();
-    JTextField textusername = new JTextField();
-    JTextField textaddress = new JTextField();
-    JTextField textdescription = new JTextField();
-    JTextField textphone = new JTextField();
-    JTextField textgender = new JTextField();
+    JTextField textAge = new JTextField();
+    JTextField textUsername = new JTextField();
+    JTextField textAddress = new JTextField();
+    JTextField textDescription = new JTextField();
+    JTextField textPhone = new JTextField();
+    JTextField textGender = new JTextField();
     JButton save = new JButton("save");
 
     JButton cancel = new JButton("cancel");
@@ -50,29 +50,29 @@ public class EditPage extends JFrame implements ActionListener{
         this.setVisible(true);
 
 
-        textage.setText(age);
-        textusername.setText(username);
-        textaddress.setText(address);
-        textdescription.setText(description);
-        textphone.setText(phone);
-        textgender.setText(gender);
+        textAge.setText(age);
+        textUsername.setText(username);
+        textAddress.setText(address);
+        textDescription.setText(description);
+        textPhone.setText(phone);
+        textGender.setText(gender);
 
 
-        textage.setPreferredSize(new Dimension(100,40));
-        textusername.setPreferredSize(new Dimension(100,40));
-        textaddress.setPreferredSize(new Dimension(100,40));
-        textdescription.setPreferredSize(new Dimension(100,40));
-        textphone.setPreferredSize(new Dimension(100,40));
-        textgender.setPreferredSize(new Dimension(100,40));
+        textAge.setPreferredSize(new Dimension(100,40));
+        textUsername.setPreferredSize(new Dimension(100,40));
+        textAddress.setPreferredSize(new Dimension(100,40));
+        textDescription.setPreferredSize(new Dimension(100,40));
+        textPhone.setPreferredSize(new Dimension(100,40));
+        textGender.setPreferredSize(new Dimension(100,40));
 
-        textusername.setFocusable(false);
+        textUsername.setFocusable(false);
 
-        this.add(textusername);
-        this.add(textage);
-        this.add(textaddress);
-        this.add(textdescription);
-        this.add(textphone);
-        this.add(textgender);
+        this.add(textUsername);
+        this.add(textAge);
+        this.add(textAddress);
+        this.add(textDescription);
+        this.add(textPhone);
+        this.add(textGender);
 
         save.addActionListener(this);
         cancel.addActionListener(this);
@@ -80,31 +80,31 @@ public class EditPage extends JFrame implements ActionListener{
 
         JPanel panel1 = new JPanel();
         panel1.add(new JLabel("Please input your username"));
-        panel1.add(textusername);
+        panel1.add(textUsername);
 
 
         JPanel panel2 = new JPanel();
         panel2.add(new JLabel("Please input your age"));
-        panel2.add(textage);
+        panel2.add(textAge);
 
 
         JPanel panel3 = new JPanel();
         panel3.add(new JLabel("Please input your address"));
-        panel3.add(textaddress);
+        panel3.add(textAddress);
 
 
         JPanel panel4 = new JPanel();
         panel4.add(new JLabel("Please input your description"));
-        panel4.add(textdescription);
+        panel4.add(textDescription);
 
 
         JPanel panel5 = new JPanel();
         panel5.add(new JLabel("Please input your phone-number"));
-        panel5.add(textphone);
+        panel5.add(textPhone);
 
         JPanel panel7 = new JPanel();
         panel7.add(new JLabel("Please input your gender"));
-        panel7.add(textgender);
+        panel7.add(textGender);
 
         JPanel panel6 = new JPanel();
         panel6.add(cancel);
@@ -139,8 +139,8 @@ public class EditPage extends JFrame implements ActionListener{
             } catch (IOException e) {
                 throw new RuntimeException("Could not create profile.csv.");
             }
-            ProfileRequestModel profileRequestModel = new ProfileRequestModel(username, textage.getText(),textgender.getText(),
-                    textaddress.getText(),textdescription.getText(),textphone.getText());
+            ProfileRequestModel profileRequestModel = new ProfileRequestModel(username, textAge.getText(), textGender.getText(),
+                    textAddress.getText(), textDescription.getText(), textPhone.getText());
             profile.save(profileRequestModel);
 
 

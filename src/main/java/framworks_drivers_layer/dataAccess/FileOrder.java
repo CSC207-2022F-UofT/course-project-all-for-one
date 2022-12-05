@@ -17,6 +17,7 @@ public class FileOrder implements OrderDsGateway {
     public FileOrder(String csvPath) throws IOException {
         csvFile = new File(csvPath);
 
+        // construct the headers of the csv file
         headers.put("Title", 0);
         headers.put("CreationTime", 1);
         headers.put("Price", 2);
@@ -29,12 +30,13 @@ public class FileOrder implements OrderDsGateway {
         headers.put("Tags", 9);
         headers.put("ID", 10);
 
-
-
+        // determine if the csv file is empty
         if (csvFile.length() == 0) {
             save();
-        } else {
+        }
 
+        // read the csv and put all data into a map
+        else {
             BufferedReader reader = new BufferedReader(new FileReader(csvFile));
             reader.readLine(); // skip header
 
@@ -63,12 +65,19 @@ public class FileOrder implements OrderDsGateway {
         }
     }
 
+    /**
+     *
+     * @param requestModel the order data to save
+     */
     @Override
     public void save(OrderDsRequestModel requestModel) {
         orders.put(String.valueOf(requestModel.hashCode()), requestModel);
         this.save();
     }
 
+    /**
+     * write the data of the map created above to the csv file
+     */
     private void save() {
         BufferedWriter writer;
         try {
@@ -96,6 +105,11 @@ public class FileOrder implements OrderDsGateway {
         }
     }
 
+    /**
+     *
+     * @param username username of the user that is acting
+     * @return a list of tags
+     */
     public List<String> getPurchaseHistoryTagsData(String username){
         List<String> tags = new ArrayList<>();
         for(OrderDsRequestModel orderDsRequestModel: orders.values()){
@@ -106,6 +120,11 @@ public class FileOrder implements OrderDsGateway {
         return tags;
     }
 
+    /**
+     *
+     * @param username the username to get the purchase history
+     * @return a list of OrderDsRequestModel object
+     */
     public List<OrderDsRequestModel> getPurchaseHistory(String username) {
         List<OrderDsRequestModel> purchaseHistory = new ArrayList<>();
         for(OrderDsRequestModel order : orders.values()) {

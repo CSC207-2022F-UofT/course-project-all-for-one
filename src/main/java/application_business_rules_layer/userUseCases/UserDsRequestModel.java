@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class UserDsRequestModel {
 
     private final String name;
-    private String password;
+    private final String password;
     private final LocalDateTime creationTime;
 
     private double walletBalance;

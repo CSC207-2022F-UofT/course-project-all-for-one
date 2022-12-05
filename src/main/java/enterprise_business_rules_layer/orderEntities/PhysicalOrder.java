@@ -36,46 +36,83 @@ public class PhysicalOrder implements Order {
         SellerUsername = sellerUsername;
         this.ID = String.valueOf(this.hashCode());
     }
+
+    /**
+     *
+     * @return the Post object of the order
+     */
     @Override
     public Post getPost() {
         return this.Post;
     }
 
+    /**
+     *
+     * @return the name of the shipment information of the order
+     */
     @Override
     public String getName() {
         return this.Name;
     }
 
+    /**
+     *
+     * @return the address of the shipment information of the order
+     */
     @Override
     public String getAddress() {
         return this.Address;
     }
 
+    /**
+     *
+     * @return the phone number of the shipment information of the order
+     */
     @Override
     public String getPhoneNumber() {
         return this.PhoneNumber;
     }
 
+    /**
+     *
+     * @return the shipment status of the order
+     */
     @Override
     public String getShipmentStatus() {
         return this.ShipmentStatus;
     }
 
+    /**
+     *
+     * @return the creation time of the order
+     */
     @Override
     public String getCreationTime() {
         return this.CreationTime;
     }
 
+    /**
+     *
+     * @return the username of the buyer of the order
+     */
     @Override
     public String getBuyerUsername() {
         return BuyerUsername;
     }
 
+    /**
+     *
+     * @return the username of the seller of the order
+     */
     @Override
     public String getSellerUsername() {
         return SellerUsername;
     }
 
+    /**
+     *
+     * @return the ID of the order
+     */
     public String getID() {
         return ID;
     }
