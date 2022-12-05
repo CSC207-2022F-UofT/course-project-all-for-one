@@ -1,7 +1,6 @@
 package Interface_adapters_layer.controller;
 
 import application_business_rules_layer.userUseCases.UserRegisterInputBoundary;
-import application_business_rules_layer.userUseCases.UserRegisterResponseModel;
 import application_business_rules_layer.userUseCases.UserRegisterRequestModel;
 
 // Interface adapters layer

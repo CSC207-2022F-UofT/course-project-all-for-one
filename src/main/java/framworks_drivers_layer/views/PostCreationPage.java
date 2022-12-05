@@ -85,7 +85,7 @@ public class PostCreationPage extends JPanel implements ActionListener {
             try {
                 postController.create(username,
                         post_title.getText(),
-                        String.valueOf(post_description.getText().replaceAll("\\p{Punct}","")),
+                        post_description.getText().replaceAll("\\p{Punct}", ""),
                         Double.parseDouble(price.getText()),
                         tags);
                 showMessageDialog(this, "Your post" +" "+ post_title.getText() +" "+ "has been created.");
@@ -105,6 +105,7 @@ public class PostCreationPage extends JPanel implements ActionListener {
             for (String tag : tags) {
                 if (tag.equals(t)) {
                     Duplicate = true;
+                    break;
                 }
             }
             if (Duplicate) {
