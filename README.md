@@ -2,6 +2,11 @@
 Our application is a marketplace where users can post their items, buy items posted by other users.
 You can run our application by running "Main".
 
+## Important Note
+Please create two accounts for the convenience to check all the features. For how to register accounts, please see User
+Login Feature and User Register Feature. In the following instructions, we will use User 1 and User 2 to represent the 
+two different accounts you registered.
+
 ## User Login Feature
 This feature allows users to login to existing accounts.
 
@@ -30,9 +35,10 @@ will show up.
   Input the correct username and password you registered and press login.
 
 ## User Register Feature
-This feature allows users to register new accounts.
+This feature allows users to register new accounts. For every new account, the program will automatically add 1000 to 
+the balance of the account.
 
-There are two scenarios whe you press the "Sign up" button on the register page:
+There are two scenarios when you press the "Sign up" button on the register page:
 1. The two password does not match. A message "Passwords don't match" will show up.
 2. The two password match. A message "username(the username you chose) created" will show up.
 
@@ -47,12 +53,16 @@ Feature for details about the login page.
 
 ## Main Page
 This is the page where users can access all the functionalities of the program. It contains:
-- A search box to type in the item you want to search with a "Search" button. 
-- A "Recommendation" button. 
-- A "User Center" button. 
-- A "Add Post" button. 
+- A search box to type in the item you want to search with a "Search" button. (Search Feature)
+- A "Recommendation" button. (Recommendation Feature)
+- A "User Center" button. (Profile Feature)
+- A "Add Post" button. (Post Creation Feature)
 
 For details of each functionality, please see corresponding feature section below. 
+
+## Post Creation Feature
+
+## Search Feature
 
 ## Recommendation Feature
 This feature will give recommendation to users based on their purchase history. 
@@ -84,3 +94,69 @@ since there is no posts in the database that is in sale and contain the tags you
 
     Close the main page. Restart the application. Log in User 1 and create another post with three tags you have used. Close the main page. Log in User 2 and press "Recommendation".
 You should see the post you just created.
+
+## Post Page
+This page contains the details of a post, where users can view the information of a product. 
+
+There are three ways users can access this page: 
+- Through search page
+- Through recommendation page
+- Through post history in user center
+
+When you open a post page, a message board will show up at the same time. Please see Message Board Feature for details
+about the message board.
+
+There are two version of post page depending on the user:
+1. If the post is created by the user viewing the page, meaning that the viewer is the owner or seller of the post, 
+there will only be a "Delete" button, which allow you to delete the post.
+2. If the post is not created by the user viewing the page, meaning that the viewer is the potential buyer of the post, 
+there will only be a "Buy button", which leads you to the confirm page and allow you to place an order.
+
+- To get the first version:
+  
+  Create a new post using the "Add Post" button on the main page using User 1 (please see Post Creation Feature 
+for details about creating a new post), then search for the post you have just created
+  (please see Search Feature for details about how to search a post). Open the post and you should see a post page with
+a delete button. If you press the "Delete" button, the post will be removed from the database. You can verify the 
+deletion in the post history under the user center in the main page (please see Profile Feature for details about 
+the post history).
+- To get the second version:
+  
+  Login to User 2 and Search for the post you just created using User 1. Open the post and you should see a post page with
+a buy button. If you press the "Buy" button, a confirm page will show up, where you will be able to place an order. Please
+see Trade Feature for details about placing an order.
+  
+
+
+## Message Board Feature
+
+## Trade Feature
+This feature allows users to trade with each other. When you view a post as a potential buyer and press the "Buy" button 
+on the post page (please see Post Page for details), a confirm page will show up, where you can review the details of the 
+post you are trying to buy and input the shipment information. Note that if you have previously set a name, phone number,
+and address in the profile of the account under user center in the main page (please see Profile Feature for details 
+about the profile), the shipment information will automatically be input on the confirm page, with the option to edit them.
+
+There are two scenarios when you press the pay button on the confirm page:
+1. The buyer have insufficient balance to make the purchase. A message "Insufficient Balance" will show up.
+2. The buyer have sufficient balance to make the purchase. A message "Order confirmed at time(the current time)" will
+show up.
+
+- To get the first scenario:
+
+  Login as User 1 and create a post with a price over 1000 (please see Post Creation Feature
+for details about creating a new post), then terminate the program and login to User 2 and Search for the post you just created using User 1. 
+Open the post and buy it, then the confirm page will show up. After you input the shipment information and press the "Pay"
+button, you should see the message informing insufficient balance.
+- To get the first scenario:
+
+  Login as User 1 and create a post with a price with small values(please see Post Creation Feature
+  for details about creating a new post), then terminate the program and login to User 2 and Search for the post you just created using User 1.
+  Open the post and buy it, then the confirm page will show up. After you input the shipment information and press the "Pay"
+  button, you should see the message informing order placed.
+
+Note that if the order is successfully placed, the post will be automatically deleted, and you should see the order in purchase
+history under user center in the main page (please see Profile Feature for details about the purchase history). At the same
+time you should see a change in balance in wallet under user center in the main page (please see Profile Feature for dtails
+about the wallet).
+## Profile Feature
