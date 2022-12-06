@@ -2,7 +2,7 @@ package framworks_drivers_layer.views;
 
 import Interface_adapters_layer.controller.MessageController;
 import Interface_adapters_layer.presenter.BuyPresenter;
-import Interface_adapters_layer.presenter.MessagePresenter;
+import application_business_rules_layer.messageUseCases.MessageOutputBoundary;
 import Interface_adapters_layer.presenter.MessageResponseFormatter;
 import application_business_rules_layer.messageUseCases.MessageDsGateway;
 import application_business_rules_layer.messageUseCases.MessageInteractor;
@@ -56,14 +56,9 @@ public class PostPage extends JFrame implements ActionListener {
         JPanel mainPanel = new JPanel();
         JPanel postPanel = new JPanel();
         JPanel postInfoPanel = new JPanel();
-        JPanel messagePanel = new JPanel();
-        JPanel boardPanel = new JPanel();
-        JPanel enterPanel = new JPanel();
-
-
 
         messageList.setModel(model);
-        MessagePresenter presenter = new MessageResponseFormatter();
+        MessageOutputBoundary presenter = new MessageResponseFormatter();
         List<String> lst = presenter.displayBoard(responseModel).getMessageList();
 
         JLabel dPostTitle = new JLabel("Title: " + Post.getTitle());
@@ -93,22 +88,6 @@ public class PostPage extends JFrame implements ActionListener {
             deleteButton.addActionListener(this);
         }
 
-
-
-//        if (!lst.isEmpty()) {
-//            model.addAll(lst);
-//            messagePanel.setLayout(new BorderLayout());
-//
-//            boardPanel.setLayout(new BorderLayout());
-//            boardPanel.add(new JScrollPane(messageList));
-//
-//            enterPanel.setLayout(new BorderLayout());
-//            enterPanel.add(inputArea, BorderLayout.WEST);
-//            enterPanel.add(postButton, BorderLayout.EAST);
-//
-//            messagePanel.add(boardPanel, BorderLayout.NORTH);
-//            messagePanel.add(enterPanel, BorderLayout.SOUTH);
-//        }
         JFrame board = new Board(dsGateway, Post.getTitle(), buyerUsername);
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -159,7 +138,7 @@ public class PostPage extends JFrame implements ActionListener {
         else{
             String input = inputArea.getText();
             MessageRequestModel requestModel = new MessageRequestModel(input, buyerUsername, Post.getTitle());
-            MessagePresenter presenter = new MessageResponseFormatter();
+            MessageOutputBoundary presenter = new MessageResponseFormatter();
             MessageInteractor interactor = new MessageInteractor(dsGateway, presenter);
             controller = new MessageController(interactor);
             controller.create(input, buyerUsername, Post.getTitle());

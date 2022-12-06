@@ -2,21 +2,20 @@ package application_business_rules_layer.messageUseCases;
 
 import enterprise_business_rules_layer.messageEntities.Message;
 import enterprise_business_rules_layer.messageEntities.MessageBoard;
-import Interface_adapters_layer.presenter.MessagePresenter;
 
 public class MessageInteractor implements MessageInputBoundary {
 
     final MessageDsGateway messageGateway;
-    final MessagePresenter messagePresenter;
+    final MessageOutputBoundary messageOutputBoundary;
 
     /**
      *
      * @param messageDsGateway relay to Interface_adapters.presenter
-     * @param messagePresenter Interface_adapters.gateway to reach message file
+     * @param messageOutputBoundary Interface_adapters.gateway to reach message file
      */
-    public MessageInteractor(MessageDsGateway messageDsGateway, MessagePresenter messagePresenter) {
+    public MessageInteractor(MessageDsGateway messageDsGateway, MessageOutputBoundary messageOutputBoundary) {
         this.messageGateway = messageDsGateway;
-        this.messagePresenter = messagePresenter;
+        this.messageOutputBoundary = messageOutputBoundary;
     }
 
     /**
@@ -34,7 +33,7 @@ public class MessageInteractor implements MessageInputBoundary {
 
         MessageResponseModel responseModel = new MessageResponseModel(board);
 
-        return messagePresenter.displayBoard(responseModel);
+        return messageOutputBoundary.displayBoard(responseModel);
 
     }
 }

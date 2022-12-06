@@ -17,6 +17,13 @@ import java.io.IOException;
 
 public class BuyPresenter {
 
+    /**
+     *
+     * @param post the post to be displayed in confirm page
+     * @param buyUsername the username of the buyer
+     * @param order OrderDsGateway object to access the order database
+     * @param user UserDsGateway object to access the user database
+     */
     public static void creatConfirmPage(Post post, String buyUsername,
                                         OrderDsGateway order, UserDsGateway user) {
 

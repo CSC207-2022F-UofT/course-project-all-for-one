@@ -7,6 +7,7 @@ import Interface_adapters_layer.presenter.*;
 import application_business_rules_layer.recommendationUseCases.RecommendationInputBoundry;
 import application_business_rules_layer.recommendationUseCases.RecommendationInteractor;
 import application_business_rules_layer.recommendationUseCases.RecommendationOutputBoundry;
+import application_business_rules_layer.searchUseCases.SearchOutputBoundary;
 import application_business_rules_layer.tradeUseCases.OrderDsGateway;
 import enterprise_business_rules_layer.postEntities.Post;
 import enterprise_business_rules_layer.postEntities.PostFactory;
@@ -66,19 +67,6 @@ public class MainPage extends JPanel implements ActionListener {
 
 
         recommendationButton.addActionListener(this);
-//        recommendationButton.addActionListener(new AbstractAction() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("Click" + e.getActionCommand());
-//
-//                try{
-//                    RecommendationResponseModel responseModel = recommendationController.generate();
-//                } catch(RecommmendationFailedError error){
-//                    JOptionPane.showMessageDialog(, "Please use more to have recommendation");
-//
-//                }
-//            }
-//        });
         userCenterButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -169,14 +157,14 @@ public class MainPage extends JPanel implements ActionListener {
 
         } else if(e.getActionCommand().equals("Search")){
             try{
-                SearchPresenter searchPresenter = new SearchFormatterPresenter();
+                SearchOutputBoundary searchOutputBoundary = new SearchFormatterOutputBoundary();
                 PostDsGateway postDsGateway;
                 try {
                     postDsGateway = new FilePost("./posts.csv");
                 } catch (IOException exception) {
                     throw new RuntimeException("Could not create posts.csv.");
                 }
-                SearchController searchController = new SearchController(postDsGateway, searchPresenter);
+                SearchController searchController = new SearchController(postDsGateway, searchOutputBoundary);
                 List<Post> posts = searchController.create(searchKeywordsTextField.getText());
                 SearchPage searchPage = new SearchPage(username, posts);
             } catch (SearchFailureError error){

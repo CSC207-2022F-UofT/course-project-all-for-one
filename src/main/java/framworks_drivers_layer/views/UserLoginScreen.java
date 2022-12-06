@@ -1,6 +1,5 @@
 package framworks_drivers_layer.views;
 
-import Interface_adapters_layer.controller.RecommendationController;
 import Interface_adapters_layer.controller.UserLoginController;
 import Interface_adapters_layer.controller.UserRegisterController;
 import Interface_adapters_layer.presenter.UserRegisterPresenter;

@@ -1,10 +1,11 @@
 package Interface_adapters_layer.presenter;
 
+import application_business_rules_layer.searchUseCases.SearchOutputBoundary;
 import enterprise_business_rules_layer.postEntities.Post;
 
 import java.util.List;
 
-public class SearchFormatterPresenter implements SearchPresenter{
+public class SearchFormatterOutputBoundary implements SearchOutputBoundary {
     @Override
     public List<Post> prepareSuccessSearchView(List<Post> posts){
         return posts;

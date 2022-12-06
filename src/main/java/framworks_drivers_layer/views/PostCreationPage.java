@@ -56,16 +56,6 @@ public class PostCreationPage extends JPanel implements ActionListener {
         TextPanelwithButton tagsInfo = new TextPanelwithButton(
                 add_tag, add);
 
-//        add.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent arg0) {
-//                tags.add(add_tag.getText());
-//                String str_tags = tags.toString();
-//                str_tags = str_tags.replace("[","").replace("]","");
-//                tag_show.setText(str_tags);
-//            }
-//        });
-
         JButton submit = new JButton("Submit");
         JPanel buttons = new JPanel();
         buttons.add(submit);
@@ -95,7 +85,7 @@ public class PostCreationPage extends JPanel implements ActionListener {
             try {
                 postController.create(username,
                         post_title.getText(),
-                        String.valueOf(post_description.getText().replaceAll("\\p{Punct}","")),
+                        post_description.getText().replaceAll("\\p{Punct}", ""),
                         Double.parseDouble(price.getText()),
                         tags);
                 showMessageDialog(this, "Your post" +" "+ post_title.getText() +" "+ "has been created.");
@@ -115,6 +105,7 @@ public class PostCreationPage extends JPanel implements ActionListener {
             for (String tag : tags) {
                 if (tag.equals(t)) {
                     Duplicate = true;
+                    break;
                 }
             }
             if (Duplicate) {

@@ -26,26 +26,27 @@ public class UserRegisterInteractor implements UserRegisterInputBoundary {
     }
 
     @Override
-    public UserRegisterResponseModel create(UserRegisterRequestModel requestModel) {
+    public void create(UserRegisterRequestModel requestModel) {
 
         // determine if the username already existed in the database
         if (userDsGateway.existsByName(requestModel.getUsername())){
-            return userRegisterOutputBoundary.prepareFailView("Username already exists.");
+            userRegisterOutputBoundary.prepareFailView("Username already exists.");
         }
 
         // determine if the two passwords user input are the same
         else if (!requestModel.getPassword().equals(requestModel.getRepeatedPassword())) {
-            return userRegisterOutputBoundary.prepareFailView("Passwords don't match.");
+            userRegisterOutputBoundary.prepareFailView("Passwords don't match.");
         }
 
+        // create a new Account object
         Wallet wallet = new Wallet(1000);
         Account account = accountFactory.create(requestModel.getUsername(), requestModel.getPassword(), wallet);
+
+        // save the new account to database
         LocalDateTime now = LocalDateTime.now();
         UserDsRequestModel userDsRequestModel = new UserDsRequestModel(account.getUsername(), account.getPassword(), now,
                 account.getWallet().getBalance());
         userDsGateway.save(userDsRequestModel);
 
-        UserRegisterResponseModel accountResponseModel = new UserRegisterResponseModel(account.getUsername(), now.toString());
-        return accountResponseModel;
     }
 }

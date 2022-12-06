@@ -21,32 +21,53 @@ public class ProfileRequestModel {
           this.gender = gender;
 
      }
-     public void setAge(String age){ this.age = age;}
-     public void setUsername(String username){this.username = username;}
-     public void setDescription(String description){this.description = description;}
-     public void setAddress(String address){this.address = address;}
-     public void setPhone(String phone){this.phone = phone;}
 
-     public void setGender(String gender) { this.gender = gender;}
-
+     /**
+      *
+      * @return the username
+      */
      public String getUsername() {
           return username;
      }
 
+     /**
+      *
+      * @return the age
+      */
      public String getAge(){
           return age;
      }
 
+     /**
+      *
+      * @return address
+      */
      public String getAddress(){
           return address;
      }
+
+     /**
+      *
+      * @return description
+      */
      public String getDescription(){
           return description;
      }
+
+     /**
+      *
+      * @return gender
+      */
      public String getGender(){
           return gender;
      }
+
+     /**
+      *
+      * @return phone
+      */
      public String getPhone(){
           return phone;
      }
+
 }

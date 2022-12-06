@@ -16,10 +16,6 @@ public class MessageDsRequestModel {
         return board;
     }
 
-    public void setBoard(MessageBoard board) {
-        this.board = board;
-    }
-
     public Message getMessage() {
         return message;
     }
