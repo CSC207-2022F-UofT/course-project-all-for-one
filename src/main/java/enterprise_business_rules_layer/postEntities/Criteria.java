@@ -1,7 +1,5 @@
 package enterprise_business_rules_layer.postEntities;
 
-import java.util.ArrayList;
-
 public class Criteria {
     /**
      * Evaluates post against pre-defined criteria
@@ -23,6 +21,14 @@ public class Criteria {
             suggestion.setSuggestion("Description should not be empty");
         }
         // Check if post description is greater than or equal to 3 chars
+        else if (post.getTitle().length() < 3) {
+            suggestion.setSuggestion("Please add more detail for your title");
+        }
+        // Check if post title is lesser than 80 chars
+        else if (post.getTitle().length() > 80) {
+            suggestion.setSuggestion("Title is too long, max char is 80");
+        }
+        // Check if post description is greater than or equal to 3 chars
         else if (post.getDescription().length() < 3) {
             suggestion.setSuggestion("Please add more detail for your description");
         }
@@ -30,7 +36,6 @@ public class Criteria {
         else if (post.getDescription().length() > 10000) {
             suggestion.setSuggestion("Description too long, max char is 1500");
         }
-
 
         return suggestion;
     }
