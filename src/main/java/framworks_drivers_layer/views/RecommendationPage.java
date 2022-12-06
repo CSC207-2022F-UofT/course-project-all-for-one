@@ -13,6 +13,12 @@ import java.util.List;
 public class RecommendationPage extends JFrame implements ActionListener {
     List<Post> posts;
     String username;
+
+    /**
+     *
+     * @param responseModel create a new page from the responseModel
+     * @param username the acting username
+     */
     public RecommendationPage(RecommendationResponseModel responseModel, String username){
         this.username = username;
         this.posts = responseModel.getRecommendation().getPosts();
@@ -33,7 +39,7 @@ public class RecommendationPage extends JFrame implements ActionListener {
             buttonsAdded[j].addActionListener(this);
             jp1.add(new JLabel("Title: " + responseModel.getRecommendation().getPosts().get(j).getTitle()));
             jp1.add(new JLabel("Description: " + responseModel.getRecommendation().getPosts().get(j).getDescription()));
-            jp1.add(new JLabel("Price: " + String.valueOf(responseModel.getRecommendation().getPosts().get(j).getPrice())));
+            jp1.add(new JLabel("Price: " + responseModel.getRecommendation().getPosts().get(j).getPrice()));
             jp1.add(buttonsAdded[j]);
             recommendationScrollPanelViewPort.add(jp1);
         }
@@ -48,6 +54,10 @@ public class RecommendationPage extends JFrame implements ActionListener {
 
     }
 
+    /**
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int j = Integer.parseInt(String.valueOf(e.getActionCommand().charAt(e.getActionCommand().length()-1)));

@@ -1,39 +1,33 @@
-# Project Template
+# Project Overview
+Our application is a marketplace where users can post their items, buy items posted by other users.
+You can run our application by running "Main".
 
-This is a template repository for CSC 207 projects. 
-This repository contains starter code for a gradle project.
-It also contains workflow documents that give instructions on how to manage your Github repository and how to use Github Projects for efficient collaboration.
+## Recommendation Feature
+This feature will give recommendation to users based on their purchase history. 
+There are three scenarios when you press the "Recommendation" button on the main page (page after login):
+1. The user has bought nothing, so a message "Please use more to have recommendation!" will show up.
+2. The user has bought some items that altogether there are at least three different tags 
+(but since we make the decision that tags don't appear in the purchase history page, you need to check orders.csv, which is the database that stores every purchase). 
+The application will select out three tags that have the highest frequency in the user's purchase history 
+and search in the post database (posts.csv) to see if there is any post has any one of the three tags.
+If there are no items in the post database containing one of the three tags, a message "There is no recommendation for you now!" will show up.
+3. If there are items in the post database containing one of the three tags, a new window with a list of items will show up.
 
-## Checklist For Your Project
-- [ ] Verify the correct settings for your project repository
-- [ ] Set up Github Projects
-- [ ] Create the implementation plan using issues and Github Projects
-- [ ] Create deveopment branches for your features
-- [ ] Use pull requests to merge finished features into main branch
-- [ ] Conduct code reviews
+- To get the first scenario:
 
-**If your team has trouble with any of these steps, please ask on Piazza. For example, with how GitHub Classroom works, your team *may* not have permissions to do some of the first few steps, in which case we'll post alternative instructions as needed.**
+    Login an account that has just been created by signing up and press "Recommendation" on the main page. You will get a message saying "Please use more to have recommendation!"
 
-## Workflow Documents
+- To get the second scenario:
+    
+    Still use the account you just logged in and call it User 1. 
+Press "add post" button on the main page and enter anything you want as detail except for tags and remember the title of the post.
+For the tags, come up with three different tags (e.g. "a", "b", "c") enter one tag at a time and each time press the "add tag" button (you need to press "add tag" three times).
+Close the main page. Restart the application.
+Create another account. Call it User 2. Log in User 2 and search the title of the post you just created and buy the item. 
+Then in the main page, press "Recommendation". You should see a message saying "There is no recommendation for you now!" 
+since there is no posts in the database that is in sale and contain the tags you just used for creating the post (you just bought the only item in the database).
 
-* Github Workflow: Please refer to the workflow that was introduced in the first lab. You should follow this when working on your code. The following document provides additional details too.
+- To get the third scenario:
 
-* [Project Planning and Development Guide](project_plan_dev.md): This document helps you to understand how to create and maintain a project plan for your class project. **This document helps you to complete the Implementation Plan Milestone.**
-
-## Gradle Project
-Import this project into your Intellij editor. It should automatically recognise this as a gradle repository.
-The starter code was built using SDK version 11.0.1. Ensure that you are using this version for this project. (You can, of course, change the SDK version as per your requirement if your team has all agreed to use a different version)
-
-You have been provided with two starter files for demonstration: HelloWorld and HelloWorldTest.
-
-You will find HelloWorld in `src/main/java/tutorial` directory. Right click on the HelloWorld file and click on `Run HelloWorld.main()`.
-This should run the program and print on your console.
-
-You will find HelloWorldTest in `src/test/java/tutorial` directory. Right click on the HelloWorldTest file and click on `Run HelloWorldTest`.
-All tests should pass. Your team can remove this sample of how testing works once you start adding your project code to the repo.
-
-Moving forward, we expect you to maintain this project structure. You *should* use Gradle as the build environment, but it is fine if your team prefers to use something else -- just remove the gradle files and push your preferred project setup. Assuming you stick with Gradle, your source code should go into `src/main/java` (you can keep creating more subdirectories as per your project requirement). Every source class can auto-generate a test file for you. For example, open HelloWorld.java file and click on the `HelloWorld` variable as shown in the image below. You should see an option `Generate` and on clicking this your should see an option `Test`. Clicking on this will generate a JUnit test file for `HelloWorld` class. This was used to generate the `HelloWorldTest`.
-
-![image](https://user-images.githubusercontent.com/5333020/196066655-d3c97bf4-fdbd-46b0-b6ae-aeb8dbcf351d.png)
-
-You can create another simple class and try generating a test for this class.
+    Close the main page. Restart the application. Log in User 1 and create another post with three tags you have used. Close the main page. Log in User 2 and press "Recommendation".
+You should see the post you just created.
