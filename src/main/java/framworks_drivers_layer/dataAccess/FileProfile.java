@@ -15,6 +15,11 @@ public class FileProfile implements ProfileGateway{
 
     private final Map<String, ProfileRequestModel> profile = new HashMap<>();
 
+    /**
+     *  read data from the database (csv.file)
+     * @param csvPath
+     * @throws IOException
+     */
     public FileProfile(String csvPath) throws IOException{
         csvFile = new File (csvPath);
 
@@ -52,6 +57,11 @@ public class FileProfile implements ProfileGateway{
         }
     }
 
+    /**
+     * save the change of the data
+     */
+
+
     private void save() {
         BufferedWriter writer;
         try {
@@ -72,6 +82,12 @@ public class FileProfile implements ProfileGateway{
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     *
+     * @param username
+     * @return the username
+     */
 
     @Override
     public String getUsername(String username) {
@@ -99,42 +115,14 @@ public class FileProfile implements ProfileGateway{
     @Override
     public String getPhone(String username) {return profile.get(username).getPhone();}
 
+    /**
+     *  As requestmodel create. Add or change profile in database.
+     * @param requestModel
+     */
     @Override
     public void save(ProfileRequestModel requestModel) {
         profile.put(requestModel.getUsername(), requestModel);
         this.save();
     }
 
-    @Override
-    public void changeAge(String username, String age) {
-        profile.get(username).setAge(age);
-        this.save();
-    }
-
-    @Override
-    public void changeGender(String username, String gender) {
-
-        profile.get(username).setGender(gender);
-        this.save();
-    }
-
-    @Override
-    public void changeDescription(String username, String description) {
-        profile.get(username).setDescription(description);
-        this.save();
-    }
-
-    @Override
-    public void changePhone(String username, String phone) {
-
-        profile.get(username).setPhone(phone);
-        this.save();
-    }
-
-    @Override
-    public void changeAddress(String username, String address) {
-
-        profile.get(username).setAddress(address);
-        this.save();
-    }
 }
