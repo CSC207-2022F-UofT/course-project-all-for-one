@@ -3,6 +3,7 @@ package application_business_rules_layer.postUseCases;
 import enterprise_business_rules_layer.postEntities.Post;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PostDsGateway {
     /**
@@ -28,4 +29,6 @@ public interface PostDsGateway {
     List<Post> findPostsWithKeyword(String keyword);
 
     List<Post> allPosts(String username);
+
+    Map<String, PostDsRequestModel> getMap();
 }

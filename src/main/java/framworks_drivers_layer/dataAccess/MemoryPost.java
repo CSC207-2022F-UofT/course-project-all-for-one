@@ -76,4 +76,9 @@ public class MemoryPost implements PostDsGateway {
         }
         return posts;
     }
+
+    @Override
+    public Map<String, PostDsRequestModel> getMap(){
+        return posts;
+    }
 }
