@@ -16,7 +16,7 @@ public class PostController {
         this.userInput = accountGateway;
     }
 
-    public PostResponseModel create(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags) {
+    public PostResponseModel create(String input_username, String input_title, String input_description, String input_price, ArrayList<String> tags) {
         PostRequestModel requestModel = new PostRequestModel(input_username, input_title, input_description, input_price, tags);
 
         return userInput.create(requestModel);

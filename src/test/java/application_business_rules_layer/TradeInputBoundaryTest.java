@@ -1,4 +1,4 @@
-package application_business_rules_layer.recommendationUseCases;
+package application_business_rules_layer;
 
 import Interface_adapters_layer.presenter.TradePresenter;
 import application_business_rules_layer.postUseCases.PostDsGateway;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-class TradeInputBoundryTest {
+class TradeInputBoundaryTest {
 
     @Test
     void orderSuccessTest1() {
@@ -27,7 +27,7 @@ class TradeInputBoundryTest {
         tagsOftestPost1.add("iphone");
         tagsOftestPost1.add("apple");
         LocalDateTime testTime = LocalDateTime.now();
-        Post testPost1 = new Post("xavier", "iPhone 14", "Like new", 500, tagsOftestPost1);
+        Post testPost1 = new Post("xavier", "iPhone 14", "Like new", "500", tagsOftestPost1);
         PostDsRequestModel postDsRequestModel = new PostDsRequestModel(testPost1.getUsername(), testPost1.getTitle(),
                 testPost1.getDescription(), testPost1.getPrice(), testPost1.getTags(), testTime, testPost1.getId());
 
@@ -67,7 +67,7 @@ class TradeInputBoundryTest {
         tagsOftestPost2.add("iphone");
         tagsOftestPost2.add("apple");
         LocalDateTime testTime = LocalDateTime.now();
-        Post testPost2 = new Post("xavier", "iPhone 14", "Like new", 1500, tagsOftestPost2);
+        Post testPost2 = new Post("xavier", "iPhone 14", "Like new", "1500", tagsOftestPost2);
         PostDsRequestModel postDsRequestModel = new PostDsRequestModel(testPost2.getUsername(), testPost2.getTitle(),
                 testPost2.getDescription(), testPost2.getPrice(), testPost2.getTags(), testTime, testPost2.getId());
 

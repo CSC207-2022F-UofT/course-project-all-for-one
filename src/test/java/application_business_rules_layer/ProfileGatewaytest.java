@@ -1,4 +1,4 @@
-package application_business_rules_layer.recommendationUseCases;
+package application_business_rules_layer;
 
 import application_business_rules_layer.profileUseCases.ProfileGateway;
 import application_business_rules_layer.profileUseCases.ProfileRequestModel;

@@ -91,7 +91,7 @@ public class MainPage extends JPanel implements ActionListener {
                 } catch (IOException error) {
                     throw new RuntimeException("Could not create file.");
                 }
-                PostOutputBoundary presenter = new PostResponseFormatter();
+                PostOutputBoundary presenter = new PostResponsePresenter();
                 PostFactory postFactory = new PostFactory();
                 PostInputBoundary interactor = new PostInteractor(
                         post, presenter, postFactory);

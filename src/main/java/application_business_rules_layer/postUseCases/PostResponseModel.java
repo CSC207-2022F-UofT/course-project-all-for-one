@@ -1,12 +1,14 @@
 package application_business_rules_layer.postUseCases;
 
+import enterprise_business_rules_layer.postEntities.Post;
+
 public class PostResponseModel {
 
-    String result;
+    Post post;
     String creationTime;
 
-    public PostResponseModel(String result, String creationTime) {
-        this.result = result;
+    public PostResponseModel(Post post, String creationTime) {
+        this.post = post;
         this.creationTime = creationTime;
     }
 
@@ -25,6 +27,6 @@ public class PostResponseModel {
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
     }
-
+    public Post getPost(){return this.post;}
 }
 

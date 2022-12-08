@@ -1,8 +1,9 @@
-package application_business_rules_layer.recommendationUseCases;
+package application_business_rules_layer;
 
 import Interface_adapters_layer.presenter.RecommendationResponsePresenter;
 import application_business_rules_layer.postUseCases.PostDsGateway;
 import application_business_rules_layer.postUseCases.PostDsRequestModel;
+import application_business_rules_layer.recommendationUseCases.*;
 import framworks_drivers_layer.dataAccess.MemoryPost;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,10 +29,10 @@ class RecommendationInputBoundryTest {
 
         PostDsGateway postDsGateway = new MemoryPost();
         PostDsRequestModel post1 = new PostDsRequestModel(
-                "Seller1", "iphone1", "good", 1, tagsOfPost12 , LocalDateTime.now(), "1");
+                "Seller1", "iphone1", "good", "1", tagsOfPost12 , LocalDateTime.now(), "1");
 
         PostDsRequestModel post2 = new PostDsRequestModel(
-                "Seller2", "iphone2", "good", 1, tagsOfPost12 , LocalDateTime.now(), "2");
+                "Seller2", "iphone2", "good", "1", tagsOfPost12 , LocalDateTime.now(), "2");
 
 
 
@@ -73,10 +74,10 @@ class RecommendationInputBoundryTest {
 
         PostDsGateway postDsGateway = new MemoryPost();
         PostDsRequestModel post1 = new PostDsRequestModel(
-                "Seller1", "macbook1", "good", 1, tagsOfPost12 , LocalDateTime.now(), "1");
+                "Seller1", "macbook1", "good", "1", tagsOfPost12 , LocalDateTime.now(), "1");
 
         PostDsRequestModel post2 = new PostDsRequestModel(
-                "Seller2", "macbook2", "good", 1, tagsOfPost12 , LocalDateTime.now(), "2");
+                "Seller2", "macbook2", "good", "1", tagsOfPost12 , LocalDateTime.now(), "2");
         postDsGateway.save(post1); postDsGateway.save(post2);
 
         RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter(){
@@ -113,10 +114,10 @@ class RecommendationInputBoundryTest {
 
         PostDsGateway postDsGateway = new MemoryPost();
         PostDsRequestModel post1 = new PostDsRequestModel(
-                "Seller1", "macbook1", "good", 1, tagsOfPost12 , LocalDateTime.now(), "1");
+                "Seller1", "macbook1", "good", "1", tagsOfPost12 , LocalDateTime.now(), "1");
 
         PostDsRequestModel post2 = new PostDsRequestModel(
-                "Seller2", "macbook2", "good", 1, tagsOfPost12 , LocalDateTime.now(), "2");
+                "Seller2", "macbook2", "good", "1", tagsOfPost12 , LocalDateTime.now(), "2");
         postDsGateway.save(post1); postDsGateway.save(post2);
 
         RecommendationOutputBoundry recommendationOutputBoundry = new RecommendationResponsePresenter(){
