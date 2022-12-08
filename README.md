@@ -178,8 +178,8 @@ button, you should see the message informing insufficient balance.
   button, you should see the message informing order placed.
 
 Note that if the order is successfully placed, the post will be automatically deleted, and you should see the order in purchase
-history under user center in the main page (please see Profile Feature for details about the purchase history). At the same
-time you should see a change in balance in wallet under user center in the main page (please see Profile Feature for dtails
+history under user center in the main page (please see Purchase History Feature for details about the purchase history). At the same
+time you should see a change in balance in wallet under user center in the main page (please see Wallet Feature for details
 about the wallet).
 ## Profile Feature
 This feature allows user to view and edit basic information and store some necessary information to trade. When user buy some things, the name, the 
@@ -191,3 +191,12 @@ You can access the profile in User Center page. The profile will show in this pa
 and you can press "edit/create" button in the User Center page. It will pop out a new page, the edit page. You can edit or create your profile
 in this page. After you modifying the profile, pressing the button "save". All the change will be save. THe edit page will dispose and pop back to 
 the User Center Page.
+## Wallet Feature
+This feature allows users to check the balance of their wallet. Users can have access to their wallet by clicking the "Wallet" button on User Center Page.
+The amount of balance will change with orders placed. When users buy something, the amount of balance in their wallet will decrease. If users post their items on our
+platform and are bought by other users, the amount of balance in these seller's wallet will increase.
+## Purchase History Feature
+This feature records all orders that are related to the user. Users can check their purchase history by clicking the "Purchase History" button on User Center Page.
+Purchase History contains a list of orders with some information about each order included: the title of the item, seller's or buyer's username, and the price of the
+item. Also, each order indicates whether the user was acting as a seller or a buyer in this transaction. The size of purchase history will increase with orders placed.
+Please buy some items on our platform to allow this feature to function successfully. in terms of how to place an order, please see Trade Feature for details.
