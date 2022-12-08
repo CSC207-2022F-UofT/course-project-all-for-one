@@ -48,7 +48,7 @@ public class ConfirmOrderPage extends JPanel implements ActionListener, TradeVie
         JLabel dPost = new JLabel(Post.getTitle());
         dPost.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel dFinalPrice = new JLabel(Double.toString(Post.getPrice()));
+        JLabel dFinalPrice = new JLabel(Post.getPrice());
         dFinalPrice.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 

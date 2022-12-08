@@ -9,7 +9,7 @@ public class PostRequestModel {
     private String Title;
     private String Description;
     private String Status;
-    private double Price;
+    private String Price;
     private ArrayList<String> Tags;
     private String Id;
 
@@ -22,7 +22,7 @@ public class PostRequestModel {
      * @param tags user's input tags of the posting item
      */
 
-    public PostRequestModel(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags){
+    public PostRequestModel(String input_username, String input_title, String input_description, String input_price, ArrayList<String> tags){
         this.Username = input_username;
         this.Title = input_title;
         this.Description = input_description;
@@ -37,7 +37,7 @@ public class PostRequestModel {
         this.Description = revise_description;
     }
 
-    public void Revise_price(double revise_price){
+    public void Revise_price(String revise_price){
         this.Price = revise_price;
     }
 
@@ -69,7 +69,7 @@ public class PostRequestModel {
     public String get_status(){
         return this.Status;
     }
-    public double get_price(){
+    public String get_price(){
         return this.Price;
     }
 

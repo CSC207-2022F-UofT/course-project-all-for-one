@@ -1,5 +1,7 @@
 package enterprise_business_rules_layer.postEntities;
 
+import static java.lang.Double.parseDouble;
+
 public class Criteria {
     /**
      * Evaluates post against pre-defined criteria
@@ -20,13 +22,9 @@ public class Criteria {
         else if (post.getDescription().isBlank()) {
             suggestion.setSuggestion("Description should not be empty");
         }
-        // Check if post title is greater than or equal to 3 chars
-        else if (post.getTitle().length() < 3) {
-            suggestion.setSuggestion("Please add more detail for your title");
-        }
-        // Check if post title is lesser than 80 chars
-        else if (post.getTitle().length() > 80) {
-            suggestion.setSuggestion("Title is too long, max char is 80");
+        // Check if post price is appropriate(has to be a double)
+        else if (post.getPrice().matches("[0-9]{1,13}(\\.[0-9]*)?")){
+            suggestion.setSuggestion("Price input was not appropriate, please enter a valid number");
         }
         // Check if post description is greater than or equal to 3 chars
         else if (post.getTitle().length() < 3) {

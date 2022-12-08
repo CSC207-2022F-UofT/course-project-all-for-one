@@ -1,4 +1,4 @@
-package enterprise_business_rules_layer.messageEntities;
+package enterprise_business_rules_layer;
 
 import org.junit.After;
 import org.junit.Before;

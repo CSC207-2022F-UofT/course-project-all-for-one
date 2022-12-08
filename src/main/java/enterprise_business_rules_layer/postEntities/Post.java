@@ -2,17 +2,17 @@ package enterprise_business_rules_layer.postEntities;
 
 import java.util.ArrayList;
 
+
 public class Post {
     private final String Username;
     private final String Title;
     private final String Description;
     private String Status;
-    private final double Price;
+    private final String Price;
     private final ArrayList<String> Tags;
-
     private final String Id;
 
-    public Post(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags){
+    public Post(String input_username, String input_title, String input_description, String input_price, ArrayList<String> tags){
         this.Username = input_username;
         this.Title = input_title;
         this.Description = input_description;
@@ -22,7 +22,7 @@ public class Post {
         this.Id = String.valueOf(this.hashCode());
     }
 
-    public Post(String input_username, String input_title, String input_description, double input_price, ArrayList<String> tags, String input_id){
+    public Post(String input_username, String input_title, String input_description, String input_price, ArrayList<String> tags, String input_id){
         this.Username = input_username;
         this.Title = input_title;
         this.Description = input_description;
@@ -54,7 +54,7 @@ public class Post {
     public String getStatus(){
         return this.Status;
     }
-    public double getPrice(){
+    public String getPrice(){
         return this.Price;
     }
 
