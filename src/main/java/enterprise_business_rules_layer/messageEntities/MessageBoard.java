@@ -54,4 +54,5 @@ public class MessageBoard implements Iterable<List<Message>>{
     public String getName() {
         return name;
     }
+
 }
