@@ -14,7 +14,7 @@ public interface SearchOutputBoundary {
     /**
      *
      * @param errorMessage a String that describe the error
-     * @return return a response model that is actually an error
+     * @return return a response that is actually an error
      */
     List<Post> prepareFailureSearchView(String errorMessage);
 }

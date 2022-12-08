@@ -14,6 +14,12 @@ public class SearchPage implements ActionListener{
     private final String username;
 
     private final List<Post> posts ;
+
+    /**
+     *
+     * @param posts of search result
+     * @param username the acting username
+     */
     public SearchPage(String username, List<Post> posts){
         this.username = username;
         this.posts = posts;
@@ -41,6 +47,10 @@ public class SearchPage implements ActionListener{
         searchFrame.setVisible(true);
         searchFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
+    /**
+     *
+     * @param e the event to be processed
+     */
 
     @Override
     public void actionPerformed(ActionEvent e) {

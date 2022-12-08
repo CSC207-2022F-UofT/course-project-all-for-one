@@ -11,6 +11,10 @@ public class SearchController {
     private final PostDsGateway postDsGateway;
 
     private final SearchOutputBoundary searchOutputBoundary;
+    /**
+     * @param postDsGateway a SearchFilesGateway instance variable
+     * @param searchOutputBoundary an interface which prepares the response
+     */
 
     public SearchController(PostDsGateway postDsGateway, SearchOutputBoundary searchOutputBoundary) {
         this.postDsGateway = postDsGateway;
