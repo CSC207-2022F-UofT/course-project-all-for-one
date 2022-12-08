@@ -1,20 +1,16 @@
 package enterprise_business_rules_layer.messageEntities;
-
-import enterprise_business_rules_layer.messageEntities.Message;
-import enterprise_business_rules_layer.messageEntities.MessageBoard;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.Test;
-
-
-import java.util.ArrayList;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.Test;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MessageBoardTest {
 
-    MessageBoard board;
+    MessageBoard board = new MessageBoard("iphone");;
     Message m1;
     Message m2;
 
@@ -27,33 +23,31 @@ public class MessageBoardTest {
 
     @After
     public void tearDown() throws Exception {
-        board = null;
+        board = new MessageBoard("iphone");
     }
+
+    @BeforeClass
+    public static void setUpClass() {}
+
+    @AfterClass
+    public static void afterClass() {}
 
     @Test
     public void addMessage() {
         board.addMessage(m1);
 
 
-        for (List<Message> messageList : board){
-            for (Message message : messageList) {
-                String username = message.getUsername();
-                String content = message.getContent();
-                assertEquals(m1.getContent(), content);
-                assertEquals(m1.getUsername(), username);
-
-            }
-
+        for (List<Message> messageList : board) {
+            assertTrue(messageList.contains(m1));
         }
-        assertEquals(1,1);
-    }
-
-    @Test
-    public void iterator() {
 
     }
+
 
     @Test
     public void getName() {
+        assertEquals(board.getName(), "iphone");
     }
+
+
 }
