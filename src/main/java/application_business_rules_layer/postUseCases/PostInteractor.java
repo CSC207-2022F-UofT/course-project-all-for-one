@@ -45,7 +45,7 @@ public class PostInteractor implements PostInputBoundary {
         PostDsRequestModel postDsModel = new PostDsRequestModel(post.getUsername(), post.getTitle(), post.getDescription(), post.getPrice(), post.getTags(), now, post.getId());
         postDsGateway.save(postDsModel);
 
-        PostResponseModel accountResponseModel = new PostResponseModel(post.getTitle(), now.toString());
+        PostResponseModel accountResponseModel = new PostResponseModel(post, now.toString());
         return postOutputBoundary.prepareSuccessView(accountResponseModel);
     }
 
