@@ -1,4 +1,4 @@
-package application_business_rules_layer.recommendationUseCases;
+package application_business_rules_layer.trade;
 
 import Interface_adapters_layer.presenter.TradePresenter;
 import application_business_rules_layer.postUseCases.PostDsGateway;
