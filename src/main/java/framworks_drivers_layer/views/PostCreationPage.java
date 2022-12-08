@@ -86,7 +86,7 @@ public class PostCreationPage extends JPanel implements ActionListener {
                 postController.create(username,
                         post_title.getText(),
                         post_description.getText().replaceAll("\\p{Punct}", ""),
-                        Double.parseDouble(price.getText()),
+                        price.getText(),
                         tags);
                 showMessageDialog(this, "Your post" +" "+ post_title.getText() +" "+ "has been created.");
                 post_title.setText(null);

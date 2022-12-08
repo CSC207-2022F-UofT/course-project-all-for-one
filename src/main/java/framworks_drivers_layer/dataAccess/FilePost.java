@@ -43,7 +43,7 @@ public class FilePost implements PostDsGateway {
                 String username = String.valueOf(col[headers.get("Username")]);
                 String title = String.valueOf(col[headers.get("Title")]);
                 String description = String.valueOf(col[headers.get("Description")]);
-                double price = Double.parseDouble(col[headers.get("Price")]);
+                String price = String.valueOf(col[headers.get("Price")]);
                 String status = String.valueOf(col[headers.get("Status")]);
                 ArrayList<String> tags = new ArrayList<String>(Arrays.asList(String.valueOf(col[headers.get("Tags")]).split(":")));
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

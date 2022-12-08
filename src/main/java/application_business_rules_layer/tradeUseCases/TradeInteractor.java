@@ -7,6 +7,8 @@ import enterprise_business_rules_layer.orderEntities.Order;
 
 import java.util.Objects;
 
+import static java.lang.Double.parseDouble;
+
 public class TradeInteractor implements TradeInputBoundary {
 
     final OrderDsGateway orderDsGateway;
@@ -40,7 +42,7 @@ public class TradeInteractor implements TradeInputBoundary {
     public TradeResponseModel create(TradeRequestModel requestModel) {
 
         // determine if the buyer has enough balance for the purchase
-        if (userDsGateway.getBalance(requestModel.getBuyerUsername()) < requestModel.getPost().getPrice()) {
+        if (userDsGateway.getBalance(requestModel.getBuyerUsername()) < parseDouble(requestModel.getPost().getPrice())) {
             return tradeOutputBoundry.prepareFailView("Insufficient balance.");
         }
 
@@ -52,8 +54,8 @@ public class TradeInteractor implements TradeInputBoundary {
         // calculate the new balance of buyer and seller after the transaction
         double buyerOldBalance = userDsGateway.getBalance(requestModel.getBuyerUsername());
         double sellerOldBalance = userDsGateway.getBalance(requestModel.getSellerUsername());
-        double buyerNewBalance = buyerOldBalance - requestModel.getPost().getPrice();
-        double sellerNewBalance = sellerOldBalance + requestModel.getPost().getPrice();
+        double buyerNewBalance = buyerOldBalance - parseDouble(requestModel.getPost().getPrice());
+        double sellerNewBalance = sellerOldBalance + parseDouble(requestModel.getPost().getPrice());
 
         // change the balance of buyer and seller to the new balance in database
         userDsGateway.changeBalance(requestModel.getBuyerUsername(), buyerNewBalance);
@@ -66,7 +68,7 @@ public class TradeInteractor implements TradeInputBoundary {
 
         // create the OrderDsRequestModel to be saved in database
         OrderDsRequestModel orderDsModel = new OrderDsRequestModel(order.getPost().getTitle(), order.getCreationTime(),
-                order.getPost().getPrice(), order.getName(), order.getAddress(), order.getPhoneNumber(),
+                parseDouble(order.getPost().getPrice()), order.getName(), order.getAddress(), order.getPhoneNumber(),
                 order.getShipmentStatus(), order.getBuyerUsername(), order.getSellerUsername(),
                 order.getPost().getTags(), order.getID());
 
