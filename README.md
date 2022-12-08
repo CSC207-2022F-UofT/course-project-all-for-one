@@ -129,6 +129,10 @@ see Trade Feature for details about placing an order.
 
 
 ## Message Board Feature
+This feature allows users to leave messages for a post. The Post page of a product will be displayed with a MessageBoard 
+simultaneously. User can enter their message and press "Post" button to leave a message on the MessageBoard. The message
+will be displayed on the Board with the username of who post it in the front of the message.
+
 
 ## Trade Feature
 This feature allows users to trade with each other. When you view a post as a potential buyer and press the "Buy" button 
