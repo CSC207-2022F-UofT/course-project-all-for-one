@@ -160,3 +160,12 @@ history under user center in the main page (please see Profile Feature for detai
 time you should see a change in balance in wallet under user center in the main page (please see Profile Feature for dtails
 about the wallet).
 ## Profile Feature
+This feature allows user to view and edit basic information and store some necessary information to trade. When user buy some things, the name, the 
+address and the phone stored in the profile will automatically fill with the confirm order page with the option to modify.
+Note that, In order to guarantee username is unique. The username can’t be modified. The username is fixed with the same username when 
+you register a new account.
+
+You can access the profile in User Center page. The profile will show in this page within a textarea. When you register, the profile is initialized to empty,
+and you can press "edit/create" button in the User Center page. It will pop out a new page, the edit page. You can edit or create your profile
+in this page. After you modifying the profile, pressing the button "save". All the change will be save. THe edit page will dispose and pop back to 
+the User Center Page.
