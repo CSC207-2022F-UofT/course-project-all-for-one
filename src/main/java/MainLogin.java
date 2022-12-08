@@ -23,11 +23,6 @@ public class MainLogin {
             throw new RuntimeException("Could not create file.");
         }
 
-
-
-
-
-
         UserLoginOutputBoundary presenter = new UserLoginPresenter();
         AccountFactory accountFactory = new AccountFactory();
         UserLoginInputBoundary interactor = new UserLoginInteractor(
@@ -39,14 +34,6 @@ public class MainLogin {
 
 
         loginScreen.setVisible(true);
-
-        // Unused screens; we'll uncomment this later
-//        WelcomeScreen welcomeScreen = new WelcomeScreen();
-//        LoginScreen loginScreen = new LoginScreen();
-//        LoggedInScreen loggedInScreen = new LoggedInScreen();
-//        screens.add(welcomeScreen, "register");
-//        screens.add(loginScreen, "login");
-//        screens.add(loggedInScreen, "loggedIn");
 
     }
 
