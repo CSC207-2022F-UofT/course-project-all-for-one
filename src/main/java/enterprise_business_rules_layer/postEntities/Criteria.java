@@ -18,14 +18,6 @@ public class Criteria {
         if (post.getTitle().isBlank()) {
             suggestion.setSuggestion("Title should not be empty");
         }
-        // Check if post description contains empty spaces
-        else if (post.getDescription().isBlank()) {
-            suggestion.setSuggestion("Description should not be empty");
-        }
-        // Check if post price is appropriate(has to be a double)
-        else if (post.getPrice().matches("[0-9]{1,13}(\\.[0-9]*)?")){
-            suggestion.setSuggestion("Price input was not appropriate, please enter a valid number");
-        }
         // Check if post description is greater than or equal to 3 chars
         else if (post.getTitle().length() < 3) {
             suggestion.setSuggestion("Please add more detail for your title");
@@ -34,13 +26,21 @@ public class Criteria {
         else if (post.getTitle().length() > 80) {
             suggestion.setSuggestion("Title is too long, max char is 80");
         }
+        // Check if post description contains empty spaces
+        else if (post.getDescription().isBlank()) {
+            suggestion.setSuggestion("Description should not be empty");
+        }
         // Check if post description is greater than or equal to 3 chars
         else if (post.getDescription().length() < 3) {
             suggestion.setSuggestion("Please add more detail for your description");
         }
         // Check if post description is lesser than 10000 chars
         else if (post.getDescription().length() > 10000) {
-            suggestion.setSuggestion("Description too long, max char is 1500");
+            suggestion.setSuggestion("Description too long, max char is 10000");
+        }
+        // Check if post price is appropriate(has to be a double)
+        else if (post.getPrice().matches("[0-9]{1,13}(\\.[0-9]*)?")){
+            suggestion.setSuggestion("Price input was not appropriate, please enter a valid number");
         }
 
         return suggestion;

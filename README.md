@@ -61,6 +61,78 @@ This is the page where users can access all the functionalities of the program. 
 For details of each functionality, please see corresponding feature section below. 
 
 ## Post Creation Feature
+This feature allows users to create a post of their product for sale. The users can input the specific information of 
+their product in a post. When the user clicks on the "Add Post" button on the main page, a post creation page will be 
+initialized and pop up.
+
+The Post creation page contains:
+- A title box to type in the title of the post
+- A description textarea to type in the description of the product for sale by the user
+- A price box to type in the price of the product for sale by the user
+- A tag box to type in a tag that the user might want to add to the post
+- A "add tag" button
+- The space under the tag box will show the tags that have already been added
+- A "submit" button
+
+There are three scenarios when you press the "add tag" button on the Post creation page:
+- the tag that the user have typed in the tag box successfully been added and the tag will be shown under the tag box
+- A message "Duplicate tag" will show up
+- A message "Tag cannot be empty" will show up
+
+To get the first scenario:
+
+The input of tag should be valid(empty string, blank spaces, duplicated tags are not allowed).
+
+To get the second scenario:
+
+The user has typed in a tag in the tag box that the user have added before, and then clicks the "add tag" button.
+
+To get the third scenario:
+
+The user has typed an empty string or blank spaces, and then clicks the "add tag" button.
+
+There are eight scenarios when you press the "submit" button on the Post creation page:
+- A message "Your post + post_title + has been created." will show up
+- A message "Title should not be empty" will show up
+- A message "Please add more details for your title" will show up
+- A message "Title is too long, max char is 80" will show up
+- A message "Description should not be empty" will show up
+- A message "Please add more details for your description" will show up
+- A message "Description is too long, max char is 10000" will show up
+- A message "Price input was not appropriate, please enter a valid number" will show up
+
+To get the first scenario:
+
+All the input of the post creation page should be valid(avoid to trigger the other scenarios).
+
+To get the second scenario:
+
+The user has typed an empty string or blank spaces in the title box.
+
+To get the third scenario:
+
+The user has typed a string less than 3 characters in the title box.
+
+To get to the forth scenario:
+
+The user has typed a string greater than 80 characters in the title box.
+
+To get to the fifth scenario:
+
+The user has typed an empty string or blank spaces in the description box.
+
+To get the sixth scenario:
+
+The user has typed a string less than 3 characters in the description box.
+
+To get to the seventh scenario:
+
+The user has typed a string greater than 10000 characters in the description box.
+
+To get to the eighth scenario:
+
+The user has typed something that is not a real number in the price box
+
 
 ## Search Feature
 This feature allows users to find their desirable products using keyword. 
