@@ -63,6 +63,24 @@ For details of each functionality, please see corresponding feature section belo
 ## Post Creation Feature
 
 ## Search Feature
+This feature allows users to find their desirable products using keyword. 
+There are three scenarios after pressing the "Search" button on the main:
+
+- A list of matched products is presented to the user on a new window. 
+- A message "No match found" will show up.
+- A message "Please enter a keyword" will show up.
+
+To get the first scenario:
+
+There are products containing the keyword either in their title or tag.
+
+To get the second scenario:
+
+There is no product containing the keyword in its title or tag.
+
+To get the third scenario:
+
+There is no keyword entered to the search box before pressing the search button.
 
 ## Recommendation Feature
 This feature will give recommendation to users based on their purchase history. 
@@ -129,6 +147,10 @@ see Trade Feature for details about placing an order.
 
 
 ## Message Board Feature
+This feature allows users to leave messages for a post. The Post page of a product will be displayed with a MessageBoard 
+simultaneously. User can enter their message and press "Post" button to leave a message on the MessageBoard. The message
+will be displayed on the Board with the username of who post it in the front of the message.
+
 
 ## Trade Feature
 This feature allows users to trade with each other. When you view a post as a potential buyer and press the "Buy" button 
