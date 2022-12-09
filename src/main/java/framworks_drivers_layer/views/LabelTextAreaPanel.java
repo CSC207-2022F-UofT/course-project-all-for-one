@@ -3,6 +3,7 @@ import javax.swing.*;
 
 // Frameworks/Drivers layer
 
+// Create a scrollable, wrap text, textarea
 public class LabelTextAreaPanel extends JPanel {
     public LabelTextAreaPanel(JLabel label, JTextArea textArea) {
         this.add(label);

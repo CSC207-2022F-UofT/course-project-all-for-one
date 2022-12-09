@@ -1,5 +1,6 @@
 package enterprise_business_rules_layer.postEntities;
 
+// suggestion for a post
 public class Suggestion {
     String suggestion;
 

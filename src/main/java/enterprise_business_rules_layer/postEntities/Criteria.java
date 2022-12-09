@@ -1,7 +1,6 @@
 package enterprise_business_rules_layer.postEntities;
 
-import static java.lang.Double.parseDouble;
-
+// find the criteria of a post object and give suggestion
 public class Criteria {
     /**
      * Evaluates post against pre-defined criteria

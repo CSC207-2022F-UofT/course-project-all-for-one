@@ -1,5 +1,7 @@
 package framworks_drivers_layer.views;
 
+import Interface_adapters_layer.controller.PostController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

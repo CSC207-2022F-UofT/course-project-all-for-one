@@ -12,6 +12,15 @@ public class Post {
     private final ArrayList<String> Tags;
     private final String Id;
 
+    /**
+     *
+     * @param input_username username of the acting user
+     * @param input_title user's input title of the post
+     * @param input_description user's input description of the posting item
+     * @param input_price user's input price of the posting item
+     * @param tags user's input tags of the posting item
+     */
+
     public Post(String input_username, String input_title, String input_description, String input_price, ArrayList<String> tags){
         this.Username = input_username;
         this.Title = input_title;
