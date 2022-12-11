@@ -38,7 +38,7 @@ public class Criteria {
             suggestion.setSuggestion("Description too long, max char is 10000");
         }
         // Check if post price is appropriate(has to be a double)
-        else if (post.getPrice().matches("[0-9]{1,13}(\\.[0-9]*)?")){
+        else if (!post.getPrice().matches("[0-9]{1,13}(\\.[0-9]*)?")){
             suggestion.setSuggestion("Price input was not appropriate, please enter a valid number");
         }
 
